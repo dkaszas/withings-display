@@ -15,27 +15,27 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            min-height: 100vh; /* Changed: allows the page to grow beyond the screen */
-            /* Removed the 'overflow: hidden' lock */
+            min-height: 100vh;
         }
         .nav {
             display: flex;
-            gap: 20px;
+            gap: 15px;
             padding: 15px 0;
             width: 100%;
             justify-content: center;
-            position: sticky; /* Keeps the buttons visible when you scroll */
+            position: sticky;
             top: 0;
-            background-color: #0d1117; /* Matches background so it hides the chart scrolling under it */
+            background-color: #0d1117;
             z-index: 100;
-            box-shadow: 0 4px 6px -6px #222; /* Adds a tiny shadow below the buttons */
+            box-shadow: 0 4px 6px -6px #222;
+            flex-wrap: wrap; /* Helps on smaller tablet screens */
         }
         button {
             background-color: #30363d;
             color: #c9d1d9;
             border: 1px solid #444c56;
-            padding: 12px 24px;
-            font-size: 18px;
+            padding: 10px 20px;
+            font-size: 16px;
             border-radius: 8px;
             cursor: pointer;
             font-weight: bold;
@@ -50,13 +50,13 @@
             flex-grow: 1;
             display: flex;
             justify-content: center;
-            align-items: flex-start; /* Changed: aligns the image to the top instead of middle */
+            align-items: flex-start;
             width: 100%;
-            padding-bottom: 40px; /* Added some padding so it doesn't hit the absolute bottom */
+            padding-bottom: 40px;
         }
         img {
             max-width: 100%;
-            height: auto; /* Changed: lets the image retain its natural height */
+            height: auto;
             display: none; 
         }
         img.active {
@@ -68,31 +68,41 @@
 
     <div class="nav">
         <button id="btn-live" class="active" onclick="switchTab('live')">60-Day Live</button>
+        <button id="btn-longevity" onclick="switchTab('longevity')">Longevity Data</button>
         <button id="btn-archive" onclick="switchTab('archive')">Full Archive</button>
     </div>
 
     <div class="img-container">
         <img id="img-live" class="active" alt="60-Day Dashboard">
+        <img id="img-longevity" alt="Longevity Dashboard">
         <img id="img-archive" alt="Archival Dashboard">
     </div>
 
     <script>
+        // Force refresh images to bypass cache
         const cacheBuster = '?v=' + new Date().getTime();
         document.getElementById('img-live').src = 'dashboard.png' + cacheBuster;
+        document.getElementById('img-longevity').src = 'longevity_dashboard.png' + cacheBuster;
         document.getElementById('img-archive').src = 'archive_dashboard.png' + cacheBuster;
 
         function switchTab(tab) {
-            if (tab === 'live') {
-                document.getElementById('img-live').classList.add('active');
-                document.getElementById('img-archive').classList.remove('active');
-                document.getElementById('btn-live').classList.add('active');
-                document.getElementById('btn-archive').classList.remove('active');
-            } else {
-                document.getElementById('img-archive').classList.add('active');
-                document.getElementById('img-live').classList.remove('active');
-                document.getElementById('btn-archive').classList.add('active');
-                document.getElementById('btn-live').classList.remove('active');
-            }
+            // IDs of all elements
+            const tabs = ['live', 'longevity', 'archive'];
+            
+            tabs.forEach(t => {
+                const img = document.getElementById('img-' + t);
+                const btn = document.getElementById('btn-' + t);
+                
+                if (t === tab) {
+                    img.classList.add('active');
+                    btn.classList.add('active');
+                    // Scroll to top when switching
+                    window.scrollTo(0,0);
+                } else {
+                    img.classList.remove('active');
+                    btn.classList.remove('active');
+                }
+            });
         }
     </script>
 
