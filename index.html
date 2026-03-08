@@ -3,108 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Health Command Center</title>
-    <meta http-equiv="refresh" content="3600">
+    <title>Health Dashboard</title>
     <style>
-        body {
-            background-color: #0d1117;
-            color: white;
-            font-family: sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-        }
-        .nav {
-            display: flex;
-            gap: 15px;
-            padding: 15px 0;
-            width: 100%;
-            justify-content: center;
-            position: sticky;
-            top: 0;
-            background-color: #0d1117;
-            z-index: 100;
-            box-shadow: 0 4px 6px -6px #222;
-            flex-wrap: wrap; /* Helps on smaller tablet screens */
-        }
-        button {
-            background-color: #30363d;
-            color: #c9d1d9;
-            border: 1px solid #444c56;
-            padding: 10px 20px;
-            font-size: 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: 0.2s;
-        }
-        button.active {
-            background-color: #2ea043;
-            color: white;
-            border-color: #2ea043;
-        }
-        .img-container {
-            flex-grow: 1;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            width: 100%;
-            padding-bottom: 40px;
-        }
-        img {
-            max-width: 100%;
-            height: auto;
-            display: none; 
-        }
-        img.active {
-            display: block; 
-        }
+        body { background-color: #0d1117; color: white; font-family: sans-serif; margin: 0; padding: 20px; text-align: center; }
+        .nav { margin-bottom: 20px; }
+        button { background: #30363d; color: white; border: 1px solid #444c56; padding: 10px 20px; margin: 5px; cursor: pointer; border-radius: 6px; font-size: 16px; }
+        button.active { background: #238636; border-color: #2ea043; }
+        img { max-width: 100%; height: auto; display: none; margin: 0 auto; border-radius: 8px; }
+        img.active { display: block; }
     </style>
 </head>
 <body>
 
     <div class="nav">
-        <button id="btn-live" class="active" onclick="switchTab('live')">60-Day Live</button>
-        <button id="btn-longevity" onclick="switchTab('longevity')">Longevity Data</button>
-        <button id="btn-archive" onclick="switchTab('archive')">Full Archive</button>
+        <button id="btn-daily" class="active" onclick="show('daily')">Daily View</button>
+        <button id="btn-archive" onclick="show('archive')">Historical Archive</button>
     </div>
 
-    <div class="img-container">
-        <img id="img-live" class="active" alt="60-Day Dashboard">
-        <img id="img-longevity" alt="Longevity Dashboard">
-        <img id="img-archive" alt="Archival Dashboard">
+    <div class="container">
+        <img id="img-daily" src="dashboard.png" class="active">
+        <img id="img-archive" src="archive_dashboard.png">
     </div>
 
     <script>
-        // Force refresh images to bypass cache
-        const cacheBuster = '?v=' + new Date().getTime();
-        document.getElementById('img-live').src = 'dashboard.png' + cacheBuster;
-        document.getElementById('img-longevity').src = 'longevity_dashboard.png' + cacheBuster;
-        document.getElementById('img-archive').src = 'archive_dashboard.png' + cacheBuster;
+        function show(type) {
+            // Reset buttons
+            document.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('img').forEach(img => img.classList.remove('active'));
 
-        function switchTab(tab) {
-            // IDs of all elements
-            const tabs = ['live', 'longevity', 'archive'];
-            
-            tabs.forEach(t => {
-                const img = document.getElementById('img-' + t);
-                const btn = document.getElementById('btn-' + t);
-                
-                if (t === tab) {
-                    img.classList.add('active');
-                    btn.classList.add('active');
-                    // Scroll to top when switching
-                    window.scrollTo(0,0);
-                } else {
-                    img.classList.remove('active');
-                    btn.classList.remove('active');
-                }
-            });
+            // Set active
+            document.getElementById('btn-' + type).classList.add('active');
+            document.getElementById('img-' + type).classList.add('active');
         }
-    </script>
 
+        // Auto-refresh images every 30 mins to keep tablet fresh
+        setInterval(() => {
+            const timestamp = new Date().getTime();
+            document.getElementById('img-daily').src = 'dashboard.png?t=' + timestamp;
+            document.getElementById('img-archive').src = 'archive_dashboard.png?t=' + timestamp;
+        }, 1800000);
+    </script>
 </body>
 </html>
