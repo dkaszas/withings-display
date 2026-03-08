@@ -7,7 +7,7 @@
     <meta http-equiv="refresh" content="3600">
     <style>
         body {
-            background-color: #0d1117; /* Matches your chart background */
+            background-color: #0d1117;
             color: white;
             font-family: sans-serif;
             margin: 0;
@@ -15,13 +15,20 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            height: 100vh;
-            overflow: hidden; /* Prevents annoying scrolling */
+            min-height: 100vh; /* Changed: allows the page to grow beyond the screen */
+            /* Removed the 'overflow: hidden' lock */
         }
         .nav {
             display: flex;
             gap: 20px;
             padding: 15px 0;
+            width: 100%;
+            justify-content: center;
+            position: sticky; /* Keeps the buttons visible when you scroll */
+            top: 0;
+            background-color: #0d1117; /* Matches background so it hides the chart scrolling under it */
+            z-index: 100;
+            box-shadow: 0 4px 6px -6px #222; /* Adds a tiny shadow below the buttons */
         }
         button {
             background-color: #30363d;
@@ -35,7 +42,7 @@
             transition: 0.2s;
         }
         button.active {
-            background-color: #2ea043; /* GitHub green for active state */
+            background-color: #2ea043;
             color: white;
             border-color: #2ea043;
         }
@@ -43,18 +50,17 @@
             flex-grow: 1;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start; /* Changed: aligns the image to the top instead of middle */
             width: 100%;
-            padding-bottom: 10px;
+            padding-bottom: 40px; /* Added some padding so it doesn't hit the absolute bottom */
         }
         img {
             max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            display: none; /* Hidden by default */
+            height: auto; /* Changed: lets the image retain its natural height */
+            display: none; 
         }
         img.active {
-            display: block; /* Shows the selected image */
+            display: block; 
         }
     </style>
 </head>
@@ -71,8 +77,6 @@
     </div>
 
     <script>
-        // Tablets aggressively cache images. This appends the exact millisecond to the image URL, 
-        // forcing the tablet to download the newest version of the image every time the page refreshes.
         const cacheBuster = '?v=' + new Date().getTime();
         document.getElementById('img-live').src = 'dashboard.png' + cacheBuster;
         document.getElementById('img-archive').src = 'archive_dashboard.png' + cacheBuster;
