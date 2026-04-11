@@ -6,7 +6,7 @@
     <title>MacroLens</title>
     <meta name="theme-color" content="#0d1117">
     <link rel="manifest" href="manifest.json">
-    <link rel="stylesheet" href="style.css?v=5">
+    <link rel="stylesheet" href="style.css?v=6">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📸</text></svg>">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,6 +32,10 @@
                     </div>
                     <input type="file" id="camera-input" accept="image/*" capture="environment">
                 </div>
+
+                <div class="context-area">
+                    <textarea id="context-input" placeholder="Optional context (e.g., 'Low-fat dressing', 'Cooked in butter')..." rows="2"></textarea>
+                </div>
                 
                 <div class="action-area">
                     <button id="analyze-btn" class="primary-btn" disabled>Analyze Meal</button>
@@ -45,12 +49,18 @@
             </div>
 
             <div id="results-card" class="glass-card results-card hidden">
-                <h2>Macronutrients Estimated</h2>
+                <h2>AI Analysis</h2>
+                
+                <div class="analysis-details">
+                    <p class="confidence-badge" id="res-confidence">Confidence: --</p>
+                    <p class="food-items-text" id="res-food-items">...</p>
+                </div>
+
                 <div class="macro-grid">
-                    <div class="macro-item"><span class="label">Calories</span><span class="value" id="res-cals">--</span> kcal</div>
-                    <div class="macro-item"><span class="label">Protein</span><span class="value" id="res-pro">--</span> g</div>
-                    <div class="macro-item"><span class="label">Carbs</span><span class="value" id="res-carb">--</span> g</div>
-                    <div class="macro-item"><span class="label">Fat</span><span class="value" id="res-fat">--</span> g</div>
+                    <div class="macro-item"><span class="label">Calories</span><span class="value" id="res-cals">--</span></div>
+                    <div class="macro-item"><span class="label">Protein</span><span class="value" id="res-pro">--</span>g</div>
+                    <div class="macro-item"><span class="label">Carbs</span><span class="value" id="res-carb">--</span>g</div>
+                    <div class="macro-item"><span class="label">Fat</span><span class="value" id="res-fat">--</span>g</div>
                 </div>
                 <button id="commit-btn" class="primary-btn pulse">Save to Dashboard</button>
                 <button id="cancel-btn" class="secondary-btn">Cancel</button>
@@ -79,6 +89,6 @@
             </div>
         </div>
     </div>
-    <script src="app.js?v=5"></script>
+    <script src="app.js?v=6"></script>
 </body>
 </html>

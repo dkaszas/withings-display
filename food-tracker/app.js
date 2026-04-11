@@ -2,6 +2,7 @@ const DOM = {
     cameraInput: document.getElementById('camera-input'),
     preview: document.getElementById('image-preview'),
     placeholder: document.getElementById('camera-placeholder'),
+    contextInput: document.getElementById('context-input'),
     analyzeBtn: document.getElementById('analyze-btn'),
     settingsBtn: document.getElementById('settings-btn'),
     settingsModal: document.getElementById('settings-modal'),
@@ -19,6 +20,8 @@ const DOM = {
     githubRepo: document.getElementById('github-repo'),
 
     // Result values
+    resConfidence: document.getElementById('res-confidence'),
+    resFoodItems: document.getElementById('res-food-items'),
     resCals: document.getElementById('res-cals'),
     resPro: document.getElementById('res-pro'),
     resCarb: document.getElementById('res-carb'),
@@ -80,6 +83,7 @@ function resetView() {
     DOM.preview.src = '';
     DOM.placeholder.style.display = 'flex';
     DOM.analyzeBtn.disabled = true;
+    DOM.contextInput.value = '';
     DOM.resultsCard.classList.add('hidden');
     DOM.cameraInput.value = '';
 }
@@ -123,16 +127,18 @@ async function analyzeMeal() {
     DOM.loader.classList.remove('hidden');
     DOM.loaderText.textContent = "Analyzing with AI...";
     
-    const promptText = `Analyze this meal. Give your best estimate for its nutritional content. Return ONLY a valid JSON object in EXACTLY this format, nothing else: {"calories": int, "protein": int, "carbs": int, "fat": int}.`;
+    const contextStr = DOM.contextInput.value.trim() ? `\nUser Context: ${DOM.contextInput.value.trim()}` : '';
+    const promptText = `Analyze this meal.${contextStr} Give your best estimate for its nutritional content. Return ONLY a valid JSON object in EXACTLY this format, nothing else: {"calories": int, "protein": int, "carbs": int, "fat": int, "food_items": "string explaining what you think the food is", "confidence": "string e.g. '80% - hard to see sauce'"}.`;
 
     try {
         let resultData;
         try {
-            // First try gemini-2.5-pro (Current active vision model)
+            // First try gemini-2.5-pro (Current stable public vision model)
             DOM.loaderText.textContent = "Querying Gemini 2.5 Pro...";
             resultData = await queryGemini('gemini-2.5-pro', promptText, currentBase64Image);
         } catch (e) {
             console.warn("Pro preview failed, falling back...", e);
+            alert("Google API blocked Pro: " + e.message + "\n\nFalling back to Flash!");
             DOM.loaderText.textContent = "Pro failed. Fallback to Gemini 2.5 Flash...";
             resultData = await queryGemini('gemini-2.5-flash', promptText, currentBase64Image);
         }
@@ -140,6 +146,8 @@ async function analyzeMeal() {
         const jsonText = resultData.candidates[0].content.parts[0].text;
         currentMacros = JSON.parse(jsonText);
 
+        DOM.resConfidence.textContent = `Confidence: ${currentMacros.confidence}`;
+        DOM.resFoodItems.textContent = currentMacros.food_items;
         DOM.resCals.textContent = currentMacros.calories;
         DOM.resPro.textContent = currentMacros.protein;
         DOM.resCarb.textContent = currentMacros.carbs;
