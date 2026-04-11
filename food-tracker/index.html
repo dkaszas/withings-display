@@ -6,7 +6,7 @@
     <title>MacroLens</title>
     <meta name="theme-color" content="#0d1117">
     <link rel="manifest" href="manifest.json">
-    <link rel="stylesheet" href="style.css?v=7">
+    <link rel="stylesheet" href="style.css?v=8">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📸</text></svg>">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,11 +26,12 @@
             <div class="glass-card main-interface">
                 <div class="camera-wrapper">
                     <img id="image-preview" style="display: none;" />
+                    <div id="image-count-badge" class="badge hidden"></div>
                     <div class="camera-placeholder" id="camera-placeholder">
                         <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
-                        <p>Tap to Snap Food</p>
+                        <p>Take Photo or Pick Gallery</p>
                     </div>
-                    <input type="file" id="camera-input" accept="image/*" capture="environment">
+                    <input type="file" id="camera-input" accept="image/*" multiple>
                 </div>
 
                 <div class="context-area">
@@ -89,6 +90,6 @@
             </div>
         </div>
     </div>
-    <script src="app.js?v=7"></script>
+    <script src="app.js?v=8"></script>
 </body>
 </html>

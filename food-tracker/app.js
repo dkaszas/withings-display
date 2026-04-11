@@ -28,7 +28,7 @@ const DOM = {
     resFat: document.getElementById('res-fat'),
 };
 
-let currentBase64Image = null;
+let currentBase64Images = [];
 let currentMacros = null;
 
 // Initialization
@@ -56,18 +56,41 @@ DOM.saveSettingsBtn.addEventListener('click', () => {
     DOM.settingsModal.classList.add('hidden');
 });
 
-DOM.cameraInput.addEventListener('change', (e) => {
-    const file = e.target.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            currentBase64Image = e.target.result;
-            DOM.preview.src = currentBase64Image;
-            DOM.preview.style.display = 'block';
-            DOM.placeholder.style.display = 'none';
-            DOM.analyzeBtn.disabled = false;
-        };
-        reader.readAsDataURL(file);
+function updateAnalyzeButtonState() {
+    const hasImages = currentBase64Images && currentBase64Images.length > 0;
+    const hasText = DOM.contextInput.value.trim().length > 0;
+    DOM.analyzeBtn.disabled = !(hasImages || hasText);
+}
+
+DOM.contextInput.addEventListener('input', updateAnalyzeButtonState);
+
+DOM.cameraInput.addEventListener('change', async (e) => {
+    const files = Array.from(e.target.files);
+    if (files.length > 0) {
+        currentBase64Images = [];
+        
+        for (let file of files) {
+            const b64 = await new Promise(resolve => {
+                const reader = new FileReader();
+                reader.onload = e => resolve(e.target.result);
+                reader.readAsDataURL(file);
+            });
+            currentBase64Images.push(b64);
+        }
+        
+        DOM.preview.src = currentBase64Images[0];
+        DOM.preview.style.display = 'block';
+        DOM.placeholder.style.display = 'none';
+        
+        const badge = document.getElementById('image-count-badge');
+        if (currentBase64Images.length > 1) {
+            badge.textContent = `${currentBase64Images.length} Images`;
+            badge.classList.remove('hidden');
+        } else {
+            badge.classList.add('hidden');
+        }
+        
+        updateAnalyzeButtonState();
     }
 });
 
@@ -77,10 +100,11 @@ DOM.analyzeBtn.addEventListener('click', analyzeMeal);
 DOM.commitBtn.addEventListener('click', saveToDashboard);
 
 function resetView() {
-    currentBase64Image = null;
+    currentBase64Images = [];
     currentMacros = null;
     DOM.preview.style.display = 'none';
     DOM.preview.src = '';
+    document.getElementById('image-count-badge').classList.add('hidden');
     DOM.placeholder.style.display = 'flex';
     DOM.analyzeBtn.disabled = true;
     DOM.contextInput.value = '';
@@ -88,21 +112,22 @@ function resetView() {
     DOM.cameraInput.value = '';
 }
 
-async function queryGemini(model, promptText, base64Data) {
+async function queryGemini(model, promptText, base64ImagesArray) {
     const apiKey = localStorage.getItem('ml_gemini_key');
     if (!apiKey) throw new Error("Gemini API Key missing.");
 
-    // Remove the data:image/jpeg;base64, prefix
-    const base64MimeType = base64Data.split(';')[0].split(':')[1];
-    const base64Raw = base64Data.split(',')[1];
+    const parts = [{ "text": promptText }];
+    
+    if (base64ImagesArray && base64ImagesArray.length > 0) {
+        for (let b64 of base64ImagesArray) {
+            const base64MimeType = b64.split(';')[0].split(':')[1];
+            const base64Raw = b64.split(',')[1];
+            parts.push({ "inlineData": { "mimeType": base64MimeType, "data": base64Raw } });
+        }
+    }
 
     const payload = {
-        "contents": [{
-            "parts": [
-                { "text": promptText },
-                { "inlineData": { "mimeType": base64MimeType, "data": base64Raw } }
-            ]
-        }],
+        "contents": [{ "parts": parts }],
         "generationConfig": { "responseMimeType": "application/json" }
     };
 
@@ -127,20 +152,25 @@ async function analyzeMeal() {
     DOM.loader.classList.remove('hidden');
     DOM.loaderText.textContent = "Analyzing with AI...";
     
-    const contextStr = DOM.contextInput.value.trim() ? `\nUser Context: ${DOM.contextInput.value.trim()}` : '';
-    const promptText = `Analyze this meal.${contextStr} Give your best estimate for its nutritional content. Return ONLY a valid JSON object in EXACTLY this format, nothing else: {"calories": int, "protein": int, "carbs": int, "fat": int, "food_items": "string explaining what you think the food is", "confidence": "string e.g. '80% - hard to see sauce'"}.`;
+    
+    const contextStr = DOM.contextInput.value.trim() ? `\nUser Context/Overrides: ${DOM.contextInput.value.trim()}` : '';
+    const hasImages = currentBase64Images && currentBase64Images.length > 0;
+    
+    const promptText = hasImages
+        ? `Analyze the provided meal imagery.${contextStr}\nEstimate its nutritional content. Return ONLY a valid JSON object in EXACTLY this format, nothing else: {"calories": int, "protein": int, "carbs": int, "fat": int, "food_items": "string explaining what you think the food is", "confidence": "string e.g. '80% - hard to see sauce'"}.`
+        : `Estimate the nutritional content based on the following meal description: ${contextStr}\nReturn ONLY a valid JSON object in EXACTLY this format, nothing else: {"calories": int, "protein": int, "carbs": int, "fat": int, "food_items": "string explaining what you think the food is", "confidence": "string e.g. '90% - text description'"}.`;
 
     try {
         let resultData;
         try {
             // First try gemini-2.5-pro (Current stable public vision model)
             DOM.loaderText.textContent = "Querying Gemini 2.5 Pro...";
-            resultData = await queryGemini('gemini-2.5-pro', promptText, currentBase64Image);
+            resultData = await queryGemini('gemini-2.5-pro', promptText, currentBase64Images);
         } catch (e) {
             console.warn("Pro preview failed, falling back...", e);
             alert("Google API blocked Pro: " + e.message + "\n\nFalling back to Flash!");
             DOM.loaderText.textContent = "Pro failed. Fallback to Gemini 2.5 Flash...";
-            resultData = await queryGemini('gemini-2.5-flash', promptText, currentBase64Image);
+            resultData = await queryGemini('gemini-2.5-flash', promptText, currentBase64Images);
         }
 
         const jsonText = resultData.candidates[0].content.parts[0].text;
