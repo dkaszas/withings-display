@@ -141,6 +141,38 @@ textarea#context-input:focus {
     color: #8b949e;
     z-index: 1;
     position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.input-split {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+}
+
+.split-btn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    gap: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.split-btn:hover {
+    color: var(--primary);
+    background: rgba(155, 81, 224, 0.05);
+}
+
+.input-split .divider {
+    width: 1px;
+    height: 60%;
+    background: var(--glass-border);
 }
 
 #camera-input {

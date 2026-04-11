@@ -1,5 +1,6 @@
 const DOM = {
     cameraInput: document.getElementById('camera-input'),
+    galleryInput: document.getElementById('gallery-input'),
     preview: document.getElementById('image-preview'),
     placeholder: document.getElementById('camera-placeholder'),
     contextInput: document.getElementById('context-input'),
@@ -64,11 +65,10 @@ function updateAnalyzeButtonState() {
 
 DOM.contextInput.addEventListener('input', updateAnalyzeButtonState);
 
-DOM.cameraInput.addEventListener('change', async (e) => {
+async function handleFileInput(e) {
     const files = Array.from(e.target.files);
     if (files.length > 0) {
         currentBase64Images = [];
-        
         for (let file of files) {
             const b64 = await new Promise(resolve => {
                 const reader = new FileReader();
@@ -92,7 +92,10 @@ DOM.cameraInput.addEventListener('change', async (e) => {
         
         updateAnalyzeButtonState();
     }
-});
+}
+
+DOM.cameraInput.addEventListener('change', handleFileInput);
+DOM.galleryInput.addEventListener('change', handleFileInput);
 
 DOM.cancelBtn.addEventListener('click', resetView);
 
@@ -110,6 +113,7 @@ function resetView() {
     DOM.contextInput.value = '';
     DOM.resultsCard.classList.add('hidden');
     DOM.cameraInput.value = '';
+    DOM.galleryInput.value = '';
 }
 
 async function queryGemini(model, promptText, base64ImagesArray) {

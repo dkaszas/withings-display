@@ -6,7 +6,7 @@
     <title>MacroLens</title>
     <meta name="theme-color" content="#0d1117">
     <link rel="manifest" href="manifest.json">
-    <link rel="stylesheet" href="style.css?v=8">
+    <link rel="stylesheet" href="style.css?v=9">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📸</text></svg>">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,10 +28,20 @@
                     <img id="image-preview" style="display: none;" />
                     <div id="image-count-badge" class="badge hidden"></div>
                     <div class="camera-placeholder" id="camera-placeholder">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
-                        <p>Take Photo or Pick Gallery</p>
+                        <div class="input-split">
+                            <label for="gallery-input" class="split-btn">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                                <span>Gallery</span>
+                            </label>
+                            <div class="divider"></div>
+                            <label for="camera-input" class="split-btn">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+                                <span>Camera</span>
+                            </label>
+                        </div>
                     </div>
-                    <input type="file" id="camera-input" accept="image/*" multiple>
+                    <input type="file" id="gallery-input" accept="image/*" multiple style="display:none;">
+                    <input type="file" id="camera-input" accept="image/*" capture="environment" style="display:none;">
                 </div>
 
                 <div class="context-area">
@@ -90,6 +100,6 @@
             </div>
         </div>
     </div>
-    <script src="app.js?v=8"></script>
+    <script src="app.js?v=9"></script>
 </body>
 </html>
