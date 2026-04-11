@@ -45,6 +45,7 @@ header {
 }
 
 .glow-text {
+    font-family: 'Spectral', serif;
     font-weight: 800;
     font-size: 28px;
     background: linear-gradient(to right, #9b51e0, #58a6ff);
