@@ -128,13 +128,13 @@ async function analyzeMeal() {
     try {
         let resultData;
         try {
-            // First try gemini-1.5-pro, the most capable vision model currently available
+            // First try gemini-1.5-pro-latest
             DOM.loaderText.textContent = "Querying Gemini 1.5 Pro...";
-            resultData = await queryGemini('gemini-1.5-pro', promptText, currentBase64Image);
+            resultData = await queryGemini('gemini-1.5-pro-latest', promptText, currentBase64Image);
         } catch (e) {
             console.warn("Pro failed, falling back to Flash...", e);
             DOM.loaderText.textContent = "Pro failed. Fallback to Gemini 1.5 Flash...";
-            resultData = await queryGemini('gemini-1.5-flash', promptText, currentBase64Image);
+            resultData = await queryGemini('gemini-1.5-flash-latest', promptText, currentBase64Image);
         }
 
         const jsonText = resultData.candidates[0].content.parts[0].text;
