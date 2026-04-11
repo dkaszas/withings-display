@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>MacroLens</title>
+    <meta name="theme-color" content="#0d1117">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📸</text></svg>">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1 class="glow-text">MacroLens</h1>
+            <button id="settings-btn" aria-label="Settings">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            </button>
+        </header>
+
+        <main>
+            <div class="glass-card main-interface">
+                <div class="camera-wrapper">
+                    <img id="image-preview" style="display: none;" />
+                    <div class="camera-placeholder" id="camera-placeholder">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+                        <p>Tap to Snap Food</p>
+                    </div>
+                    <input type="file" id="camera-input" accept="image/*" capture="environment">
+                </div>
+                
+                <div class="action-area">
+                    <button id="analyze-btn" class="primary-btn" disabled>Analyze Meal</button>
+                </div>
+            </div>
+
+            <!-- Loader and Results overlay -->
+            <div id="loader" class="glass-overlay hidden">
+                <div class="spinner"></div>
+                <p id="loader-text">Analyzing with AI...</p>
+            </div>
+
+            <div id="results-card" class="glass-card results-card hidden">
+                <h2>Macronutrients Estimated</h2>
+                <div class="macro-grid">
+                    <div class="macro-item"><span class="label">Calories</span><span class="value" id="res-cals">--</span> kcal</div>
+                    <div class="macro-item"><span class="label">Protein</span><span class="value" id="res-pro">--</span> g</div>
+                    <div class="macro-item"><span class="label">Carbs</span><span class="value" id="res-carb">--</span> g</div>
+                    <div class="macro-item"><span class="label">Fat</span><span class="value" id="res-fat">--</span> g</div>
+                </div>
+                <button id="commit-btn" class="primary-btn pulse">Save to Dashboard</button>
+                <button id="cancel-btn" class="secondary-btn">Cancel</button>
+            </div>
+        </main>
+
+        <!-- Settings Modal -->
+        <div id="settings-modal" class="modal hidden">
+            <div class="modal-content glass-card">
+                <h2>Configuration</h2>
+                <p class="subtitle">Keys are stored locally securely.</p>
+                <div class="input-group">
+                    <label for="gemini-key">Gemini API Key</label>
+                    <input type="password" id="gemini-key" placeholder="AIzaSy...">
+                </div>
+                <div class="input-group">
+                    <label for="github-pat">GitHub PAT</label>
+                    <input type="password" id="github-pat" placeholder="ghp_...">
+                </div>
+                <div class="input-group">
+                    <label for="github-repo">Target Repo</label>
+                    <input type="text" id="github-repo" value="dkaszas/withings" placeholder="owner/repo">
+                </div>
+                <button id="save-settings-btn" class="primary-btn">Save</button>
+                <button id="close-settings-btn" class="secondary-btn">Close</button>
+            </div>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
