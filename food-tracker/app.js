@@ -146,6 +146,8 @@ async function analyzeMeal() {
         const jsonText = resultData.candidates[0].content.parts[0].text;
         currentMacros = JSON.parse(jsonText);
 
+        currentMacros.timestamp = new Date().toISOString();
+
         DOM.resConfidence.textContent = `Confidence: ${currentMacros.confidence}`;
         DOM.resFoodItems.textContent = currentMacros.food_items;
         DOM.resCals.textContent = currentMacros.calories;
