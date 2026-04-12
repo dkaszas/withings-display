@@ -192,7 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
             DOM.databankNavBtn.textContent = 'SCANNER';
             DOM.databankNavBtn.style.backgroundColor = 'var(--lcars-peach)';
             
-            DOM.pillar1.textContent = 'PROMPT'; DOM.pillar1.className = 'lcars-bar lcars-bar-standard bg-tan'; DOM.pillar1.style.cursor = 'pointer';
+            DOM.pillar1.textContent = 'PROMPT'; DOM.pillar1.className = 'lcars-bar lcars-bar-standard bg-emerald'; DOM.pillar1.style.cursor = 'pointer';
             DOM.pillar2.textContent = 'QUERY'; DOM.pillar2.className = 'lcars-bar lcars-bar-stretch bg-dark-orange'; DOM.pillar2.style.cursor = 'pointer';
             DOM.pillar3.textContent = 'CLEAR'; DOM.pillar3.className = 'lcars-bar lcars-bar-standard bg-red'; DOM.pillar3.style.cursor = 'pointer';
             DOM.pillar4.textContent = 'RESPONSE'; DOM.pillar4.className = 'lcars-bar lcars-bar-stretch bg-purple'; DOM.pillar4.style.cursor = 'pointer';
