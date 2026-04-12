@@ -54,7 +54,7 @@ input, textarea, button {
     margin-right: 5px;
 }
 .lcars-column > * {
-    margin-bottom: 5px;
+    margin-bottom: 4px; /* Optically reduced by 1px to offset corner-radius geometric expansion */
 }
 .lcars-column > *:last-child {
     margin-bottom: 0px;
@@ -320,8 +320,13 @@ textarea#context-input::placeholder { color: var(--lcars-dark-orange); }
 #results-card {
     display: flex;
     flex-direction: column;
-    gap: 5px;
     width: 100% !important;
+}
+#results-card > * {
+    margin-bottom: 5px;
+}
+#results-card > *:last-child {
+    margin-bottom: 0px;
 }
 
 .lcars-data-block {
