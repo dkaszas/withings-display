@@ -737,6 +737,57 @@ USER QUERY: ${query}`;
         }
     });
 
+    function setupMic(micBtnId, inputId, defaultColor, activeColor) {
+        const micBtn = document.getElementById(micBtnId);
+        const inputField = document.getElementById(inputId);
+        if (!micBtn || !inputField) return;
+
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (!SpeechRecognition) {
+            micBtn.style.display = 'none';
+            return;
+        }
+
+        const recognition = new SpeechRecognition();
+        recognition.continuous = false;
+        recognition.interimResults = false;
+        let isListening = false;
+
+        micBtn.addEventListener('click', () => {
+            if (isListening) recognition.stop();
+            else recognition.start();
+        });
+
+        recognition.onstart = () => {
+            isListening = true;
+            micBtn.style.color = activeColor;
+            inputField.placeholder = "LISTENING OPENCANAL...";
+        };
+
+        recognition.onresult = (event) => {
+            const transcript = event.results[0][0].transcript;
+            if (inputField.value) inputField.value += ' ' + transcript;
+            else inputField.value = transcript;
+        };
+
+        recognition.onend = () => {
+            isListening = false;
+            micBtn.style.color = defaultColor;
+            if (inputField.id === 'omni-input') inputField.placeholder = "QUERY INTERACTIVE DATABANK...";
+            else if (inputField.id === 'sport-context') inputField.placeholder = "FREEFORM CONTEXT (E.G. 'felt tired', 'pb on bench')";
+            else inputField.placeholder = "OVERRIDE CONTEXT:";
+        };
+
+        recognition.onerror = () => {
+            isListening = false;
+            micBtn.style.color = defaultColor;
+        };
+    }
+
+    setupMic('mic-context', 'context-input', 'var(--lcars-peach)', 'var(--lcars-red)');
+    setupMic('mic-omni', 'omni-input', 'var(--lcars-dark-orange)', 'var(--lcars-red)');
+    setupMic('mic-sport', 'sport-context', 'var(--lcars-gold)', 'var(--lcars-red)');
+
     const hash = window.location.hash.replace('#', '');
     if (['scanner', 'tricorder', 'databank', 'sports'].includes(hash)) openView(hash);
     else openView('scanner');

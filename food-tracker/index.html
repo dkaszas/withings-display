@@ -6,7 +6,7 @@
     <title>MacroLens LCARS</title>
     <meta name="theme-color" content="#000000">
     <link rel="manifest" href="manifest.json">
-    <link rel="stylesheet" href="style.css?v=97">
+    <link rel="stylesheet" href="style.css?v=98">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🖖</text></svg>">
 </head>
 <body>
@@ -49,7 +49,10 @@
             </div>
 
             <!-- OVERRIDE FIELD -->
-            <textarea id="context-input" placeholder="OVERRIDE CONTEXT:" rows="2"></textarea>
+            <div style="position: relative;">
+                <textarea id="context-input" placeholder="OVERRIDE CONTEXT:" rows="2" style="width: 100%; box-sizing: border-box; padding-right: 40px;"></textarea>
+                <div id="mic-context" style="position: absolute; bottom: 10px; right: 10px; cursor: pointer; color: var(--lcars-peach); font-size: 20px;">🎤</div>
+            </div>
             
             <!-- MODEL SELECTOR -->
             <div class="model-select">
@@ -84,7 +87,10 @@
             <!-- DATABANK VIEW -->
             <div id="databank-view" class="hidden">
                 <div class="lcars-bar lcars-bar-standard bg-tan omni-title" style="margin-bottom: 10px;">MEDICAL DATABASE UPLINK</div>
-                <textarea id="omni-input" placeholder="QUERY INTERACTIVE DATABANK..." rows="4"></textarea>
+                <div style="position: relative;">
+                    <textarea id="omni-input" placeholder="QUERY INTERACTIVE DATABANK..." rows="4" style="width: 100%; box-sizing: border-box; padding-right: 40px;"></textarea>
+                    <div id="mic-omni" style="position: absolute; bottom: 10px; right: 10px; cursor: pointer; color: var(--lcars-dark-orange); font-size: 20px;">🎤</div>
+                </div>
                 <button id="omni-btn" class="lcars-btn bg-dark-orange" style="margin-top: 10px; margin-bottom: 10px;">TRANSMIT SECURE QUERY</button>
                 <button id="omni-clear-btn" class="lcars-btn bg-red">CLEAR DATA</button>
                 <div id="omni-response" class="omni-response hidden" style="margin-top: 10px;"></div>
@@ -93,7 +99,7 @@
             <!-- TRICORDER VIEW -->
             <div id="tricorder-view" class="hidden" style="margin-top: 15px;">
                 <div class="tricorder-image-wrapper">
-                    <img src="https://raw.githubusercontent.com/dkaszas/withings-display/refs/heads/main/dashboard.png?v=97latest" alt="Health Dashboard" />
+                    <img src="https://raw.githubusercontent.com/dkaszas/withings-display/refs/heads/main/dashboard.png?v=98latest" alt="Health Dashboard" />
                 </div>
                 <div id="diagnostic-footer" class="diagnostic-footer hidden">
                     <!-- populated via javascript -->
@@ -119,13 +125,16 @@
 
                 <div id="sport-dynamic-inputs" style="margin-bottom: 10px; display: flex; flex-direction: column; gap: 5px;"></div>
 
-                <textarea id="sport-context" placeholder="FREEFORM CONTEXT (E.G. 'felt tired', 'pb on bench')" rows="2" style="width: 100%; margin-bottom: 10px; padding: 10px; background: #000; color: var(--lcars-gold); border: 2px solid var(--lcars-gold); border-radius: 10px; font-family: 'Oswald', sans-serif; font-size: 14px;"></textarea>
+                <div style="position: relative; margin-bottom: 10px;">
+                    <textarea id="sport-context" placeholder="FREEFORM CONTEXT (E.G. 'felt tired', 'pb on bench')" rows="2" style="width: 100%; box-sizing: border-box; padding: 10px; padding-right: 40px; background: #000; color: var(--lcars-gold); border: 2px solid var(--lcars-gold); border-radius: 10px; font-family: 'Oswald', sans-serif; font-size: 14px;"></textarea>
+                    <div id="mic-sport" style="position: absolute; bottom: 15px; right: 10px; cursor: pointer; color: var(--lcars-gold); font-size: 20px;">🎤</div>
+                </div>
 
                 <button id="sport-submit-btn" class="lcars-btn bg-blue" style="margin-bottom: 10px;">TRANSMIT ACTIVITY DATA</button>
                 <button id="sport-clear-btn" class="lcars-btn bg-red" style="margin-bottom: 20px;">CLEAR DATA</button>
 
                 <div class="tricorder-image-wrapper">
-                    <img src="https://raw.githubusercontent.com/dkaszas/withings-display/refs/heads/main/sports_dashboard.png?v=97latest" alt="Sports Dashboard" onerror="this.style.display='none'" onload="this.style.display='block'" />
+                    <img src="https://raw.githubusercontent.com/dkaszas/withings-display/refs/heads/main/sports_dashboard.png?v=98latest" alt="Sports Dashboard" onerror="this.style.display='none'" onload="this.style.display='block'" />
                 </div>
             </div>
 
@@ -148,6 +157,6 @@
         </div>
     </div>
 
-    <script src="app.js?v=97"></script>
+    <script src="app.js?v=98"></script>
 </body>
 </html>
