@@ -107,6 +107,7 @@ input, textarea, button {
 .bg-tan { background-color: var(--lcars-tan) !important; }
 .bg-dark-orange { background-color: var(--lcars-dark-orange) !important; }
 .bg-cyan { background-color: var(--lcars-cyan) !important; }
+.bg-gold { background-color: var(--lcars-gold) !important; }
 
 /* LCARS MAIN CONTENT */
 .lcars-main {
