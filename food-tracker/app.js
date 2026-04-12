@@ -144,11 +144,13 @@ async function fetchDatabank() {
     try {
         const nutRes = await fetch(`https://api.github.com/repos/${repo}/contents/nutrition_log.jsonl`, { headers });
         const hrRes = await fetch(`https://api.github.com/repos/${repo}/contents/tasker_health_metrics.jsonl`, { headers });
+        const vitalsRes = await fetch(`https://api.github.com/repos/${repo}/contents/health_data.csv`, { headers });
         
         let nutData = nutRes.ok ? await nutRes.text() : '';
         let hrData = hrRes.ok ? await hrRes.text() : '';
+        let vitalsData = vitalsRes.ok ? await vitalsRes.text() : '';
 
-        return `NUTRITION LOG:\n${nutData.slice(-15000)}\n\nHEALTH METRICS:\n${hrData.slice(-15000)}`;
+        return `NUTRITION LOG:\n${nutData.slice(-15000)}\n\nHEALTH METRICS:\n${hrData.slice(-15000)}\n\nRAW VITALS (incl BP/Weight):\n${vitalsData.slice(-15000)}`;
     } catch(e) {
         console.warn("Databank fetch issue:", e);
         return null;
