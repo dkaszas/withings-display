@@ -6,7 +6,7 @@
     <title>MacroLens LCARS</title>
     <meta name="theme-color" content="#000000">
     <link rel="manifest" href="manifest.json">
-    <link rel="stylesheet" href="style.css?v=85">
+    <link rel="stylesheet" href="style.css?v=86">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🖖</text></svg>">
 </head>
 <body>
@@ -92,7 +92,7 @@
             <!-- TRICORDER VIEW -->
             <div id="tricorder-view" class="hidden" style="margin-top: 15px;">
                 <div class="tricorder-image-wrapper">
-                    <img src="https://raw.githubusercontent.com/dkaszas/withings-display/refs/heads/main/dashboard.png?v=85latest" alt="Health Dashboard" />
+                    <img src="https://raw.githubusercontent.com/dkaszas/withings-display/refs/heads/main/dashboard.png?v=86latest" alt="Health Dashboard" />
                 </div>
                 <div id="diagnostic-footer" class="diagnostic-footer hidden">
                     <!-- populated via javascript -->
@@ -100,9 +100,12 @@
             </div>
 
             <!-- SPORTS VIEW -->
-            <div id="sports-view" class="hidden" style="margin-top: 15px;">
-                <div class="lcars-bar lcars-bar-standard bg-gold omni-title" style="margin-bottom: 10px;">ACTIVITY LOG UPLINK</div>
-                
+            <div id="sports-view" class="hidden">
+                <div style="display: flex; gap: 10px; margin-bottom: 10px; align-items: center;">
+                    <label style="color: var(--lcars-cyan); font-size: 14px; min-width: 80px;">LOCAL TIME:</label>
+                    <input type="datetime-local" id="sport-time" style="flex-grow: 1; padding: 8px; background: #000; color: var(--lcars-cyan); border: 2px solid var(--lcars-cyan); border-radius: 10px; font-family: 'Oswald', sans-serif; font-size: 14px;">
+                </div>
+
                 <select id="sport-select" class="lcars-select" style="width: 100%; margin-bottom: 10px; padding: 10px; background: #000; color: var(--lcars-gold); border: 2px solid var(--lcars-gold); border-radius: 10px; font-family: 'Oswald', sans-serif; font-size: 16px;">
                     <option value="" disabled selected>SELECT ACTIVITY...</option>
                     <option value="pilates">PILATES</option>
@@ -115,17 +118,13 @@
 
                 <div id="sport-dynamic-inputs" style="margin-bottom: 10px; display: flex; flex-direction: column; gap: 5px;"></div>
 
-                <div style="display: flex; gap: 10px; margin-bottom: 10px; align-items: center;">
-                    <label style="color: var(--lcars-cyan); font-size: 14px; min-width: 80px;">LOCAL TIME:</label>
-                    <input type="datetime-local" id="sport-time" style="flex-grow: 1; padding: 8px; background: #000; color: var(--lcars-cyan); border: 2px solid var(--lcars-cyan); border-radius: 10px; font-family: 'Oswald', sans-serif; font-size: 14px;">
-                </div>
+                <textarea id="sport-context" placeholder="FREEFORM CONTEXT (E.G. 'felt tired', 'pb on bench')" rows="2" style="width: 100%; margin-bottom: 10px; padding: 10px; background: #000; color: var(--lcars-gold); border: 2px solid var(--lcars-gold); border-radius: 10px; font-family: 'Oswald', sans-serif; font-size: 14px;"></textarea>
 
-                <textarea id="sport-context" placeholder="FREEFORM CONTEXT (E.G. 'felt tired', 'pb on bench')" rows="2" style="width: 100%; margin-bottom: 10px; padding: 10px; background: #000; color: var(--lcars-peach); border: 2px solid var(--lcars-peach); border-radius: 10px; font-family: 'Oswald', sans-serif; font-size: 14px;"></textarea>
-
-                <button id="sport-submit-btn" class="lcars-btn bg-blue" style="margin-bottom: 20px;">TRANSMIT ACTIVITY DATA</button>
+                <button id="sport-submit-btn" class="lcars-btn bg-blue" style="margin-bottom: 10px;">TRANSMIT ACTIVITY DATA</button>
+                <button id="sport-clear-btn" class="lcars-btn bg-red" style="margin-bottom: 20px;">CLEAR DATA</button>
 
                 <div class="tricorder-image-wrapper">
-                    <img src="https://raw.githubusercontent.com/dkaszas/withings-display/refs/heads/main/sports_dashboard.png?v=85latest" alt="Sports Dashboard" onerror="this.style.display='none'" onload="this.style.display='block'" />
+                    <img src="https://raw.githubusercontent.com/dkaszas/withings-display/refs/heads/main/sports_dashboard.png?v=86latest" alt="Sports Dashboard" onerror="this.style.display='none'" onload="this.style.display='block'" />
                 </div>
             </div>
 
@@ -148,6 +147,6 @@
         </div>
     </div>
 
-    <script src="app.js?v=85"></script>
+    <script src="app.js?v=86"></script>
 </body>
 </html>
