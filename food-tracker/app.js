@@ -339,6 +339,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                   createLift('Lat Pulldowns', 's-gym-lat', '30', '4', '8') +
                                   createLift('Triceps Pulldowns', 's-gym-triceps', '30', '4', '8') +
                                   createLift('Bench Presses (Dumbbells)', 's-gym-bench', '50', '4', '8') +
+                                  createLift('Pec Flys', 's-gym-pecs', '50', '4', '8') +
                                   createLift('Deadlifts', 's-gym-deadlifts', '60', '3', '6') +
                                   createLift('Squats', 's-gym-squats', '70', '3', '6');
         } else if (sport === 'cycling') {
