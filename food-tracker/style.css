@@ -46,15 +46,15 @@ input, textarea, button {
 .lcars-column {
     display: flex;
     flex-direction: column;
-    width: 100px;
+    width: 60px;
     gap: 5px;
     flex-shrink: 0;
 }
 
 .lcars-bar {
     text-align: right;
-    padding: 10px 5px;
-    font-size: 14px;
+    padding: 5px 5px;
+    font-size: 12px;
     font-weight: 700;
     color: #000;
 }
@@ -126,19 +126,13 @@ input, textarea, button {
 }
 
 .lcars-title {
-    font-size: 36px;
+    font-size: 28px;
     font-weight: 700;
     color: var(--lcars-orange);
     text-align: right;
     line-height: 1;
-    margin-top: 15px;
-}
-
-.lcars-subtitle {
-    font-size: 16px;
-    color: var(--lcars-purple);
-    text-align: right;
-    margin-bottom: 20px;
+    margin-top: 0px;
+    margin-bottom: 5px;
 }
 
 /* CAMERA INPUT GRID */
