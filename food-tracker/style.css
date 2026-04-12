@@ -322,28 +322,33 @@ textarea#context-input::placeholder { color: var(--lcars-dark-orange); }
 }
 textarea#omni-input {
     width: 100%;
-    background: #000;
-    border: 2px solid var(--lcars-blue);
+    background-color: var(--lcars-black);
+    color: var(--lcars-tan);
+    border: 2px solid var(--lcars-dark-orange);
     border-radius: 10px;
     padding: 10px;
-    color: var(--lcars-peach);
-    font-size: 16px;
-    outline: none;
-    resize: none;
+    margin-bottom: 2px;
+    font-size: 18px;
+    font-family: 'Oswald', sans-serif;
+    resize: vertical;
 }
-textarea#omni-input::placeholder { color: var(--lcars-purple); }
 .omni-response {
-    background: #000;
-    border: 2px dashed var(--lcars-tan);
-    border-radius: 10px;
+    background-color: var(--lcars-black);
+    color: var(--lcars-tan);
     padding: 15px;
-    color: var(--lcars-peach);
-    font-size: 14px;
-    font-weight: 400;
-    text-transform: none;
+    border: 2px solid var(--lcars-orange);
+    border-radius: 10px;
+    font-size: 18px;
     line-height: 1.4;
     white-space: pre-wrap;
-    font-family: inherit;
+    max-height: 250px;
+    overflow-y: auto;
+}
+.omni-response b, .omni-response strong {
+    color: var(--lcars-peach);
+}
+.omni-response i, .omni-response em {
+    color: var(--lcars-blue);
 }
 
 /* TRICORDER SPECIFICS */
@@ -358,6 +363,7 @@ textarea#omni-input::placeholder { color: var(--lcars-purple); }
     display: block;
     width: 111%; /* Stretches right side natively out of bounds by ~10% */
     max-width: none;
+    margin-left: -3%; /* Chips away the left padding */
 }
 
 /* OVERLAYS */
@@ -395,7 +401,7 @@ textarea#omni-input::placeholder { color: var(--lcars-purple); }
 }
 
 .lcars-app.tricorder-mode .lcars-column {
-    min-width: 15px; /* Aggressive squash for Tricorder */
+    display: none; /* Radically free up horizontal space */
 }
 .lcars-app.tricorder-mode .lcars-column .lcars-bar {
     font-size: 0px; /* Hide text */

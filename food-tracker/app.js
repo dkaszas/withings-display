@@ -231,8 +231,12 @@ DOM.omniBtn.addEventListener('click', async () => {
         let resultData = await queryGemini('gemini-2.5-flash', promptText, [], false);
         let aiResp = resultData.candidates[0].content.parts[0].text;
         
+        // Basic Markdown parsing for bold and italics
+        aiResp = aiResp.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
+        aiResp = aiResp.replace(/\*(.*?)\*/g, '<i>$1</i>');
+        
         DOM.omniResponse.classList.remove('hidden');
-        DOM.omniResponse.textContent = aiResp;
+        DOM.omniResponse.innerHTML = aiResp;
         DOM.omniInput.value = '';
 
     } catch (e) {
