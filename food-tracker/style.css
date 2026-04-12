@@ -306,6 +306,46 @@ textarea#context-input::placeholder { color: var(--lcars-dark-orange); }
 .btn-commit { background-color: var(--lcars-blue); }
 .btn-cancel { background-color: var(--lcars-red); }
 
+/* OMNI-PANEL */
+.omni-container {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-top: 4px solid var(--lcars-tan);
+    padding-top: 20px;
+}
+.omni-title {
+    color: #000;
+    justify-content: flex-start;
+    padding-left: 15px;
+}
+textarea#omni-input {
+    width: 100%;
+    background: #000;
+    border: 2px solid var(--lcars-blue);
+    border-radius: 10px;
+    padding: 10px;
+    color: var(--lcars-peach);
+    font-size: 16px;
+    outline: none;
+    resize: none;
+}
+textarea#omni-input::placeholder { color: var(--lcars-purple); }
+.omni-response {
+    background: #000;
+    border: 2px dashed var(--lcars-tan);
+    border-radius: 10px;
+    padding: 15px;
+    color: var(--lcars-peach);
+    font-size: 14px;
+    font-weight: 400;
+    text-transform: none;
+    line-height: 1.4;
+    white-space: pre-wrap;
+    font-family: inherit;
+}
+
 /* OVERLAYS */
 .hidden { display: none !important; }
 

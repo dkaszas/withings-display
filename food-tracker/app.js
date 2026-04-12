@@ -24,6 +24,11 @@ const DOM = {
     githubPat: document.getElementById('github-pat'),
     githubRepo: document.getElementById('github-repo'),
 
+    // Omni-Panel
+    omniInput: document.getElementById('omni-input'),
+    omniBtn: document.getElementById('omni-btn'),
+    omniResponse: document.getElementById('omni-response'),
+
     // Result values
     resConfidence: document.getElementById('res-confidence'),
     resFoodItems: document.getElementById('res-food-items'),
@@ -125,6 +130,61 @@ DOM.cancelBtn.addEventListener('click', resetView);
 
 DOM.analyzeBtn.addEventListener('click', analyzeMeal);
 DOM.commitBtn.addEventListener('click', saveToDashboard);
+
+async function fetchDatabank() {
+    const pat = localStorage.getItem('ml_github_pat');
+    const repo = localStorage.getItem('ml_github_repo');
+    if (!pat || !repo) return null;
+
+    const headers = {
+        'Accept': 'application/vnd.github.v3.raw',
+        'Authorization': `token ${pat}`
+    };
+
+    try {
+        const nutRes = await fetch(`https://api.github.com/repos/${repo}/contents/nutrition_log.jsonl`, { headers });
+        const hrRes = await fetch(`https://api.github.com/repos/${repo}/contents/tasker_health_metrics.jsonl`, { headers });
+        
+        let nutData = nutRes.ok ? await nutRes.text() : '';
+        let hrData = hrRes.ok ? await hrRes.text() : '';
+
+        return `NUTRITION LOG:\n${nutData.slice(-15000)}\n\nHEALTH METRICS:\n${hrData.slice(-15000)}`;
+    } catch(e) {
+        console.warn("Databank fetch issue:", e);
+        return null;
+    }
+}
+
+DOM.omniBtn.addEventListener('click', async () => {
+    const query = DOM.omniInput.value.trim();
+    if (!query) return;
+
+    DOM.loader.classList.remove('hidden');
+    DOM.loaderText.textContent = "SYNCHRONIZING DATABANKS...";
+    
+    try {
+        const databank = await fetchDatabank();
+        if (!databank) {
+            throw new Error("Unable to authenticate or fetch Databank. Check CONFIG parameters.");
+        }
+
+        const promptText = `You are a Star Trek LCARS Medical UI analyzing the user's longitudinal health data. Analyze the provided structured logs and answer the user's query clearly, scientifically, and concisely (using Markdown if helpful, but DO NOT enclose the entire response in JSON codeblocks). \n\nDATABANK RECORDS:\n${databank}\n\nUSER QUERY:\n${query}`;
+
+        DOM.loaderText.textContent = `QUERYING OMNICORE...`;
+        
+        let resultData = await queryGemini('gemini-2.5-flash', promptText, []);
+        let aiResp = resultData.candidates[0].content.parts[0].text;
+        
+        DOM.omniResponse.classList.remove('hidden');
+        DOM.omniResponse.textContent = aiResp;
+        DOM.omniInput.value = '';
+
+    } catch (e) {
+        alert(e.message);
+    } finally {
+        DOM.loader.classList.add('hidden');
+    }
+});
 
 function resetView() {
     currentBase64Images = [];
