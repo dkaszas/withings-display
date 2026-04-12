@@ -421,8 +421,8 @@ textarea#omni-input {
 
 /* TRICORDER SPECIFICS */
 .tricorder-image-wrapper {
-    width: calc(100% + 10px);
-    margin-right: -10px;
+    width: calc(100% + 20px);
+    margin-right: -20px;
     overflow: hidden;
     border: 3px solid var(--lcars-blue);
     border-left: none;
@@ -431,9 +431,9 @@ textarea#omni-input {
 }
 .tricorder-image-wrapper img {
     display: block;
-    width: 111%; /* Stretches right side natively out of bounds by ~10% */
+    width: 130%; /* Expand heavily to completely discard matplotlib right-margins */
     max-width: none;
-    margin-left: -3%; /* Chips away the left padding */
+    margin-left: -6%; /* Centers the plot safely */
 }
 
 /* DIAGNOSTIC FOOTER */
