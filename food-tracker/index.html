@@ -3,103 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>MacroLens</title>
-    <meta name="theme-color" content="#0d1117">
+    <title>MacroLens LCARS</title>
+    <meta name="theme-color" content="#000000">
     <link rel="manifest" href="manifest.json">
-    <link rel="stylesheet" href="style.css?v=10">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📸</text></svg>">
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Spectral:wght@800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=11">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
 </head>
 <body>
-    <div id="app">
-        <header>
-            <h1 class="glow-text">MacroLens</h1>
-            <button id="settings-btn" aria-label="Settings">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-            </button>
-        </header>
+    
+    <div id="settings-btn" class="settings-icon" aria-label="Settings">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+    </div>
 
-        <main>
-            <div class="glass-card main-interface">
-                <div class="camera-wrapper">
-                    <img id="image-preview" style="display: none;" />
-                    <div id="image-count-badge" class="badge hidden"></div>
-                    <div class="camera-placeholder" id="camera-placeholder">
-                        <div class="input-split">
-                            <label for="gallery-input" class="split-btn">
-                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
-                                <span>Gallery</span>
-                            </label>
-                            <div class="divider"></div>
-                            <label for="camera-input" class="split-btn">
-                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
-                                <span>Camera</span>
-                            </label>
-                        </div>
+    <div id="app" class="lcars-app">
+        <!-- LCARS LEFT PILLAR -->
+        <div class="lcars-column">
+            <div class="lcars-bar lcars-bar-top bg-peach">47</div>
+            <div class="lcars-bar lcars-bar-standard bg-blue">01</div>
+            <div class="lcars-bar lcars-bar-standard bg-purple">02</div>
+            <div class="lcars-bar lcars-bar-stretch bg-orange">03</div>
+            <div class="lcars-bar lcars-bar-standard bg-tan">04</div>
+            <div class="lcars-bar lcars-bar-stretch bg-red">05</div>
+        </div>
+
+        <!-- MAIN INTERFACE -->
+        <div class="lcars-main">
+            <!-- HEADER WRAPPER -->
+            <div class="lcars-header">
+                <div class="lcars-top-elbow"></div>
+                <div class="lcars-top-pill"></div>
+            </div>
+            
+            <div class="lcars-title">MACROLENS<br><span style="color:var(--lcars-blue)">ONLINE</span></div>
+            <div class="lcars-subtitle">A.I. NUTRITIONAL UPLINK</div>
+
+            <!-- CAMERA/GALLERY SENSOR BLOCK -->
+            <div class="camera-wrapper">
+                <img id="image-preview" style="display: none;" />
+                <div class="camera-placeholder" id="camera-placeholder">
+                    <div class="input-split">
+                        <label for="gallery-input" class="split-btn split-top">GALLERY</label>
+                        <label for="camera-input" class="split-btn split-bottom">SENSOR</label>
                     </div>
-                    <input type="file" id="gallery-input" accept="image/*" multiple style="display:none;">
-                    <input type="file" id="camera-input" accept="image/*" capture="environment" style="display:none;">
                 </div>
-
-                <div class="context-area">
-                    <textarea id="context-input" placeholder="Optional context (e.g., 'Low-fat dressing', 'Cooked in butter')..." rows="2"></textarea>
-                </div>
-                
-                <div class="action-area">
-                    <button id="analyze-btn" class="primary-btn" disabled>Analyze Meal</button>
-                </div>
+                <input type="file" id="gallery-input" accept="image/*" multiple style="display:none;">
+                <input type="file" id="camera-input" accept="image/*" capture="environment" style="display:none;">
             </div>
+            <div id="image-count-badge" class="hidden" style="color:var(--lcars-peach); text-align:right;"></div>
 
-            <!-- Loader and Results overlay -->
-            <div id="loader" class="glass-overlay hidden">
-                <div class="spinner"></div>
-                <p id="loader-text">Analyzing with AI...</p>
-            </div>
+            <!-- OVERRIDE FIELD -->
+            <textarea id="context-input" placeholder="OVERRIDE CONTEXT..." rows="2"></textarea>
+            
+            <!-- ACTION BUTTON -->
+            <button id="analyze-btn" class="lcars-btn bg-purple" disabled>ENGAGE ANALYSIS</button>
 
-            <div id="results-card" class="glass-card results-card hidden">
-                <h2>AI Analysis</h2>
-                
-                <div class="analysis-details">
-                    <p class="confidence-badge" id="res-confidence">Confidence: --</p>
-                    <p class="food-items-text" id="res-food-items">...</p>
+            <!-- RESULTS OVERLAY -->
+            <div id="results-card" class="hidden">
+                <div class="lcars-data-block">
+                    <div class="confidence-badge" id="res-confidence">CONFIDENCE: --</div>
+                    <div class="food-items-text" id="res-food-items">...</div>
                 </div>
 
                 <div class="macro-grid">
-                    <div class="macro-item"><span class="label">Calories</span><span class="value" id="res-cals">--</span></div>
-                    <div class="macro-item"><span class="label">Protein</span><span class="value" id="res-pro">--</span>g</div>
-                    <div class="macro-item"><span class="label">Carbs</span><span class="value" id="res-carb">--</span>g</div>
-                    <div class="macro-item"><span class="label">Fat</span><span class="value" id="res-fat">--</span>g</div>
+                    <div class="macro-item bg-orange"><span class="label">CALORIES</span><span class="value" id="res-cals">--</span></div>
+                    <div class="macro-item bg-blue"><span class="label">PROTEIN</span><span class="value" id="res-pro">--</span></div>
+                    <div class="macro-item bg-peach"><span class="label">CARBS</span><span class="value" id="res-carb">--</span></div>
+                    <div class="macro-item bg-purple"><span class="label">FAT</span><span class="value" id="res-fat">--</span></div>
                 </div>
-                <button id="commit-btn" class="primary-btn pulse">Save to Dashboard</button>
-                <button id="cancel-btn" class="secondary-btn">Cancel</button>
-            </div>
-        </main>
-
-        <!-- Settings Modal -->
-        <div id="settings-modal" class="modal hidden">
-            <div class="modal-content glass-card">
-                <h2>Configuration</h2>
-                <p class="subtitle">Keys are stored locally securely.</p>
-                <div class="input-group">
-                    <label for="gemini-key">Gemini API Key</label>
-                    <input type="password" id="gemini-key" placeholder="AIzaSy...">
-                </div>
-                <div class="input-group">
-                    <label for="github-pat">GitHub PAT</label>
-                    <input type="password" id="github-pat" placeholder="ghp_...">
-                </div>
-                <div class="input-group">
-                    <label for="github-repo">Target Repo</label>
-                    <input type="text" id="github-repo" value="dkaszas/withings" placeholder="owner/repo">
-                </div>
-                <button id="save-settings-btn" class="primary-btn">Save</button>
-                <button id="close-settings-btn" class="secondary-btn">Close</button>
+                
+                <button id="commit-btn" class="lcars-btn btn-commit">TRANSMIT TO DATABANK</button>
+                <button id="cancel-btn" class="lcars-btn btn-cancel" style="border-radius: 10px; height: 35px; font-size:16px;">ABORT</button>
             </div>
         </div>
     </div>
-    <script src="app.js?v=10"></script>
+
+    <!-- UTILITY MODALS -->
+    <div id="loader" class="hidden">
+        <div id="loader-text">ACCESSING DATABANK...</div>
+    </div>
+
+    <div id="settings-modal" class="hidden">
+        <div class="modal-content">
+            <h2 style="color:var(--lcars-orange)">SYSTEM CONFIG</h2>
+            <input type="password" id="gemini-key" placeholder="AI SUBSYSTEM KEY">
+            <input type="password" id="github-pat" placeholder="DATABANK PAT">
+            <input type="text" id="github-repo" value="dkaszas/withings" placeholder="DATABANK ID">
+            <button id="save-settings-btn" class="lcars-btn bg-blue">SAVE</button>
+            <button id="close-settings-btn" class="lcars-btn bg-red">CLOSE</button>
+        </div>
+    </div>
+
+    <script src="app.js?v=11"></script>
 </body>
 </html>

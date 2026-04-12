@@ -31,6 +31,7 @@ const DOM = {
 
 let currentBase64Images = [];
 let currentMacros = null;
+let imageLastModified = null;
 
 // Initialization
 function init() {
@@ -68,6 +69,12 @@ DOM.contextInput.addEventListener('input', updateAnalyzeButtonState);
 async function handleFileInput(e) {
     const files = Array.from(e.target.files);
     if (files.length > 0) {
+        if (files[0] && files[0].lastModified) {
+            imageLastModified = new Date(files[0].lastModified).toISOString();
+        } else {
+            imageLastModified = null;
+        }
+        
         currentBase64Images = [];
         for (let file of files) {
             const b64 = await new Promise(resolve => {
@@ -105,6 +112,7 @@ DOM.commitBtn.addEventListener('click', saveToDashboard);
 function resetView() {
     currentBase64Images = [];
     currentMacros = null;
+    imageLastModified = null;
     DOM.preview.style.display = 'none';
     DOM.preview.src = '';
     document.getElementById('image-count-badge').classList.add('hidden');
@@ -214,6 +222,7 @@ async function saveToDashboard() {
         event_type: "food_log_update",
         client_payload: {
             timestamp: new Date().toISOString(),
+            image_timestamp: imageLastModified || new Date().toISOString(),
             ...currentMacros
         }
     };
