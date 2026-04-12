@@ -72,6 +72,21 @@ function init() {
     if (!DOM.geminiKey.value || !DOM.githubPat.value) {
         DOM.settingsModal.classList.remove('hidden');
     }
+    
+    // Initial sync of pillar heights
+    setTimeout(syncPillarHeights, 100);
+    window.addEventListener('resize', syncPillarHeights);
+}
+
+function syncPillarHeights() {
+    if (DOM.scannerView.classList.contains('hidden')) return;
+    
+    const wrapper = document.querySelector('.camera-wrapper');
+    if (wrapper && wrapper.clientHeight > 0) {
+        const splitHeight = (wrapper.clientHeight - 5) / 2;
+        DOM.pillar1.style.height = splitHeight + 'px';
+        DOM.pillar2.style.height = splitHeight + 'px';
+    }
 }
 
 // Event Listeners
@@ -114,6 +129,8 @@ function updateDynamicPillars() {
         DOM.analyzeBtn.disabled = true;
         DOM.analyzeBtn.classList.add('hidden');
     }
+    
+    syncPillarHeights();
 }
 
 function openView(target) {

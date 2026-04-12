@@ -60,7 +60,7 @@ input, textarea, button {
 }
 
 .lcars-bar-top {
-    height: 100px;
+    height: 158px; /* Mathematically aligned to 100+15+28+15 to sync with right column content! */
     border-top-left-radius: 30px;
     border-bottom-left-radius: 30px;
     display: flex;
@@ -153,6 +153,7 @@ input, textarea, button {
 .camera-wrapper {
     position: relative;
     width: 100%;
+    aspect-ratio: 1; /* Restored for large tappable area */
     background: #000;
     border-radius: 0 20px 20px 0;
     display: flex;
@@ -169,14 +170,14 @@ input, textarea, button {
 
 .camera-placeholder {
     width: 100%;
-    height: 85px; /* Exactly matches TWO 40px left-pillar columns and their 5px gap! */
+    height: 100%; /* Restored */
     display: flex;
     flex-direction: column;
     z-index: 1;
 }
 
 .split-btn {
-    height: 40px; /* Force to exactly trace left pillar blocks */
+    flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
