@@ -39,15 +39,7 @@ input, textarea, button {
     width: 100%;
     max-width: 600px;
     display: flex;
-    flex-direction: column;
-    gap: 0;
-}
-
-.lcars-grid-row {
-    display: grid;
-    grid-template-columns: 60px 1fr;
-    gap: 5px;
-    width: 100%;
+    gap: 2px;
 }
 
 /* LCARS LEFT COLUMN */
@@ -68,9 +60,9 @@ input, textarea, button {
 }
 
 .lcars-bar-top {
-    height: 30px; /* Locked height */
-    border-top-left-radius: 30px;
-    border-bottom-left-radius: 0px;
+    height: 20px; /* Aligned to match elbow/pills height exactly */
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 0;
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -115,9 +107,9 @@ input, textarea, button {
 /* HEADER ELBOW-BAR */
 .lcars-header {
     display: flex;
-    align-items: center; /* Center pills in 30px height */
+    align-items: center;
     gap: 10px;
-    height: 30px; /* Matching height */
+    height: 20px; /* Match the 47 pillar exactly for a flush top vector */
     flex-shrink: 0;
 }
 
@@ -126,7 +118,6 @@ input, textarea, button {
     height: 20px;
     background-color: var(--lcars-peach) !important;
     border-bottom-right-radius: 20px;
-    align-self: flex-end;
 }
 .lcars-top-pill {
     min-width: 80px;

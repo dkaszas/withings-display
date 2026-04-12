@@ -57,7 +57,7 @@ const DOM = {
 let currentBase64Images = [];
 let currentMacros = null;
 let imageLastModified = null;
-let selectedModel = 'gemini-1.5-flash';
+let selectedModel = 'gemini-2.5-flash';
 
 // Initialization
 function init() {
@@ -192,13 +192,13 @@ DOM.databankNavBtn.addEventListener('click', () => {
 });
 
 DOM.btnFlash.addEventListener('click', () => {
-    selectedModel = 'gemini-1.5-flash';
+    selectedModel = 'gemini-2.5-flash';
     DOM.btnFlash.classList.add('active');
     DOM.btnPro.classList.remove('active');
 });
 
 DOM.btnPro.addEventListener('click', () => {
-    selectedModel = 'gemini-1.5-pro';
+    selectedModel = 'gemini-2.5-pro';
     DOM.btnPro.classList.add('active');
     DOM.btnFlash.classList.remove('active');
 });
@@ -272,7 +272,7 @@ DOM.omniBtn.addEventListener('click', async () => {
 
         DOM.loaderText.textContent = `QUERYING OMNICORE...`;
         
-        let resultData = await queryGemini('gemini-1.5-flash', promptText, [], false);
+        let resultData = await queryGemini('gemini-2.5-flash', promptText, [], false);
         let aiResp = resultData.candidates[0].content.parts[0].text;
         
         // Basic Markdown parsing for bold and italics
@@ -354,24 +354,24 @@ async function analyzeMeal() {
 
     try {
         let resultData;
-        if (selectedModel === 'gemini-1.5-flash') {
+        if (selectedModel === 'gemini-2.5-flash') {
             try {
                 DOM.loaderText.textContent = "QUERYING FLASH DATABANK...";
-                resultData = await queryGemini('gemini-1.5-flash', promptText, currentBase64Images, true);
+                resultData = await queryGemini('gemini-2.5-flash', promptText, currentBase64Images, true);
             } catch (e) {
                 console.warn("Flash failed, falling back...", e);
                 DOM.loaderText.textContent = "FLASH FAILED. FALLBACK UPLINK...";
-                resultData = await queryGemini('gemini-1.5-pro', promptText, currentBase64Images, true);
+                resultData = await queryGemini('gemini-2.5-pro', promptText, currentBase64Images, true);
             }
         } else {
             // Pro selected
             try {
                 DOM.loaderText.textContent = "QUERYING PRO DATABANK...";
-                resultData = await queryGemini('gemini-1.5-pro', promptText, currentBase64Images, true);
+                resultData = await queryGemini('gemini-2.5-pro', promptText, currentBase64Images, true);
             } catch (e) {
                 console.warn("Pro failed, falling back...", e);
                 DOM.loaderText.textContent = "PRO FAILED. FALLBACK UPLINK...";
-                resultData = await queryGemini('gemini-1.5-flash', promptText, currentBase64Images, true);
+                resultData = await queryGemini('gemini-2.5-flash', promptText, currentBase64Images, true);
             }
         }
 
