@@ -6,7 +6,7 @@
     <title>MacroLens LCARS</title>
     <meta name="theme-color" content="#000000">
     <link rel="manifest" href="manifest.json">
-    <link rel="stylesheet" href="style.css?v=37">
+    <link rel="stylesheet" href="style.css?v=38">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🖖</text></svg>">
 </head>
 <body>
@@ -37,11 +37,11 @@
 
             <!-- CAMERA/GALLERY SENSOR BLOCK -->
             <div class="camera-wrapper">
-                <img id="image-preview" style="display: none;" />
+                <img id="image-preview" class="hidden" />
                 <div class="camera-placeholder" id="camera-placeholder">
                     <div class="input-split">
-                        <label for="gallery-input" class="split-btn split-top" style="background-color: var(--lcars-blue)">GALLERY</label>
-                        <label for="camera-input" class="split-btn split-bottom" style="background-color: var(--lcars-purple)">SENSOR</label>
+                        <label for="gallery-input" class="split-btn split-top bg-blue" style="cursor: pointer;">GALLERY</label>
+                        <label for="camera-input" class="split-btn split-bottom bg-purple" style="cursor: pointer;">SENSOR</label>
                     </div>
                 </div>
                 <input type="file" id="gallery-input" accept="image/*" multiple style="display:none;">
@@ -115,6 +115,6 @@
         </div>
     </div>
 
-    <script src="app.js?v=37"></script>
+    <script src="app.js?v=38"></script>
 </body>
 </html>

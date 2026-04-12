@@ -211,7 +211,6 @@ function processImageSelection(file) {
     reader.onload = (e) => {
         currentBase64Images.push(e.target.result.split(',')[1]);
         DOM.preview.src = e.target.result;
-        DOM.preview.style.display = 'block';
         DOM.preview.classList.remove('hidden');
         DOM.placeholder.style.display = 'none';
         DOM.badge.textContent = `IMG: ${currentBase64Images.length}/3`;
@@ -293,7 +292,6 @@ DOM.omniBtn.addEventListener('click', async () => {
 function clearImage() {
     currentBase64Images = [];
     DOM.preview.src = '';
-    DOM.preview.style.display = 'none';
     DOM.preview.classList.add('hidden');
     DOM.placeholder.style.display = 'flex';
     DOM.contextInput.value = '';
