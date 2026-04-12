@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
         commitBtn: document.getElementById('commit-btn'),
         cancelBtn: document.getElementById('cancel-btn'),
         badge: document.getElementById('image-count-badge'),
+        stardate: document.getElementById('stardate-display'),
         
         // Model toggles
         modelSelect: document.querySelector('.model-select'),
@@ -74,6 +75,20 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!DOM.geminiKey.value || !DOM.githubPat.value) {
             DOM.settingsModal.classList.remove('hidden');
         }
+        
+        updateStardate();
+        setInterval(updateStardate, 60000);
+    }
+
+    function updateStardate() {
+        if (!DOM.stardate) return;
+        const now = new Date();
+        const opts = { timeZone: 'Europe/Zurich', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false };
+        const formatter = new Intl.DateTimeFormat('en-US', opts);
+        const parts = formatter.formatToParts(now);
+        let ds = {};
+        parts.forEach(p => ds[p.type] = p.value);
+        DOM.stardate.textContent = `STARDATE ${ds.year}${ds.month}${ds.day}.${ds.hour}${ds.minute}`;
     }
 
     function updateDynamicPillars() {
