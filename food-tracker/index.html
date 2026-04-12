@@ -6,7 +6,7 @@
     <title>MacroLens LCARS</title>
     <meta name="theme-color" content="#000000">
     <link rel="manifest" href="manifest.json">
-    <link rel="stylesheet" href="style.css?v=101">
+    <link rel="stylesheet" href="style.css?v=75">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🖖</text></svg>">
 </head>
 <body>
@@ -51,7 +51,9 @@
             <!-- OVERRIDE FIELD -->
             <div style="position: relative;">
                 <textarea id="context-input" placeholder="OVERRIDE CONTEXT:" rows="2" style="width: 100%; box-sizing: border-box; padding-right: 40px;"></textarea>
-                <div id="mic-context" style="position: absolute; bottom: 10px; right: 10px; cursor: pointer; color: var(--lcars-peach); font-size: 20px;">🎤</div>
+                <div id="mic-context" style="position: absolute; bottom: 15px; right: 15px; cursor: pointer; color: var(--lcars-peach); user-select: none; -webkit-user-select: none; z-index: 10;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+                </div>
             </div>
             
             <!-- MODEL SELECTOR -->
@@ -89,7 +91,9 @@
                 <div class="lcars-bar lcars-bar-standard bg-emerald omni-title" style="margin-bottom: 10px;">MEDICAL DATABASE UPLINK</div>
                 <div style="position: relative;">
                     <textarea id="omni-input" placeholder="QUERY INTERACTIVE DATABANK..." rows="4" style="width: 100%; box-sizing: border-box; padding-right: 40px;"></textarea>
-                    <div id="mic-omni" style="position: absolute; bottom: 10px; right: 10px; cursor: pointer; color: var(--lcars-dark-orange); font-size: 20px;">🎤</div>
+                    <div id="mic-omni" style="position: absolute; bottom: 15px; right: 15px; cursor: pointer; color: var(--lcars-dark-orange); user-select: none; -webkit-user-select: none; z-index: 10;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+                    </div>
                 </div>
                 <button id="omni-btn" class="lcars-btn bg-dark-orange" style="margin-top: 10px; margin-bottom: 10px;">TRANSMIT SECURE QUERY</button>
                 <button id="omni-clear-btn" class="lcars-btn bg-red">CLEAR DATA</button>
@@ -99,7 +103,7 @@
             <!-- TRICORDER VIEW -->
             <div id="tricorder-view" class="hidden" style="margin-top: 15px;">
                 <div class="tricorder-image-wrapper">
-                    <img src="https://raw.githubusercontent.com/dkaszas/withings-display/refs/heads/main/dashboard.png?v=101latest" alt="Health Dashboard" />
+                    <img src="https://raw.githubusercontent.com/dkaszas/withings-display/refs/heads/main/dashboard.png?v=latest" alt="Health Dashboard" />
                 </div>
                 <div id="diagnostic-footer" class="diagnostic-footer hidden">
                     <!-- populated via javascript -->
@@ -128,14 +132,16 @@
 
                 <div style="position: relative; margin-bottom: 10px;">
                     <textarea id="sport-context" placeholder="FREEFORM CONTEXT (E.G. 'felt tired', 'pb on bench')" rows="2" style="width: 100%; box-sizing: border-box; padding: 10px; padding-right: 40px; background: #000; color: var(--lcars-gold); border: 2px solid var(--lcars-gold); border-radius: 10px; font-family: 'Oswald', sans-serif; font-size: 14px;"></textarea>
-                    <div id="mic-sport" style="position: absolute; bottom: 15px; right: 10px; cursor: pointer; color: var(--lcars-gold); font-size: 20px;">🎤</div>
+                    <div id="mic-sport" style="position: absolute; bottom: 20px; right: 15px; cursor: pointer; color: var(--lcars-gold); user-select: none; -webkit-user-select: none; z-index: 10;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+                    </div>
                 </div>
 
                 <button id="sport-submit-btn" class="lcars-btn bg-blue" style="margin-bottom: 10px;">TRANSMIT ACTIVITY DATA</button>
                 <button id="sport-clear-btn" class="lcars-btn bg-red" style="margin-bottom: 20px;">CLEAR DATA</button>
 
                 <div class="tricorder-image-wrapper">
-                    <img src="https://raw.githubusercontent.com/dkaszas/withings-display/refs/heads/main/sports_dashboard.png?v=101latest" alt="Sports Dashboard" onerror="this.style.display='none'" onload="this.style.display='block'" />
+                    <img src="https://raw.githubusercontent.com/dkaszas/withings-display/refs/heads/main/sports_dashboard.png?v=latest" alt="Sports Dashboard" onerror="this.style.display='none'" onload="this.style.display='block'" />
                 </div>
             </div>
 
@@ -158,6 +164,6 @@
         </div>
     </div>
 
-    <script src="app.js?v=101"></script>
+    <script src="app.js?v=75"></script>
 </body>
 </html>
