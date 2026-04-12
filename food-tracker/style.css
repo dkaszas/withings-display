@@ -54,7 +54,7 @@ input, textarea, button {
     margin-right: 5px;
 }
 .lcars-column > * {
-    margin-bottom: 1px; /* Optically reduced to 1px */
+    margin-bottom: 2px; /* Dialed half a step back to 2px */
 }
 .lcars-column > *:last-child {
     margin-bottom: 0px;
@@ -321,6 +321,7 @@ textarea#context-input::placeholder { color: var(--lcars-dark-orange); }
     display: flex;
     flex-direction: column;
     width: 100% !important;
+    margin-top: 4px; /* User requested custom alignment padding */
 }
 #results-card > * {
     margin-bottom: 5px;
