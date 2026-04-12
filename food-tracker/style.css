@@ -54,7 +54,7 @@ input, textarea, button {
     margin-right: 5px;
 }
 .lcars-column > * {
-    margin-bottom: 3px; /* Optically reduced to 3px */
+    margin-bottom: 2px; /* Optically reduced to 2px */
 }
 .lcars-column > *:last-child {
     margin-bottom: 0px;
