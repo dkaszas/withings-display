@@ -15,6 +15,7 @@ const DOM = {
     resultsCard: document.getElementById('results-card'),
     commitBtn: document.getElementById('commit-btn'),
     cancelBtn: document.getElementById('cancel-btn'),
+    badge: document.getElementById('image-count-badge'),
     
     // Model toggles
     btnFlash: document.getElementById('btn-flash'),
@@ -83,6 +84,30 @@ DOM.saveSettingsBtn.addEventListener('click', () => {
     DOM.settingsModal.classList.add('hidden');
 });
 
+function updateDynamicPillars() {
+    if (DOM.scannerView.classList.contains('hidden')) return;
+    
+    DOM.pillar1.textContent = 'GALLERY'; DOM.pillar1.className = 'lcars-bar lcars-bar-standard bg-blue'; DOM.pillar1.style.cursor = 'pointer';
+    DOM.pillar2.textContent = 'SENSOR'; DOM.pillar2.className = 'lcars-bar lcars-bar-standard bg-purple'; DOM.pillar2.style.cursor = 'pointer';
+    
+    // Hide interaction until relevant
+    DOM.pillar3.textContent = ''; DOM.pillar3.className = 'lcars-bar lcars-bar-stretch bg-dark-orange'; DOM.pillar3.style.cursor = 'default';
+    DOM.pillar4.textContent = ''; DOM.pillar4.className = 'lcars-bar lcars-bar-standard bg-peach'; DOM.pillar4.style.cursor = 'default';
+    DOM.pillar5.textContent = ''; DOM.pillar5.className = 'lcars-bar lcars-bar-stretch bg-red'; DOM.pillar5.style.cursor = 'default';
+
+    const hasImage = !DOM.preview.classList.contains('hidden');
+    const hasResults = !DOM.resultsCard.classList.contains('hidden');
+
+    if (hasImage && !hasResults) {
+        DOM.pillar3.textContent = 'ANALYZE'; DOM.pillar3.className = 'lcars-bar lcars-bar-stretch bg-blue'; DOM.pillar3.style.cursor = 'pointer';
+        DOM.pillar5.textContent = 'ABORT'; DOM.pillar5.className = 'lcars-bar lcars-bar-stretch bg-red'; DOM.pillar5.style.cursor = 'pointer';
+    } 
+    else if (hasResults) {
+        DOM.pillar4.textContent = 'COMMIT'; DOM.pillar4.className = 'lcars-bar lcars-bar-standard bg-blue'; DOM.pillar4.style.cursor = 'pointer';
+        DOM.pillar5.textContent = 'ABORT'; DOM.pillar5.className = 'lcars-bar lcars-bar-stretch bg-red'; DOM.pillar5.style.cursor = 'pointer';
+    }
+}
+
 function openView(target) {
     // Hide all
     DOM.scannerView.classList.add('hidden');
@@ -109,20 +134,15 @@ function openView(target) {
         DOM.databankNavBtn.textContent = 'SCANNER';
         DOM.databankNavBtn.style.backgroundColor = 'var(--lcars-peach)';
         
-        DOM.pillar1.textContent = 'SCANNER'; DOM.pillar1.className = 'lcars-bar lcars-bar-standard bg-peach';
-        DOM.pillar2.textContent = 'TRICORDER'; DOM.pillar2.className = 'lcars-bar lcars-bar-standard bg-blue';
-        DOM.pillar3.textContent = 'TRANSMIT'; DOM.pillar3.className = 'lcars-bar lcars-bar-stretch bg-dark-orange';
-        DOM.pillar4.textContent = 'CLEAR'; DOM.pillar4.className = 'lcars-bar lcars-bar-standard bg-tan';
-        DOM.pillar5.textContent = 'CONFIG'; DOM.pillar5.className = 'lcars-bar lcars-bar-stretch bg-purple';
+        DOM.pillar1.textContent = 'SCANNER'; DOM.pillar1.className = 'lcars-bar lcars-bar-standard bg-peach'; DOM.pillar1.style.cursor = 'pointer';
+        DOM.pillar2.textContent = 'TRICORDER'; DOM.pillar2.className = 'lcars-bar lcars-bar-standard bg-blue'; DOM.pillar2.style.cursor = 'pointer';
+        DOM.pillar3.textContent = 'TRANSMIT'; DOM.pillar3.className = 'lcars-bar lcars-bar-stretch bg-dark-orange'; DOM.pillar3.style.cursor = 'pointer';
+        DOM.pillar4.textContent = 'CLEAR'; DOM.pillar4.className = 'lcars-bar lcars-bar-standard bg-tan'; DOM.pillar4.style.cursor = 'pointer';
+        DOM.pillar5.textContent = 'CONFIG'; DOM.pillar5.className = 'lcars-bar lcars-bar-stretch bg-purple'; DOM.pillar5.style.cursor = 'pointer';
 
     } else {
         DOM.scannerView.classList.remove('hidden');
-        
-        DOM.pillar1.textContent = 'GALLERY'; DOM.pillar1.className = 'lcars-bar lcars-bar-standard bg-blue';
-        DOM.pillar2.textContent = 'SENSOR'; DOM.pillar2.className = 'lcars-bar lcars-bar-standard bg-purple';
-        DOM.pillar3.textContent = 'ANALYZE'; DOM.pillar3.className = 'lcars-bar lcars-bar-stretch bg-orange';
-        DOM.pillar4.textContent = 'COMMIT'; DOM.pillar4.className = 'lcars-bar lcars-bar-standard bg-peach';
-        DOM.pillar5.textContent = 'ABORT'; DOM.pillar5.className = 'lcars-bar lcars-bar-stretch bg-red';
+        updateDynamicPillars();
     }
 }
 
@@ -192,37 +212,27 @@ async function handleFileInput(e) {
         } else {
             imageLastModified = null;
         }
-        
-        currentBase64Images = [];
-        for (let file of files) {
-            const b64 = await new Promise(resolve => {
-                const reader = new FileReader();
-                reader.onload = e => resolve(e.target.result);
-                reader.readAsDataURL(file);
-            });
-            currentBase64Images.push(b64);
-        }
-        
-        DOM.preview.src = currentBase64Images[0];
+function processImageSelection(file) {
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        currentBase64Images.push(e.target.result.split(',')[1]);
+        DOM.preview.src = e.target.result;
         DOM.preview.style.display = 'block';
+        DOM.preview.classList.remove('hidden');
         DOM.placeholder.style.display = 'none';
-        
-        const badge = document.getElementById('image-count-badge');
-        if (currentBase64Images.length > 1) {
-            badge.textContent = `${currentBase64Images.length} Images`;
-            badge.classList.remove('hidden');
-        } else {
-            badge.classList.add('hidden');
-        }
-        
-        updateAnalyzeButtonState();
-    }
+        DOM.analyzeBtn.disabled = false;
+        DOM.badge.textContent = `IMG: ${currentBase64Images.length}/3`;
+        DOM.badge.classList.remove('hidden');
+        updateDynamicPillars();
+    };
+    reader.readAsDataURL(file);
 }
 
-DOM.cameraInput.addEventListener('change', handleFileInput);
-DOM.galleryInput.addEventListener('change', handleFileInput);
+DOM.cameraInput.addEventListener('change', (e) => processImageSelection(e.target.files[0]));
+DOM.galleryInput.addEventListener('change', (e) => processImageSelection(e.target.files[0]));
 
-DOM.cancelBtn.addEventListener('click', resetView);
+DOM.cancelBtn.addEventListener('click', clearImage);
 
 DOM.analyzeBtn.addEventListener('click', analyzeMeal);
 DOM.commitBtn.addEventListener('click', saveToDashboard);
@@ -288,19 +298,19 @@ DOM.omniBtn.addEventListener('click', async () => {
     }
 });
 
-function resetView() {
+function clearImage() {
     currentBase64Images = [];
-    currentMacros = null;
-    imageLastModified = null;
-    DOM.preview.style.display = 'none';
     DOM.preview.src = '';
-    document.getElementById('image-count-badge').classList.add('hidden');
+    DOM.preview.style.display = 'none';
+    DOM.preview.classList.add('hidden');
     DOM.placeholder.style.display = 'flex';
     DOM.analyzeBtn.disabled = true;
     DOM.contextInput.value = '';
     DOM.resultsCard.classList.add('hidden');
+    DOM.badge.classList.add('hidden');
     DOM.cameraInput.value = '';
     DOM.galleryInput.value = '';
+    updateDynamicPillars();
 }
 
 async function queryGemini(model, promptText, base64ImagesArray, isJsonMode = true) {
@@ -311,9 +321,7 @@ async function queryGemini(model, promptText, base64ImagesArray, isJsonMode = tr
     
     if (base64ImagesArray && base64ImagesArray.length > 0) {
         for (let b64 of base64ImagesArray) {
-            const base64MimeType = b64.split(';')[0].split(':')[1];
-            const base64Raw = b64.split(',')[1];
-            parts.push({ "inlineData": { "mimeType": base64MimeType, "data": base64Raw } });
+            parts.push({ "inlineData": { "mimeType": "image/jpeg", "data": b64 } });
         }
     }
 
@@ -389,6 +397,8 @@ async function analyzeMeal() {
         DOM.resFat.textContent = currentMacros.fat;
 
         DOM.resultsCard.classList.remove('hidden');
+        updateDynamicPillars();
+
     } catch (e) {
         alert(e.message);
     } finally {
@@ -434,7 +444,7 @@ async function saveToDashboard() {
         DOM.resultsCard.classList.add('hidden');
         DOM.loader.classList.add('hidden');
         alert("Successfully saved to Dashboard!");
-        resetView();
+        clearImage();
     } catch (e) {
         alert(e.message);
         DOM.loader.classList.add('hidden');

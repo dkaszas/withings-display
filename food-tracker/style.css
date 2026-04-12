@@ -39,7 +39,7 @@ input, textarea, button {
     width: 100%;
     max-width: 600px;
     display: flex;
-    gap: 10px;
+    gap: 2px;
 }
 
 /* LCARS LEFT COLUMN */
@@ -181,13 +181,13 @@ input, textarea, button {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 24px;
-    color: #000;
-    cursor: pointer;
-    font-weight: 700;
+    background-color: var(--lcars-peach);
+    color: black;
+    font-weight: bold;
+    border-radius: 10px;
 }
-.split-top { background-color: var(--lcars-purple); }
-.split-bottom { background-color: var(--lcars-orange); }
+.split-top { background-color: var(--lcars-blue); }
+.split-bottom { background-color: var(--lcars-purple); }
 
 .split-btn:hover {
     filter: brightness(1.2);
