@@ -11,10 +11,6 @@
 </head>
 <body>
     
-    <div id="settings-btn" class="settings-icon" aria-label="Settings">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-    </div>
-
     <div id="app" class="lcars-app">
         <!-- LCARS LEFT PILLAR -->
         <div class="lcars-column">
@@ -31,7 +27,8 @@
             <!-- HEADER WRAPPER -->
             <div class="lcars-header">
                 <div class="lcars-top-elbow"></div>
-                <a href="https://dkaszas.github.io/withings/" target="_blank" class="lcars-top-pill">TRICORDER</a>
+                <div id="settings-btn" class="lcars-top-pill" style="cursor: pointer; background-color: var(--lcars-purple);">CONFIG</div>
+                <a href="https://dkaszas.github.io/withings/" target="_blank" class="lcars-top-pill" style="background-color: var(--lcars-blue);">TRICORDER</a>
             </div>
             
             <div class="lcars-title">MACROLENS</div>
