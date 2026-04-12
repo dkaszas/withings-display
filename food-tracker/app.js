@@ -162,7 +162,7 @@ async function queryGemini(model, promptText, base64ImagesArray) {
 
 async function analyzeMeal() {
     DOM.loader.classList.remove('hidden');
-    DOM.loaderText.textContent = "Analyzing with AI...";
+    DOM.loaderText.textContent = "ESTABLISHING SECURE UPLINK...";
     
     
     const contextStr = DOM.contextInput.value.trim() ? `\nUser Context/Overrides: ${DOM.contextInput.value.trim()}` : '';
@@ -175,14 +175,12 @@ async function analyzeMeal() {
     try {
         let resultData;
         try {
-            // First try gemini-2.5-pro (Current stable public vision model)
-            DOM.loaderText.textContent = "Querying Gemini 2.5 Pro...";
-            resultData = await queryGemini('gemini-2.5-pro', promptText, currentBase64Images);
-        } catch (e) {
-            console.warn("Pro preview failed, falling back...", e);
-            alert("Google API blocked Pro: " + e.message + "\n\nFalling back to Flash!");
-            DOM.loaderText.textContent = "Pro failed. Fallback to Gemini 2.5 Flash...";
+            DOM.loaderText.textContent = "QUERYING FLASH DATABANK...";
             resultData = await queryGemini('gemini-2.5-flash', promptText, currentBase64Images);
+        } catch (e) {
+            console.warn("Flash failed, falling back...", e);
+            DOM.loaderText.textContent = "FLASH FAILED. FALLBACK UPLINK...";
+            resultData = await queryGemini('gemini-2.5-pro', promptText, currentBase64Images);
         }
 
         const jsonText = resultData.candidates[0].content.parts[0].text;
@@ -207,7 +205,7 @@ async function analyzeMeal() {
 
 async function saveToDashboard() {
     DOM.loader.classList.remove('hidden');
-    DOM.loaderText.textContent = "Dispatching to GitHub...";
+    DOM.loaderText.textContent = "TRANSMITTING TELEMETRY...";
     
     const pat = localStorage.getItem('ml_github_pat');
     const repo = localStorage.getItem('ml_github_repo');
