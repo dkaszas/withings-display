@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const hasResults = !DOM.resultsCard.classList.contains('hidden');
 
         if (canAnalyze && !hasResults) {
-            DOM.pillar3.textContent = 'ANALYZE'; DOM.pillar3.className = 'lcars-bar lcars-bar-stretch bg-blue'; DOM.pillar3.style.cursor = 'pointer';
+            DOM.pillar3.textContent = 'ANALYZE'; DOM.pillar3.className = 'lcars-bar lcars-bar-stretch bg-cyan'; DOM.pillar3.style.cursor = 'pointer';
             DOM.pillar5.textContent = 'ABORT'; DOM.pillar5.className = 'lcars-bar lcars-bar-stretch bg-red'; DOM.pillar5.style.cursor = 'pointer';
             DOM.analyzeBtn.disabled = false;
             DOM.analyzeBtn.classList.remove('hidden');
