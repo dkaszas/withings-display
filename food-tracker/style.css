@@ -109,14 +109,14 @@ input, textarea, button {
     display: flex;
     align-items: flex-end;
     gap: 10px;
-    padding-top: 10px;
+    height: 100px; /* Match the exact height of the 47 top pillar block */
 }
 
 .lcars-top-elbow {
     flex-grow: 1;
     height: 20px;
-    background-color: var(--lcars-peach);
-    border-bottom-right-radius: 10px;
+    background-color: var(--lcars-peach) !important;
+    border-bottom-right-radius: 20px;
 }
 .lcars-top-pill {
     min-width: 80px;
@@ -154,8 +154,6 @@ input, textarea, button {
     width: 100%;
     aspect-ratio: 1;
     background: #000;
-    border: 3px solid var(--lcars-blue);
-    border-left: none;
     border-radius: 0 20px 20px 0;
     display: flex;
     align-items: center;
