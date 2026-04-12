@@ -41,7 +41,7 @@ input, textarea, button {
     width: 100%;
     max-width: 600px;
     display: flex;
-    gap: 2px;
+    gap: 5px;
 }
 
 /* LCARS LEFT COLUMN */
