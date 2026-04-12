@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 DOM.pillar3.style.flexGrow = '0';
                 const p3Top = DOM.pillar3.getBoundingClientRect().top;
                 const targetTop = DOM.commitBtn.getBoundingClientRect().top;
-                const targetHeight = targetTop - p3Top;
+                const targetHeight = targetTop - p3Top - 2;
                 if (targetHeight > 0) {
                     DOM.pillar3.style.minHeight = targetHeight + 'px';
                     DOM.pillar3.style.height = targetHeight + 'px';
