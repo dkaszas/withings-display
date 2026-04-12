@@ -46,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Omni-Panel
         omniInput: document.getElementById('omni-input'),
         omniBtn: document.getElementById('omni-btn'),
+        omniClearBtn: document.getElementById('omni-clear-btn'),
         omniResponse: document.getElementById('omni-response'),
 
         // Sports View
@@ -177,6 +178,8 @@ document.addEventListener('DOMContentLoaded', () => {
         
         DOM.app.classList.remove('tricorder-mode');
         DOM.pillar2.style.display = '';
+        DOM.pillar4.style.display = '';
+        DOM.pillar5.style.display = '';
 
         if (target === 'tricorder') {
             DOM.tricorderView.classList.remove('hidden');
@@ -190,20 +193,20 @@ document.addEventListener('DOMContentLoaded', () => {
             DOM.databankNavBtn.style.backgroundColor = 'var(--lcars-peach)';
             
             DOM.pillar1.textContent = 'PROMPT'; DOM.pillar1.className = 'lcars-bar lcars-bar-standard bg-tan'; DOM.pillar1.style.cursor = 'pointer';
-            DOM.pillar2.textContent = 'QUERY'; DOM.pillar2.className = 'lcars-bar lcars-bar-standard bg-dark-orange'; DOM.pillar2.style.cursor = 'pointer';
-            DOM.pillar3.textContent = 'CLEAR'; DOM.pillar3.className = 'lcars-bar lcars-bar-stretch bg-red'; DOM.pillar3.style.cursor = 'pointer';
-            DOM.pillar4.textContent = 'CONFIG'; DOM.pillar4.className = 'lcars-bar lcars-bar-standard bg-purple'; DOM.pillar4.style.cursor = 'pointer';
-            DOM.pillar5.textContent = 'SCANNER'; DOM.pillar5.className = 'lcars-bar lcars-bar-stretch bg-peach'; DOM.pillar5.style.cursor = 'pointer';
+            DOM.pillar2.textContent = 'QUERY'; DOM.pillar2.className = 'lcars-bar lcars-bar-stretch bg-dark-orange'; DOM.pillar2.style.cursor = 'pointer';
+            DOM.pillar3.textContent = 'CLEAR'; DOM.pillar3.className = 'lcars-bar lcars-bar-standard bg-red'; DOM.pillar3.style.cursor = 'pointer';
+            DOM.pillar4.style.display = 'none';
+            DOM.pillar5.style.display = 'none';
 
             const alignDatabankPillars = () => {
                 if (DOM.databankView.classList.contains('hidden')) return;
-                DOM.pillar3.style.flexGrow = '0';
-                const p3Top = DOM.pillar3.getBoundingClientRect().top;
-                const targetTop = DOM.omniBtn.getBoundingClientRect().top;
-                const targetHeight = targetTop - p3Top - 2;
+                DOM.pillar2.style.flexGrow = '0';
+                const p2Top = DOM.pillar2.getBoundingClientRect().top;
+                const targetTop = DOM.omniClearBtn.getBoundingClientRect().top;
+                const targetHeight = targetTop - p2Top - 2;
                 if (targetHeight > 0) {
-                    DOM.pillar3.style.minHeight = targetHeight + 'px';
-                    DOM.pillar3.style.height = targetHeight + 'px';
+                    DOM.pillar2.style.minHeight = targetHeight + 'px';
+                    DOM.pillar2.style.height = targetHeight + 'px';
                 }
             };
             window.alignDatabankPillars = alignDatabankPillars;
@@ -269,9 +272,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (DOM.pillar3.textContent === 'ANALYZE') DOM.analyzeBtn.click();
         if (DOM.pillar3.textContent === 'TRANSMIT') DOM.omniBtn.click();
         if (DOM.pillar3.textContent === 'CONTEXT') DOM.sportContext.focus();
-        if (DOM.pillar3.textContent === 'ACTIVITY') openView('sports');
+        if (DOM.pillar3.textContent === 'ACTIVITY') {
+            if (!DOM.sportsView.classList.contains('hidden')) DOM.sportSelect.focus();
+            else openView('sports');
+        }
         if (DOM.pillar3.textContent === 'CLEAR' && !DOM.databankView.classList.contains('hidden')) {
-            DOM.omniInput.value = ''; DOM.omniResponse.classList.add('hidden'); DOM.omniResponse.innerHTML = '';
+            DOM.omniClearBtn.click();
         }
     });
     DOM.pillar4.addEventListener('click', () => {
@@ -611,6 +617,12 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!response.ok) throw new Error("GitHub dispatch failed.");
             alert("Saved to Dashboard!"); DOM.cancelBtn.click();
         } catch (e) { alert(e.message); } finally { DOM.loader.classList.add('hidden'); }
+    });
+
+    DOM.omniClearBtn.addEventListener('click', () => {
+        DOM.omniInput.value = '';
+        DOM.omniResponse.classList.add('hidden');
+        DOM.omniResponse.innerHTML = '';
     });
 
     DOM.omniBtn.addEventListener('click', async () => {
