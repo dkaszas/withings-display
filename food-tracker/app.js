@@ -341,7 +341,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const createLift = (label, idPrefix, defKg='', defSets='', defReps='') => `
             <div style="display: flex; flex-direction: column; gap: 5px; margin-bottom: 15px; border-bottom: 1px dashed #30363d; padding-bottom: 10px;">
-                <label style="color: var(--lcars-peach); font-size: 14px;">${label.toUpperCase()}</label>
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <label style="color: var(--lcars-peach); font-size: 14px;">${label.toUpperCase()}</label>
+                    <input type="checkbox" id="${idPrefix}-done" data-type="lift-toggle" style="width: 18px; height: 18px; margin: 0; accent-color: var(--lcars-cyan); cursor: pointer;">
+                </div>
                 <div style="display: flex; gap: 10px;">
                     <input type="number" id="${idPrefix}-kg" placeholder="KILOS" value="${defKg}" style="width: 35%; padding: 8px; background: #0d1117; color: var(--lcars-peach); border: 1px solid var(--lcars-cyan); border-radius: 5px; font-family: 'Oswald', sans-serif; font-size: 12px;">
                     <input type="number" id="${idPrefix}-sets" placeholder="SETS" value="${defSets}" style="width: 30%; padding: 8px; background: #0d1117; color: var(--lcars-peach); border: 1px solid var(--lcars-cyan); border-radius: 5px; font-family: 'Oswald', sans-serif; font-size: 12px;">
@@ -413,9 +416,18 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Harvest dynamic fields mapped universally
         const dynamicElements = DOM.sportDynamicInputs.querySelectorAll('input, select');
+        
+        const uncheckedPrefixes = Array.from(DOM.sportDynamicInputs.querySelectorAll('input[data-type="lift-toggle"]:not(:checked)'))
+            .map(cb => cb.id.replace('-done', ''));
+
         dynamicElements.forEach(el => {
-            if (el.id && el.id.startsWith('s-') && el.value) {
-                payloadData[el.id.replace('s-', '')] = el.value;
+            if (el.id && el.id.startsWith('s-')) {
+                if (el.type === 'checkbox') return;
+                if (uncheckedPrefixes.some(prefix => el.id.startsWith(prefix))) return;
+                
+                if (el.value) {
+                    payloadData[el.id.replace('s-', '')] = el.value;
+                }
             }
         });
 
