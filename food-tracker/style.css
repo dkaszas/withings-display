@@ -39,7 +39,15 @@ input, textarea, button {
     width: 100%;
     max-width: 600px;
     display: flex;
-    gap: 2px;
+    flex-direction: column;
+    gap: 0;
+}
+
+.lcars-grid-row {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 5px;
+    width: 100%;
 }
 
 /* LCARS LEFT COLUMN */
@@ -60,11 +68,11 @@ input, textarea, button {
 }
 
 .lcars-bar-top {
-    height: 40px;
+    height: 30px; /* Locked height */
     border-top-left-radius: 30px;
-    border-bottom-left-radius: 30px;
+    border-bottom-left-radius: 0px;
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: flex-end;
 }
 
@@ -107,10 +115,10 @@ input, textarea, button {
 /* HEADER ELBOW-BAR */
 .lcars-header {
     display: flex;
-    align-items: flex-end;
+    align-items: center; /* Center pills in 30px height */
     gap: 10px;
-    height: 40px; /* Flush with 47 top pillar block without overhang */
-    flex-shrink: 0; /* Protect against viewport collapse */
+    height: 30px; /* Matching height */
+    flex-shrink: 0;
 }
 
 .lcars-top-elbow {
@@ -118,6 +126,7 @@ input, textarea, button {
     height: 20px;
     background-color: var(--lcars-peach) !important;
     border-bottom-right-radius: 20px;
+    align-self: flex-end;
 }
 .lcars-top-pill {
     min-width: 80px;

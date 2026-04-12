@@ -6,96 +6,110 @@
     <title>MacroLens LCARS</title>
     <meta name="theme-color" content="#000000">
     <link rel="manifest" href="manifest.json">
-    <link rel="stylesheet" href="style.css?v=35">
+    <link rel="stylesheet" href="style.css?v=36">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🖖</text></svg>">
 </head>
 <body>
     
     <div id="app" class="lcars-app">
-        <!-- LCARS LEFT PILLAR -->
-        <div class="lcars-column" style="text-align: right; font-weight: bold; font-family: 'Oswald', sans-serif;">
-            <div id="settings-btn" class="lcars-bar lcars-bar-top bg-peach" style="cursor: pointer; justify-content: flex-end; padding-right: 5px;">47</div>
-            <div id="pillar-bar-1" class="lcars-bar lcars-bar-standard bg-blue" style="cursor: pointer; justify-content: flex-end; padding-right: 5px;">GALLERY</div>
-            <div id="pillar-bar-2" class="lcars-bar lcars-bar-standard bg-purple" style="cursor: pointer; justify-content: flex-end; padding-right: 5px;">SENSOR</div>
-            <div id="pillar-bar-3" class="lcars-bar lcars-bar-stretch bg-orange" style="cursor: pointer; justify-content: flex-end; padding-right: 5px;">ANALYZE</div>
-            <div id="pillar-bar-4" class="lcars-bar lcars-bar-standard bg-peach" style="cursor: pointer; justify-content: flex-end; padding-right: 5px;">COMMIT</div>
-            <div id="pillar-bar-5" class="lcars-bar lcars-bar-stretch bg-red" style="cursor: pointer; justify-content: flex-end; padding-right: 5px;">ABORT</div>
-        </div>
-
-        <!-- MAIN INTERFACE -->
-        <div class="lcars-main">
-            <!-- HEADER WRAPPER -->
+        <!-- TOP SYSTEM ROW -->
+        <div class="lcars-grid-row">
+            <div id="settings-btn" class="lcars-bar lcars-bar-top bg-peach" style="cursor: pointer;">47</div>
             <div class="lcars-header">
                 <div class="lcars-top-elbow"></div>
                 <div id="databank-nav-btn" class="lcars-top-pill" style="cursor: pointer; background-color: var(--lcars-dark-orange);">DATABANK</div>
                 <div id="nav-btn" class="lcars-top-pill" style="cursor: pointer; background-color: var(--lcars-blue);">TRICORDER</div>
             </div>
-            
-            <!-- SCANNER VIEW -->
-            <div id="scanner-view">
-                <div class="lcars-title">MACROLENS</div>
+        </div>
 
-            <!-- CAMERA/GALLERY SENSOR BLOCK -->
-            <div class="camera-wrapper">
-                <img id="image-preview" style="display: none;" />
-                <div class="camera-placeholder" id="camera-placeholder">
-                    <div class="input-split">
-                        <label for="gallery-input" class="split-btn split-top" style="background-color: var(--lcars-blue)">GALLERY</label>
-                        <label for="camera-input" class="split-btn split-bottom" style="background-color: var(--lcars-purple)">SENSOR</label>
+        <!-- SCANNER VIEW -->
+        <div id="scanner-view">
+            <!-- TITLE ROW -->
+            <div class="lcars-grid-row" style="margin-top: 5px;">
+                <div class="lcars-bar bg-blue" style="height: 38px; border-radius: 0;"></div>
+                <div class="lcars-title" style="margin-bottom: 0;">MACROLENS</div>
+            </div>
+
+            <!-- CAMERA / UPLOAD ROW (Welded) -->
+            <div class="lcars-grid-row" style="gap: 5px; margin-top: 5px;">
+                <div class="lcars-pillar-stack" style="display: flex; flex-direction: column; gap: 5px;">
+                    <div id="pillar-bar-1" class="lcars-bar lcars-bar-standard bg-blue" style="border-radius: 0; flex: 1; display: flex; align-items: center; justify-content: flex-end;">GALLERY</div>
+                    <div id="pillar-bar-2" class="lcars-bar lcars-bar-standard bg-purple" style="border-radius: 0; flex: 1; display: flex; align-items: center; justify-content: flex-end;">SENSOR</div>
+                </div>
+                <div class="camera-wrapper" style="border-radius: 0 20px 20px 0;">
+                    <img id="image-preview" style="display: none;" />
+                    <div class="camera-placeholder" id="camera-placeholder">
+                        <div class="input-split">
+                            <label for="gallery-input" class="split-btn split-top" style="background-color: var(--lcars-blue)">GALLERY</label>
+                            <label for="camera-input" class="split-btn split-bottom" style="background-color: var(--lcars-purple)">SENSOR</label>
+                        </div>
+                    </div>
+                    <input type="file" id="gallery-input" accept="image/*" multiple style="display:none;">
+                    <input type="file" id="camera-input" accept="image/*" capture="environment" style="display:none;">
+                </div>
+            </div>
+
+            <!-- ANALYZE / OVERRIDE ROW -->
+            <div class="lcars-grid-row" style="margin-top: 5px; gap: 5px;">
+                <div id="pillar-bar-3" class="lcars-bar lcars-bar-stretch bg-orange" style="border-radius: 0; min-height: 80px; display: flex; align-items: flex-end; justify-content: flex-end;">ANALYZE</div>
+                <div class="analyze-input-block" style="display: flex; flex-direction: column; flex-grow: 1;">
+                    <textarea id="context-input" placeholder="OVERRIDE CONTEXT..." rows="2" style="border-radius: 0 10px 0 0; border: 2px solid var(--lcars-orange); border-left: none;"></textarea>
+                    <div class="model-select" style="margin-top: 0;">
+                        <div class="model-btn active" id="btn-flash" style="border-radius: 0;">MODEL: FLASH</div>
+                        <div class="model-btn" id="btn-pro" style="border-radius: 0 0 10px 0;">MODEL: PRO</div>
+                    </div>
+                    <button id="analyze-btn" class="lcars-btn bg-blue hidden" style="margin-top: 5px; border-radius: 0 25px 25px 0;">ENGAGE ANALYSIS</button>
+                    <div id="image-count-badge" class="hidden" style="color:var(--lcars-peach); text-align:right; font-size: 12px; padding: 2px;"></div>
+                </div>
+            </div>
+
+            <!-- RESULTS (Dynamic) -->
+            <div id="results-card" class="hidden" style="margin-top: 10px;">
+                <div class="lcars-grid-row">
+                    <div id="pillar-bar-4" class="lcars-bar bg-peach" style="height: 60px; display: flex; align-items: center; justify-content: flex-end;">COMMIT</div>
+                    <div class="lcars-data-block">
+                        <div class="confidence-badge" id="res-confidence">CONFIDENCE: --</div>
+                        <div class="food-items-text" id="res-food-items">...</div>
                     </div>
                 </div>
-                <input type="file" id="gallery-input" accept="image/*" multiple style="display:none;">
-                <input type="file" id="camera-input" accept="image/*" capture="environment" style="display:none;">
-            </div>
-            <div id="image-count-badge" class="hidden" style="color:var(--lcars-peach); text-align:right;"></div>
 
-            <!-- OVERRIDE FIELD -->
-            <textarea id="context-input" placeholder="OVERRIDE CONTEXT..." rows="2"></textarea>
-            
-            <!-- MODEL SELECTOR -->
-            <div class="model-select">
-                <div class="model-btn active" id="btn-flash">MODEL: FLASH</div>
-                <div class="model-btn" id="btn-pro">MODEL: PRO</div>
-            </div>
-            
-            <!-- ACTION BUTTON -->
-            <button id="analyze-btn" class="lcars-btn bg-blue hidden">ENGAGE ANALYSIS</button>
-
-            <!-- RESULTS OVERLAY -->
-            <div id="results-card" class="hidden">
-                <div class="lcars-data-block">
-                    <div class="confidence-badge" id="res-confidence">CONFIDENCE: --</div>
-                    <div class="food-items-text" id="res-food-items">...</div>
-                </div>
-
-                <div class="macro-grid">
-                    <div class="macro-item bg-orange"><span class="label">CALORIES</span><span class="value" id="res-cals">--</span></div>
-                    <div class="macro-item bg-blue"><span class="label">PROTEIN</span><span class="value" id="res-pro">--</span></div>
-                    <div class="macro-item bg-peach"><span class="label">CARBS</span><span class="value" id="res-carb">--</span></div>
-                    <div class="macro-item bg-purple"><span class="label">FAT</span><span class="value" id="res-fat">--</span></div>
-                </div>
-                
-                <button id="commit-btn" class="lcars-btn btn-commit">TRANSMIT TO DATABANK</button>
-                <button id="cancel-btn" class="lcars-btn btn-cancel" style="border-radius: 10px; height: 35px; font-size:16px;">ABORT</button>
-            </div>
-
-            </div> <!-- END SCANNER VIEW -->
-
-            <!-- DATABANK VIEW -->
-            <div id="databank-view" class="hidden" style="margin-top: 15px;">
-                <div class="lcars-bar lcars-bar-standard bg-tan omni-title" style="margin-bottom: 10px;">MEDICAL DATABASE UPLINK</div>
-                <textarea id="omni-input" placeholder="QUERY INTERACTIVE DATABANK..." rows="4"></textarea>
-                <button id="omni-btn" class="lcars-btn bg-dark-orange" style="margin-top: 10px;">TRANSMIT SECURE QUERY</button>
-                <div id="omni-response" class="omni-response hidden" style="margin-top: 10px;"></div>
-            </div>
-
-            <!-- TRICORDER VIEW -->
-            <div id="tricorder-view" class="hidden" style="margin-top: 15px;">
-                <div class="tricorder-image-wrapper">
-                    <img src="https://raw.githubusercontent.com/dkaszas/withings-display/refs/heads/main/dashboard.png?v=latest" alt="Health Dashboard" />
+                <div class="lcars-grid-row" style="margin-top: 5px;">
+                    <div id="pillar-bar-5" class="lcars-bar bg-red" style="height: 120px; display: flex; align-items: flex-end; justify-content: flex-end;">ABORT</div>
+                    <div class="macro-result-area" style="display: flex; flex-direction: column; gap: 5px;">
+                        <div class="macro-grid">
+                            <div class="macro-item bg-orange"><span class="label">CALORIES</span><span class="value" id="res-cals">--</span></div>
+                            <div class="macro-item bg-blue"><span class="label">PROTEIN</span><span class="value" id="res-pro">--</span></div>
+                            <div class="macro-item bg-peach"><span class="label">CARBS</span><span class="value" id="res-carb">--</span></div>
+                            <div class="macro-item bg-purple"><span class="label">FAT</span><span class="value" id="res-fat">--</span></div>
+                        </div>
+                        <button id="commit-btn" class="lcars-btn btn-commit" style="border-radius: 0 25px 25px 0;">TRANSMIT TO DATABANK</button>
+                        <button id="cancel-btn" class="lcars-btn btn-cancel" style="border-radius: 10px; height: 35px; font-size:16px; width: 100%;">ABORT</button>
+                    </div>
                 </div>
             </div>
+        </div> <!-- END SCANNER VIEW -->
 
+        <!-- DATABANK VIEW -->
+        <div id="databank-view" class="hidden" style="margin-top: 15px;">
+            <div class="lcars-grid-row">
+                <div class="lcars-bar bg-tan" style="height: 40px; border-radius: 20px 0 0 20px;"></div>
+                <div class="lcars-bar lcars-bar-standard bg-tan omni-title" style="margin-bottom: 0; width: 100%; border-radius: 0 20px 20px 0;">MEDICAL DATABASE UPLINK</div>
+            </div>
+            <div class="lcars-grid-row" style="margin-top: 5px;">
+                <div class="lcars-bar bg-dark-orange" style="height: 100%; min-height: 100px;"></div>
+                <div class="omni-content" style="display: flex; flex-direction: column; gap: 5px;">
+                    <textarea id="omni-input" placeholder="QUERY INTERACTIVE DATABANK..." rows="4" style="border-left: none; border-radius: 0 10px 10px 0;"></textarea>
+                    <button id="omni-btn" class="lcars-btn bg-dark-orange" style="border-radius: 0 25px 25px 0;">TRANSMIT SECURE QUERY</button>
+                </div>
+            </div>
+            <div id="omni-response" class="omni-response hidden" style="margin-top: 10px; margin-left: 65px;"></div>
+        </div>
+
+        <!-- TRICORDER VIEW -->
+        <div id="tricorder-view" class="hidden" style="margin-top: 15px;">
+            <div class="tricorder-image-wrapper" style="margin-left: 65px;">
+                <img src="https://raw.githubusercontent.com/dkaszas/withings-display/refs/heads/main/dashboard.png?v=latest" alt="Health Dashboard" />
+            </div>
         </div>
     </div>
 
@@ -115,6 +129,6 @@
         </div>
     </div>
 
-    <script src="app.js?v=35"></script>
+    <script src="app.js?v=36"></script>
 </body>
 </html>
