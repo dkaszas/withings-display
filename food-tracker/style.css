@@ -421,14 +421,13 @@ textarea#omni-input {
 
 /* TRICORDER SPECIFICS */
 .tricorder-image-wrapper {
-    width: calc(100% + 20px);
-    margin-right: -10px;
-    margin-left: -10px; /* Flush to both edges in tricorder mode */
+    width: 100%;
+    margin-right: 0;
+    margin-left: 0;
     overflow: hidden;
     border: 3px solid var(--lcars-blue);
     border-left: none;
-    border-right: none;
-    border-radius: 0;
+    border-radius: 0 10px 10px 0;
     background: #000;
 }
 .tricorder-image-wrapper img {
@@ -507,9 +506,10 @@ textarea#omni-input {
 .lcars-app.tricorder-mode .lcars-main {
     width: 100% !important;
     max-width: 100% !important;
+    overflow: visible !important; /* Prevent clipping of sidebars */
 }
 .lcars-app.tricorder-mode {
-    max-width: 1400px !important; /* Allow the chart to actually breathe */
+    max-width: calc(100vw - 20px) !important; /* Expand to full device width */
 }
 .lcars-app.tricorder-mode .lcars-column .lcars-bar {
     font-size: 0px; /* Hide text */
