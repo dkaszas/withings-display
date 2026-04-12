@@ -78,9 +78,6 @@ document.addEventListener('DOMContentLoaded', () => {
         
         updateStardate();
         setInterval(updateStardate, 60000);
-        
-        // Bootstrap layout matrix
-        updateDynamicPillars();
     }
 
     function updateStardate() {
@@ -110,88 +107,49 @@ document.addEventListener('DOMContentLoaded', () => {
         const canAnalyze = hasImage || hasText;
         const hasResults = !DOM.resultsCard.classList.contains('hidden');
 
-        // Central Alignment Matrix
-        const syncLCARSHeights = () => {
-            if (DOM.scannerView.classList.contains('hidden')) return;
+        if (canAnalyze && !hasResults) {
+            DOM.pillar3.style.flexGrow = '';
+            DOM.pillar3.style.minHeight = '100px';
+            DOM.pillar3.style.height = 'auto';
 
-            const camRect = document.querySelector('.camera-wrapper').getBoundingClientRect();
-            const halfCam = Math.max(0, (camRect.height - 5) / 2);
-            
-            DOM.pillar1.style.minHeight = '0px';
-            DOM.pillar2.style.minHeight = '0px';
-            DOM.pillar1.style.height = `${halfCam}px`;
-            DOM.pillar2.style.height = `${halfCam}px`;
+            DOM.pillar3.textContent = 'ANALYZE'; DOM.pillar3.className = 'lcars-bar lcars-bar-stretch bg-cyan'; DOM.pillar3.style.cursor = 'pointer';
+            DOM.pillar5.textContent = 'ABORT'; DOM.pillar5.className = 'lcars-bar lcars-bar-stretch bg-red'; DOM.pillar5.style.cursor = 'pointer';
+            DOM.analyzeBtn.disabled = false;
+            DOM.analyzeBtn.classList.remove('hidden');
+            DOM.contextInput.classList.remove('hidden');
+            DOM.modelSelect.classList.remove('hidden');
+        } 
+        else if (hasResults) {
+            DOM.pillar4.textContent = 'COMMIT'; DOM.pillar4.className = 'lcars-bar lcars-bar-standard bg-blue'; DOM.pillar4.style.cursor = 'pointer';
+            DOM.pillar5.textContent = 'ABORT'; DOM.pillar5.className = 'lcars-bar lcars-bar-stretch bg-red'; DOM.pillar5.style.cursor = 'pointer';
+            DOM.analyzeBtn.classList.add('hidden');
+            DOM.contextInput.classList.add('hidden');
+            DOM.modelSelect.classList.add('hidden');
 
-            if (hasResults) {
-                DOM.pillar3.textContent = 'COMMIT';
-                DOM.pillar3.className = 'lcars-bar lcars-bar-standard bg-blue';
-                DOM.pillar4.textContent = 'ANALYZE';
-                DOM.pillar4.className = 'lcars-bar lcars-bar-stretch bg-cyan';
-
-                const commitBtnRect = DOM.commitBtn.getBoundingClientRect();
+            // Magic JS Vertical Splicing aligner - robust timing guarantees
+            const alignPillars = () => {
                 DOM.pillar3.style.flexGrow = '0';
-                DOM.pillar3.style.height = `${commitBtnRect.height}px`;
+                const p3Top = DOM.pillar3.getBoundingClientRect().top;
+                const targetTop = DOM.commitBtn.getBoundingClientRect().top;
+                const targetHeight = targetTop - p3Top - 5;
+                if (targetHeight > 0) {
+                    DOM.pillar3.style.minHeight = targetHeight + 'px';
+                    DOM.pillar3.style.height = targetHeight + 'px';
+                }
+            };
+            setTimeout(alignPillars, 50);
+            setTimeout(alignPillars, 300);
+            setTimeout(alignPillars, 800); // Super-safe fallback for slow mobile rendering
+        } else {
+            DOM.pillar3.style.flexGrow = '';
+            DOM.pillar3.style.minHeight = '100px';
+            DOM.pillar3.style.height = 'auto';
 
-                const dataRect = document.querySelector('.lcars-data-block').getBoundingClientRect();
-                const macroRect = document.querySelector('.macro-grid').getBoundingClientRect();
-                const analyzeHeight = Math.max(10, macroRect.bottom - dataRect.top);
-                
-                DOM.pillar4.style.flexGrow = '0';
-                DOM.pillar4.style.height = `${analyzeHeight}px`;
-
-                DOM.pillar5.textContent = 'ABORT';
-                DOM.pillar5.className = 'lcars-bar lcars-bar-stretch bg-red';
-                DOM.pillar5.style.flexGrow = '1';
-                
-                DOM.analyzeBtn.classList.add('hidden');
-                DOM.contextInput.classList.add('hidden');
-                DOM.modelSelect.classList.add('hidden');
-            } else if (canAnalyze) {
-                DOM.pillar3.textContent = 'ANALYZE';
-                DOM.pillar3.className = 'lcars-bar lcars-bar-stretch bg-cyan';
-                DOM.pillar3.style.flexGrow = '1';
-                DOM.pillar3.style.height = 'auto';
-
-                DOM.pillar4.textContent = 'COMMIT';
-                DOM.pillar4.className = 'lcars-bar lcars-bar-standard bg-peach';
-                DOM.pillar4.style.flexGrow = '0';
-                DOM.pillar4.style.height = '40px';
-
-                DOM.pillar5.textContent = 'ABORT';
-                DOM.pillar5.className = 'lcars-bar lcars-bar-stretch bg-red';
-                DOM.pillar5.style.flexGrow = '1';
-
-                DOM.analyzeBtn.disabled = false;
-                DOM.analyzeBtn.classList.remove('hidden');
-                DOM.contextInput.classList.remove('hidden');
-                DOM.modelSelect.classList.remove('hidden');
-            } else {
-                DOM.pillar3.textContent = 'ANALYZE';
-                DOM.pillar3.className = 'lcars-bar lcars-bar-stretch bg-peach';
-                DOM.pillar3.style.flexGrow = '1';
-                DOM.pillar3.style.height = 'auto';
-
-                DOM.pillar4.textContent = 'COMMIT';
-                DOM.pillar4.className = 'lcars-bar lcars-bar-standard bg-peach';
-                DOM.pillar4.style.flexGrow = '0';
-                DOM.pillar4.style.height = '40px';
-
-                DOM.pillar5.textContent = 'ABORT';
-                DOM.pillar5.className = 'lcars-bar lcars-bar-stretch bg-red';
-                DOM.pillar5.style.flexGrow = '1';
-
-                DOM.analyzeBtn.disabled = true;
-                DOM.analyzeBtn.classList.remove('hidden');
-                DOM.contextInput.classList.remove('hidden');
-                DOM.modelSelect.classList.remove('hidden');
-            }
-        };
-
-        syncLCARSHeights();
-        setTimeout(syncLCARSHeights, 50);
-        setTimeout(syncLCARSHeights, 300);
-        
-        window.addEventListener('resize', syncLCARSHeights);
+            DOM.analyzeBtn.disabled = true;
+            DOM.analyzeBtn.classList.add('hidden');
+            DOM.contextInput.classList.remove('hidden');
+            DOM.modelSelect.classList.remove('hidden');
+        }
     }
 
     function openView(target) {
