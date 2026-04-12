@@ -25,6 +25,13 @@ const DOM = {
     githubPat: document.getElementById('github-pat'),
     githubRepo: document.getElementById('github-repo'),
 
+    // Pillars
+    pillar1: document.getElementById('pillar-bar-1'),
+    pillar2: document.getElementById('pillar-bar-2'),
+    pillar3: document.getElementById('pillar-bar-3'),
+    pillar4: document.getElementById('pillar-bar-4'),
+    pillar5: document.getElementById('pillar-bar-5'),
+
     // Navigation
     navBtn: document.getElementById('nav-btn'),
     databankNavBtn: document.getElementById('databank-nav-btn'),
@@ -101,10 +108,45 @@ function openView(target) {
         DOM.databankView.classList.remove('hidden');
         DOM.databankNavBtn.textContent = 'SCANNER';
         DOM.databankNavBtn.style.backgroundColor = 'var(--lcars-peach)';
+        
+        DOM.pillar1.textContent = 'SCANNER'; DOM.pillar1.className = 'lcars-bar lcars-bar-standard bg-peach';
+        DOM.pillar2.textContent = 'TRICORDER'; DOM.pillar2.className = 'lcars-bar lcars-bar-standard bg-blue';
+        DOM.pillar3.textContent = 'TRANSMIT'; DOM.pillar3.className = 'lcars-bar lcars-bar-stretch bg-dark-orange';
+        DOM.pillar4.textContent = 'CLEAR'; DOM.pillar4.className = 'lcars-bar lcars-bar-standard bg-tan';
+        DOM.pillar5.textContent = 'CONFIG'; DOM.pillar5.className = 'lcars-bar lcars-bar-stretch bg-purple';
+
     } else {
         DOM.scannerView.classList.remove('hidden');
+        
+        DOM.pillar1.textContent = 'GALLERY'; DOM.pillar1.className = 'lcars-bar lcars-bar-standard bg-blue';
+        DOM.pillar2.textContent = 'SENSOR'; DOM.pillar2.className = 'lcars-bar lcars-bar-standard bg-purple';
+        DOM.pillar3.textContent = 'ANALYZE'; DOM.pillar3.className = 'lcars-bar lcars-bar-stretch bg-orange';
+        DOM.pillar4.textContent = 'COMMIT'; DOM.pillar4.className = 'lcars-bar lcars-bar-standard bg-peach';
+        DOM.pillar5.textContent = 'ABORT'; DOM.pillar5.className = 'lcars-bar lcars-bar-stretch bg-red';
     }
 }
+
+// Left Pillar Physical Bindings
+DOM.pillar1.addEventListener('click', () => {
+    if (DOM.pillar1.textContent === 'GALLERY') DOM.galleryInput.click();
+    if (DOM.pillar1.textContent === 'SCANNER') openView('scanner');
+});
+DOM.pillar2.addEventListener('click', () => {
+    if (DOM.pillar2.textContent === 'SENSOR') DOM.cameraInput.click();
+    if (DOM.pillar2.textContent === 'TRICORDER') openView('tricorder');
+});
+DOM.pillar3.addEventListener('click', () => {
+    if (DOM.pillar3.textContent === 'ANALYZE') DOM.analyzeBtn.click();
+    if (DOM.pillar3.textContent === 'TRANSMIT') DOM.omniBtn.click();
+});
+DOM.pillar4.addEventListener('click', () => {
+    if (DOM.pillar4.textContent === 'COMMIT' && !DOM.resultsCard.classList.contains('hidden')) DOM.commitBtn.click();
+    if (DOM.pillar4.textContent === 'CLEAR') { DOM.omniInput.value = ''; DOM.omniResponse.classList.add('hidden'); }
+});
+DOM.pillar5.addEventListener('click', () => {
+    if (DOM.pillar5.textContent === 'ABORT' && !DOM.resultsCard.classList.contains('hidden')) DOM.cancelBtn.click();
+    if (DOM.pillar5.textContent === 'CONFIG') DOM.settingsModal.classList.remove('hidden');
+});
 
 DOM.navBtn.addEventListener('click', () => {
     if (DOM.navBtn.textContent === 'TRICORDER') {

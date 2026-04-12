@@ -6,20 +6,20 @@
     <title>MacroLens LCARS</title>
     <meta name="theme-color" content="#000000">
     <link rel="manifest" href="manifest.json">
-    <link rel="stylesheet" href="style.css?v=25">
+    <link rel="stylesheet" href="style.css?v=26">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🖖</text></svg>">
 </head>
 <body>
     
     <div id="app" class="lcars-app">
         <!-- LCARS LEFT PILLAR -->
-        <div class="lcars-column">
+        <div class="lcars-column" style="text-align: right; font-weight: bold; font-family: 'Oswald', sans-serif;">
             <div class="lcars-bar lcars-bar-top bg-peach">47</div>
-            <div class="lcars-bar lcars-bar-standard bg-blue">01</div>
-            <div class="lcars-bar lcars-bar-standard bg-purple">02</div>
-            <div class="lcars-bar lcars-bar-stretch bg-orange">03</div>
-            <div class="lcars-bar lcars-bar-standard bg-tan">04</div>
-            <div class="lcars-bar lcars-bar-stretch bg-red">05</div>
+            <div id="pillar-bar-1" class="lcars-bar lcars-bar-standard bg-blue" style="cursor: pointer; justify-content: flex-end; padding-right: 5px;">GALLERY</div>
+            <div id="pillar-bar-2" class="lcars-bar lcars-bar-standard bg-purple" style="cursor: pointer; justify-content: flex-end; padding-right: 5px;">SENSOR</div>
+            <div id="pillar-bar-3" class="lcars-bar lcars-bar-stretch bg-orange" style="cursor: pointer; justify-content: flex-end; padding-right: 5px;">ANALYZE</div>
+            <div id="pillar-bar-4" class="lcars-bar lcars-bar-standard bg-peach" style="cursor: pointer; justify-content: flex-end; padding-right: 5px;">COMMIT</div>
+            <div id="pillar-bar-5" class="lcars-bar lcars-bar-stretch bg-red" style="cursor: pointer; justify-content: flex-end; padding-right: 5px;">ABORT</div>
         </div>
 
         <!-- MAIN INTERFACE -->
@@ -41,8 +41,8 @@
                 <img id="image-preview" style="display: none;" />
                 <div class="camera-placeholder" id="camera-placeholder">
                     <div class="input-split">
-                        <label for="gallery-input" class="split-btn split-top">GALLERY</label>
-                        <label for="camera-input" class="split-btn split-bottom">SENSOR</label>
+                        <label for="gallery-input" class="split-btn split-top" style="background-color: var(--lcars-blue)">GALLERY</label>
+                        <label for="camera-input" class="split-btn split-bottom" style="background-color: var(--lcars-purple)">SENSOR</label>
                     </div>
                 </div>
                 <input type="file" id="gallery-input" accept="image/*" multiple style="display:none;">
@@ -60,7 +60,7 @@
             </div>
             
             <!-- ACTION BUTTON -->
-            <button id="analyze-btn" class="lcars-btn bg-purple" disabled>ENGAGE ANALYSIS</button>
+            <button id="analyze-btn" class="lcars-btn bg-orange" disabled>ENGAGE ANALYSIS</button>
 
             <!-- RESULTS OVERLAY -->
             <div id="results-card" class="hidden">
@@ -116,6 +116,6 @@
         </div>
     </div>
 
-    <script src="app.js?v=25"></script>
+    <script src="app.js?v=26"></script>
 </body>
 </html>
