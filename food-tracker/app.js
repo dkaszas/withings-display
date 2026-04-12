@@ -198,11 +198,29 @@ document.addEventListener('DOMContentLoaded', () => {
             DOM.sportsNavBtn.textContent = 'SCANNER';
             DOM.sportsNavBtn.style.backgroundColor = 'var(--lcars-peach)';
             
-            DOM.pillar1.textContent = 'SCANNER'; DOM.pillar1.className = 'lcars-bar lcars-bar-standard bg-peach'; DOM.pillar1.style.cursor = 'pointer';
-            DOM.pillar2.textContent = 'TRICORDER'; DOM.pillar2.className = 'lcars-bar lcars-bar-standard bg-blue'; DOM.pillar2.style.cursor = 'pointer';
-            DOM.pillar3.textContent = 'INJECT LOG'; DOM.pillar3.className = 'lcars-bar lcars-bar-stretch bg-gold'; DOM.pillar3.style.cursor = 'pointer';
-            DOM.pillar4.textContent = 'CLEAR'; DOM.pillar4.className = 'lcars-bar lcars-bar-standard bg-tan'; DOM.pillar4.style.cursor = 'pointer';
+            DOM.pillar1.textContent = 'SCANNER'; DOM.pillar1.className = 'lcars-bar lcars-bar-standard bg-gold'; DOM.pillar1.style.cursor = 'pointer';
+            DOM.pillar2.textContent = 'TRICORDER'; DOM.pillar2.className = 'lcars-bar lcars-bar-standard bg-cyan'; DOM.pillar2.style.cursor = 'pointer';
+            DOM.pillar3.textContent = 'CLEAR'; DOM.pillar3.className = 'lcars-bar lcars-bar-stretch bg-peach'; DOM.pillar3.style.cursor = 'pointer';
+            DOM.pillar4.textContent = 'INJECT LOG'; DOM.pillar4.className = 'lcars-bar lcars-bar-standard bg-blue'; DOM.pillar4.style.cursor = 'pointer';
             DOM.pillar5.textContent = 'CONFIG'; DOM.pillar5.className = 'lcars-bar lcars-bar-stretch bg-purple'; DOM.pillar5.style.cursor = 'pointer';
+
+            const alignSportsPillars = () => {
+                if (DOM.sportsView.classList.contains('hidden')) return;
+                DOM.pillar3.style.flexGrow = '0';
+                const p3Top = DOM.pillar3.getBoundingClientRect().top;
+                const targetTop = DOM.sportSubmitBtn.getBoundingClientRect().top;
+                const targetHeight = targetTop - p3Top - 2;
+                if (targetHeight > 0) {
+                    DOM.pillar3.style.minHeight = targetHeight + 'px';
+                    DOM.pillar3.style.height = targetHeight + 'px';
+                }
+            };
+            window.alignSportsPillars = alignSportsPillars; // bind globally for the select trigger
+
+            setTimeout(alignSportsPillars, 50);
+            setTimeout(alignSportsPillars, 300);
+            setTimeout(alignSportsPillars, 800);
+
         } else {
             DOM.scannerView.classList.remove('hidden');
             updateDynamicPillars();
@@ -230,17 +248,17 @@ document.addEventListener('DOMContentLoaded', () => {
     DOM.pillar3.addEventListener('click', () => {
         if (DOM.pillar3.textContent === 'ANALYZE') DOM.analyzeBtn.click();
         if (DOM.pillar3.textContent === 'TRANSMIT') DOM.omniBtn.click();
-        if (DOM.pillar3.textContent === 'INJECT LOG') DOM.sportSubmitBtn.click();
+        if (DOM.pillar3.textContent === 'CLEAR') { 
+            DOM.sportContext.value = ''; 
+            DOM.sportSelect.value = '';
+            DOM.sportDynamicInputs.innerHTML = '';
+            if (window.alignSportsPillars) window.alignSportsPillars();
+        }
     });
     DOM.pillar4.addEventListener('click', () => {
         if (DOM.pillar4.textContent === 'COMMIT' && !DOM.resultsCard.classList.contains('hidden')) DOM.commitBtn.click();
-        if (DOM.pillar4.textContent === 'CLEAR') { 
-            DOM.omniInput.value = ''; 
-            DOM.sportContext.value = ''; 
-            DOM.omniResponse.classList.add('hidden'); 
-            DOM.sportSelect.value = '';
-            DOM.sportDynamicInputs.innerHTML = '';
-        }
+        if (DOM.pillar4.textContent === 'CLEAR') { DOM.omniInput.value = ''; DOM.omniResponse.classList.add('hidden'); }
+        if (DOM.pillar4.textContent === 'INJECT LOG') DOM.sportSubmitBtn.click();
     });
     DOM.pillar5.addEventListener('click', () => {
         if (DOM.pillar5.textContent === 'ABORT' && !DOM.resultsCard.classList.contains('hidden')) DOM.cancelBtn.click();
@@ -308,6 +326,10 @@ document.addEventListener('DOMContentLoaded', () => {
                                   createInput('LAPS', 's-laps', 'number');
         } else if (sport === 'cc_ski') {
             container.innerHTML = createInput('DISTANCE (km)', 's-dist', 'number');
+        }
+        
+        if (window.alignSportsPillars) {
+            setTimeout(window.alignSportsPillars, 50);
         }
     });
 
