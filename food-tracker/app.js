@@ -353,7 +353,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const contextStr = DOM.contextInput.value.trim() ? `\nUser Context: ${DOM.contextInput.value.trim()}` : '';
         const hasImages = currentBase64Images && currentBase64Images.length > 0;
         const promptText = hasImages
-            ? `Identify food items and estimate macros.${contextStr}\nReturn ONLY JSON: {"calories": int, "protein": int, "carbs": int, "fat": int, "food_items": "string", "confidence": "string"}.`
+            ? `Identify food items and estimate macros. If you see something half eaten or empty, assume it has been fully eaten. If you see a drink next to the meal, assume it was a full sized drink that I drank.${contextStr}\nReturn ONLY JSON: {"calories": int, "protein": int, "carbs": int, "fat": int, "food_items": "string", "confidence": "string"}.`
             : `Estimate macros from description: ${contextStr}\nReturn ONLY JSON: {"calories": int, "protein": int, "carbs": int, "fat": int, "food_items": "string", "confidence": "string"}.`;
 
         try {
