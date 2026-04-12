@@ -337,7 +337,7 @@ textarea#context-input::placeholder { color: var(--lcars-dark-orange); }
     border: 2px solid var(--lcars-cyan);
     border-left: none;
     border-radius: 0 10px 10px 0;
-    margin-bottom: 10px !important;
+    margin-bottom: 20px !important;
 }
 
 .confidence-badge {
@@ -354,7 +354,7 @@ textarea#context-input::placeholder { color: var(--lcars-dark-orange); }
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
-    margin-bottom: 10px !important;
+    margin-bottom: 20px !important;
 }
 .macro-item {
     background: var(--lcars-dark-orange);
