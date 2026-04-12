@@ -421,8 +421,9 @@ textarea#omni-input {
 
 /* TRICORDER SPECIFICS */
 .tricorder-image-wrapper {
-    width: 100%;
-    overflow: hidden; /* Crop the overflow */
+    width: calc(100% + 10px);
+    margin-right: -10px;
+    overflow: hidden;
     border: 3px solid var(--lcars-blue);
     border-left: none;
     border-radius: 0 10px 10px 0;
