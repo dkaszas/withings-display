@@ -787,7 +787,7 @@ USER QUERY: ${query}`;
         };
     }
 
-    setupMic('mic-context', 'context-input', 'var(--lcars-peach)', 'var(--lcars-red)');
+    setupMic('mic-context', 'context-input', 'var(--lcars-orange)', 'var(--lcars-red)');
     setupMic('mic-omni', 'omni-input', 'var(--lcars-dark-orange)', 'var(--lcars-red)');
     setupMic('mic-sport', 'sport-context', 'var(--lcars-gold)', 'var(--lcars-red)');
 
