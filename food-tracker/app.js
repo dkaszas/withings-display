@@ -15,6 +15,10 @@ const DOM = {
     commitBtn: document.getElementById('commit-btn'),
     cancelBtn: document.getElementById('cancel-btn'),
     
+    // Model toggles
+    btnFlash: document.getElementById('btn-flash'),
+    btnPro: document.getElementById('btn-pro'),
+    
     // Inputs
     geminiKey: document.getElementById('gemini-key'),
     githubPat: document.getElementById('github-pat'),
@@ -32,6 +36,7 @@ const DOM = {
 let currentBase64Images = [];
 let currentMacros = null;
 let imageLastModified = null;
+let selectedModel = 'gemini-2.5-flash';
 
 // Initialization
 function init() {
@@ -56,6 +61,18 @@ DOM.saveSettingsBtn.addEventListener('click', () => {
     localStorage.setItem('ml_github_pat', DOM.githubPat.value.trim());
     localStorage.setItem('ml_github_repo', DOM.githubRepo.value.trim());
     DOM.settingsModal.classList.add('hidden');
+});
+
+DOM.btnFlash.addEventListener('click', () => {
+    selectedModel = 'gemini-2.5-flash';
+    DOM.btnFlash.classList.add('active');
+    DOM.btnPro.classList.remove('active');
+});
+
+DOM.btnPro.addEventListener('click', () => {
+    selectedModel = 'gemini-2.5-pro';
+    DOM.btnPro.classList.add('active');
+    DOM.btnFlash.classList.remove('active');
 });
 
 function updateAnalyzeButtonState() {
@@ -174,13 +191,25 @@ async function analyzeMeal() {
 
     try {
         let resultData;
-        try {
-            DOM.loaderText.textContent = "QUERYING FLASH DATABANK...";
-            resultData = await queryGemini('gemini-2.5-flash', promptText, currentBase64Images);
-        } catch (e) {
-            console.warn("Flash failed, falling back...", e);
-            DOM.loaderText.textContent = "FLASH FAILED. FALLBACK UPLINK...";
-            resultData = await queryGemini('gemini-2.5-pro', promptText, currentBase64Images);
+        if (selectedModel === 'gemini-2.5-flash') {
+            try {
+                DOM.loaderText.textContent = "QUERYING FLASH DATABANK...";
+                resultData = await queryGemini('gemini-2.5-flash', promptText, currentBase64Images);
+            } catch (e) {
+                console.warn("Flash failed, falling back...", e);
+                DOM.loaderText.textContent = "FLASH FAILED. FALLBACK UPLINK...";
+                resultData = await queryGemini('gemini-2.5-pro', promptText, currentBase64Images);
+            }
+        } else {
+            // Pro selected
+            try {
+                DOM.loaderText.textContent = "QUERYING PRO DATABANK...";
+                resultData = await queryGemini('gemini-2.5-pro', promptText, currentBase64Images);
+            } catch (e) {
+                console.warn("Pro failed, falling back...", e);
+                DOM.loaderText.textContent = "PRO FAILED. FALLBACK UPLINK...";
+                resultData = await queryGemini('gemini-2.5-flash', promptText, currentBase64Images);
+            }
         }
 
         const jsonText = resultData.candidates[0].content.parts[0].text;
