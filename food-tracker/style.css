@@ -119,10 +119,23 @@ input, textarea, button {
     border-bottom-right-radius: 10px;
 }
 .lcars-top-pill {
-    width: 60px;
+    min-width: 80px;
+    padding: 0 15px;
     height: 20px;
     background-color: var(--lcars-purple);
     border-radius: 10px;
+    color: #000;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: filter 0.2s;
+}
+
+.lcars-top-pill:hover {
+    filter: brightness(1.2);
 }
 
 .lcars-title {
