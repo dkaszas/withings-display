@@ -27,8 +27,10 @@ const DOM = {
 
     // Navigation
     navBtn: document.getElementById('nav-btn'),
+    databankNavBtn: document.getElementById('databank-nav-btn'),
     scannerView: document.getElementById('scanner-view'),
     tricorderView: document.getElementById('tricorder-view'),
+    databankView: document.getElementById('databank-view'),
 
     // Omni-Panel
     omniInput: document.getElementById('omni-input'),
@@ -74,21 +76,49 @@ DOM.saveSettingsBtn.addEventListener('click', () => {
     DOM.settingsModal.classList.add('hidden');
 });
 
-DOM.navBtn.addEventListener('click', () => {
-    if (DOM.tricorderView.classList.contains('hidden')) {
-        // Toggle to Tricorder
+function openView(target) {
+    // Hide all
+    DOM.scannerView.classList.add('hidden');
+    DOM.tricorderView.classList.add('hidden');
+    DOM.databankView.classList.add('hidden');
+    
+    // Reset all nav pills
+    DOM.navBtn.textContent = 'TRICORDER';
+    DOM.navBtn.style.backgroundColor = 'var(--lcars-blue)';
+    DOM.databankNavBtn.textContent = 'DATABANK';
+    DOM.databankNavBtn.style.backgroundColor = 'var(--lcars-dark-orange)';
+    
+    // Reset app mode
+    DOM.app.classList.remove('tricorder-mode');
+
+    // Route desired view
+    if (target === 'tricorder') {
         DOM.tricorderView.classList.remove('hidden');
-        DOM.scannerView.classList.add('hidden');
         DOM.navBtn.textContent = 'SCANNER';
         DOM.navBtn.style.backgroundColor = 'var(--lcars-peach)';
         DOM.app.classList.add('tricorder-mode');
+    } else if (target === 'databank') {
+        DOM.databankView.classList.remove('hidden');
+        DOM.databankNavBtn.textContent = 'SCANNER';
+        DOM.databankNavBtn.style.backgroundColor = 'var(--lcars-peach)';
     } else {
-        // Toggle back to Scanner
-        DOM.tricorderView.classList.add('hidden');
         DOM.scannerView.classList.remove('hidden');
-        DOM.navBtn.textContent = 'TRICORDER';
-        DOM.navBtn.style.backgroundColor = 'var(--lcars-blue)';
-        DOM.app.classList.remove('tricorder-mode');
+    }
+}
+
+DOM.navBtn.addEventListener('click', () => {
+    if (DOM.navBtn.textContent === 'TRICORDER') {
+        openView('tricorder');
+    } else {
+        openView('scanner');
+    }
+});
+
+DOM.databankNavBtn.addEventListener('click', () => {
+    if (DOM.databankNavBtn.textContent === 'DATABANK') {
+        openView('databank');
+    } else {
+        openView('scanner');
     }
 });
 

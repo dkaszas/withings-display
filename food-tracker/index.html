@@ -6,7 +6,7 @@
     <title>MacroLens LCARS</title>
     <meta name="theme-color" content="#000000">
     <link rel="manifest" href="manifest.json">
-    <link rel="stylesheet" href="style.css?v=22">
+    <link rel="stylesheet" href="style.css?v=23">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
 </head>
 <body>
@@ -28,6 +28,7 @@
             <div class="lcars-header">
                 <div class="lcars-top-elbow"></div>
                 <div id="settings-btn" class="lcars-top-pill" style="cursor: pointer; background-color: var(--lcars-purple);">CONFIG</div>
+                <div id="databank-nav-btn" class="lcars-top-pill" style="cursor: pointer; background-color: var(--lcars-dark-orange);">DATABANK</div>
                 <div id="nav-btn" class="lcars-top-pill" style="cursor: pointer; background-color: var(--lcars-blue);">TRICORDER</div>
             </div>
             
@@ -79,14 +80,15 @@
                 <button id="cancel-btn" class="lcars-btn btn-cancel" style="border-radius: 10px; height: 35px; font-size:16px;">ABORT</button>
             </div>
 
-            <!-- MEDICAL DATABASE OMNI-PANEL -->
-            <div class="omni-container">
-                <div class="lcars-bar lcars-bar-standard bg-tan omni-title">MEDICAL OMNI-PANEL</div>
-                <textarea id="omni-input" placeholder="QUERY MEDICAL DATABANK..." rows="2"></textarea>
-                <button id="omni-btn" class="lcars-btn bg-dark-orange">TRANSMIT QUERY</button>
-                <div id="omni-response" class="omni-response hidden"></div>
-            </div>
             </div> <!-- END SCANNER VIEW -->
+
+            <!-- DATABANK VIEW -->
+            <div id="databank-view" class="hidden" style="margin-top: 15px;">
+                <div class="lcars-bar lcars-bar-standard bg-tan omni-title" style="margin-bottom: 10px;">MEDICAL DATABASE UPLINK</div>
+                <textarea id="omni-input" placeholder="QUERY INTERACTIVE DATABANK..." rows="4"></textarea>
+                <button id="omni-btn" class="lcars-btn bg-dark-orange" style="margin-top: 10px;">TRANSMIT SECURE QUERY</button>
+                <div id="omni-response" class="omni-response hidden" style="margin-top: 10px;"></div>
+            </div>
 
             <!-- TRICORDER VIEW -->
             <div id="tricorder-view" class="hidden" style="margin-top: 15px;">
@@ -115,6 +117,6 @@
         </div>
     </div>
 
-    <script src="app.js?v=22"></script>
+    <script src="app.js?v=23"></script>
 </body>
 </html>
