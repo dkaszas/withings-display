@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MacroLens LCARS</title>
     <meta name="theme-color" content="#000000">
     <link rel="manifest" href="manifest.json">
-    <link rel="stylesheet" href="style.css?v=21">
+    <link rel="stylesheet" href="style.css?v=22">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
 </head>
 <body>
@@ -91,7 +91,9 @@
             <!-- TRICORDER VIEW -->
             <div id="tricorder-view" class="hidden" style="margin-top: 15px;">
                 <div class="lcars-bar lcars-bar-standard bg-blue omni-title" style="margin-bottom: 10px;">HEALTH METRICS OVERVIEW</div>
-                <img src="https://raw.githubusercontent.com/dkaszas/withings-display/refs/heads/main/dashboard.png?v=latest" style="width: 100%; border: 3px solid var(--lcars-blue); border-radius: 10px;" alt="Health Dashboard" />
+                <div class="tricorder-image-wrapper">
+                    <img src="https://raw.githubusercontent.com/dkaszas/withings-display/refs/heads/main/dashboard.png?v=latest" alt="Health Dashboard" />
+                </div>
             </div>
 
         </div>
@@ -113,6 +115,6 @@
         </div>
     </div>
 
-    <script src="app.js?v=21"></script>
+    <script src="app.js?v=22"></script>
 </body>
 </html>

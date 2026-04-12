@@ -1,4 +1,5 @@
 const DOM = {
+    app: document.getElementById('app'),
     cameraInput: document.getElementById('camera-input'),
     galleryInput: document.getElementById('gallery-input'),
     preview: document.getElementById('image-preview'),
@@ -80,12 +81,14 @@ DOM.navBtn.addEventListener('click', () => {
         DOM.scannerView.classList.add('hidden');
         DOM.navBtn.textContent = 'SCANNER';
         DOM.navBtn.style.backgroundColor = 'var(--lcars-peach)';
+        DOM.app.classList.add('tricorder-mode');
     } else {
         // Toggle back to Scanner
         DOM.tricorderView.classList.add('hidden');
         DOM.scannerView.classList.remove('hidden');
         DOM.navBtn.textContent = 'TRICORDER';
         DOM.navBtn.style.backgroundColor = 'var(--lcars-blue)';
+        DOM.app.classList.remove('tricorder-mode');
     }
 });
 

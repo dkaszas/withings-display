@@ -346,6 +346,20 @@ textarea#omni-input::placeholder { color: var(--lcars-purple); }
     font-family: inherit;
 }
 
+/* TRICORDER SPECIFICS */
+.tricorder-image-wrapper {
+    width: 100%;
+    overflow: hidden; /* Crop the overflow */
+    border: 3px solid var(--lcars-blue);
+    border-radius: 10px;
+    background: #000;
+}
+.tricorder-image-wrapper img {
+    display: block;
+    width: 111%; /* Stretches right side natively out of bounds by ~10% */
+    max-width: none;
+}
+
 /* OVERLAYS */
 .hidden { display: none !important; }
 
@@ -371,6 +385,20 @@ textarea#omni-input::placeholder { color: var(--lcars-purple); }
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.lcars-column {
+    min-width: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    transition: min-width 0.3s;
+}
+
+.lcars-app.tricorder-mode .lcars-column {
+    min-width: 15px; /* Aggressive squash for Tricorder */
+}
+.lcars-app.tricorder-mode .lcars-column .lcars-bar {
+    font-size: 0px; /* Hide text */
 }
 .modal-content {
     width: 300px;
