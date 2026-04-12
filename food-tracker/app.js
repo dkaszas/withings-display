@@ -162,6 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function openView(target) {
+        window.history.replaceState(null, null, '#' + target);
         DOM.scannerView.classList.add('hidden');
         DOM.tricorderView.classList.add('hidden');
         DOM.databankView.classList.add('hidden');
@@ -189,8 +190,8 @@ document.addEventListener('DOMContentLoaded', () => {
             
             DOM.pillar1.textContent = 'SCANNER'; DOM.pillar1.className = 'lcars-bar lcars-bar-standard bg-peach'; DOM.pillar1.style.cursor = 'pointer';
             DOM.pillar2.textContent = 'TRICORDER'; DOM.pillar2.className = 'lcars-bar lcars-bar-standard bg-blue'; DOM.pillar2.style.cursor = 'pointer';
-            DOM.pillar3.textContent = 'TRANSMIT'; DOM.pillar3.className = 'lcars-bar lcars-bar-stretch bg-dark-orange'; DOM.pillar3.style.cursor = 'pointer';
-            DOM.pillar4.textContent = 'CLEAR'; DOM.pillar4.className = 'lcars-bar lcars-bar-standard bg-tan'; DOM.pillar4.style.cursor = 'pointer';
+            DOM.pillar3.textContent = 'ACTIVITY'; DOM.pillar3.className = 'lcars-bar lcars-bar-standard bg-gold'; DOM.pillar3.style.cursor = 'pointer';
+            DOM.pillar4.textContent = 'DATABANK'; DOM.pillar4.className = 'lcars-bar lcars-bar-stretch bg-dark-orange'; DOM.pillar4.style.cursor = 'pointer';
             DOM.pillar5.textContent = 'CONFIG'; DOM.pillar5.className = 'lcars-bar lcars-bar-stretch bg-purple'; DOM.pillar5.style.cursor = 'pointer';
 
         } else if (target === 'sports') {
@@ -251,6 +252,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (DOM.pillar3.textContent === 'ANALYZE') DOM.analyzeBtn.click();
         if (DOM.pillar3.textContent === 'TRANSMIT') DOM.omniBtn.click();
         if (DOM.pillar3.textContent === 'CONTEXT') DOM.sportContext.focus();
+        if (DOM.pillar3.textContent === 'ACTIVITY') openView('sports');
     });
     DOM.pillar4.addEventListener('click', () => {
         if (DOM.pillar4.textContent === 'COMMIT' && !DOM.resultsCard.classList.contains('hidden')) DOM.commitBtn.click();
@@ -624,4 +626,8 @@ USER QUERY: ${query}`;
     }
 
     init();
+
+    const hash = window.location.hash.substring(1);
+    if (['scanner', 'tricorder', 'databank', 'sports'].includes(hash)) openView(hash);
+    else openView('scanner');
 });
