@@ -24,6 +24,11 @@ const DOM = {
     githubPat: document.getElementById('github-pat'),
     githubRepo: document.getElementById('github-repo'),
 
+    // Navigation
+    navBtn: document.getElementById('nav-btn'),
+    scannerView: document.getElementById('scanner-view'),
+    tricorderView: document.getElementById('tricorder-view'),
+
     // Omni-Panel
     omniInput: document.getElementById('omni-input'),
     omniBtn: document.getElementById('omni-btn'),
@@ -66,6 +71,22 @@ DOM.saveSettingsBtn.addEventListener('click', () => {
     localStorage.setItem('ml_github_pat', DOM.githubPat.value.trim());
     localStorage.setItem('ml_github_repo', DOM.githubRepo.value.trim());
     DOM.settingsModal.classList.add('hidden');
+});
+
+DOM.navBtn.addEventListener('click', () => {
+    if (DOM.tricorderView.classList.contains('hidden')) {
+        // Toggle to Tricorder
+        DOM.tricorderView.classList.remove('hidden');
+        DOM.scannerView.classList.add('hidden');
+        DOM.navBtn.textContent = 'SCANNER';
+        DOM.navBtn.style.backgroundColor = 'var(--lcars-peach)';
+    } else {
+        // Toggle back to Scanner
+        DOM.tricorderView.classList.add('hidden');
+        DOM.scannerView.classList.remove('hidden');
+        DOM.navBtn.textContent = 'TRICORDER';
+        DOM.navBtn.style.backgroundColor = 'var(--lcars-blue)';
+    }
 });
 
 DOM.btnFlash.addEventListener('click', () => {
