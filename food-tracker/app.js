@@ -394,6 +394,9 @@ document.addEventListener('DOMContentLoaded', () => {
                                   createInput('LAPS', 's-laps', 'number');
         } else if (sport === 'cc_ski') {
             container.innerHTML = createInput('DISTANCE (km)', 's-dist', 'number');
+        } else if (sport === 'other') {
+            container.innerHTML = createInput('ACTIVITY DETAILS', 's-other-details', 'text') +
+                                  createInput('DURATION (min)', 's-time', 'number');
         }
         
         if (window.alignSportsPillars) {
