@@ -108,6 +108,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const hasResults = !DOM.resultsCard.classList.contains('hidden');
 
         if (canAnalyze && !hasResults) {
+            DOM.pillar3.style.flexGrow = '';
+            DOM.pillar3.style.minHeight = '100px';
+            DOM.pillar3.style.height = 'auto';
+
             DOM.pillar3.textContent = 'ANALYZE'; DOM.pillar3.className = 'lcars-bar lcars-bar-stretch bg-cyan'; DOM.pillar3.style.cursor = 'pointer';
             DOM.pillar5.textContent = 'ABORT'; DOM.pillar5.className = 'lcars-bar lcars-bar-stretch bg-red'; DOM.pillar5.style.cursor = 'pointer';
             DOM.analyzeBtn.disabled = false;
@@ -121,7 +125,23 @@ document.addEventListener('DOMContentLoaded', () => {
             DOM.analyzeBtn.classList.add('hidden');
             DOM.contextInput.classList.add('hidden');
             DOM.modelSelect.classList.add('hidden');
+
+            // Magic JS Vertical Splicing aligner
+            requestAnimationFrame(() => {
+                DOM.pillar3.style.flexGrow = '0';
+                const p3Top = DOM.pillar3.getBoundingClientRect().top;
+                const targetTop = DOM.commitBtn.getBoundingClientRect().top;
+                const targetHeight = targetTop - p3Top - 5;
+                if (targetHeight > 0) {
+                    DOM.pillar3.style.minHeight = targetHeight + 'px';
+                    DOM.pillar3.style.height = targetHeight + 'px';
+                }
+            });
         } else {
+            DOM.pillar3.style.flexGrow = '';
+            DOM.pillar3.style.minHeight = '100px';
+            DOM.pillar3.style.height = 'auto';
+
             DOM.analyzeBtn.disabled = true;
             DOM.analyzeBtn.classList.add('hidden');
             DOM.contextInput.classList.remove('hidden');

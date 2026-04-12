@@ -96,7 +96,7 @@ input, textarea, button {
 .bg-purple { background-color: var(--lcars-purple) !important; }
 .bg-blue { background-color: var(--lcars-blue) !important; }
 .bg-orange { background-color: var(--lcars-orange) !important; }
-.bg-peach { background-color: var(--lcars-peach) !important; border-bottom-left-radius: 0; border-top-left-radius: 40px; }
+.bg-peach { background-color: var(--lcars-peach) !important; }
 .bg-red { background-color: var(--lcars-red) !important; }
 .bg-tan { background-color: var(--lcars-tan) !important; }
 .bg-dark-orange { background-color: var(--lcars-dark-orange) !important; }
