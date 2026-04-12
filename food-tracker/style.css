@@ -13,6 +13,7 @@
     --lcars-cyan: #00cccc;
     --lcars-gold: #ffcc00;
     --lcars-teal: #3399cc;
+    --lcars-emerald: #50c878;
 }
 
 * {
@@ -108,6 +109,7 @@ input, textarea, button {
 .bg-dark-orange { background-color: var(--lcars-dark-orange) !important; }
 .bg-cyan { background-color: var(--lcars-cyan) !important; }
 .bg-gold { background-color: var(--lcars-gold) !important; }
+.bg-emerald { background-color: var(--lcars-emerald) !important; }
 
 /* LCARS MAIN CONTENT */
 .lcars-main {
@@ -405,7 +407,7 @@ textarea#omni-input {
     background-color: var(--lcars-black);
     color: var(--lcars-tan);
     padding: 15px;
-    border: 2px solid var(--lcars-orange);
+    border: 2px solid var(--lcars-purple);
     border-left: none;
     border-radius: 0 10px 10px 0;
     font-size: 18px;
