@@ -321,7 +321,7 @@ textarea#context-input::placeholder { color: var(--lcars-dark-orange); }
     display: flex;
     flex-direction: column;
     width: 100% !important;
-    margin-top: 4px; /* User requested custom alignment padding */
+    margin-top: 2px; /* Fine-tuned alignment padding */
 }
 #results-card > * {
     margin-bottom: 5px;
@@ -352,6 +352,7 @@ textarea#context-input::placeholder { color: var(--lcars-dark-orange); }
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
+    margin-bottom: 10px !important;
 }
 .macro-item {
     background: var(--lcars-dark-orange);
