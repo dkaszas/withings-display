@@ -204,14 +204,6 @@ function updateAnalyzeButtonState() {
 
 DOM.contextInput.addEventListener('input', updateAnalyzeButtonState);
 
-async function handleFileInput(e) {
-    const files = Array.from(e.target.files);
-    if (files.length > 0) {
-        if (files[0] && files[0].lastModified) {
-            imageLastModified = new Date(files[0].lastModified).toISOString();
-        } else {
-            imageLastModified = null;
-        }
 function processImageSelection(file) {
     if (!file) return;
     const reader = new FileReader();
