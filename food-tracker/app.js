@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
         DOM.databankView.classList.add('hidden');
         DOM.sportsView.classList.add('hidden');
         
-        DOM.navBtn.textContent = 'TRICORDER';
+        DOM.navBtn.innerHTML = '<span class="text-xs">TRICORDER</span>';
         DOM.navBtn.style.backgroundColor = 'var(--lcars-teal)';
         DOM.databankNavBtn.textContent = 'DATABANK';
         DOM.databankNavBtn.style.backgroundColor = 'var(--lcars-dark-orange)';
@@ -176,6 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
         DOM.sportsNavBtn.style.backgroundColor = 'var(--lcars-gold)';
         
         DOM.app.classList.remove('tricorder-mode');
+        DOM.pillar2.style.display = '';
 
         if (target === 'tricorder') {
             DOM.tricorderView.classList.remove('hidden');
@@ -214,8 +215,8 @@ document.addEventListener('DOMContentLoaded', () => {
             DOM.sportsNavBtn.style.backgroundColor = 'var(--lcars-peach)';
             
             DOM.pillar1.textContent = 'TIME'; DOM.pillar1.className = 'lcars-bar lcars-bar-standard bg-cyan'; DOM.pillar1.style.cursor = 'pointer';
-            DOM.pillar2.textContent = 'ACTIVITY'; DOM.pillar2.className = 'lcars-bar lcars-bar-standard bg-gold'; DOM.pillar2.style.cursor = 'pointer';
-            DOM.pillar3.textContent = 'CONTEXT'; DOM.pillar3.className = 'lcars-bar lcars-bar-stretch bg-gold'; DOM.pillar3.style.cursor = 'pointer';
+            DOM.pillar2.style.display = 'none';
+            DOM.pillar3.textContent = 'ACTIVITY'; DOM.pillar3.className = 'lcars-bar lcars-bar-stretch bg-gold'; DOM.pillar3.style.cursor = 'pointer';
             DOM.pillar4.textContent = 'TRANSMIT'; DOM.pillar4.className = 'lcars-bar lcars-bar-standard bg-blue'; DOM.pillar4.style.cursor = 'pointer';
             DOM.pillar5.textContent = 'CLEAR'; DOM.pillar5.className = 'lcars-bar lcars-bar-stretch bg-red'; DOM.pillar5.style.cursor = 'pointer';
 

@@ -535,3 +535,9 @@ textarea#omni-input {
     color: var(--lcars-blue);
     cursor: pointer;
 }
+
+/* UTILITY CLASSES */
+.text-xs {
+    font-size: 11px !important;
+    letter-spacing: -0.5px !important;
+}
