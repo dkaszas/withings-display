@@ -262,6 +262,7 @@ textarea#context-input {
     font-size: 16px;
     outline: none;
     resize: none;
+    margin: 10px 0 !important;
 }
 textarea#context-input::placeholder { color: var(--lcars-dark-orange); }
 
@@ -313,7 +314,6 @@ textarea#context-input::placeholder { color: var(--lcars-dark-orange); }
 }
 #analyze-btn {
     font-size: 16px;
-    margin-top: 5px;
 }
 
 /* RESULTS */
@@ -321,7 +321,6 @@ textarea#context-input::placeholder { color: var(--lcars-dark-orange); }
     display: flex;
     flex-direction: column;
     width: 100% !important;
-    margin-top: 2px; /* Fine-tuned alignment padding */
 }
 #results-card > * {
     margin-bottom: 5px;
@@ -336,6 +335,7 @@ textarea#context-input::placeholder { color: var(--lcars-dark-orange); }
     border: 2px solid var(--lcars-cyan);
     border-left: none;
     border-radius: 0 10px 10px 0;
+    margin-bottom: 10px !important;
 }
 
 .confidence-badge {
