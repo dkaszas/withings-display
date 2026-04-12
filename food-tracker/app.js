@@ -78,6 +78,9 @@ document.addEventListener('DOMContentLoaded', () => {
         
         updateStardate();
         setInterval(updateStardate, 60000);
+        
+        // Bootstrap layout matrix
+        updateDynamicPillars();
     }
 
     function updateStardate() {
