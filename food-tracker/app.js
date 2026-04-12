@@ -170,11 +170,11 @@ DOM.omniBtn.addEventListener('click', async () => {
             throw new Error("Unable to authenticate or fetch Databank. Check CONFIG parameters.");
         }
 
-        const promptText = `You are a Star Trek LCARS Medical UI analyzing the user's longitudinal health data. Analyze the provided structured logs and answer the user's query clearly, scientifically, and concisely (using Markdown if helpful, but DO NOT enclose the entire response in JSON codeblocks). \n\nDATABANK RECORDS:\n${databank}\n\nUSER QUERY:\n${query}`;
+        const promptText = `You are an incredibly smart, conversational AI integrated into a Sci-Fi LCARS interface. You have been given the user's latest historical health metrics (Withings Data) and nutrition logs. The user will ask you questions about their health, habits, or general advice. Act as a normal, highly intelligent chatbot. Use your general knowledge and logic to deduce actionable advice based on their data. You can answer freely using Markdown, but NEVER reply in raw JSON format unless absolutely necessary for a data visualization.\n\nDATABANK RECORDS:\n${databank}\n\nUSER QUERY:\n${query}`;
 
         DOM.loaderText.textContent = `QUERYING OMNICORE...`;
         
-        let resultData = await queryGemini('gemini-2.5-flash', promptText, []);
+        let resultData = await queryGemini('gemini-2.5-flash', promptText, [], false);
         let aiResp = resultData.candidates[0].content.parts[0].text;
         
         DOM.omniResponse.classList.remove('hidden');
@@ -203,7 +203,7 @@ function resetView() {
     DOM.galleryInput.value = '';
 }
 
-async function queryGemini(model, promptText, base64ImagesArray) {
+async function queryGemini(model, promptText, base64ImagesArray, isJsonMode = true) {
     const apiKey = localStorage.getItem('ml_gemini_key');
     if (!apiKey) throw new Error("Gemini API Key missing.");
 
@@ -218,9 +218,11 @@ async function queryGemini(model, promptText, base64ImagesArray) {
     }
 
     const payload = {
-        "contents": [{ "parts": parts }],
-        "generationConfig": { "responseMimeType": "application/json" }
+        "contents": [{ "parts": parts }]
     };
+    if (isJsonMode) {
+        payload.generationConfig = { "responseMimeType": "application/json" };
+    }
 
     const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
     
@@ -256,21 +258,21 @@ async function analyzeMeal() {
         if (selectedModel === 'gemini-2.5-flash') {
             try {
                 DOM.loaderText.textContent = "QUERYING FLASH DATABANK...";
-                resultData = await queryGemini('gemini-2.5-flash', promptText, currentBase64Images);
+                resultData = await queryGemini('gemini-2.5-flash', promptText, currentBase64Images, true);
             } catch (e) {
                 console.warn("Flash failed, falling back...", e);
                 DOM.loaderText.textContent = "FLASH FAILED. FALLBACK UPLINK...";
-                resultData = await queryGemini('gemini-2.5-pro', promptText, currentBase64Images);
+                resultData = await queryGemini('gemini-2.5-pro', promptText, currentBase64Images, true);
             }
         } else {
             // Pro selected
             try {
                 DOM.loaderText.textContent = "QUERYING PRO DATABANK...";
-                resultData = await queryGemini('gemini-2.5-pro', promptText, currentBase64Images);
+                resultData = await queryGemini('gemini-2.5-pro', promptText, currentBase64Images, true);
             } catch (e) {
                 console.warn("Pro failed, falling back...", e);
                 DOM.loaderText.textContent = "PRO FAILED. FALLBACK UPLINK...";
-                resultData = await queryGemini('gemini-2.5-flash', promptText, currentBase64Images);
+                resultData = await queryGemini('gemini-2.5-flash', promptText, currentBase64Images, true);
             }
         }
 
