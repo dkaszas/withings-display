@@ -212,7 +212,11 @@ document.addEventListener('DOMContentLoaded', () => {
             DOM.preview.classList.remove('hidden');
             DOM.placeholder.style.display = 'none';
             DOM.badge.textContent = `IMG: ${currentBase64Images.length}/3`;
-            DOM.badge.classList.remove('hidden');
+            if (currentBase64Images.length > 1) {
+                DOM.badge.classList.remove('hidden');
+            } else {
+                DOM.badge.classList.add('hidden');
+            }
             updateDynamicPillars();
         };
         reader.readAsDataURL(file);
