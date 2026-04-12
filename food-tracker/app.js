@@ -198,11 +198,11 @@ document.addEventListener('DOMContentLoaded', () => {
             DOM.sportsNavBtn.textContent = 'SCANNER';
             DOM.sportsNavBtn.style.backgroundColor = 'var(--lcars-peach)';
             
-            DOM.pillar1.textContent = 'SCANNER'; DOM.pillar1.className = 'lcars-bar lcars-bar-standard bg-gold'; DOM.pillar1.style.cursor = 'pointer';
-            DOM.pillar2.textContent = 'TRICORDER'; DOM.pillar2.className = 'lcars-bar lcars-bar-standard bg-cyan'; DOM.pillar2.style.cursor = 'pointer';
-            DOM.pillar3.textContent = 'CLEAR'; DOM.pillar3.className = 'lcars-bar lcars-bar-stretch bg-peach'; DOM.pillar3.style.cursor = 'pointer';
-            DOM.pillar4.textContent = 'INJECT LOG'; DOM.pillar4.className = 'lcars-bar lcars-bar-standard bg-blue'; DOM.pillar4.style.cursor = 'pointer';
-            DOM.pillar5.textContent = 'CONFIG'; DOM.pillar5.className = 'lcars-bar lcars-bar-stretch bg-purple'; DOM.pillar5.style.cursor = 'pointer';
+            DOM.pillar1.textContent = 'ACTIVITY'; DOM.pillar1.className = 'lcars-bar lcars-bar-standard bg-gold'; DOM.pillar1.style.cursor = 'pointer';
+            DOM.pillar2.textContent = 'TIME'; DOM.pillar2.className = 'lcars-bar lcars-bar-standard bg-cyan'; DOM.pillar2.style.cursor = 'pointer';
+            DOM.pillar3.textContent = 'CONTEXT'; DOM.pillar3.className = 'lcars-bar lcars-bar-stretch bg-peach'; DOM.pillar3.style.cursor = 'pointer';
+            DOM.pillar4.textContent = 'TRANSMIT'; DOM.pillar4.className = 'lcars-bar lcars-bar-standard bg-blue'; DOM.pillar4.style.cursor = 'pointer';
+            DOM.pillar5.textContent = 'CLEAR'; DOM.pillar5.className = 'lcars-bar lcars-bar-stretch bg-red'; DOM.pillar5.style.cursor = 'pointer';
 
             const alignSportsPillars = () => {
                 if (DOM.sportsView.classList.contains('hidden')) return;
@@ -240,29 +240,32 @@ document.addEventListener('DOMContentLoaded', () => {
     DOM.pillar1.addEventListener('click', () => {
         if (DOM.pillar1.textContent === 'GALLERY') DOM.galleryInput.click();
         if (DOM.pillar1.textContent === 'SCANNER') openView('scanner');
+        if (DOM.pillar1.textContent === 'ACTIVITY') DOM.sportSelect.focus();
     });
     DOM.pillar2.addEventListener('click', () => {
         if (DOM.pillar2.textContent === 'SENSOR') DOM.cameraInput.click();
         if (DOM.pillar2.textContent === 'TRICORDER') openView('tricorder');
+        if (DOM.pillar2.textContent === 'TIME') DOM.sportTime.focus();
     });
     DOM.pillar3.addEventListener('click', () => {
         if (DOM.pillar3.textContent === 'ANALYZE') DOM.analyzeBtn.click();
         if (DOM.pillar3.textContent === 'TRANSMIT') DOM.omniBtn.click();
-        if (DOM.pillar3.textContent === 'CLEAR') { 
+        if (DOM.pillar3.textContent === 'CONTEXT') DOM.sportContext.focus();
+    });
+    DOM.pillar4.addEventListener('click', () => {
+        if (DOM.pillar4.textContent === 'COMMIT' && !DOM.resultsCard.classList.contains('hidden')) DOM.commitBtn.click();
+        if (DOM.pillar4.textContent === 'CLEAR') { DOM.omniInput.value = ''; DOM.omniResponse.classList.add('hidden'); }
+        if (DOM.pillar4.textContent === 'TRANSMIT' && !DOM.sportsView.classList.contains('hidden')) DOM.sportSubmitBtn.click();
+    });
+    DOM.pillar5.addEventListener('click', () => {
+        if (DOM.pillar5.textContent === 'ABORT' && !DOM.resultsCard.classList.contains('hidden')) DOM.cancelBtn.click();
+        if (DOM.pillar5.textContent === 'CONFIG') DOM.settingsModal.classList.remove('hidden');
+        if (DOM.pillar5.textContent === 'CLEAR' && !DOM.sportsView.classList.contains('hidden')) { 
             DOM.sportContext.value = ''; 
             DOM.sportSelect.value = '';
             DOM.sportDynamicInputs.innerHTML = '';
             if (window.alignSportsPillars) window.alignSportsPillars();
         }
-    });
-    DOM.pillar4.addEventListener('click', () => {
-        if (DOM.pillar4.textContent === 'COMMIT' && !DOM.resultsCard.classList.contains('hidden')) DOM.commitBtn.click();
-        if (DOM.pillar4.textContent === 'CLEAR') { DOM.omniInput.value = ''; DOM.omniResponse.classList.add('hidden'); }
-        if (DOM.pillar4.textContent === 'INJECT LOG') DOM.sportSubmitBtn.click();
-    });
-    DOM.pillar5.addEventListener('click', () => {
-        if (DOM.pillar5.textContent === 'ABORT' && !DOM.resultsCard.classList.contains('hidden')) DOM.cancelBtn.click();
-        if (DOM.pillar5.textContent === 'CONFIG') DOM.settingsModal.classList.remove('hidden');
     });
 
     DOM.navBtn.addEventListener('click', () => {
