@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
         DOM.pillar2.textContent = 'SENSOR'; DOM.pillar2.className = 'lcars-bar lcars-bar-standard bg-purple'; DOM.pillar2.style.cursor = 'pointer';
         
         // Default interaction bars
-        DOM.pillar3.textContent = ''; DOM.pillar3.className = 'lcars-bar lcars-bar-stretch bg-dark-orange'; DOM.pillar3.style.cursor = 'default';
+        DOM.pillar3.textContent = 'ANALYZE'; DOM.pillar3.className = 'lcars-bar lcars-bar-stretch bg-cyan'; DOM.pillar3.style.cursor = 'default';
         DOM.pillar4.textContent = ''; DOM.pillar4.className = 'lcars-bar lcars-bar-standard bg-peach'; DOM.pillar4.style.cursor = 'default';
         DOM.pillar5.textContent = ''; DOM.pillar5.className = 'lcars-bar lcars-bar-stretch bg-red'; DOM.pillar5.style.cursor = 'default';
 
