@@ -188,11 +188,25 @@ document.addEventListener('DOMContentLoaded', () => {
             DOM.databankNavBtn.textContent = 'SCANNER';
             DOM.databankNavBtn.style.backgroundColor = 'var(--lcars-peach)';
             
-            DOM.pillar1.textContent = 'SCANNER'; DOM.pillar1.className = 'lcars-bar lcars-bar-standard bg-peach'; DOM.pillar1.style.cursor = 'pointer';
-            DOM.pillar2.textContent = 'TRICORDER'; DOM.pillar2.className = 'lcars-bar lcars-bar-standard bg-blue'; DOM.pillar2.style.cursor = 'pointer';
-            DOM.pillar3.textContent = 'ACTIVITY'; DOM.pillar3.className = 'lcars-bar lcars-bar-standard bg-gold'; DOM.pillar3.style.cursor = 'pointer';
-            DOM.pillar4.textContent = 'DATABANK'; DOM.pillar4.className = 'lcars-bar lcars-bar-stretch bg-dark-orange'; DOM.pillar4.style.cursor = 'pointer';
-            DOM.pillar5.textContent = 'CONFIG'; DOM.pillar5.className = 'lcars-bar lcars-bar-stretch bg-purple'; DOM.pillar5.style.cursor = 'pointer';
+            DOM.pillar1.textContent = 'PROMPT'; DOM.pillar1.className = 'lcars-bar lcars-bar-standard bg-tan'; DOM.pillar1.style.cursor = 'pointer';
+            DOM.pillar2.textContent = 'QUERY'; DOM.pillar2.className = 'lcars-bar lcars-bar-standard bg-dark-orange'; DOM.pillar2.style.cursor = 'pointer';
+            DOM.pillar3.textContent = 'CLEAR'; DOM.pillar3.className = 'lcars-bar lcars-bar-stretch bg-red'; DOM.pillar3.style.cursor = 'pointer';
+            DOM.pillar4.textContent = 'CONFIG'; DOM.pillar4.className = 'lcars-bar lcars-bar-standard bg-purple'; DOM.pillar4.style.cursor = 'pointer';
+            DOM.pillar5.textContent = 'SCANNER'; DOM.pillar5.className = 'lcars-bar lcars-bar-stretch bg-peach'; DOM.pillar5.style.cursor = 'pointer';
+
+            const alignDatabankPillars = () => {
+                if (DOM.databankView.classList.contains('hidden')) return;
+                DOM.pillar3.style.flexGrow = '0';
+                const p3Top = DOM.pillar3.getBoundingClientRect().top;
+                const targetTop = DOM.omniBtn.getBoundingClientRect().top;
+                const targetHeight = targetTop - p3Top - 2;
+                if (targetHeight > 0) {
+                    DOM.pillar3.style.minHeight = targetHeight + 'px';
+                    DOM.pillar3.style.height = targetHeight + 'px';
+                }
+            };
+            window.alignDatabankPillars = alignDatabankPillars;
+            setTimeout(alignDatabankPillars, 50);
 
         } else if (target === 'sports') {
             DOM.sportsView.classList.remove('hidden');
@@ -242,17 +256,22 @@ document.addEventListener('DOMContentLoaded', () => {
         if (DOM.pillar1.textContent === 'GALLERY') DOM.galleryInput.click();
         if (DOM.pillar1.textContent === 'SCANNER') openView('scanner');
         if (DOM.pillar1.textContent === 'TIME') DOM.sportTime.focus();
+        if (DOM.pillar1.textContent === 'PROMPT') DOM.omniInput.focus();
     });
     DOM.pillar2.addEventListener('click', () => {
         if (DOM.pillar2.textContent === 'SENSOR') DOM.cameraInput.click();
         if (DOM.pillar2.textContent === 'TRICORDER') openView('tricorder');
         if (DOM.pillar2.textContent === 'ACTIVITY') DOM.sportSelect.focus();
+        if (DOM.pillar2.textContent === 'QUERY') DOM.omniBtn.click();
     });
     DOM.pillar3.addEventListener('click', () => {
         if (DOM.pillar3.textContent === 'ANALYZE') DOM.analyzeBtn.click();
         if (DOM.pillar3.textContent === 'TRANSMIT') DOM.omniBtn.click();
         if (DOM.pillar3.textContent === 'CONTEXT') DOM.sportContext.focus();
         if (DOM.pillar3.textContent === 'ACTIVITY') openView('sports');
+        if (DOM.pillar3.textContent === 'CLEAR' && !DOM.databankView.classList.contains('hidden')) {
+            DOM.omniInput.value = ''; DOM.omniResponse.classList.add('hidden'); DOM.omniResponse.innerHTML = '';
+        }
     });
     DOM.pillar4.addEventListener('click', () => {
         if (DOM.pillar4.textContent === 'COMMIT' && !DOM.resultsCard.classList.contains('hidden')) DOM.commitBtn.click();
@@ -262,6 +281,7 @@ document.addEventListener('DOMContentLoaded', () => {
     DOM.pillar5.addEventListener('click', () => {
         if (DOM.pillar5.textContent === 'ABORT' && !DOM.resultsCard.classList.contains('hidden')) DOM.cancelBtn.click();
         if (DOM.pillar5.textContent === 'CONFIG') DOM.settingsModal.classList.remove('hidden');
+        if (DOM.pillar5.textContent === 'SCANNER') openView('scanner');
         if (DOM.pillar5.textContent === 'CLEAR' && !DOM.sportsView.classList.contains('hidden')) { 
             DOM.sportContext.value = ''; 
             DOM.sportSelect.value = '';
@@ -638,12 +658,13 @@ USER QUERY: ${query}`;
         if (!pat || !repo) return null;
         const headers = { 'Accept': 'application/vnd.github.v3.raw', 'Authorization': `token ${pat}` };
         try {
-            const [nut, hr, vit] = await Promise.all([
+            const [nut, hr, vit, spt] = await Promise.all([
                 fetch(`https://api.github.com/repos/${repo}/contents/nutrition_log.jsonl`, { headers }),
                 fetch(`https://api.github.com/repos/${repo}/contents/tasker_health_metrics.jsonl`, { headers }),
-                fetch(`https://api.github.com/repos/${repo}/contents/health_data.csv`, { headers })
+                fetch(`https://api.github.com/repos/${repo}/contents/health_data.csv`, { headers }),
+                fetch(`https://api.github.com/repos/${repo}/contents/sports_log.csv`, { headers })
             ]);
-            return `NUTRITION:\n${nut.ok ? await nut.text() : ''}\n\nMETRICS:\n${hr.ok ? await hr.text() : ''}\n\nVITALS:\n${vit.ok ? await vit.text() : ''}`;
+            return `NUTRITION:\n${nut.ok ? await nut.text() : ''}\n\nMETRICS:\n${hr.ok ? await hr.text() : ''}\n\nVITALS:\n${vit.ok ? await vit.text() : ''}\n\nSPORTS:\n${spt.ok ? await spt.text() : ''}`;
         } catch { return null; }
     }
 
