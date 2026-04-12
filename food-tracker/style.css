@@ -60,7 +60,7 @@ input, textarea, button {
 }
 
 .lcars-bar-top {
-    height: 100px;
+    height: 40px;
     border-top-left-radius: 30px;
     border-bottom-left-radius: 30px;
     display: flex;
@@ -109,7 +109,7 @@ input, textarea, button {
     display: flex;
     align-items: flex-end;
     gap: 10px;
-    height: 100px; /* Match the exact height of the 47 top pillar block */
+    height: 40px; /* Flush with 47 top pillar block without overhang */
     flex-shrink: 0; /* Protect against viewport collapse */
 }
 
