@@ -54,7 +54,7 @@ input, textarea, button {
     margin-right: 5px;
 }
 .lcars-column > * {
-    margin-bottom: 4px; /* Optically reduced by 1px to offset corner-radius geometric expansion */
+    margin-bottom: 3px; /* Optically reduced to 3px */
 }
 .lcars-column > *:last-child {
     margin-bottom: 0px;
