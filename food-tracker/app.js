@@ -169,7 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
         DOM.databankView.classList.add('hidden');
         DOM.sportsView.classList.add('hidden');
         
-        DOM.navBtn.innerHTML = '<span class="text-xs">TRICORDER</span>';
+        DOM.navBtn.textContent = 'TRICORDER';
         DOM.navBtn.style.backgroundColor = 'var(--lcars-teal)';
         DOM.databankNavBtn.textContent = 'DATABANK';
         DOM.databankNavBtn.style.backgroundColor = 'var(--lcars-dark-orange)';
@@ -195,7 +195,9 @@ document.addEventListener('DOMContentLoaded', () => {
             DOM.pillar1.textContent = 'PROMPT'; DOM.pillar1.className = 'lcars-bar lcars-bar-standard bg-tan'; DOM.pillar1.style.cursor = 'pointer';
             DOM.pillar2.textContent = 'QUERY'; DOM.pillar2.className = 'lcars-bar lcars-bar-stretch bg-dark-orange'; DOM.pillar2.style.cursor = 'pointer';
             DOM.pillar3.textContent = 'CLEAR'; DOM.pillar3.className = 'lcars-bar lcars-bar-standard bg-red'; DOM.pillar3.style.cursor = 'pointer';
-            DOM.pillar4.style.display = 'none';
+            DOM.pillar4.textContent = 'RESPONSE'; DOM.pillar4.className = 'lcars-bar lcars-bar-stretch bg-purple'; DOM.pillar4.style.cursor = 'pointer';
+            if (DOM.omniResponse.classList.contains('hidden')) DOM.pillar4.style.display = 'none';
+            else DOM.pillar4.style.display = '';
             DOM.pillar5.style.display = 'none';
 
             const alignDatabankPillars = () => {
@@ -207,6 +209,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (targetHeight > 0) {
                     DOM.pillar2.style.minHeight = targetHeight + 'px';
                     DOM.pillar2.style.height = targetHeight + 'px';
+                }
+
+                if (!DOM.omniResponse.classList.contains('hidden') && DOM.pillar4.style.display !== 'none') {
+                    DOM.pillar4.style.flexGrow = '0';
+                    const p4Top = DOM.pillar4.getBoundingClientRect().top;
+                    const rBottom = DOM.omniResponse.getBoundingClientRect().bottom;
+                    const p4Height = rBottom - p4Top - 2;
+                    if (p4Height > 0) {
+                        DOM.pillar4.style.minHeight = p4Height + 'px';
+                        DOM.pillar4.style.height = p4Height + 'px';
+                    }
                 }
             };
             window.alignDatabankPillars = alignDatabankPillars;
@@ -635,11 +648,17 @@ document.addEventListener('DOMContentLoaded', () => {
         DOM.omniInput.value = '';
         DOM.omniResponse.classList.add('hidden');
         DOM.omniResponse.innerHTML = '';
+        DOM.pillar4.style.display = 'none';
+        if (window.alignDatabankPillars) setTimeout(window.alignDatabankPillars, 50);
     });
 
     DOM.omniBtn.addEventListener('click', async () => {
         const query = DOM.omniInput.value.trim();
         if (!query) return;
+        
+        DOM.omniResponse.innerHTML = '';
+        DOM.omniResponse.classList.add('hidden');
+        DOM.pillar4.style.display = 'none';
         DOM.loader.classList.remove('hidden'); DOM.loaderText.textContent = "SYNCHRONIZING...";
         try {
             const databank = await fetchDatabank();
@@ -675,6 +694,8 @@ USER QUERY: ${query}`;
             
             aiResp = aiResp.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>').replace(/\*(.*?)\*/g, '<i>$1</i>');
             DOM.omniResponse.classList.remove('hidden'); DOM.omniResponse.innerHTML = aiResp; DOM.omniInput.value = '';
+            DOM.pillar4.style.display = '';
+            if (window.alignDatabankPillars) setTimeout(window.alignDatabankPillars, 50);
         } catch (e) { alert(e.message); } finally { DOM.loader.classList.add('hidden'); }
     });
 
@@ -695,7 +716,28 @@ USER QUERY: ${query}`;
 
     init();
 
-    const hash = window.location.hash.substring(1);
+    DOM.contextInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            DOM.analyzeBtn.click();
+        }
+    });
+
+    DOM.sportContext.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            DOM.sportSubmitBtn.click();
+        }
+    });
+
+    DOM.omniInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            DOM.omniBtn.click();
+        }
+    });
+
+    const hash = window.location.hash.replace('#', '');
     if (['scanner', 'tricorder', 'databank', 'sports'].includes(hash)) openView(hash);
     else openView('scanner');
 });
