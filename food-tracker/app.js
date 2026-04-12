@@ -68,6 +68,8 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     let currentBase64Images = [];
+    let currentStream = null;
+    let databankPreTriggered = false;
     let currentMacros = null;
     let imageLastModified = null;
     let selectedModel = 'gemini-2.5-flash';
@@ -199,6 +201,26 @@ document.addEventListener('DOMContentLoaded', () => {
             if (DOM.omniResponse.classList.contains('hidden')) DOM.pillar4.style.display = 'none';
             else DOM.pillar4.style.display = '';
             DOM.pillar5.style.display = 'none';
+
+            if (!databankPreTriggered) {
+                databankPreTriggered = true;
+                setTimeout(async () => {
+                    DOM.omniResponse.innerHTML = '';
+                    DOM.omniResponse.classList.add('hidden');
+                    DOM.pillar4.style.display = 'none';
+                    DOM.loader.classList.remove('hidden'); DOM.loaderText.textContent = "SYNTHESIZING HEALTH BIOMETRICS...";
+                    try {
+                        const databank = await fetchDatabank();
+                        const promptText = `Analyze these records:\n${databank}\n\nTask: Give me a quick, punchy, LCARS-style status update on my health metrics, sleep, and diet for today and the past day. Propose actionable changes to optimize. Keep it concise.`;
+                        let resultData = await queryGemini('gemini-2.5-flash', promptText, [], false);
+                        let aiResp = resultData.candidates[0].content.parts[0].text;
+                        aiResp = aiResp.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>').replace(/\*(.*?)\*/g, '<i>$1</i>');
+                        DOM.omniResponse.classList.remove('hidden'); DOM.omniResponse.innerHTML = aiResp;
+                        DOM.pillar4.style.display = '';
+                        if (window.alignDatabankPillars) setTimeout(window.alignDatabankPillars, 50);
+                    } catch(e) { console.error(e); } finally { DOM.loader.classList.add('hidden'); }
+                }, 300);
+            }
 
             const alignDatabankPillars = () => {
                 if (DOM.databankView.classList.contains('hidden')) return;
