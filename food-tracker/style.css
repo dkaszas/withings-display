@@ -155,7 +155,8 @@ input, textarea, button {
     aspect-ratio: 1;
     background: #000;
     border: 3px solid var(--lcars-blue);
-    border-radius: 20px;
+    border-left: none;
+    border-radius: 0 20px 20px 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -184,7 +185,7 @@ input, textarea, button {
     background-color: var(--lcars-peach);
     color: black;
     font-weight: bold;
-    border-radius: 10px;
+    border-radius: 0 15px 15px 0;
 }
 .split-top { background-color: var(--lcars-blue); }
 .split-bottom { background-color: var(--lcars-purple); }
@@ -204,7 +205,8 @@ textarea#context-input {
     width: 100%;
     background: #000;
     border: 2px solid var(--lcars-orange);
-    border-radius: 10px;
+    border-left: none;
+    border-radius: 0 10px 10px 0;
     padding: 10px;
     color: var(--lcars-peach);
     font-size: 16px;
@@ -241,7 +243,7 @@ textarea#context-input::placeholder { color: var(--lcars-dark-orange); }
 .lcars-btn {
     width: 100%;
     height: 50px;
-    border-radius: 25px;
+    border-radius: 0 25px 25px 0;
     border: none;
     font-size: 20px;
     font-weight: 700;
@@ -272,7 +274,8 @@ textarea#context-input::placeholder { color: var(--lcars-dark-orange); }
     background: #000;
     padding: 10px;
     border: 2px solid var(--lcars-blue);
-    border-radius: 10px;
+    border-left: none;
+    border-radius: 0 10px 10px 0;
 }
 
 .confidence-badge {
@@ -294,7 +297,7 @@ textarea#context-input::placeholder { color: var(--lcars-dark-orange); }
     background: var(--lcars-dark-orange);
     color: #000;
     padding: 10px;
-    border-radius: 15px;
+    border-radius: 0 15px 15px 0;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -325,7 +328,8 @@ textarea#omni-input {
     background-color: var(--lcars-black);
     color: var(--lcars-tan);
     border: 2px solid var(--lcars-dark-orange);
-    border-radius: 10px;
+    border-left: none;
+    border-radius: 0 10px 10px 0;
     padding: 10px;
     margin-bottom: 2px;
     font-size: 18px;
@@ -337,7 +341,8 @@ textarea#omni-input {
     color: var(--lcars-tan);
     padding: 15px;
     border: 2px solid var(--lcars-orange);
-    border-radius: 10px;
+    border-left: none;
+    border-radius: 0 10px 10px 0;
     font-size: 18px;
     line-height: 1.4;
     white-space: pre-wrap;
@@ -356,7 +361,8 @@ textarea#omni-input {
     width: 100%;
     overflow: hidden; /* Crop the overflow */
     border: 3px solid var(--lcars-blue);
-    border-radius: 10px;
+    border-left: none;
+    border-radius: 0 10px 10px 0;
     background: #000;
 }
 .tricorder-image-wrapper img {
