@@ -11,6 +11,7 @@
     --lcars-red: #cc4444;
     --lcars-tan: #f5deb3;
     --lcars-cyan: #00cccc;
+    --lcars-gold: #ffcc00;
 }
 
 * {
@@ -239,7 +240,7 @@ textarea#context-input::placeholder { color: var(--lcars-dark-orange); }
 .model-btn#btn-flash { border-radius: 17px 0 0 17px; }
 .model-btn#btn-pro { border-radius: 0 17px 17px 0; }
 .model-btn:hover { filter: brightness(1.2); }
-.model-btn#btn-flash.active { background-color: var(--lcars-peach); color: #000; }
+.model-btn#btn-flash.active { background-color: var(--lcars-gold); color: #000; }
 .model-btn#btn-pro.active { background-color: var(--lcars-blue); color: #000; }
 
 .lcars-btn {
