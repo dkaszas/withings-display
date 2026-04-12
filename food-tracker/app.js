@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const parts = formatter.formatToParts(now);
         let ds = {};
         parts.forEach(p => ds[p.type] = p.value);
-        DOM.stardate.textContent = `STARDATE ${ds.year}${ds.month}${ds.day}.${ds.hour}${ds.minute}`;
+        DOM.stardate.textContent = `${ds.year}${ds.month}${ds.day}.${ds.hour}${ds.minute}`;
     }
 
     function updateDynamicPillars() {
