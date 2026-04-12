@@ -1,4 +1,4 @@
-const CACHE_NAME = 'macrolens-v91';
+const CACHE_NAME = 'macrolens-v92';
 const ASSETS = [
   './',
   './index.html',
@@ -7,13 +7,13 @@ const ASSETS = [
   './manifest.json'
 ];
 
-self.addEv91entListener('install', ev91ent => {
+self.addEventListener('install', event => {
   self.skipWaiting();
-  ev91ent.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS)));
+  event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS)));
 });
 
-self.addEv91entListener('activ91ate', ev91ent => {
-  ev91ent.waitUntil(
+self.addEventListener('activate', event => {
+  event.waitUntil(
     caches.keys().then(cacheNames => {
       return Promise.all(
         cacheNames.filter(name => name !== CACHE_NAME).map(name => caches.delete(name))
@@ -22,11 +22,11 @@ self.addEv91entListener('activ91ate', ev91ent => {
   );
 });
 
-self.addEv91entListener('fetch', ev91ent => {
-  ev91ent.respondWith(
-    caches.match(ev91ent.request).then(response => {
-      // Return cached v91ersion or fetch from network (Network-first strategy for API calls not implemented as we only cache static assets)
-      return response || fetch(ev91ent.request);
+self.addEventListener('fetch', event => {
+  event.respondWith(
+    caches.match(event.request).then(response => {
+      // Return cached version or fetch from network (Network-first strategy for API calls not implemented as we only cache static assets)
+      return response || fetch(event.request);
     })
   );
 });
