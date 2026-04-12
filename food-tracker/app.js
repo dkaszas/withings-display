@@ -312,13 +312,13 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         `;
 
-        const createLift = (label, idPrefix) => `
+        const createLift = (label, idPrefix, defKg='', defSets='', defReps='') => `
             <div style="display: flex; flex-direction: column; gap: 5px; margin-bottom: 15px; border-bottom: 1px dashed #30363d; padding-bottom: 10px;">
                 <label style="color: var(--lcars-peach); font-size: 14px;">${label.toUpperCase()}</label>
                 <div style="display: flex; gap: 10px;">
-                    <input type="number" id="${idPrefix}-kg" placeholder="KILOS" style="width: 35%; padding: 8px; background: #0d1117; color: var(--lcars-peach); border: 1px solid var(--lcars-cyan); border-radius: 5px; font-family: 'Oswald', sans-serif; font-size: 12px;">
-                    <input type="number" id="${idPrefix}-sets" placeholder="SETS" style="width: 30%; padding: 8px; background: #0d1117; color: var(--lcars-peach); border: 1px solid var(--lcars-cyan); border-radius: 5px; font-family: 'Oswald', sans-serif; font-size: 12px;">
-                    <input type="number" id="${idPrefix}-reps" placeholder="REPS" style="width: 30%; padding: 8px; background: #0d1117; color: var(--lcars-peach); border: 1px solid var(--lcars-cyan); border-radius: 5px; font-family: 'Oswald', sans-serif; font-size: 12px;">
+                    <input type="number" id="${idPrefix}-kg" placeholder="KILOS" value="${defKg}" style="width: 35%; padding: 8px; background: #0d1117; color: var(--lcars-peach); border: 1px solid var(--lcars-cyan); border-radius: 5px; font-family: 'Oswald', sans-serif; font-size: 12px;">
+                    <input type="number" id="${idPrefix}-sets" placeholder="SETS" value="${defSets}" style="width: 30%; padding: 8px; background: #0d1117; color: var(--lcars-peach); border: 1px solid var(--lcars-cyan); border-radius: 5px; font-family: 'Oswald', sans-serif; font-size: 12px;">
+                    <input type="number" id="${idPrefix}-reps" placeholder="REPS" value="${defReps}" style="width: 30%; padding: 8px; background: #0d1117; color: var(--lcars-peach); border: 1px solid var(--lcars-cyan); border-radius: 5px; font-family: 'Oswald', sans-serif; font-size: 12px;">
                 </div>
             </div>
         `;
@@ -333,14 +333,14 @@ document.addEventListener('DOMContentLoaded', () => {
             container.innerHTML = createSelect('BACK BASELINE (20m stretches/lifting)', 's-gym-back', ['YES', 'NO']) + 
                                   createSelect('LEG STRETCHES (10m pre-run)', 's-gym-leg', ['YES', 'NO']) + 
                                   '<div style="margin-top: 15px;"></div>' +
-                                  createLift('Shrugs', 's-gym-shrugs') +
-                                  createLift('Shoulder Presses', 's-gym-shoulder') +
-                                  createLift('Biceps Curls', 's-gym-biceps') +
-                                  createLift('Lat Pulldowns', 's-gym-lat') +
-                                  createLift('Triceps Pulldowns', 's-gym-triceps') +
-                                  createLift('Bench Presses', 's-gym-bench') +
-                                  createLift('Deadlifts', 's-gym-deadlifts') +
-                                  createLift('Squats', 's-gym-squats');
+                                  createLift('Shrugs', 's-gym-shrugs', '22', '4', '8') +
+                                  createLift('Shoulder Lifts', 's-gym-shoulder', '5', '4', '8') +
+                                  createLift('Biceps Curls', 's-gym-biceps', '17', '4', '8') +
+                                  createLift('Lat Pulldowns', 's-gym-lat', '30', '4', '8') +
+                                  createLift('Triceps Pulldowns', 's-gym-triceps', '30', '4', '8') +
+                                  createLift('Bench Presses (Dumbbells)', 's-gym-bench', '50', '4', '8') +
+                                  createLift('Deadlifts', 's-gym-deadlifts', '60', '3', '6') +
+                                  createLift('Squats', 's-gym-squats', '70', '3', '6');
         } else if (sport === 'cycling') {
             container.innerHTML = createInput('DURATION (min)', 's-time') + 
                                   createInput('DISTANCE (km)', 's-dist', 'number') + 
