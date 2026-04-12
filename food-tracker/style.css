@@ -143,7 +143,8 @@ input, textarea, button {
     align-items: center;
     justify-content: flex-end;
     padding-right: 15px;
-    font-size: 14px;
+    font-size: 13px; /* Decreased from 14px */
+    letter-spacing: 0.5px;
     font-weight: 700 !important;
     font-family: 'Oswald', sans-serif;
     color: #000;
