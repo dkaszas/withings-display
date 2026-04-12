@@ -421,9 +421,8 @@ textarea#omni-input {
 
 /* TRICORDER SPECIFICS */
 .tricorder-image-wrapper {
-    width: 100%;
-    margin-right: 0;
-    margin-left: 0;
+    width: calc(100% + 10px);
+    margin-right: -10px;
     overflow: hidden;
     border: 3px solid var(--lcars-blue);
     border-left: none;
@@ -432,8 +431,9 @@ textarea#omni-input {
 }
 .tricorder-image-wrapper img {
     display: block;
-    width: 100%;
-    height: auto;
+    width: 111%; /* Stretches right side natively out of bounds by ~10% */
+    max-width: none;
+    margin-left: -3%; /* Chips away the left padding */
 }
 
 /* DIAGNOSTIC FOOTER */
@@ -502,14 +502,6 @@ textarea#omni-input {
 
 .lcars-app.tricorder-mode .lcars-column {
     display: none; /* Radically free up horizontal space */
-}
-.lcars-app.tricorder-mode .lcars-main {
-    width: 100% !important;
-    max-width: 100% !important;
-    overflow: visible !important; /* Prevent clipping of sidebars */
-}
-.lcars-app.tricorder-mode {
-    max-width: calc(100vw - 20px) !important; /* Expand to full device width */
 }
 .lcars-app.tricorder-mode .lcars-column .lcars-bar {
     font-size: 0px; /* Hide text */
