@@ -135,7 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
         DOM.databankView.classList.add('hidden');
         
         DOM.navBtn.textContent = 'TRICORDER';
-        DOM.navBtn.style.backgroundColor = 'var(--lcars-blue)';
+        DOM.navBtn.style.backgroundColor = 'var(--lcars-teal)';
         DOM.databankNavBtn.textContent = 'DATABANK';
         DOM.databankNavBtn.style.backgroundColor = 'var(--lcars-dark-orange)';
         
