@@ -169,6 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
             DOM.navBtn.textContent = 'SCANNER';
             DOM.navBtn.style.backgroundColor = 'var(--lcars-peach)';
             DOM.app.classList.add('tricorder-mode');
+            fetchDiagnostics();
         } else if (target === 'databank') {
             DOM.databankView.classList.remove('hidden');
             DOM.databankNavBtn.textContent = 'SCANNER';
@@ -240,6 +241,48 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     DOM.contextInput.addEventListener('input', updateDynamicPillars);
+
+    async function fetchDiagnostics() {
+        const diagFooter = document.getElementById('diagnostic-footer');
+        if (!diagFooter) return;
+        
+        try {
+            const cacheBuster = Date.now();
+            const res = await fetch(`https://raw.githubusercontent.com/dkaszas/withings-display/refs/heads/main/diagnostics.json?v=${cacheBuster}`);
+            if (!res.ok) throw new Error('Fetch failed');
+            const data = await res.json();
+            
+            const formatTime = (ts) => {
+                if (!ts) return "OFFLINE";
+                const d = new Date(ts);
+                const h = String(d.getHours()).padStart(2, '0');
+                const m = String(d.getMinutes()).padStart(2, '0');
+                const mn = String(d.getMonth() + 1).padStart(2, '0');
+                const dy = String(d.getDate()).padStart(2, '0');
+                return `${dy}/${mn} ${h}${m}`;
+            };
+
+            diagFooter.innerHTML = `
+                <div class="diag-row">
+                    <span class="diag-label">WITHINGS SENSORS</span>
+                    <span class="diag-val">${formatTime(data.last_withings)}</span>
+                </div>
+                <div class="diag-row">
+                    <span class="diag-label">NUTRITION LOG</span>
+                    <span class="diag-val">${formatTime(data.last_nutrition)}</span>
+                </div>
+                <div class="diag-row">
+                    <span class="diag-label">CUSTOM TASKER PUSH</span>
+                    <span class="diag-val" style="${data.tasker_stale ? 'color: var(--lcars-red);' : ''}">${formatTime(data.last_tasker)}</span>
+                </div>
+            `;
+            diagFooter.classList.remove('hidden');
+        } catch (e) {
+            console.error("Failed to load diagnostics", e);
+            diagFooter.innerHTML = `<div class="diag-row"><span class="diag-label">SYSTEM_STATUS</span><span class="diag-val" style="color: var(--lcars-red)">OFFLINE</span></div>`;
+            diagFooter.classList.remove('hidden');
+        }
+    }
 
     function processImageSelection(file) {
         if (!file) return;
