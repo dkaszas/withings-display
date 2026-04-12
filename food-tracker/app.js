@@ -96,15 +96,23 @@ function updateDynamicPillars() {
     DOM.pillar5.textContent = ''; DOM.pillar5.className = 'lcars-bar lcars-bar-stretch bg-red'; DOM.pillar5.style.cursor = 'default';
 
     const hasImage = !DOM.preview.classList.contains('hidden');
+    const hasText = DOM.contextInput.value.trim().length > 0;
+    const canAnalyze = hasImage || hasText;
     const hasResults = !DOM.resultsCard.classList.contains('hidden');
 
-    if (hasImage && !hasResults) {
+    if (canAnalyze && !hasResults) {
         DOM.pillar3.textContent = 'ANALYZE'; DOM.pillar3.className = 'lcars-bar lcars-bar-stretch bg-blue'; DOM.pillar3.style.cursor = 'pointer';
         DOM.pillar5.textContent = 'ABORT'; DOM.pillar5.className = 'lcars-bar lcars-bar-stretch bg-red'; DOM.pillar5.style.cursor = 'pointer';
+        DOM.analyzeBtn.disabled = false;
+        DOM.analyzeBtn.classList.remove('hidden');
     } 
     else if (hasResults) {
         DOM.pillar4.textContent = 'COMMIT'; DOM.pillar4.className = 'lcars-bar lcars-bar-standard bg-blue'; DOM.pillar4.style.cursor = 'pointer';
         DOM.pillar5.textContent = 'ABORT'; DOM.pillar5.className = 'lcars-bar lcars-bar-stretch bg-red'; DOM.pillar5.style.cursor = 'pointer';
+        DOM.analyzeBtn.classList.add('hidden');
+    } else {
+        DOM.analyzeBtn.disabled = true;
+        DOM.analyzeBtn.classList.add('hidden');
     }
 }
 
@@ -196,13 +204,7 @@ DOM.btnPro.addEventListener('click', () => {
     DOM.btnFlash.classList.remove('active');
 });
 
-function updateAnalyzeButtonState() {
-    const hasImages = currentBase64Images && currentBase64Images.length > 0;
-    const hasText = DOM.contextInput.value.trim().length > 0;
-    DOM.analyzeBtn.disabled = !(hasImages || hasText);
-}
-
-DOM.contextInput.addEventListener('input', updateAnalyzeButtonState);
+DOM.contextInput.addEventListener('input', updateDynamicPillars);
 
 function processImageSelection(file) {
     if (!file) return;
@@ -213,7 +215,6 @@ function processImageSelection(file) {
         DOM.preview.style.display = 'block';
         DOM.preview.classList.remove('hidden');
         DOM.placeholder.style.display = 'none';
-        DOM.analyzeBtn.disabled = false;
         DOM.badge.textContent = `IMG: ${currentBase64Images.length}/3`;
         DOM.badge.classList.remove('hidden');
         updateDynamicPillars();
@@ -296,7 +297,6 @@ function clearImage() {
     DOM.preview.style.display = 'none';
     DOM.preview.classList.add('hidden');
     DOM.placeholder.style.display = 'flex';
-    DOM.analyzeBtn.disabled = true;
     DOM.contextInput.value = '';
     DOM.resultsCard.classList.add('hidden');
     DOM.badge.classList.add('hidden');

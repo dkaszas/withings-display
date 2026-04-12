@@ -88,13 +88,13 @@ input, textarea, button {
 }
 
 /* COLORS */
-.bg-purple { background-color: var(--lcars-purple); }
-.bg-blue { background-color: var(--lcars-blue); }
-.bg-orange { background-color: var(--lcars-orange); }
-.bg-peach { background-color: var(--lcars-peach); border-bottom-left-radius: 0; border-top-left-radius: 40px; }
-.bg-red { background-color: var(--lcars-red); }
-.bg-tan { background-color: var(--lcars-tan); }
-.bg-dark-orange { background-color: var(--lcars-dark-orange); }
+.bg-purple { background-color: var(--lcars-purple) !important; }
+.bg-blue { background-color: var(--lcars-blue) !important; }
+.bg-orange { background-color: var(--lcars-orange) !important; }
+.bg-peach { background-color: var(--lcars-peach) !important; border-bottom-left-radius: 0; border-top-left-radius: 40px; }
+.bg-red { background-color: var(--lcars-red) !important; }
+.bg-tan { background-color: var(--lcars-tan) !important; }
+.bg-dark-orange { background-color: var(--lcars-dark-orange) !important; }
 
 /* LCARS MAIN CONTENT */
 .lcars-main {
