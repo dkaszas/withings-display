@@ -211,11 +211,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     DOM.loader.classList.remove('hidden'); DOM.loaderText.textContent = "SYNTHESIZING HEALTH BIOMETRICS...";
                     try {
                         const databank = await fetchDatabank();
-                        const promptText = `Analyze these records:\n${databank}\n\nTask: Give me a quick, punchy, LCARS-style status update on my health metrics, sleep, and diet for today and the past day. Propose actionable changes to optimize. Keep it concise.`;
+                        const promptText = `Analyze these records:\n${databank}\n\nTask: Give me a highly condensed LCARS-style status update on my health metrics, sleep, and diet for today and the past day. INSTRUCTION: Provide ACTIONABLE RECOMMENDATIONS FIRST at the very top. Then, follow up with brief contextual data points. Be extremely concise.`;
+                        const condensedInput = "Status update on latest telemetry. Recommendations first.";
                         let resultData = await queryGemini('gemini-2.5-flash', promptText, [], false);
                         let aiResp = resultData.candidates[0].content.parts[0].text;
                         aiResp = aiResp.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>').replace(/\*(.*?)\*/g, '<i>$1</i>');
                         DOM.omniResponse.classList.remove('hidden'); DOM.omniResponse.innerHTML = aiResp;
+                        DOM.omniInput.value = condensedInput;
                         DOM.pillar4.style.display = '';
                         if (window.alignDatabankPillars) setTimeout(window.alignDatabankPillars, 50);
                     } catch(e) { console.error(e); } finally { DOM.loader.classList.add('hidden'); }
@@ -251,6 +253,8 @@ document.addEventListener('DOMContentLoaded', () => {
             DOM.sportsView.classList.remove('hidden');
             DOM.sportsNavBtn.textContent = 'SCANNER';
             DOM.sportsNavBtn.style.backgroundColor = 'var(--lcars-peach)';
+            
+            fetchSportsTable();
             
             DOM.pillar1.textContent = 'TIME'; DOM.pillar1.className = 'lcars-bar lcars-bar-standard bg-cyan'; DOM.pillar1.style.cursor = 'pointer';
             DOM.pillar2.style.display = 'none';
@@ -512,6 +516,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     DOM.contextInput.addEventListener('input', updateDynamicPillars);
+    async function fetchSportsTable() {
+        try {
+            const cacheBuster = Date.now();
+            const res = await fetch(`https://raw.githubusercontent.com/dkaszas/withings-display/refs/heads/main/sports_table.html?v=${cacheBuster}`);
+            if (res.ok) {
+                const text = await res.text();
+                const container = document.getElementById('sports-table-container');
+                if (container) container.innerHTML = text;
+            }
+        } catch (e) { console.error("Failed to fetch sports HTML: ", e); }
+    }
 
     async function fetchDiagnostics() {
         const diagFooter = document.getElementById('diagnostic-footer');
