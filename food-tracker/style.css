@@ -12,6 +12,7 @@
     --lcars-tan: #f5deb3;
     --lcars-cyan: #00cccc;
     --lcars-gold: #ffcc00;
+    --lcars-teal: #3399cc;
 }
 
 * {
@@ -28,6 +29,7 @@ body {
     min-height: 100vh;
     display: flex;
     justify-content: center;
+    align-items: flex-start;
     overflow-x: hidden;
     padding: 10px;
 }
@@ -63,6 +65,7 @@ input, textarea, button {
 
 .lcars-bar-top {
     height: 20px; /* Aligned to match elbow/pills height exactly */
+    padding: 0 5px;
     border-top-left-radius: 20px;
     border-bottom-left-radius: 0;
     display: flex;
