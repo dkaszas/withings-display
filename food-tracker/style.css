@@ -110,6 +110,7 @@ input, textarea, button {
     align-items: flex-end;
     gap: 10px;
     height: 100px; /* Match the exact height of the 47 top pillar block */
+    flex-shrink: 0; /* Protect against viewport collapse */
 }
 
 .lcars-top-elbow {
@@ -152,7 +153,6 @@ input, textarea, button {
 .camera-wrapper {
     position: relative;
     width: 100%;
-    aspect-ratio: 1;
     background: #000;
     border-radius: 0 20px 20px 0;
     display: flex;
@@ -162,21 +162,21 @@ input, textarea, button {
 }
 .camera-wrapper img {
     width: 100%;
-    height: 100%;
+    aspect-ratio: 1;
     object-fit: cover;
     z-index: 2;
 }
 
 .camera-placeholder {
     width: 100%;
-    height: 100%;
+    height: 85px; /* Exactly matches TWO 40px left-pillar columns and their 5px gap! */
     display: flex;
     flex-direction: column;
     z-index: 1;
 }
 
 .split-btn {
-    flex: 1;
+    height: 40px; /* Force to exactly trace left pillar blocks */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -195,6 +195,7 @@ input, textarea, button {
 .input-split {
     display: flex;
     flex-direction: column;
+    gap: 5px; /* Match lcars-column gap precisely! */
     height: 100%;
 }
 
