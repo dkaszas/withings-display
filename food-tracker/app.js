@@ -312,6 +312,17 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         `;
 
+        const createLift = (label, idPrefix) => `
+            <div style="display: flex; flex-direction: column; gap: 5px; margin-bottom: 15px; border-bottom: 1px dashed #30363d; padding-bottom: 10px;">
+                <label style="color: var(--lcars-peach); font-size: 14px;">${label.toUpperCase()}</label>
+                <div style="display: flex; gap: 10px;">
+                    <input type="number" id="${idPrefix}-kg" placeholder="KILOS" style="width: 35%; padding: 8px; background: #0d1117; color: var(--lcars-peach); border: 1px solid var(--lcars-cyan); border-radius: 5px; font-family: 'Oswald', sans-serif; font-size: 12px;">
+                    <input type="number" id="${idPrefix}-sets" placeholder="SETS" style="width: 30%; padding: 8px; background: #0d1117; color: var(--lcars-peach); border: 1px solid var(--lcars-cyan); border-radius: 5px; font-family: 'Oswald', sans-serif; font-size: 12px;">
+                    <input type="number" id="${idPrefix}-reps" placeholder="REPS" style="width: 30%; padding: 8px; background: #0d1117; color: var(--lcars-peach); border: 1px solid var(--lcars-cyan); border-radius: 5px; font-family: 'Oswald', sans-serif; font-size: 12px;">
+                </div>
+            </div>
+        `;
+
         if (sport === 'pilates') {
             container.innerHTML = createInput('DURATION (min)', 's-time', 'number', '50');
         } else if (sport === 'running') {
@@ -319,9 +330,17 @@ document.addEventListener('DOMContentLoaded', () => {
                                   createInput('DURATION (min)', 's-time') + 
                                   createInput('DISTANCE (km)', 's-dist', 'number');
         } else if (sport === 'gym') {
-            container.innerHTML = createSelect('BACK STRETCH', 's-gym-back', ['YES', 'NO']) + 
-                                  createSelect('LEG STRETCH', 's-gym-leg', ['YES', 'NO']) + 
-                                  `<div style="color: var(--lcars-blue); font-size: 12px; margin-top: 5px;">USE FREEFORM BOX FOR SPECIFIC LIFTS (E.G. 'bench press 3x8 80kg')</div>`;
+            container.innerHTML = createSelect('BACK BASELINE (20m stretches/lifting)', 's-gym-back', ['YES', 'NO']) + 
+                                  createSelect('LEG STRETCHES (10m pre-run)', 's-gym-leg', ['YES', 'NO']) + 
+                                  '<div style="margin-top: 15px;"></div>' +
+                                  createLift('Shrugs', 's-gym-shrugs') +
+                                  createLift('Shoulder Presses', 's-gym-shoulder') +
+                                  createLift('Biceps Curls', 's-gym-biceps') +
+                                  createLift('Lat Pulldowns', 's-gym-lat') +
+                                  createLift('Triceps Pulldowns', 's-gym-triceps') +
+                                  createLift('Bench Presses', 's-gym-bench') +
+                                  createLift('Deadlifts', 's-gym-deadlifts') +
+                                  createLift('Squats', 's-gym-squats');
         } else if (sport === 'cycling') {
             container.innerHTML = createInput('DURATION (min)', 's-time') + 
                                   createInput('DISTANCE (km)', 's-dist', 'number') + 
@@ -364,10 +383,12 @@ document.addEventListener('DOMContentLoaded', () => {
             context: DOM.sportContext.value.trim()
         };
         
-        // Harvest dynamic fields
-        ['s-time', 's-dist', 's-elev', 's-laps', 's-subtype', 's-gym-back', 's-gym-leg'].forEach(id => {
-            const el = document.getElementById(id);
-            if (el && el.value) payloadData[id.replace('s-', '')] = el.value;
+        // Harvest dynamic fields mapped universally
+        const dynamicElements = DOM.sportDynamicInputs.querySelectorAll('input, select');
+        dynamicElements.forEach(el => {
+            if (el.id && el.id.startsWith('s-') && el.value) {
+                payloadData[el.id.replace('s-', '')] = el.value;
+            }
         });
 
         const pat = localStorage.getItem('ml_github_pat'), repo = localStorage.getItem('ml_github_repo'), geminiKey = localStorage.getItem('ml_gemini_key');
