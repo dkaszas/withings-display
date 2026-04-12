@@ -6,7 +6,7 @@
     <title>MacroLens LCARS</title>
     <meta name="theme-color" content="#000000">
     <link rel="manifest" href="manifest.json">
-    <link rel="stylesheet" href="style.css?v=44">
+    <link rel="stylesheet" href="style.css?v=45">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🖖</text></svg>">
 </head>
 <body>
@@ -32,7 +32,7 @@
             </div>
             
             <!-- SCANNER VIEW -->
-            <div id="scanner-view" style="margin-top: 5px;">
+            <div id="scanner-view">
 
             <!-- CAMERA/GALLERY SENSOR BLOCK -->
             <div class="camera-wrapper">
@@ -63,7 +63,7 @@
             <!-- RESULTS OVERLAY -->
             <div id="results-card" class="hidden">
                 <button id="commit-btn" class="lcars-btn btn-commit">TRANSMIT TO DATABANK</button>
-                <button id="cancel-btn" class="lcars-btn btn-cancel" style="border-radius: 10px; height: 35px; font-size:16px;">ABORT</button>
+                <button id="cancel-btn" class="lcars-btn btn-cancel">ABORT</button>
 
                 <div class="lcars-data-block">
                     <div class="confidence-badge" id="res-confidence">CONFIDENCE: --</div>
@@ -114,6 +114,6 @@
         </div>
     </div>
 
-    <script src="app.js?v=44"></script>
+    <script src="app.js?v=45"></script>
 </body>
 </html>
