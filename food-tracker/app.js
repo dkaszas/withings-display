@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         badge: document.getElementById('image-count-badge'),
         
         // Model toggles
+        modelSelect: document.querySelector('.model-select'),
         btnFlash: document.getElementById('btn-flash'),
         btnPro: document.getElementById('btn-pro'),
         
@@ -96,14 +97,20 @@ document.addEventListener('DOMContentLoaded', () => {
             DOM.pillar5.textContent = 'ABORT'; DOM.pillar5.className = 'lcars-bar lcars-bar-stretch bg-red'; DOM.pillar5.style.cursor = 'pointer';
             DOM.analyzeBtn.disabled = false;
             DOM.analyzeBtn.classList.remove('hidden');
+            DOM.contextInput.classList.remove('hidden');
+            DOM.modelSelect.classList.remove('hidden');
         } 
         else if (hasResults) {
             DOM.pillar4.textContent = 'COMMIT'; DOM.pillar4.className = 'lcars-bar lcars-bar-standard bg-blue'; DOM.pillar4.style.cursor = 'pointer';
             DOM.pillar5.textContent = 'ABORT'; DOM.pillar5.className = 'lcars-bar lcars-bar-stretch bg-red'; DOM.pillar5.style.cursor = 'pointer';
             DOM.analyzeBtn.classList.add('hidden');
+            DOM.contextInput.classList.add('hidden');
+            DOM.modelSelect.classList.add('hidden');
         } else {
             DOM.analyzeBtn.disabled = true;
             DOM.analyzeBtn.classList.add('hidden');
+            DOM.contextInput.classList.remove('hidden');
+            DOM.modelSelect.classList.remove('hidden');
         }
     }
 
