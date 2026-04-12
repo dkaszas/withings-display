@@ -48,6 +48,15 @@ document.addEventListener('DOMContentLoaded', () => {
         omniBtn: document.getElementById('omni-btn'),
         omniResponse: document.getElementById('omni-response'),
 
+        // Sports View
+        sportsNavBtn: document.getElementById('sports-nav-btn'),
+        sportsView: document.getElementById('sports-view'),
+        sportSelect: document.getElementById('sport-select'),
+        sportDynamicInputs: document.getElementById('sport-dynamic-inputs'),
+        sportTime: document.getElementById('sport-time'),
+        sportContext: document.getElementById('sport-context'),
+        sportSubmitBtn: document.getElementById('sport-submit-btn'),
+
         // Result values
         resConfidence: document.getElementById('res-confidence'),
         resFoodItems: document.getElementById('res-food-items'),
@@ -156,11 +165,14 @@ document.addEventListener('DOMContentLoaded', () => {
         DOM.scannerView.classList.add('hidden');
         DOM.tricorderView.classList.add('hidden');
         DOM.databankView.classList.add('hidden');
+        DOM.sportsView.classList.add('hidden');
         
         DOM.navBtn.textContent = 'TRICORDER';
         DOM.navBtn.style.backgroundColor = 'var(--lcars-teal)';
         DOM.databankNavBtn.textContent = 'DATABANK';
         DOM.databankNavBtn.style.backgroundColor = 'var(--lcars-dark-orange)';
+        DOM.sportsNavBtn.textContent = 'ACTIVITY LOG';
+        DOM.sportsNavBtn.style.backgroundColor = 'var(--lcars-gold)';
         
         DOM.app.classList.remove('tricorder-mode');
 
@@ -181,6 +193,16 @@ document.addEventListener('DOMContentLoaded', () => {
             DOM.pillar4.textContent = 'CLEAR'; DOM.pillar4.className = 'lcars-bar lcars-bar-standard bg-tan'; DOM.pillar4.style.cursor = 'pointer';
             DOM.pillar5.textContent = 'CONFIG'; DOM.pillar5.className = 'lcars-bar lcars-bar-stretch bg-purple'; DOM.pillar5.style.cursor = 'pointer';
 
+        } else if (target === 'sports') {
+            DOM.sportsView.classList.remove('hidden');
+            DOM.sportsNavBtn.textContent = 'SCANNER';
+            DOM.sportsNavBtn.style.backgroundColor = 'var(--lcars-peach)';
+            
+            DOM.pillar1.textContent = 'SCANNER'; DOM.pillar1.className = 'lcars-bar lcars-bar-standard bg-peach'; DOM.pillar1.style.cursor = 'pointer';
+            DOM.pillar2.textContent = 'TRICORDER'; DOM.pillar2.className = 'lcars-bar lcars-bar-standard bg-blue'; DOM.pillar2.style.cursor = 'pointer';
+            DOM.pillar3.textContent = 'TRANSMIT'; DOM.pillar3.className = 'lcars-bar lcars-bar-stretch bg-gold'; DOM.pillar3.style.cursor = 'pointer';
+            DOM.pillar4.textContent = ''; DOM.pillar4.className = 'lcars-bar lcars-bar-standard bg-tan'; DOM.pillar4.style.cursor = 'default';
+            DOM.pillar5.textContent = 'CONFIG'; DOM.pillar5.className = 'lcars-bar lcars-bar-stretch bg-purple'; DOM.pillar5.style.cursor = 'pointer';
         } else {
             DOM.scannerView.classList.remove('hidden');
             updateDynamicPillars();
@@ -226,6 +248,111 @@ document.addEventListener('DOMContentLoaded', () => {
     DOM.databankNavBtn.addEventListener('click', () => {
         if (DOM.databankNavBtn.textContent === 'DATABANK') openView('databank');
         else openView('scanner');
+    });
+
+    DOM.sportsNavBtn.addEventListener('click', () => {
+        if (DOM.sportsNavBtn.textContent === 'ACTIVITY LOG') {
+            openView('sports');
+            const now = new Date();
+            now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+            DOM.sportTime.value = now.toISOString().slice(0, 16);
+        } else {
+            openView('scanner');
+        }
+    });
+
+    DOM.sportSelect.addEventListener('change', (e) => {
+        const sport = e.target.value;
+        const container = DOM.sportDynamicInputs;
+        container.innerHTML = '';
+        
+        const createInput = (label, id, type='number', placeholder='') => `
+            <div style="display: flex; gap: 10px; align-items: center;">
+                <label style="color: var(--lcars-peach); font-size: 14px; min-width: 100px;">${label}:</label>
+                <input type="${type}" id="${id}" placeholder="${placeholder}" style="flex-grow: 1; padding: 8px; background: #000; color: var(--lcars-peach); border: 1px solid var(--lcars-peach); border-radius: 5px; font-family: 'Oswald', sans-serif; font-size: 14px;">
+            </div>
+        `;
+        
+        const createSelect = (label, id, options) => `
+            <div style="display: flex; gap: 10px; align-items: center;">
+                <label style="color: var(--lcars-peach); font-size: 14px; min-width: 100px;">${label}:</label>
+                <select id="${id}" style="flex-grow: 1; padding: 8px; background: #000; color: var(--lcars-peach); border: 1px solid var(--lcars-peach); border-radius: 5px; font-family: 'Oswald', sans-serif; font-size: 14px;">
+                    ${options.map(o => `<option value="${o}">${o}</option>`).join('')}
+                </select>
+            </div>
+        `;
+
+        if (sport === 'pilates') {
+            container.innerHTML = createInput('DURATION (min)', 's-time', 'number', '50');
+        } else if (sport === 'running') {
+            container.innerHTML = createSelect('TYPE', 's-subtype', ['4x4 Interval', 'Long Run', 'Tempo', 'Recovery']) + 
+                                  createInput('DURATION (min)', 's-time') + 
+                                  createInput('DISTANCE (km)', 's-dist', 'number');
+        } else if (sport === 'gym') {
+            container.innerHTML = createSelect('BACK STRETCH', 's-gym-back', ['YES', 'NO']) + 
+                                  createSelect('LEG STRETCH', 's-gym-leg', ['YES', 'NO']) + 
+                                  `<div style="color: var(--lcars-blue); font-size: 12px; margin-top: 5px;">USE FREEFORM BOX FOR SPECIFIC LIFTS (E.G. 'bench press 3x8 80kg')</div>`;
+        } else if (sport === 'cycling') {
+            container.innerHTML = createInput('DURATION (min)', 's-time') + 
+                                  createInput('DISTANCE (km)', 's-dist', 'number') + 
+                                  createInput('ELEVATION (m)', 's-elev', 'number');
+        } else if (sport === 'swim') {
+            container.innerHTML = createInput('DURATION (min)', 's-time') + 
+                                  createInput('LAPS', 's-laps', 'number');
+        } else if (sport === 'cc_ski') {
+            container.innerHTML = createInput('DISTANCE (km)', 's-dist', 'number');
+        }
+    });
+
+    DOM.sportSubmitBtn.addEventListener('click', async () => {
+        if (!DOM.sportSelect.value || !DOM.sportTime.value) {
+            alert("ACTIVITY AND LOCAL TIME REQUIRED.");
+            return;
+        }
+        
+        DOM.loader.classList.remove('hidden'); 
+        DOM.loaderText.textContent = "TRANSMITTING TELEMETRY...";
+        
+        const payloadData = {
+            sport: DOM.sportSelect.value,
+            local_time: DOM.sportTime.value,
+            context: DOM.sportContext.value.trim()
+        };
+        
+        // Harvest dynamic fields
+        ['s-time', 's-dist', 's-elev', 's-laps', 's-subtype', 's-gym-back', 's-gym-leg'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el && el.value) payloadData[id.replace('s-', '')] = el.value;
+        });
+
+        const pat = localStorage.getItem('ml_github_pat'), repo = localStorage.getItem('ml_github_repo'), geminiKey = localStorage.getItem('ml_gemini_key');
+        if (!pat || !repo || !geminiKey) { 
+            alert("CONFIG/KEYS MISSING."); 
+            DOM.loader.classList.add('hidden'); 
+            return; 
+        }
+        
+        const payload = { 
+            event_type: "sport_log_update", 
+            client_payload: { 
+                timestamp: new Date().toISOString(),
+                gemini_key: geminiKey,
+                sport_data: payloadData
+            } 
+        };
+        
+        try {
+            const response = await fetch(`https://api.github.com/repos/${repo}/dispatches`, {
+                method: 'POST', headers: { 'Accept': 'application/vnd.github.v3+json', 'Authorization': `token ${pat}`, 'Content-Type': 'application/json' }, body: JSON.stringify(payload)
+            });
+            if (!response.ok) throw new Error("GitHub dispatch failed.");
+            alert("ACTIVITY TRANSMITTED TO GITHUB!"); 
+            DOM.sportContext.value = '';
+        } catch (e) { 
+            alert(e.message); 
+        } finally { 
+            DOM.loader.classList.add('hidden'); 
+        }
     });
 
     DOM.btnFlash.addEventListener('click', () => {
