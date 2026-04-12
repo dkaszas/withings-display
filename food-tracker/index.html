@@ -6,7 +6,7 @@
     <title>MacroLens LCARS</title>
     <meta name="theme-color" content="#000000">
     <link rel="manifest" href="manifest.json">
-    <link rel="stylesheet" href="style.css?v=41">
+    <link rel="stylesheet" href="style.css?v=42">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🖖</text></svg>">
 </head>
 <body>
@@ -62,6 +62,9 @@
 
             <!-- RESULTS OVERLAY -->
             <div id="results-card" class="hidden">
+                <button id="commit-btn" class="lcars-btn btn-commit">TRANSMIT TO DATABANK</button>
+                <button id="cancel-btn" class="lcars-btn btn-cancel" style="border-radius: 10px; height: 35px; font-size:16px;">ABORT</button>
+
                 <div class="lcars-data-block">
                     <div class="confidence-badge" id="res-confidence">CONFIDENCE: --</div>
                     <div class="food-items-text" id="res-food-items">...</div>
@@ -73,9 +76,6 @@
                     <div class="macro-item bg-peach"><span class="label">CARBS</span><span class="value" id="res-carb">--</span></div>
                     <div class="macro-item bg-purple"><span class="label">FAT</span><span class="value" id="res-fat">--</span></div>
                 </div>
-                
-                <button id="commit-btn" class="lcars-btn btn-commit">TRANSMIT TO DATABANK</button>
-                <button id="cancel-btn" class="lcars-btn btn-cancel" style="border-radius: 10px; height: 35px; font-size:16px;">ABORT</button>
             </div>
 
             </div> <!-- END SCANNER VIEW -->
@@ -114,6 +114,6 @@
         </div>
     </div>
 
-    <script src="app.js?v=41"></script>
+    <script src="app.js?v=42"></script>
 </body>
 </html>
