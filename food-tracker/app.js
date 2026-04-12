@@ -126,8 +126,8 @@ document.addEventListener('DOMContentLoaded', () => {
             DOM.contextInput.classList.add('hidden');
             DOM.modelSelect.classList.add('hidden');
 
-            // Magic JS Vertical Splicing aligner
-            requestAnimationFrame(() => {
+            // Magic JS Vertical Splicing aligner - robust timing guarantees
+            const alignPillars = () => {
                 DOM.pillar3.style.flexGrow = '0';
                 const p3Top = DOM.pillar3.getBoundingClientRect().top;
                 const targetTop = DOM.commitBtn.getBoundingClientRect().top;
@@ -136,7 +136,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     DOM.pillar3.style.minHeight = targetHeight + 'px';
                     DOM.pillar3.style.height = targetHeight + 'px';
                 }
-            });
+            };
+            setTimeout(alignPillars, 50);
+            setTimeout(alignPillars, 300);
+            setTimeout(alignPillars, 800); // Super-safe fallback for slow mobile rendering
         } else {
             DOM.pillar3.style.flexGrow = '';
             DOM.pillar3.style.minHeight = '100px';
