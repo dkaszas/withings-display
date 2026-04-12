@@ -204,24 +204,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (!databankPreTriggered) {
                 databankPreTriggered = true;
-                setTimeout(async () => {
-                    DOM.omniResponse.innerHTML = '';
-                    DOM.omniResponse.classList.add('hidden');
-                    DOM.pillar4.style.display = 'none';
-                    DOM.loader.classList.remove('hidden'); DOM.loaderText.textContent = "SYNTHESIZING HEALTH BIOMETRICS...";
-                    try {
-                        const databank = await fetchDatabank();
-                        const promptText = `Analyze these records:\n${databank}\n\nTask: Give me a highly condensed LCARS-style status update on my health metrics, sleep, and diet for today and the past day. INSTRUCTION: Provide ACTIONABLE RECOMMENDATIONS FIRST at the very top. Then, follow up with brief contextual data points. Be extremely concise.`;
-                        const condensedInput = "Status update on latest telemetry. Recommendations first.";
-                        let resultData = await queryGemini('gemini-2.5-flash', promptText, [], false);
-                        let aiResp = resultData.candidates[0].content.parts[0].text;
-                        aiResp = aiResp.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>').replace(/\*(.*?)\*/g, '<i>$1</i>');
-                        DOM.omniResponse.classList.remove('hidden'); DOM.omniResponse.innerHTML = aiResp;
-                        DOM.omniInput.value = condensedInput;
-                        DOM.pillar4.style.display = '';
-                        if (window.alignDatabankPillars) setTimeout(window.alignDatabankPillars, 50);
-                    } catch(e) { console.error(e); } finally { DOM.loader.classList.add('hidden'); }
-                }, 300);
+                const condensedInput = "Status update on latest telemetry. Recommendations first.";
+                DOM.omniInput.value = condensedInput;
             }
 
             const alignDatabankPillars = () => {
