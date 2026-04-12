@@ -82,10 +82,29 @@ function syncPillarHeights() {
     if (DOM.scannerView.classList.contains('hidden')) return;
     
     const wrapper = document.querySelector('.camera-wrapper');
-    if (wrapper && wrapper.clientHeight > 0) {
+    if (!wrapper) return;
+
+    // 1. Force the top Pillar Array to perfectly align horizontally with the right column components 
+    // Right column Y offset to camera-wrapper = 148px natively (100 header + 15 gap + 28 font + 5 margin). 
+    // Left column top bar is 100px. Left column gap is 3px. Y = 103px. 
+    // 148px - 103px = 45px exact missing vertical offset padding required to synchronize them.
+    DOM.settingsBtn.style.marginBottom = '45px'; 
+
+    // 2. Map GALLERY gap spacer dynamically based on the responsive aspect-ratio viewport frame height
+    const placeholder = document.getElementById('camera-placeholder');
+    if (placeholder && !placeholder.classList.contains('hidden') && placeholder.style.display !== 'none') {
         const splitHeight = (wrapper.clientHeight - 5) / 2;
-        DOM.pillar1.style.height = splitHeight + 'px';
-        DOM.pillar2.style.height = splitHeight + 'px';
+        // Native left-pillar standard blocks are exactly 40px tall. 
+        // We push the second 40px block perfectly downward so they sit flush inside identical bounds!
+        const requiredMargin = Math.max(0, splitHeight - 40 + 2); 
+        DOM.pillar1.style.marginBottom = requiredMargin + 'px';
+        DOM.pillar1.style.height = '40px'; 
+        DOM.pillar2.style.height = '40px';
+    } else {
+        // If an image is uploaded, we clear the giant spacer so they compactly wedge at the top!
+        DOM.pillar1.style.marginBottom = '0px';
+        DOM.pillar1.style.height = '40px';
+        DOM.pillar2.style.height = '40px';
     }
 }
 
