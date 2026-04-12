@@ -404,9 +404,37 @@ document.addEventListener('DOMContentLoaded', () => {
         DOM.loader.classList.remove('hidden'); DOM.loaderText.textContent = "SYNCHRONIZING...";
         try {
             const databank = await fetchDatabank();
-            const promptText = `Analyze records: ${databank}\n\nUSER QUERY: ${query}`;
+            const promptText = `Analyze records: ${databank}\n\nCRITICAL INSTRUCTION: If the USER QUERY explicitly contains new health metrics (like HRV, Sleep Score, Health Score, Vitalite) that they want to explicitly log, you MUST:
+1. Thoroughly verify if today's date already contains these genuinely new/fresh values in the METRICS database. If a fresh value explicitly exists for today, perfectly reply with a warning that it exists and IGNORE the upload.
+2. If it is genuinely missing from today's active variables, reply confirming you will manually inject it, AND append this exact literal string to the very end of your response: __LOG_METRIC_PAYLOAD__ followed securely by the minified valid JSON of the explicitly detected metrics. Example:
+Yes Captain, logging it now. __LOG_METRIC_PAYLOAD__{"hrv": 35, "vitalite": 66}
+
+USER QUERY: ${query}`;
             let resultData = await queryGemini('gemini-2.5-flash', promptText, [], false);
-            let aiResp = resultData.candidates[0].content.parts[0].text.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>').replace(/\*(.*?)\*/g, '<i>$1</i>');
+            let aiResp = resultData.candidates[0].content.parts[0].text;
+            
+            // Check for payload extraction
+            const payloadMatch = aiResp.match(/__LOG_METRIC_PAYLOAD__\s*({.*})/);
+            if (payloadMatch) {
+                try {
+                    const metricsJSON = JSON.parse(payloadMatch[1]);
+                    aiResp = aiResp.replace(payloadMatch[0], "").trim();
+                    
+                    const pat = localStorage.getItem('ml_github_pat'), repo = localStorage.getItem('ml_github_repo');
+                    const payload = { 
+                        event_type: "withings_manual_injection", 
+                        client_payload: { 
+                            timestamp: new Date().toISOString(), 
+                            metrics: metricsJSON 
+                        } 
+                    };
+                    await fetch(`https://api.github.com/repos/dkaszas/withings/dispatches`, {
+                        method: 'POST', headers: { 'Accept': 'application/vnd.github.v3+json', 'Authorization': `token ${pat}`, 'Content-Type': 'application/json' }, body: JSON.stringify(payload)
+                    });
+                } catch(e) { console.error("Interception parsing failed", e); }
+            }
+            
+            aiResp = aiResp.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>').replace(/\*(.*?)\*/g, '<i>$1</i>');
             DOM.omniResponse.classList.remove('hidden'); DOM.omniResponse.innerHTML = aiResp; DOM.omniInput.value = '';
         } catch (e) { alert(e.message); } finally { DOM.loader.classList.add('hidden'); }
     });
