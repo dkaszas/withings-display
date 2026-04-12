@@ -50,9 +50,12 @@ input, textarea, button {
 .lcars-column {
     display: flex;
     flex-direction: column;
-    width: 60px;
+    width: 60px !important;
+    min-width: 60px !important;
+    max-width: 60px !important;
     gap: 5px;
     flex-shrink: 0;
+    align-items: flex-end !important; /* Force right bounds rigidly */
 }
 
 .lcars-bar {
@@ -62,9 +65,9 @@ input, textarea, button {
     font-size: 12px;
     font-weight: 700;
     color: #000;
-    width: 60px !important;
-    min-width: 60px !important;
-    max-width: 60px !important;
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
     box-sizing: border-box !important;
     overflow: hidden !important;
     white-space: nowrap !important;
@@ -143,7 +146,9 @@ input, textarea, button {
     align-items: center;
     justify-content: flex-end;
     padding-right: 15px;
-    font-size: 12px;
+    font-size: 14px;
+    font-weight: 700 !important;
+    font-family: 'Oswald', sans-serif;
     color: #000;
 }
 .lcars-top-pill {
@@ -181,6 +186,7 @@ input, textarea, button {
     display: flex;
     flex-direction: column;
     gap: 5px;
+    width: 100% !important;
 }
 
 .camera-wrapper {
@@ -305,6 +311,7 @@ textarea#context-input::placeholder { color: var(--lcars-dark-orange); }
     display: flex;
     flex-direction: column;
     gap: 5px;
+    width: 100% !important;
 }
 
 .lcars-data-block {
