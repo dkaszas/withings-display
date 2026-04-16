@@ -377,11 +377,13 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
 
         if (sport === 'pilates') {
-            container.innerHTML = createInput('DURATION (min)', 's-time', 'number', '50');
+            container.innerHTML = createInput('DURATION (min)', 's-time', 'number', '50') +
+                                  createInput('CALORIES (optional)', 's-cal');
         } else if (sport === 'running') {
             container.innerHTML = createSelect('TYPE', 's-subtype', ['4x4 Interval', 'Long Run', 'Tempo', 'Recovery']) + 
                                   createInput('DURATION (min)', 's-time') + 
-                                  createInput('DISTANCE (km)', 's-dist', 'number');
+                                  createInput('DISTANCE (km)', 's-dist', 'number') +
+                                  createInput('CALORIES (optional)', 's-cal');
         } else if (sport === 'gym') {
             container.innerHTML = createSelect('BACK BASELINE (20m stretches/lifting)', 's-gym-back', ['YES', 'NO']) + 
                                   createSelect('LEG STRETCHES (10m pre-run)', 's-gym-leg', ['YES', 'NO']) + 
@@ -396,14 +398,18 @@ document.addEventListener('DOMContentLoaded', () => {
                                   createLift('Deadlifts', 's-gym-deadlifts', '60', '3', '6') +
                                   createLift('Squats', 's-gym-squats', '70', '3', '6');
         } else if (sport === 'cycling') {
-            container.innerHTML = createInput('DURATION (min)', 's-time') + 
+            container.innerHTML = createSelect('TYPE', 's-subtype', ['Road', 'Mountain', 'Stationary']) +
+                                  createInput('DURATION (min)', 's-time') + 
                                   createInput('DISTANCE (km)', 's-dist', 'number') + 
-                                  createInput('ELEVATION (m)', 's-elev', 'number');
+                                  createInput('ELEVATION (m)', 's-elev', 'number') +
+                                  createInput('CALORIES (optional)', 's-cal');
         } else if (sport === 'swim') {
             container.innerHTML = createInput('DURATION (min)', 's-time') + 
-                                  createInput('LAPS', 's-laps', 'number');
+                                  createInput('LAPS', 's-laps', 'number') +
+                                  createInput('CALORIES (optional)', 's-cal');
         } else if (sport === 'cc_ski') {
-            container.innerHTML = createInput('DISTANCE (km)', 's-dist', 'number');
+            container.innerHTML = createInput('DISTANCE (km)', 's-dist', 'number') +
+                                  createInput('CALORIES (optional)', 's-cal');
         } else if (sport === 'other') {
             container.innerHTML = createInput('ACTIVITY DETAILS', 's-other-details', 'text') +
                                   createInput('DURATION (min)', 's-time', 'number');
