@@ -1,4 +1,4 @@
-const CACHE_NAME = 'macrolens-v82';
+const CACHE_NAME = 'macrolens-v83';
 const ASSETS = [
   './',
   './index.html',
@@ -18,7 +18,7 @@ self.addEventListener('activate', event => {
       return Promise.all(
         cacheNames.filter(name => name !== CACHE_NAME).map(name => caches.delete(name))
       );
-    })
+    }).then(() => self.clients.claim())
   );
 });
 
