@@ -132,7 +132,7 @@ input, textarea, button {
 .lcars-header {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 5px;
     height: 20px; /* Match the 47 pillar exactly for a flush top vector */
     flex-shrink: 0;
 }
@@ -145,21 +145,20 @@ input, textarea, button {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    padding-right: 15px;
-    font-size: 13px; /* Decreased from 14px */
+    padding-right: 8px;
+    font-size: 12px; /* Decreased from 14px */
     letter-spacing: 0.5px;
     font-weight: 700 !important;
     font-family: 'Oswald', sans-serif;
     color: #000;
 }
 .lcars-top-pill {
-    min-width: 80px;
-    padding: 0 15px;
+    padding: 0 8px;
     height: 20px;
     background-color: var(--lcars-purple);
     border-radius: 10px;
     color: #000;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 700;
     text-decoration: none;
     display: flex;
