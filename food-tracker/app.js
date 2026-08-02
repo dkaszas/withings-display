@@ -395,17 +395,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (DOM.fastNotifyBtn) {
         DOM.fastNotifyBtn.addEventListener('click', async () => {
-            if ('Notification' in window) {
-                const perm = await Notification.requestPermission();
+            if (!('Notification' in window)) {
+                alert("Browser notifications are not supported in this browser.\n\nNote for iOS (iPhone/iPad): You must tap Share -> 'Add to Home Screen' and launch the app from your home screen to use notifications.");
+                return;
+            }
+            try {
+                let perm = Notification.permission;
+                if (perm !== 'granted') {
+                    if (typeof Notification.requestPermission === 'function') {
+                        perm = await new Promise(resolve => {
+                            const res = Notification.requestPermission(resolve);
+                            if (res && res.then) res.then(resolve);
+                        });
+                    }
+                }
                 updateNotificationStatusUI();
                 if (perm === 'granted') {
-                    new Notification("MacroLens LCARS", {
-                        body: "Notifications enabled! You will receive eating window summaries and daily logging reminders.",
-                        icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🖖</text></svg>'
-                    });
+                    if ('serviceWorker' in navigator && navigator.serviceWorker.ready) {
+                        const sw = await navigator.serviceWorker.ready;
+                        sw.showNotification("MacroLens LCARS", {
+                            body: "Notifications enabled! You will receive daily eating window summaries and logging reminders.",
+                            icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🖖</text></svg>'
+                        });
+                    } else {
+                        new Notification("MacroLens LCARS", {
+                            body: "Notifications enabled! You will receive daily eating window summaries and logging reminders.",
+                            icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🖖</text></svg>'
+                        });
+                    }
+                } else if (perm === 'denied') {
+                    alert("Notification permission was denied. Please enable notifications for this app in your device/browser settings.");
                 }
-            } else {
-                alert("Browser notifications are not supported in this browser.");
+            } catch (err) {
+                alert("Notification setup error: " + err.message);
             }
         });
     }
@@ -933,15 +955,31 @@ USER QUERY: ${query}`;
                     const winHours = ((lastTime - firstTime) / 3600000).toFixed(1);
                     const fmtT = d => `${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
                     
-                    new Notification("Fasting Window Ended", {
-                        body: `Consumed ${Math.round(totalCals)} kcal (P:${Math.round(totalPro)}g C:${Math.round(totalCarb)}g F:${Math.round(totalFat)}g) in ${winHours}h window (${fmtT(firstTime)} - ${fmtT(lastTime)}).`,
-                        icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🖖</text></svg>'
-                    });
+                    if ('serviceWorker' in navigator && navigator.serviceWorker.ready) {
+                        const sw = await navigator.serviceWorker.ready;
+                        sw.showNotification("Fasting Window Ended", {
+                            body: `Consumed ${Math.round(totalCals)} kcal (P:${Math.round(totalPro)}g C:${Math.round(totalCarb)}g F:${Math.round(totalFat)}g) in ${winHours}h window (${fmtT(firstTime)} - ${fmtT(lastTime)}).`,
+                            icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🖖</text></svg>'
+                        });
+                    } else {
+                        new Notification("Fasting Window Ended", {
+                            body: `Consumed ${Math.round(totalCals)} kcal (P:${Math.round(totalPro)}g C:${Math.round(totalCarb)}g F:${Math.round(totalFat)}g) in ${winHours}h window (${fmtT(firstTime)} - ${fmtT(lastTime)}).`,
+                            icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🖖</text></svg>'
+                        });
+                    }
                 } else {
-                    new Notification("Daily Logging Reminder", {
-                        body: "Your target eating window is ending, but no meals were logged today. Remember to log your meals!",
-                        icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🖖</text></svg>'
-                    });
+                    if ('serviceWorker' in navigator && navigator.serviceWorker.ready) {
+                        const sw = await navigator.serviceWorker.ready;
+                        sw.showNotification("Daily Logging Reminder", {
+                            body: "Your target eating window is ending, but no meals were logged today. Remember to log your meals!",
+                            icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🖖</text></svg>'
+                        });
+                    } else {
+                        new Notification("Daily Logging Reminder", {
+                            body: "Your target eating window is ending, but no meals were logged today. Remember to log your meals!",
+                            icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🖖</text></svg>'
+                        });
+                    }
                 }
             } catch (err) {
                 console.error("Fasting notification schedule error: ", err);
