@@ -193,7 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
         DOM.navBtn.style.backgroundColor = 'var(--lcars-teal)';
         DOM.databankNavBtn.textContent = 'DATABANK';
         DOM.databankNavBtn.style.backgroundColor = 'var(--lcars-dark-orange)';
-        DOM.sportsNavBtn.textContent = 'ACTIVITY LOG';
+        DOM.sportsNavBtn.textContent = 'ACTIVITY';
         DOM.sportsNavBtn.style.backgroundColor = 'var(--lcars-gold)';
         if (DOM.fastNavBtn) {
             DOM.fastNavBtn.textContent = 'FAST';
@@ -367,7 +367,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     DOM.sportsNavBtn.addEventListener('click', () => {
-        if (DOM.sportsNavBtn.textContent === 'ACTIVITY LOG') {
+        if (DOM.sportsNavBtn.textContent === 'ACTIVITY') {
             openView('sports');
             const now = new Date();
             now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
@@ -838,7 +838,7 @@ USER QUERY: ${query}`;
             DOM.fastNotifyStatus.textContent = `STATUS: NOTIFICATIONS ${Notification.permission.toUpperCase()}`;
             DOM.fastNotifyStatus.style.color = '#c9d1d9';
             if (DOM.fastNotifyBtn) {
-                DOM.fastNotifyBtn.textContent = 'ENABLE BROWSER NOTIFICATIONS';
+                DOM.fastNotifyBtn.textContent = 'ENABLE NOTIFICATIONS';
                 DOM.fastNotifyBtn.className = 'lcars-btn bg-blue';
             }
         }
