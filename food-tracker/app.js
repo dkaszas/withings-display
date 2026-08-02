@@ -73,6 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
         fastEndInput: document.getElementById('fast-end-input'),
         fastSaveBtn: document.getElementById('fast-save-btn'),
         fastNotifyBtn: document.getElementById('fast-notify-btn'),
+        fastTestNotifyBtn: document.getElementById('fast-test-notify-btn'),
         fastNotifyStatus: document.getElementById('fast-notify-status'),
         fastTelemetryStatus: document.getElementById('fast-telemetry-status'),
         fastNtfyTopic: document.getElementById('fast-ntfy-topic'),
@@ -433,6 +434,49 @@ document.addEventListener('DOMContentLoaded', () => {
             } catch (err) {
                 alert("Notification setup error: " + err.message);
             }
+        });
+    }
+
+    if (DOM.fastTestNotifyBtn) {
+        DOM.fastTestNotifyBtn.addEventListener('click', async () => {
+            const topic = DOM.fastNtfyTopic ? DOM.fastNtfyTopic.value.trim() : (localStorage.getItem('ml_fast_ntfy_topic') || 'macrolens_kaszas');
+            
+            let ntfyOk = false;
+            try {
+                const res = await fetch(`https://ntfy.sh/${encodeURIComponent(topic)}`, {
+                    method: 'POST',
+                    headers: {
+                        'Title': 'MacroLens Test Push',
+                        'Tags': 'bell,tada'
+                    },
+                    body: 'Test notification from MacroLens LCARS! Push channel is working properly. 🖖'
+                });
+                if (res.ok) ntfyOk = true;
+            } catch (e) {
+                console.error("ntfy test push failed:", e);
+            }
+
+            let localOk = false;
+            if ('Notification' in window && Notification.permission === 'granted') {
+                try {
+                    if ('serviceWorker' in navigator && navigator.serviceWorker.ready) {
+                        const sw = await navigator.serviceWorker.ready;
+                        await sw.showNotification("MacroLens Test Notification 🔔", {
+                            body: "Local browser notification is working!",
+                            icon: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🖖</text></svg>"
+                        });
+                    } else {
+                        new Notification("MacroLens Test Notification 🔔", {
+                            body: "Local browser notification is working!"
+                        });
+                    }
+                    localOk = true;
+                } catch (e) {
+                    console.error("Local test notification failed:", e);
+                }
+            }
+
+            alert(`TEST NOTIFICATION RESULTS:\n\n• ntfy.sh Cloud Push: ${ntfyOk ? 'SUCCESS (Topic: ' + topic + ')' : 'FAILED'}\n• Local Browser Notification: ${localOk ? 'SUCCESS' : 'NOT GRANTED'}`);
         });
     }
 
@@ -935,22 +979,22 @@ USER QUERY: ${query}`;
             await fetch(`https://ntfy.sh/${encodeURIComponent(topic)}`, {
                 method: 'POST',
                 headers: {
-                    'Title': 'Eating Window Opened 🥗',
+                    'Title': 'Eating Window Opened',
                     'Tags': 'salad,clock1',
                     'Delay': `${startUnix}`
                 },
-                body: `Your target eating window is now open (${targetStart} - ${targetEnd}). Enjoy your meals!`
+                body: `Your target eating window is now open (${targetStart} - ${targetEnd}). Enjoy your meals! 🥗`
             });
             
             const endUnix = getTargetUnix(targetEnd);
             await fetch(`https://ntfy.sh/${encodeURIComponent(topic)}`, {
                 method: 'POST',
                 headers: {
-                    'Title': 'Eating Window Closing ⌛',
+                    'Title': 'Eating Window Closing',
                     'Tags': 'hourglass_flowing_sand,bell',
                     'Delay': `${endUnix}`
                 },
-                body: `Your target eating window (${targetStart} - ${targetEnd}) is ending. Don't forget to log your final meal!`
+                body: `Your target eating window (${targetStart} - ${targetEnd}) is ending. Don't forget to log your final meal! ⌛`
             });
             
             console.log("ntfy.sh cloud push scheduled for topic:", topic);
