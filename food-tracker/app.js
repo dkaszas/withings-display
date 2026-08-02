@@ -915,9 +915,33 @@ USER QUERY: ${query}`;
         
         const now = new Date();
         const curHHMM = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+        const targetStart = localStorage.getItem('ml_fast_start') || '13:00';
         const targetEnd = localStorage.getItem('ml_fast_end') || '20:00';
         const todayStr = now.toISOString().slice(0, 10);
         
+        // Window Start Trigger
+        if (curHHMM === targetStart) {
+            if (localStorage.getItem('ml_fast_start_notified_date') !== todayStr) {
+                localStorage.setItem('ml_fast_start_notified_date', todayStr);
+                const notifTitle = "Eating Window Opened";
+                const notifBody = `Your target eating window is now open (${targetStart} - ${targetEnd}). Enjoy your meals!`;
+                if ('serviceWorker' in navigator && navigator.serviceWorker.ready) {
+                    navigator.serviceWorker.ready.then(sw => {
+                        sw.showNotification(notifTitle, {
+                            body: notifBody,
+                            icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🖖</text></svg>'
+                        });
+                    });
+                } else {
+                    new Notification(notifTitle, {
+                        body: notifBody,
+                        icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🖖</text></svg>'
+                    });
+                }
+            }
+        }
+
+        // Window End Trigger
         if (curHHMM === targetEnd) {
             if (localStorage.getItem('ml_fast_notified_date') === todayStr) return;
             localStorage.setItem('ml_fast_notified_date', todayStr);
