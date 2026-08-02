@@ -192,7 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         DOM.navBtn.textContent = 'TRICORDER';
         DOM.navBtn.style.backgroundColor = 'var(--lcars-teal)';
-        DOM.databankNavBtn.textContent = 'DATABANK';
+        DOM.databankNavBtn.textContent = 'CHAT';
         DOM.databankNavBtn.style.backgroundColor = 'var(--lcars-dark-orange)';
         DOM.sportsNavBtn.textContent = 'ACTIVITY';
         DOM.sportsNavBtn.style.backgroundColor = 'var(--lcars-gold)';
@@ -363,7 +363,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     DOM.databankNavBtn.addEventListener('click', () => {
-        if (DOM.databankNavBtn.textContent === 'DATABANK') openView('databank');
+        if (DOM.databankNavBtn.textContent === 'CHAT') openView('databank');
         else openView('scanner');
     });
 
