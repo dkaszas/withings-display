@@ -27,6 +27,7 @@
             <!-- HEADER WRAPPER -->
             <div class="lcars-header">
                 <div id="sports-nav-btn" class="lcars-top-elbow" style="cursor: pointer; background-color: var(--lcars-gold) !important; color: #000;">ACTIVITY LOG</div>
+                <div id="fast-nav-btn" class="lcars-top-pill" style="cursor: pointer; background-color: var(--lcars-emerald);">FAST</div>
                 <div id="databank-nav-btn" class="lcars-top-pill" style="cursor: pointer; background-color: var(--lcars-dark-orange);">DATABANK</div>
                 <div id="nav-btn" class="lcars-top-pill" style="cursor: pointer; background-color: var(--lcars-teal);">TRICORDER</div>
             </div>
@@ -147,6 +148,37 @@
                 <div id="sports-table-container" style="margin-top: 15px;"></div>
             </div>
 
+            <!-- FASTING VIEW -->
+            <div id="fast-view" class="hidden" style="margin-top: 15px;">
+                <div class="lcars-bar lcars-bar-standard bg-emerald omni-title" style="margin-bottom: 15px;">INTERMITTENT FASTING PROTOCOL</div>
+                
+                <div style="background: #0d1117; border: 1px solid var(--lcars-emerald); border-radius: 10px; padding: 15px; margin-bottom: 15px;">
+                    <div style="color: var(--lcars-emerald); font-size: 16px; font-weight: bold; margin-bottom: 10px;">TARGET EATING WINDOW</div>
+                    <div style="display: flex; gap: 10px; margin-bottom: 10px; align-items: center;">
+                        <label style="color: var(--lcars-peach); font-size: 14px; min-width: 110px;">WINDOW START:</label>
+                        <input type="time" id="fast-start-input" value="13:00" style="flex-grow: 1; padding: 8px; background: #000; color: var(--lcars-emerald); border: 1px solid var(--lcars-emerald); border-radius: 5px; font-family: 'Oswald', sans-serif; font-size: 14px;">
+                    </div>
+                    <div style="display: flex; gap: 10px; margin-bottom: 15px; align-items: center;">
+                        <label style="color: var(--lcars-peach); font-size: 14px; min-width: 110px;">WINDOW END:</label>
+                        <input type="time" id="fast-end-input" value="20:00" style="flex-grow: 1; padding: 8px; background: #000; color: var(--lcars-emerald); border: 1px solid var(--lcars-emerald); border-radius: 5px; font-family: 'Oswald', sans-serif; font-size: 14px;">
+                    </div>
+                    <button id="fast-save-btn" class="lcars-btn bg-emerald" style="width: 100%;">SAVE WINDOW CONFIG</button>
+                </div>
+
+                <div style="background: #0d1117; border: 1px solid var(--lcars-cyan); border-radius: 10px; padding: 15px; margin-bottom: 15px;">
+                    <div style="color: var(--lcars-cyan); font-size: 16px; font-weight: bold; margin-bottom: 10px;">DAILY NOTIFICATIONS</div>
+                    <div id="fast-notify-status" style="color: #c9d1d9; font-size: 14px; margin-bottom: 10px;">STATUS: NOTIFICATIONS DISABLED</div>
+                    <button id="fast-notify-btn" class="lcars-btn bg-blue" style="width: 100%;">ENABLE BROWSER NOTIFICATIONS</button>
+                </div>
+
+                <div style="background: #0d1117; border: 1px solid var(--lcars-gold); border-radius: 10px; padding: 15px;">
+                    <div style="color: var(--lcars-gold); font-size: 16px; font-weight: bold; margin-bottom: 10px;">TODAY'S FASTING TELEMETRY</div>
+                    <div id="fast-telemetry-status" style="color: #c9d1d9; font-size: 14px; line-height: 1.6;">
+                        Calculating telemetry...
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -166,6 +198,6 @@
         </div>
     </div>
 
-    <script src="app.js?v=75"></script>
+    <script src="app.js?v=78"></script>
 </body>
 </html>

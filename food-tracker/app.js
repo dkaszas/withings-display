@@ -65,6 +65,16 @@ document.addEventListener('DOMContentLoaded', () => {
         resPro: document.getElementById('res-pro'),
         resCarb: document.getElementById('res-carb'),
         resFat: document.getElementById('res-fat'),
+
+        // Fasting View
+        fastNavBtn: document.getElementById('fast-nav-btn'),
+        fastView: document.getElementById('fast-view'),
+        fastStartInput: document.getElementById('fast-start-input'),
+        fastEndInput: document.getElementById('fast-end-input'),
+        fastSaveBtn: document.getElementById('fast-save-btn'),
+        fastNotifyBtn: document.getElementById('fast-notify-btn'),
+        fastNotifyStatus: document.getElementById('fast-notify-status'),
+        fastTelemetryStatus: document.getElementById('fast-telemetry-status'),
     };
 
     let currentBase64Images = [];
@@ -88,6 +98,13 @@ document.addEventListener('DOMContentLoaded', () => {
             DOM.settingsModal.classList.remove('hidden');
         }
         
+        if (DOM.fastStartInput) DOM.fastStartInput.value = localStorage.getItem('ml_fast_start') || '13:00';
+        if (DOM.fastEndInput) DOM.fastEndInput.value = localStorage.getItem('ml_fast_end') || '20:00';
+        
+        updateNotificationStatusUI();
+        checkFastingNotificationSchedule();
+        setInterval(checkFastingNotificationSchedule, 60000);
+
         updateStardate();
         setInterval(updateStardate, 60000);
     }
@@ -170,6 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
         DOM.tricorderView.classList.add('hidden');
         DOM.databankView.classList.add('hidden');
         DOM.sportsView.classList.add('hidden');
+        if (DOM.fastView) DOM.fastView.classList.add('hidden');
         
         DOM.navBtn.textContent = 'TRICORDER';
         DOM.navBtn.style.backgroundColor = 'var(--lcars-teal)';
@@ -177,6 +195,10 @@ document.addEventListener('DOMContentLoaded', () => {
         DOM.databankNavBtn.style.backgroundColor = 'var(--lcars-dark-orange)';
         DOM.sportsNavBtn.textContent = 'ACTIVITY LOG';
         DOM.sportsNavBtn.style.backgroundColor = 'var(--lcars-gold)';
+        if (DOM.fastNavBtn) {
+            DOM.fastNavBtn.textContent = 'FAST';
+            DOM.fastNavBtn.style.backgroundColor = 'var(--lcars-emerald)';
+        }
         
         DOM.app.classList.remove('tricorder-mode');
         DOM.pillar2.style.display = '';
@@ -263,6 +285,20 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(alignSportsPillars, 300);
             setTimeout(alignSportsPillars, 800);
 
+        } else if (target === 'fast') {
+            if (DOM.fastView) DOM.fastView.classList.remove('hidden');
+            if (DOM.fastNavBtn) {
+                DOM.fastNavBtn.textContent = 'SCANNER';
+                DOM.fastNavBtn.style.backgroundColor = 'var(--lcars-peach)';
+            }
+            
+            DOM.pillar1.textContent = 'START'; DOM.pillar1.className = 'lcars-bar lcars-bar-standard bg-emerald'; DOM.pillar1.style.cursor = 'pointer';
+            DOM.pillar2.textContent = 'END'; DOM.pillar2.className = 'lcars-bar lcars-bar-standard bg-cyan'; DOM.pillar2.style.cursor = 'pointer';
+            DOM.pillar3.textContent = 'SAVE'; DOM.pillar3.className = 'lcars-bar lcars-bar-stretch bg-emerald'; DOM.pillar3.style.cursor = 'pointer';
+            DOM.pillar4.textContent = 'NOTIFY'; DOM.pillar4.className = 'lcars-bar lcars-bar-standard bg-blue'; DOM.pillar4.style.cursor = 'pointer';
+            DOM.pillar5.style.display = 'none';
+
+            updateFastingTelemetryUI();
         } else {
             DOM.scannerView.classList.remove('hidden');
             updateDynamicPillars();
@@ -340,6 +376,39 @@ document.addEventListener('DOMContentLoaded', () => {
             openView('scanner');
         }
     });
+
+    if (DOM.fastNavBtn) {
+        DOM.fastNavBtn.addEventListener('click', () => {
+            if (DOM.fastNavBtn.textContent === 'FAST') openView('fast');
+            else openView('scanner');
+        });
+    }
+
+    if (DOM.fastSaveBtn) {
+        DOM.fastSaveBtn.addEventListener('click', () => {
+            localStorage.setItem('ml_fast_start', DOM.fastStartInput.value);
+            localStorage.setItem('ml_fast_end', DOM.fastEndInput.value);
+            alert(`FASTING WINDOW CONFIG SAVED: ${DOM.fastStartInput.value} TO ${DOM.fastEndInput.value}`);
+            updateFastingTelemetryUI();
+        });
+    }
+
+    if (DOM.fastNotifyBtn) {
+        DOM.fastNotifyBtn.addEventListener('click', async () => {
+            if ('Notification' in window) {
+                const perm = await Notification.requestPermission();
+                updateNotificationStatusUI();
+                if (perm === 'granted') {
+                    new Notification("MacroLens LCARS", {
+                        body: "Notifications enabled! You will receive eating window summaries and daily logging reminders.",
+                        icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🖖</text></svg>'
+                    });
+                }
+            } else {
+                alert("Browser notifications are not supported in this browser.");
+            }
+        });
+    }
 
     DOM.sportSelect.addEventListener('change', (e) => {
         const sport = e.target.value;
@@ -562,6 +631,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function processImageSelection(file) {
         if (!file) return;
+        imageLastModified = file.lastModified ? new Date(file.lastModified).toISOString() : new Date().toISOString();
         const reader = new FileReader();
         reader.onload = (e) => {
             currentBase64Images.push(e.target.result.split(',')[1]);
@@ -647,6 +717,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const jsonText = resultData.candidates[0].content.parts[0].text;
             currentMacros = JSON.parse(jsonText);
             currentMacros.timestamp = new Date().toISOString();
+            currentMacros.image_timestamp = imageLastModified || currentMacros.timestamp;
             DOM.resConfidence.textContent = `Confidence: ${currentMacros.confidence}`;
             DOM.resFoodItems.textContent = currentMacros.food_items;
             DOM.resCals.textContent = currentMacros.calories;
@@ -728,6 +799,155 @@ USER QUERY: ${query}`;
             if (window.alignDatabankPillars) setTimeout(window.alignDatabankPillars, 50);
         } catch (e) { alert(e.message); } finally { DOM.loader.classList.add('hidden'); }
     });
+
+    function updateNotificationStatusUI() {
+        if (!DOM.fastNotifyStatus) return;
+        if (!('Notification' in window)) {
+            DOM.fastNotifyStatus.textContent = 'STATUS: NOTIFICATIONS NOT SUPPORTED IN THIS BROWSER';
+            if (DOM.fastNotifyBtn) DOM.fastNotifyBtn.style.display = 'none';
+        } else if (Notification.permission === 'granted') {
+            DOM.fastNotifyStatus.textContent = 'STATUS: NOTIFICATIONS ENABLED';
+            DOM.fastNotifyStatus.style.color = 'var(--lcars-emerald)';
+            if (DOM.fastNotifyBtn) {
+                DOM.fastNotifyBtn.textContent = 'NOTIFICATIONS ACTIVE';
+                DOM.fastNotifyBtn.className = 'lcars-btn bg-emerald';
+            }
+        } else {
+            DOM.fastNotifyStatus.textContent = `STATUS: NOTIFICATIONS ${Notification.permission.toUpperCase()}`;
+            DOM.fastNotifyStatus.style.color = '#c9d1d9';
+            if (DOM.fastNotifyBtn) {
+                DOM.fastNotifyBtn.textContent = 'ENABLE BROWSER NOTIFICATIONS';
+                DOM.fastNotifyBtn.className = 'lcars-btn bg-blue';
+            }
+        }
+    }
+
+    async function updateFastingTelemetryUI() {
+        if (!DOM.fastTelemetryStatus) return;
+        DOM.fastTelemetryStatus.innerHTML = 'Analyzing today\'s meal timestamps...';
+        
+        const targetStart = localStorage.getItem('ml_fast_start') || '13:00';
+        const targetEnd = localStorage.getItem('ml_fast_end') || '20:00';
+        const todayStr = new Date().toISOString().slice(0, 10);
+        
+        try {
+            const databank = await fetchDatabank();
+            let todayMeals = [];
+            if (databank) {
+                const nutSection = databank.split('METRICS:')[0] || '';
+                const lines = nutSection.split('\n').filter(l => l.trim().startsWith('{'));
+                lines.forEach(l => {
+                    try {
+                        const entry = JSON.parse(l);
+                        const entryDate = (entry.image_timestamp || entry.timestamp || '').slice(0, 10);
+                        if (entryDate === todayStr) todayMeals.push(entry);
+                    } catch (e) {}
+                });
+            }
+            
+            if (todayMeals.length > 0) {
+                let totalCals = 0, totalPro = 0, totalCarb = 0, totalFat = 0;
+                let times = [];
+                todayMeals.forEach(m => {
+                    totalCals += Number(m.calories || 0);
+                    totalPro += Number(m.protein || 0);
+                    totalCarb += Number(m.carbs || 0);
+                    totalFat += Number(m.fat || 0);
+                    const ts = new Date(m.image_timestamp || m.timestamp);
+                    if (!isNaN(ts)) times.push(ts);
+                });
+                
+                times.sort((a,b) => a - b);
+                const firstTime = times[0];
+                const lastTime = times[times.length - 1];
+                const winHours = ((lastTime - firstTime) / 3600000).toFixed(1);
+                const fmtT = d => `${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
+                
+                DOM.fastTelemetryStatus.innerHTML = `
+                    <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+                        <span>TARGET WINDOW:</span> <span style="color:var(--lcars-emerald)">${targetStart} - ${targetEnd}</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+                        <span>ACTUAL WINDOW:</span> <span style="color:var(--lcars-cyan)">${fmtT(firstTime)} - ${fmtT(lastTime)} (${winHours}h)</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+                        <span>TOTAL CALORIES:</span> <span style="color:var(--lcars-gold)">${Math.round(totalCals)} kcal</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between;">
+                        <span>MACRO BREAKDOWN:</span> <span>P: ${Math.round(totalPro)}g | C: ${Math.round(totalCarb)}g | F: ${Math.round(totalFat)}g</span>
+                    </div>
+                `;
+            } else {
+                DOM.fastTelemetryStatus.innerHTML = `
+                    <div style="margin-bottom:8px;">TARGET WINDOW: <span style="color:var(--lcars-emerald)">${targetStart} - ${targetEnd}</span></div>
+                    <div style="color: var(--lcars-peach);">NO MEALS LOGGED TODAY YET.</div>
+                `;
+            }
+        } catch (e) {
+            DOM.fastTelemetryStatus.innerHTML = `<div style="color:var(--lcars-red)">FAILED TO LOAD FASTING TELEMETRY</div>`;
+        }
+    }
+
+    async function checkFastingNotificationSchedule() {
+        if (!('Notification' in window) || Notification.permission !== 'granted') return;
+        
+        const now = new Date();
+        const curHHMM = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+        const targetEnd = localStorage.getItem('ml_fast_end') || '20:00';
+        const todayStr = now.toISOString().slice(0, 10);
+        
+        if (curHHMM === targetEnd) {
+            if (localStorage.getItem('ml_fast_notified_date') === todayStr) return;
+            localStorage.setItem('ml_fast_notified_date', todayStr);
+            
+            try {
+                const databank = await fetchDatabank();
+                let todayMeals = [];
+                if (databank) {
+                    const nutSection = databank.split('METRICS:')[0] || '';
+                    const lines = nutSection.split('\n').filter(l => l.trim().startsWith('{'));
+                    lines.forEach(l => {
+                        try {
+                            const entry = JSON.parse(l);
+                            const entryDate = (entry.image_timestamp || entry.timestamp || '').slice(0, 10);
+                            if (entryDate === todayStr) todayMeals.push(entry);
+                        } catch (e) {}
+                    });
+                }
+                
+                if (todayMeals.length > 0) {
+                    let totalCals = 0, totalPro = 0, totalCarb = 0, totalFat = 0;
+                    let times = [];
+                    todayMeals.forEach(m => {
+                        totalCals += Number(m.calories || 0);
+                        totalPro += Number(m.protein || 0);
+                        totalCarb += Number(m.carbs || 0);
+                        totalFat += Number(m.fat || 0);
+                        const ts = new Date(m.image_timestamp || m.timestamp);
+                        if (!isNaN(ts)) times.push(ts);
+                    });
+                    
+                    times.sort((a,b) => a - b);
+                    const firstTime = times[0];
+                    const lastTime = times[times.length - 1];
+                    const winHours = ((lastTime - firstTime) / 3600000).toFixed(1);
+                    const fmtT = d => `${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
+                    
+                    new Notification("Fasting Window Ended", {
+                        body: `Consumed ${Math.round(totalCals)} kcal (P:${Math.round(totalPro)}g C:${Math.round(totalCarb)}g F:${Math.round(totalFat)}g) in ${winHours}h window (${fmtT(firstTime)} - ${fmtT(lastTime)}).`,
+                        icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🖖</text></svg>'
+                    });
+                } else {
+                    new Notification("Daily Logging Reminder", {
+                        body: "Your target eating window is ending, but no meals were logged today. Remember to log your meals!",
+                        icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🖖</text></svg>'
+                    });
+                }
+            } catch (err) {
+                console.error("Fasting notification schedule error: ", err);
+            }
+        }
+    }
 
     async function fetchDatabank() {
         const pat = localStorage.getItem('ml_github_pat'), repo = localStorage.getItem('ml_github_repo');

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'macrolens-v101';
+const CACHE_NAME = 'macrolens-v78';
 const ASSETS = [
   './',
   './index.html',
@@ -25,8 +25,20 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
   event.respondWith(
     caches.match(event.request).then(response => {
-      // Return cached version or fetch from network (Network-first strategy for API calls not implemented as we only cache static assets)
       return response || fetch(event.request);
     })
   );
 });
+
+self.addEventListener('notificationclick', event => {
+  event.notification.close();
+  event.waitUntil(
+    clients.matchAll({ type: 'window', includeUncontrolled: true }).then(clientList => {
+      for (const client of clientList) {
+        if (client.url && 'focus' in client) return client.focus();
+      }
+      if (clients.openWindow) return clients.openWindow('./#fast');
+    })
+  );
+});
+
