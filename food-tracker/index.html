@@ -158,9 +158,13 @@
                         <label style="color: var(--lcars-peach); font-size: 14px; min-width: 110px;">WINDOW START:</label>
                         <input type="time" id="fast-start-input" value="13:00" style="flex-grow: 1; padding: 8px; background: #000; color: var(--lcars-emerald); border: 1px solid var(--lcars-emerald); border-radius: 5px; font-family: 'Oswald', sans-serif; font-size: 14px;">
                     </div>
-                    <div style="display: flex; gap: 10px; margin-bottom: 15px; align-items: center;">
+                    <div style="display: flex; gap: 10px; margin-bottom: 10px; align-items: center;">
                         <label style="color: var(--lcars-peach); font-size: 14px; min-width: 110px;">WINDOW END:</label>
                         <input type="time" id="fast-end-input" value="20:00" style="flex-grow: 1; padding: 8px; background: #000; color: var(--lcars-emerald); border: 1px solid var(--lcars-emerald); border-radius: 5px; font-family: 'Oswald', sans-serif; font-size: 14px;">
+                    </div>
+                    <div style="display: flex; gap: 10px; margin-bottom: 15px; align-items: center;">
+                        <label style="color: var(--lcars-peach); font-size: 14px; min-width: 110px;">NTFY TOPIC:</label>
+                        <input type="text" id="fast-ntfy-topic" placeholder="e.g. macrolens_kaszas" value="macrolens_kaszas" style="flex-grow: 1; padding: 8px; background: #000; color: var(--lcars-cyan); border: 1px solid var(--lcars-cyan); border-radius: 5px; font-family: 'Oswald', sans-serif; font-size: 14px;">
                     </div>
                     <button id="fast-save-btn" class="lcars-btn bg-emerald" style="width: 100%;">SAVE WINDOW CONFIG</button>
                 </div>
@@ -198,6 +202,6 @@
         </div>
     </div>
 
-    <script src="app.js?v=80"></script>
+    <script src="app.js?v=82"></script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'macrolens-v80';
+const CACHE_NAME = 'macrolens-v82';
 const ASSETS = [
   './',
   './index.html',

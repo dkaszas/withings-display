@@ -75,6 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
         fastNotifyBtn: document.getElementById('fast-notify-btn'),
         fastNotifyStatus: document.getElementById('fast-notify-status'),
         fastTelemetryStatus: document.getElementById('fast-telemetry-status'),
+        fastNtfyTopic: document.getElementById('fast-ntfy-topic'),
     };
 
     let currentBase64Images = [];
@@ -385,10 +386,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (DOM.fastSaveBtn) {
-        DOM.fastSaveBtn.addEventListener('click', () => {
+        DOM.fastSaveBtn.addEventListener('click', async () => {
             localStorage.setItem('ml_fast_start', DOM.fastStartInput.value);
             localStorage.setItem('ml_fast_end', DOM.fastEndInput.value);
-            alert(`FASTING WINDOW CONFIG SAVED: ${DOM.fastStartInput.value} TO ${DOM.fastEndInput.value}`);
+            if (DOM.fastNtfyTopic) localStorage.setItem('ml_fast_ntfy_topic', DOM.fastNtfyTopic.value.trim());
+            
+            await scheduleNtfyCloudPush();
+            alert(`FASTING WINDOW CONFIG SAVED: ${DOM.fastStartInput.value} TO ${DOM.fastEndInput.value}\nNTFY Cloud Push Scheduled!`);
             updateFastingTelemetryUI();
         });
     }
@@ -907,6 +911,51 @@ USER QUERY: ${query}`;
             }
         } catch (e) {
             DOM.fastTelemetryStatus.innerHTML = `<div style="color:var(--lcars-red)">FAILED TO LOAD FASTING TELEMETRY</div>`;
+        }
+    }
+
+    async function scheduleNtfyCloudPush() {
+        const topic = DOM.fastNtfyTopic ? DOM.fastNtfyTopic.value.trim() : (localStorage.getItem('ml_fast_ntfy_topic') || 'macrolens_kaszas');
+        if (!topic) return;
+        
+        localStorage.setItem('ml_fast_ntfy_topic', topic);
+        const targetStart = localStorage.getItem('ml_fast_start') || '13:00';
+        const targetEnd = localStorage.getItem('ml_fast_end') || '20:00';
+        
+        function getTargetUnix(hhmm) {
+            const [h, m] = hhmm.split(':').map(Number);
+            const d = new Date();
+            d.setHours(h, m, 0, 0);
+            if (d < new Date()) d.setDate(d.getDate() + 1);
+            return Math.floor(d.getTime() / 1000);
+        }
+        
+        try {
+            const startUnix = getTargetUnix(targetStart);
+            await fetch(`https://ntfy.sh/${encodeURIComponent(topic)}`, {
+                method: 'POST',
+                headers: {
+                    'Title': 'Eating Window Opened 🥗',
+                    'Tags': 'salad,clock1',
+                    'Delay': `${startUnix}`
+                },
+                body: `Your target eating window is now open (${targetStart} - ${targetEnd}). Enjoy your meals!`
+            });
+            
+            const endUnix = getTargetUnix(targetEnd);
+            await fetch(`https://ntfy.sh/${encodeURIComponent(topic)}`, {
+                method: 'POST',
+                headers: {
+                    'Title': 'Eating Window Closing ⌛',
+                    'Tags': 'hourglass_flowing_sand,bell',
+                    'Delay': `${endUnix}`
+                },
+                body: `Your target eating window (${targetStart} - ${targetEnd}) is ending. Don't forget to log your final meal!`
+            });
+            
+            console.log("ntfy.sh cloud push scheduled for topic:", topic);
+        } catch (e) {
+            console.error("ntfy.sh scheduling failed:", e);
         }
     }
 
