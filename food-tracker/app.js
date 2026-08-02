@@ -439,44 +439,57 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (DOM.fastTestNotifyBtn) {
         DOM.fastTestNotifyBtn.addEventListener('click', async () => {
+            const originalText = DOM.fastTestNotifyBtn.textContent;
+            DOM.fastTestNotifyBtn.textContent = 'GENERATING...';
+            DOM.fastTestNotifyBtn.disabled = true;
+
             const topic = DOM.fastNtfyTopic ? DOM.fastNtfyTopic.value.trim() : (localStorage.getItem('ml_fast_ntfy_topic') || 'macrolens_kaszas');
             
-            let ntfyOk = false;
             try {
-                const res = await fetch(`https://ntfy.sh/${encodeURIComponent(topic)}`, {
-                    method: 'POST',
-                    headers: {
-                        'Title': 'MacroLens Test Push',
-                        'Tags': 'bell,tada'
-                    },
-                    body: 'Test notification from MacroLens LCARS! Push channel is working properly. 🖖'
-                });
-                if (res.ok) ntfyOk = true;
-            } catch (e) {
-                console.error("ntfy test push failed:", e);
-            }
-
-            let localOk = false;
-            if ('Notification' in window && Notification.permission === 'granted') {
+                const summary = await generateAiSummary('test');
+                
+                let ntfyOk = false;
                 try {
-                    if ('serviceWorker' in navigator && navigator.serviceWorker.ready) {
-                        const sw = await navigator.serviceWorker.ready;
-                        await sw.showNotification("MacroLens Test Notification 🔔", {
-                            body: "Local browser notification is working!",
-                            icon: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🖖</text></svg>"
-                        });
-                    } else {
-                        new Notification("MacroLens Test Notification 🔔", {
-                            body: "Local browser notification is working!"
-                        });
-                    }
-                    localOk = true;
+                    const res = await fetch(`https://ntfy.sh/${encodeURIComponent(topic)}`, {
+                        method: 'POST',
+                        headers: {
+                            'Title': 'MacroLens Status Update',
+                            'Tags': 'bell,chart_with_upwards_trend'
+                        },
+                        body: summary.text
+                    });
+                    if (res.ok) ntfyOk = true;
                 } catch (e) {
-                    console.error("Local test notification failed:", e);
+                    console.error("ntfy test push failed:", e);
                 }
-            }
 
-            alert(`TEST NOTIFICATION RESULTS:\n\n• ntfy.sh Cloud Push: ${ntfyOk ? 'SUCCESS (Topic: ' + topic + ')' : 'FAILED'}\n• Local Browser Notification: ${localOk ? 'SUCCESS' : 'NOT GRANTED'}`);
+                let localOk = false;
+                if ('Notification' in window && Notification.permission === 'granted') {
+                    try {
+                        if ('serviceWorker' in navigator && navigator.serviceWorker.ready) {
+                            const sw = await navigator.serviceWorker.ready;
+                            await sw.showNotification("MacroLens Status Update 🔔", {
+                                body: summary.text,
+                                icon: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🖖</text></svg>"
+                            });
+                        } else {
+                            new Notification("MacroLens Status Update 🔔", {
+                                body: summary.text
+                            });
+                        }
+                        localOk = true;
+                    } catch (e) {
+                        console.error("Local test notification failed:", e);
+                    }
+                }
+
+                alert(`STATUS UPDATE PUSHED!\n\n"${summary.text}"\n\n• ntfy.sh Push: ${ntfyOk ? 'SUCCESS (' + topic + ')' : 'FAILED'}\n• Local Notification: ${localOk ? 'SUCCESS' : 'NOT GRANTED'}`);
+            } catch (err) {
+                alert("Test Push Error: " + err.message);
+            } finally {
+                DOM.fastTestNotifyBtn.textContent = originalText;
+                DOM.fastTestNotifyBtn.disabled = false;
+            }
         });
     }
 
@@ -873,20 +886,20 @@ USER QUERY: ${query}`;
     function updateNotificationStatusUI() {
         if (!DOM.fastNotifyStatus) return;
         if (!('Notification' in window)) {
-            DOM.fastNotifyStatus.textContent = 'STATUS: NOTIFICATIONS NOT SUPPORTED IN THIS BROWSER';
+            DOM.fastNotifyStatus.textContent = 'STATUS: NOT SUPPORTED';
             if (DOM.fastNotifyBtn) DOM.fastNotifyBtn.style.display = 'none';
         } else if (Notification.permission === 'granted') {
-            DOM.fastNotifyStatus.textContent = 'STATUS: NOTIFICATIONS ENABLED';
+            DOM.fastNotifyStatus.textContent = 'STATUS: ACTIVE';
             DOM.fastNotifyStatus.style.color = 'var(--lcars-emerald)';
             if (DOM.fastNotifyBtn) {
-                DOM.fastNotifyBtn.textContent = 'NOTIFICATIONS ACTIVE';
+                DOM.fastNotifyBtn.textContent = 'ACTIVE';
                 DOM.fastNotifyBtn.className = 'lcars-btn bg-emerald';
             }
         } else {
-            DOM.fastNotifyStatus.textContent = `STATUS: NOTIFICATIONS ${Notification.permission.toUpperCase()}`;
+            DOM.fastNotifyStatus.textContent = 'STATUS: INACTIVE';
             DOM.fastNotifyStatus.style.color = '#c9d1d9';
             if (DOM.fastNotifyBtn) {
-                DOM.fastNotifyBtn.textContent = 'ENABLE NOTIFICATIONS';
+                DOM.fastNotifyBtn.textContent = 'ENABLE';
                 DOM.fastNotifyBtn.className = 'lcars-btn bg-blue';
             }
         }
@@ -958,6 +971,140 @@ USER QUERY: ${query}`;
         }
     }
 
+    async function generateAiSummary(mode) {
+        const rawData = await fetchDatabank();
+        const todayStr = new Date().toISOString().slice(0, 10);
+        
+        let totalCals = 0, totalPro = 0, totalCarb = 0, totalFat = 0;
+        let foodItems = [];
+        let activities = [];
+        let vitalsList = [];
+
+        if (rawData) {
+            // Parse Nutrition
+            const nutMatch = rawData.match(/NUTRITION:\n([\s\S]*?)(?=\n\nMETRICS:|$)/);
+            if (nutMatch && nutMatch[1]) {
+                nutMatch[1].split('\n').forEach(line => {
+                    if (!line.trim() || !line.trim().startsWith('{')) return;
+                    try {
+                        const item = JSON.parse(line);
+                        const itemDate = (item.image_timestamp || item.timestamp || '').slice(0, 10);
+                        if (itemDate === todayStr) {
+                            totalCals += Number(item.calories || 0);
+                            totalPro += Number(item.protein || 0);
+                            totalCarb += Number(item.carbs || 0);
+                            totalFat += Number(item.fat || 0);
+                            if (item.food_items) foodItems.push(item.food_items);
+                        }
+                    } catch(e){}
+                });
+            }
+
+            // Parse Sports
+            const sportsMatch = rawData.match(/SPORTS:\n([\s\S]*?)$/);
+            if (sportsMatch && sportsMatch[1]) {
+                sportsMatch[1].split('\n').forEach(line => {
+                    if (line.includes(todayStr)) {
+                        const parts = line.split(',');
+                        if (parts.length >= 3) {
+                            activities.push(`${parts[1]} (${parts[2]} min)`);
+                        } else {
+                            activities.push(line.trim());
+                        }
+                    }
+                });
+            }
+
+            // Parse Metrics
+            const metricsMatch = rawData.match(/METRICS:\n([\s\S]*?)(?=\n\nVITALS:|$)/);
+            if (metricsMatch && metricsMatch[1]) {
+                const lines = metricsMatch[1].trim().split('\n').filter(l => l.trim().startsWith('{'));
+                if (lines.length > 0) {
+                    try {
+                        const latest = JSON.parse(lines[lines.length - 1]);
+                        if (latest.hrv) vitalsList.push(`HRV: ${latest.hrv}ms`);
+                        if (latest.sleep_score) vitalsList.push(`Sleep Score: ${latest.sleep_score}`);
+                        if (latest.activity_score) vitalsList.push(`Activity Score: ${latest.activity_score}`);
+                        if (latest.body_score) vitalsList.push(`Body Score: ${latest.body_score}`);
+                    } catch(e){}
+                }
+            }
+
+            // Parse Vitals CSV
+            const vitalsMatch = rawData.match(/VITALS:\n([\s\S]*?)(?=\n\nSPORTS:|$)/);
+            if (vitalsMatch && vitalsMatch[1]) {
+                const csvLines = vitalsMatch[1].trim().split('\n');
+                if (csvLines.length > 1) {
+                    const lastLine = csvLines[csvLines.length - 1];
+                    const cols = csvLines[0].split(',');
+                    const vals = lastLine.split(',');
+                    cols.forEach((c, idx) => {
+                        const cLower = c.toLowerCase();
+                        if (cLower.includes('heart') || cLower.includes('bpm') || cLower.includes('spo2') || cLower.includes('temp')) {
+                            if (vals[idx] && vals[idx] !== '0' && vals[idx] !== '') {
+                                vitalsList.push(`${c}: ${vals[idx]}`);
+                            }
+                        }
+                    });
+                }
+            }
+        }
+
+        const vitalsStr = vitalsList.length > 0 ? vitalsList.join(', ') : 'Vitals nominal';
+        const foodStr = `Calories: ${Math.round(totalCals)} kcal (P:${Math.round(totalPro)}g C:${Math.round(totalCarb)}g F:${Math.round(totalFat)}g). Items: ${foodItems.length > 0 ? foodItems.join(', ') : 'None logged'}`;
+        const activityStr = activities.length > 0 ? activities.join('; ') : 'No workouts registered';
+
+        const startStr = localStorage.getItem('ml_fast_start') || '13:00';
+        const endStr = localStorage.getItem('ml_fast_end') || '20:00';
+        const now = new Date();
+        const curHHMM = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+        const isEatingWindow = (curHHMM >= startStr && curHHMM < endStr);
+        const stageStr = isEatingWindow ? `EATING WINDOW (${startStr} - ${endStr})` : `FASTING WINDOW (${endStr} - ${startStr})`;
+
+        let prompt = '';
+        if (mode === 'start_fast') {
+            prompt = `You are an LCARS Health Assistant. Write a concise 2-sentence notification (max 220 chars) for the END OF EATING WINDOW / START OF FAST.
+Data summary:
+- Food Eaten Today: ${foodStr}
+- Workouts/Activities: ${activityStr}
+- Health Metrics/Vitals: ${vitalsStr}
+Provide a brief overview of today's food, workouts, and health metrics. Keep it concise, clean, no quotes.`;
+        } else if (mode === 'end_fast') {
+            prompt = `You are an LCARS Health Assistant. Write a concise 2-sentence notification (max 220 chars) for the END OF FAST / START OF EATING WINDOW.
+Data summary:
+- Vitals/Health Metrics: ${vitalsStr}
+- Calories & Macros Consumed: ${foodStr}
+Summarize how daily vital signs are doing and state how many calories were consumed so far. Keep it concise, clean, no quotes.`;
+        } else {
+            prompt = `You are an LCARS Health Assistant. Write a concise status update notification (max 220 chars).
+- Current Stage: ${stageStr} (Time: ${curHHMM})
+- Calories & Macros: ${foodStr}
+- Workouts Registered: ${activityStr}
+- Vitals: ${vitalsStr}
+State current stage, calories & macros consumed, and registered workouts. Keep it punchy, clean, no quotes.`;
+        }
+
+        let aiText = '';
+        try {
+            const apiKey = localStorage.getItem('gemini_api_key') || (DOM.geminiApiKey ? DOM.geminiApiKey.value.trim() : '');
+            if (!apiKey) throw new Error("Gemini Key missing");
+            const primaryModel = selectedModel || 'gemini-2.5-flash';
+            const res = await queryGemini(primaryModel, prompt);
+            aiText = res.candidates[0].content.parts[0].text.trim().replace(/^["']|["']$/g, '');
+        } catch(e) {
+            console.warn("Gemini notification prompt failed, using fallback:", e);
+            if (mode === 'start_fast') {
+                aiText = `Fast Started (${endStr}). Today's Summary: ${Math.round(totalCals)} kcal (P:${Math.round(totalPro)}g C:${Math.round(totalCarb)}g F:${Math.round(totalFat)}g). Workouts: ${activityStr}. Vitals: ${vitalsStr}.`;
+            } else if (mode === 'end_fast') {
+                aiText = `Eating Window Open (${startStr}-${endStr}). Vitals: ${vitalsStr}. Consumed so far: ${Math.round(totalCals)} kcal (P:${Math.round(totalPro)}g C:${Math.round(totalCarb)}g F:${Math.round(totalFat)}g).`;
+            } else {
+                aiText = `Stage: ${stageStr}. Consumed: ${Math.round(totalCals)} kcal (P:${Math.round(totalPro)}g C:${Math.round(totalCarb)}g F:${Math.round(totalFat)}g). Workouts: ${activityStr}.`;
+            }
+        }
+
+        return { stageStr, text: aiText };
+    }
+
     async function scheduleNtfyCloudPush() {
         const topic = DOM.fastNtfyTopic ? DOM.fastNtfyTopic.value.trim() : (localStorage.getItem('ml_fast_ntfy_topic') || 'macrolens_kaszas');
         if (!topic) return;
@@ -975,6 +1122,7 @@ USER QUERY: ${query}`;
         }
         
         try {
+            const endFastSummary = await generateAiSummary('end_fast');
             const startUnix = getTargetUnix(targetStart);
             await fetch(`https://ntfy.sh/${encodeURIComponent(topic)}`, {
                 method: 'POST',
@@ -983,18 +1131,19 @@ USER QUERY: ${query}`;
                     'Tags': 'salad,clock1',
                     'Delay': `${startUnix}`
                 },
-                body: `Your target eating window is now open (${targetStart} - ${targetEnd}). Enjoy your meals! 🥗`
+                body: endFastSummary.text
             });
             
+            const startFastSummary = await generateAiSummary('start_fast');
             const endUnix = getTargetUnix(targetEnd);
             await fetch(`https://ntfy.sh/${encodeURIComponent(topic)}`, {
                 method: 'POST',
                 headers: {
-                    'Title': 'Eating Window Closing',
+                    'Title': 'Fasting Window Started',
                     'Tags': 'hourglass_flowing_sand,bell',
                     'Delay': `${endUnix}`
                 },
-                body: `Your target eating window (${targetStart} - ${targetEnd}) is ending. Don't forget to log your final meal! ⌛`
+                body: startFastSummary.text
             });
             
             console.log("ntfy.sh cloud push scheduled for topic:", topic);
@@ -1012,94 +1161,44 @@ USER QUERY: ${query}`;
         const targetEnd = localStorage.getItem('ml_fast_end') || '20:00';
         const todayStr = now.toISOString().slice(0, 10);
         
-        // Window Start Trigger
+        // Window Start Trigger (Eating Window Open)
         if (curHHMM === targetStart) {
             if (localStorage.getItem('ml_fast_start_notified_date') !== todayStr) {
                 localStorage.setItem('ml_fast_start_notified_date', todayStr);
-                const notifTitle = "Eating Window Opened";
-                const notifBody = `Your target eating window is now open (${targetStart} - ${targetEnd}). Enjoy your meals!`;
+                const summary = await generateAiSummary('end_fast');
                 if ('serviceWorker' in navigator && navigator.serviceWorker.ready) {
                     navigator.serviceWorker.ready.then(sw => {
-                        sw.showNotification(notifTitle, {
-                            body: notifBody,
+                        sw.showNotification("Eating Window Opened 🥗", {
+                            body: summary.text,
                             icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🖖</text></svg>'
                         });
                     });
                 } else {
-                    new Notification(notifTitle, {
-                        body: notifBody,
+                    new Notification("Eating Window Opened 🥗", {
+                        body: summary.text,
                         icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🖖</text></svg>'
                     });
                 }
             }
         }
 
-        // Window End Trigger
+        // Window End Trigger (Fasting Window Started)
         if (curHHMM === targetEnd) {
             if (localStorage.getItem('ml_fast_notified_date') === todayStr) return;
             localStorage.setItem('ml_fast_notified_date', todayStr);
             
-            try {
-                const databank = await fetchDatabank();
-                let todayMeals = [];
-                if (databank) {
-                    const nutSection = databank.split('METRICS:')[0] || '';
-                    const lines = nutSection.split('\n').filter(l => l.trim().startsWith('{'));
-                    lines.forEach(l => {
-                        try {
-                            const entry = JSON.parse(l);
-                            const entryDate = (entry.image_timestamp || entry.timestamp || '').slice(0, 10);
-                            if (entryDate === todayStr) todayMeals.push(entry);
-                        } catch (e) {}
-                    });
-                }
-                
-                if (todayMeals.length > 0) {
-                    let totalCals = 0, totalPro = 0, totalCarb = 0, totalFat = 0;
-                    let times = [];
-                    todayMeals.forEach(m => {
-                        totalCals += Number(m.calories || 0);
-                        totalPro += Number(m.protein || 0);
-                        totalCarb += Number(m.carbs || 0);
-                        totalFat += Number(m.fat || 0);
-                        const ts = new Date(m.image_timestamp || m.timestamp);
-                        if (!isNaN(ts)) times.push(ts);
-                    });
-                    
-                    times.sort((a,b) => a - b);
-                    const firstTime = times[0];
-                    const lastTime = times[times.length - 1];
-                    const winHours = ((lastTime - firstTime) / 3600000).toFixed(1);
-                    const fmtT = d => `${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
-                    
-                    if ('serviceWorker' in navigator && navigator.serviceWorker.ready) {
-                        const sw = await navigator.serviceWorker.ready;
-                        sw.showNotification("Fasting Window Ended", {
-                            body: `Consumed ${Math.round(totalCals)} kcal (P:${Math.round(totalPro)}g C:${Math.round(totalCarb)}g F:${Math.round(totalFat)}g) in ${winHours}h window (${fmtT(firstTime)} - ${fmtT(lastTime)}).`,
-                            icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🖖</text></svg>'
-                        });
-                    } else {
-                        new Notification("Fasting Window Ended", {
-                            body: `Consumed ${Math.round(totalCals)} kcal (P:${Math.round(totalPro)}g C:${Math.round(totalCarb)}g F:${Math.round(totalFat)}g) in ${winHours}h window (${fmtT(firstTime)} - ${fmtT(lastTime)}).`,
-                            icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🖖</text></svg>'
-                        });
-                    }
-                } else {
-                    if ('serviceWorker' in navigator && navigator.serviceWorker.ready) {
-                        const sw = await navigator.serviceWorker.ready;
-                        sw.showNotification("Daily Logging Reminder", {
-                            body: "Your target eating window is ending, but no meals were logged today. Remember to log your meals!",
-                            icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🖖</text></svg>'
-                        });
-                    } else {
-                        new Notification("Daily Logging Reminder", {
-                            body: "Your target eating window is ending, but no meals were logged today. Remember to log your meals!",
-                            icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🖖</text></svg>'
-                        });
-                    }
-                }
-            } catch (err) {
-                console.error("Fasting notification schedule error: ", err);
+            const summary = await generateAiSummary('start_fast');
+            if ('serviceWorker' in navigator && navigator.serviceWorker.ready) {
+                const sw = await navigator.serviceWorker.ready;
+                sw.showNotification("Fasting Window Started ⌛", {
+                    body: summary.text,
+                    icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🖖</text></svg>'
+                });
+            } else {
+                new Notification("Fasting Window Started ⌛", {
+                    body: summary.text,
+                    icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🖖</text></svg>'
+                });
             }
         }
     }
