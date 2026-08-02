@@ -930,14 +930,28 @@ USER QUERY: ${query}`;
             
             if (todayMeals.length > 0) {
                 let totalCals = 0, totalPro = 0, totalCarb = 0, totalFat = 0;
+                let fastingCals = 0;
                 let times = [];
                 todayMeals.forEach(m => {
                     totalCals += Number(m.calories || 0);
                     totalPro += Number(m.protein || 0);
                     totalCarb += Number(m.carbs || 0);
                     totalFat += Number(m.fat || 0);
+                    
                     const ts = new Date(m.image_timestamp || m.timestamp);
-                    if (!isNaN(ts)) times.push(ts);
+                    if (!isNaN(ts)) {
+                        times.push(ts);
+                        const hhmm = `${String(ts.getHours()).padStart(2,'0')}:${String(ts.getMinutes()).padStart(2,'0')}`;
+                        let isFasting = false;
+                        if (targetStart < targetEnd) {
+                            isFasting = (hhmm >= targetEnd || hhmm < targetStart);
+                        } else {
+                            isFasting = (hhmm >= targetEnd && hhmm < targetStart);
+                        }
+                        if (isFasting) {
+                            fastingCals += Number(m.calories || 0);
+                        }
+                    }
                 });
                 
                 times.sort((a,b) => a - b);
@@ -956,14 +970,26 @@ USER QUERY: ${query}`;
                     <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
                         <span>TOTAL CALORIES:</span> <span style="color:var(--lcars-gold)">${Math.round(totalCals)} kcal</span>
                     </div>
+                    <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+                        <span>FASTING CALORIES:</span> ${
+                            fastingCals === 0
+                                ? '<span style="color:var(--lcars-emerald); font-weight:bold;">0 kcal (Clean Fast! 🌟)</span>'
+                                : `<span style="color:var(--lcars-red); font-weight:bold;">${Math.round(fastingCals)} kcal ⚠️</span>`
+                        }
+                    </div>
                     <div style="display:flex; justify-content:space-between;">
                         <span>MACRO BREAKDOWN:</span> <span>P: ${Math.round(totalPro)}g | C: ${Math.round(totalCarb)}g | F: ${Math.round(totalFat)}g</span>
                     </div>
                 `;
             } else {
                 DOM.fastTelemetryStatus.innerHTML = `
-                    <div style="margin-bottom:8px;">TARGET WINDOW: <span style="color:var(--lcars-emerald)">${targetStart} - ${targetEnd}</span></div>
-                    <div style="color: var(--lcars-peach);">NO MEALS LOGGED TODAY YET.</div>
+                    <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+                        <span>TARGET WINDOW:</span> <span style="color:var(--lcars-emerald)">${targetStart} - ${targetEnd}</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+                        <span>FASTING CALORIES:</span> <span style="color:var(--lcars-emerald); font-weight:bold;">0 kcal (Clean Fast! 🌟)</span>
+                    </div>
+                    <div style="color: var(--lcars-peach); margin-top:5px;">NO MEALS LOGGED TODAY YET.</div>
                 `;
             }
         } catch (e) {
