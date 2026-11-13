@@ -1,4 +1,6 @@
-// Auto-generated Baguette & Sourdough Boule Guru Knowledge Data
+// Bread Guru — Knowledge Data & Comprehensive Master Formulas
+// Compiled from 9 Foundational Texts (Modernist Bread, Lanio, Robertson, Leo, Forkish, King Arthur, Poilâne, Roberts, Greenway)
+
 const BAGUETTE_KB = {
   "00_MASTER_RECIPES_BIO_WHITE_FLOUR.md": "# MASTER BAGUETTES FOR BIO WHITE FLOUR: THE THREE PARADIGMS\n### Calibrated specifically for Organic / Bio White Wheat Flour (T65 / Artisan Unbleached ~11.0\u201311.8% Protein)\n\n---\n\n## Technical Calibration for Bio (Organic) White Flour\n\nWhen baking baguettes with **bio white flour** (organic French T65 or organic unbleached all-purpose/bread flour blend), three scientific realities must be addressed:\n\n1. **No Chemical Oxidizers or Conditioners:** Conventional commercial flours often contain ascorbic acid, potassium bromate, or bleaching agents that artificially cross-link gluten. Bio flour relies entirely on mechanical alignment, thermal regulation, and natural atmospheric oxidation during fermentation. Over-mixing will shear the gluten bonds; gentle folding (*p\u00e9trissage lent*) and time build superior tensile strength.\n2. **Native Enzymatic Dynamics:** Organic grain retains natural amylases and proteases without fungal spike additives. Autolyse is highly effective, but prolonged warm autolyses (>75 min) can degrade gluten elasticity. We calibrate autolyse to **45\u201360 minutes** at controlled temperatures.\n3. **Hydration Sweet Spot (68%\u201372%):** Bio white flour reaches optimal extensibility and structure without slumping at **69%\u201371% total hydration**. Adding water via **bassinage** (retaining 4\u20135% water until late in mixing) guarantees complete gluten sheath formation before the dough is relaxed by free water.\n\n---\n\n# PARADIGM 1: 100% PURE SOURDOUGH BAGUETTE (LEVAIN LIQUIDE)\n*Synthesis of Maurizio Leo (The Perfect Loaf), Jean-Marie Lanio (All About Baguette), and Addie Roberts (Secrets of Open Crumb)*\n\nThis version yields an open, gelatinized custard-like crumb with irregular alveoli, a blistered mahogany crust, and a sweet-whey, mild yogurt lactic aroma (preventing sharp acetic punch).\n\n### Batch Yield: 3 Baguettes (~310g raw dough each)\n\n### 1. Baker\u2019s Percentages & Formula\n| Ingredient | Baker's % | Weight (g) | Notes |\n| :--- | :--- | :--- | :--- |\n| **Bio White Flour** | 100.0% | 500g | Total flour (460g in main dough + 40g in levain) |\n| **Water** | 70.0% | 350g | Total water (310g main + 40g in levain) |\n| *Water 1 (Autolyse)* | 56.0% | 280g | Filtered, temp-adjusted |\n| *Water 2 (Bassinage)* | 6.0% | 30g | Added with salt |\n| **Fine Sea Salt** | 2.0% | 10g | Non-iodized |\n| **Liquid Levain (100% Hydr.)** | 16.0% | 80g | Built young (4\u20135 hours from feeding) |\n\n### 2. Leavening Architecture (Young Liquid Levain)\n* Build 5\u20136 hours before mixing:\n  * 16g active sourdough starter (100% hydration)\n  * 40g bio white flour\n  * 40g tepid water (26\u00b0C / 79\u00b0F)\n* Ferment at 24\u00b0\u201326\u00b0C (75\u00b0\u201379\u00b0F) until aerated, domed, and sweet-fruity (pH ~4.0\u20134.2, NOT exhausted/acidic).\n\n### 3. Step-by-Step Workflow & Timetable\n1. **Autolyse (60 min):**\n   * Mix 460g bio white flour with 280g Water 1 until no dry flour remains.\n   * Target dough temp after autolyse: 23\u00b0\u201324\u00b0C (73\u00b0\u201375\u00b0F). Rest covered for 60 min.\n2. **Incorporate Levain (5 min):**\n   * Spread 80g young liquid levain over the autolysed dough. Knead gently using the Rubaud method or gentle bowl folds for 3 minutes until smooth and integrated. Rest 20 min.\n3. **Bassinage & Salt Addition (5 min):**\n   * Sprinkle 10g fine salt and pour remaining 30g Water 2 over dough. Squeeze and fold until water and salt are fully absorbed and dough regains tension.\n4. **Bulk Fermentation & Strengthening (3.5 \u2013 4.5 hours @ 24\u00b0C / 75\u00b0F):**\n   * Perform **3 sets of Coil Folds** (or gentle stretch-and-folds) spaced 30 minutes apart during the first 1.5 hours.\n   * Let rest undisturbed for the remainder of bulk until volume increases by **35%\u201345%**, edges dome, and underside reveals trapped gas bubbles. *Do not let it double*, as high acidity will dissolve gluten during cold shaping.\n5. **Cold Retardation (Pointage au Bac - 12 to 16 hours @ 4\u00b0\u20135\u00b0C):**\n   * Transfer dough container into refrigerator (4\u00b0C / 39\u00b0F) overnight. This solidifies the dough lipids, retards yeast, develops maltose, and makes shaping cold, extensible dough effortless.\n6. **Dividing & Preshaping (Day 2):**\n   * Tip cold dough onto lightly floured surface. Divide into 3 equal pieces (~310g each).\n   * Gently pat into rectangles without crushing gas. Fold top third down and bottom third up (letter fold) to create a relaxed cylinder.\n   * Rest uncovered for 20\u201325 minutes (*D\u00e9tente* / Bench rest).\n7. **Final Shaping (Classical French Elongation):**\n   * Flatten cylinder lightly with fingers into a 12x18cm rectangle.\n   * Fold top edge down 1/3 and seal with thumb heel. Fold bottom edge up 1/3 and seal.\n   * Fold top completely over to meet bottom edge, using fingertips and thumb to trap an internal longitudinal air pocket and seal the bottom seam (*la soudure*).\n   * Roll outward with even pressure from center to ends, keeping hands angled to taper the tips (*bouts effil\u00e9s*). Target length: 35\u201338cm (to fit home baking stones).\n8. **Proofing on Couche (60\u201390 min @ 22\u00b0\u201324\u00b0C):**\n   * Place baguettes seam-side UP in floured linen couche pleats. Cover with damp cloth or plastic.\n   * Proof until puffy and resilient (finger poke leaves slow rebound).\n9. **Scoring & Baking:**\n   * Transfer to peel seam-side DOWN.\n   * Score 5 slashes along the central longitudinal axis at a **20\u00b0\u201330\u00b0 blade angle**, overlapping each cut by 1/3.\n   * Bake @ 245\u00b0C (475\u00b0F) with intense steam for 10 minutes. Remove steam source, vent oven, lower to 230\u00b0C (445\u00b0F), and bake 12\u201315 min until deep golden amber.\n\n---\n\n# PARADIGM 2: THE HYBRID BAGUETTE (LEVAIN + COMMERCIAL PINCH / TARTINE STYLE)\n*Synthesis of Chad Robertson (Tartine Bread) and Jean-Marie Lanio (French Tradition Hybrid)*\n\nThis method represents the apex of modern Parisian boulangerie baking: the complex aroma and longevity of sourdough combined with the explosive oven spring, distinct ears (*grignes*), and open, honeycomb alveolation provided by a controlled commercial yeast assist.\n\n### Batch Yield: 3 Baguettes (~315g raw dough each)\n\n### 1. Baker\u2019s Percentages & Formula\n| Ingredient | Baker's % | Weight (g) | Notes |\n| :--- | :--- | :--- | :--- |\n| **Bio White Flour** | 100.0% | 500g | Total flour (440g main + 30g levain + 30g poolish) |\n| **Water** | 71.0% | 355g | Total water (295g main + 30g levain + 30g poolish) |\n| *Water 1 (Autolyse)* | 54.0% | 270g | 22\u00b0C (72\u00b0F) |\n| *Water 2 (Bassinage)* | 5.0% | 25g | Dissolve yeast & salt |\n| **Fine Sea Salt** | 2.0% | 10g | 2% standard |\n| **Liquid Levain (100%)** | 12.0% | 60g | Young, sweet sourdough leaven |\n| **Poolish (100%)** | 12.0% | 60g | Over-fermented poolish (sweet wheat aroma) |\n| **Instant Dry Yeast (IDY)** | 0.2% | 1.0g | Micro-pinch (approx 1/4 tsp) |\n\n### 2. Dual Pre-Ferment Strategy\n* **The Poolish (12h prior or 4h warm):** 30g bio white flour + 30g water + 0.1g yeast (tiny speck). Ferment until bubbly and just beginning to recede.\n* **The Young Levain (5h prior):** 10g starter + 25g bio white flour + 25g water. Use at peak float stage.\n\n### 3. Step-by-Step Workflow & Timetable\n1. **Autolyse (45 min):** Mix 440g bio white flour and 270g Water 1. Rest 45 min.\n2. **Mix & Inoculate:** Add 60g Poolish and 60g Levain. Work with hands for 3 minutes.\n3. **Bassinage & Inoculation:** Add 1.0g Instant Yeast dissolved in 25g Water 2 along with 10g salt. Mix until dough forms a cohesive, glossy mass.\n4. **Bulk Fermentation (2.5 \u2013 3 hours @ 24\u00b0C / 75\u00b0F):**\n   * Fold at 30, 60, and 90 minutes.\n   * Because both leavens are present, fermentation is vigorous yet controlled. Dough should feel light, airy, and billowy with a 50% volume expansion.\n5. **Optional Retardation:** Can either be shaped same-day or placed in fridge (4\u00b0C) for 10\u201314 hours.\n6. **Dividing, Preshaping & Shaping:**\n   * Divide into 315g portions. Preshap into loose cylinders. Bench rest 20 min.\n   * Shape using the Lanio 3-step roll: Fold top over, fold bottom up, create tension seam, roll gently outward from center to 38cm length.\n7. **Couche Proofing (45\u201360 min @ 23\u00b0C):**\n   * Hybrid dough proofs faster than pure levain. Monitor with gentle indentation test.\n8. **Scoring & Baking:**\n   * 5 overlapping cuts at 25\u00b0 angle.\n   * Bake @ 245\u00b0C (475\u00b0F) on preheated stone/steel with heavy steam for 10 min.\n   * Vent steam, bake 12\u201314 min more until golden brown with crisp singing crust (*le chant du pain*).\n\n---\n\n# PARADIGM 3: ARTISANAL OVERNIGHT POOLISH BAGUETTE (COMMERCIAL YEAST TRADITION)\n*Synthesis of Jean-Marie Lanio (*Pointage Retard\u00e9*), King Arthur Big Book of Bread, and Ken Forkish (FWSY)*\n\nThe purist Parisian classic that highlights the natural sweetness of organic wheat through slow enzymatic conversion without any sourdough acidity. Thin, shattering crust with an irregular, glossy, pearl-colored interior.\n\n### Batch Yield: 3 Baguettes (~310g raw dough each)\n\n### 1. Baker\u2019s Percentages & Formula\n| Ingredient | Baker's % | Weight (g) | Notes |\n| :--- | :--- | :--- | :--- |\n| **Bio White Flour** | 100.0% | 500g | Total flour (350g main + 150g in poolish) |\n| **Water** | 70.0% | 350g | Total water (200g main + 150g in poolish) |\n| *Water 1 (Main Mix)* | 35.0% | 175g | Adjusted by Base Temp formula |\n| *Water 2 (Bassinage)* | 5.0% | 25g | Added with salt |\n| **Fine Sea Salt** | 2.0% | 10g | 2% standard |\n| **Instant Dry Yeast (IDY)** | 0.3% | 1.5g | Total (0.2g in poolish + 1.3g in final dough) |\n\n### 2. The Overnight Poolish (100% Hydration, 30% Pre-fermented Flour)\n* 14\u201316 hours before dough mix:\n  * 150g Bio White Flour\n  * 150g Cold Water (18\u00b0C / 64\u00b0F)\n  * 0.2g Instant Dry Yeast (a tiny pinch between two fingers)\n* Ferment at cool room temperature (18\u00b0\u201320\u00b0C / 64\u00b0\u201368\u00b0F). Poolish should be fully expanded, frothy with surface craters, and have a rich hazelnut aroma.\n\n### 3. Step-by-Step Workflow & Timetable\n1. **Autolyse (30 min):**\n   * In mixing bowl, combine 350g bio white flour, 175g Water 1, and all 300g of mature Poolish.\n   * Mix until no dry flour remains. Rest covered for 30 minutes.\n2. **Final Mix & Bassinage:**\n   * Sprinkle 10g fine salt and 1.3g Instant Dry Yeast over dough. Add 25g Water 2.\n   * Mix on medium speed (or hand slap-and-fold) for 4\u20135 minutes until smooth, extensible, and pulling away cleanly from the bowl edges. Desired dough temperature: **23\u00b0\u201324\u00b0C**.\n3. **Pointage Retard\u00e9 (Cold Bulk Fermentation - Professional Method):**\n   * Let dough rest at room temperature for 45 minutes with 1 set of folds at 30 min.\n   * Transfer to an oiled container, seal, and place immediately into **4\u00b0C (39\u00b0F) refrigeration for 14 to 18 hours**.\n   * *Science:* Cold enzymatic conversion breaks starches into maltose while yeast activity is dormant, maximizing browning sugars and crust blister formation.\n4. **Dividing & Preshaping (Cold Process):**\n   * Turn cold dough onto bench. Divide into three 310g portions.\n   * Gently fold into rectangular rolls. Rest 25 minutes covered.\n5. **Final Shaping:**\n   * Extend to 36\u201338cm with light hand pressure, preserving trapped gas columns inside the gluten sheath.\n6. **Final Proof on Linen Couche:**\n   * Proof in couche pleats for **60 minutes at room temperature (22\u00b0\u201324\u00b0C)**.\n   * Dough should be buoyant, light, and hold gentle indentation.\n7. **Scoring & Baking:**\n   * Transfer with a transfer board (*planche \u00e0 enfourner*) to parchment or peel.\n   * Score with 5 swift, shallow slashes along the center line.\n   * Bake at **245\u00b0C (475\u00b0F)** with heavy steam for 10 min. Vent steam and bake at **225\u00b0C (435\u00b0F)** for 12\u201314 min until deeply golden and resonant when tapped on the bottom.\n\n---\n\n## Master Comparison Matrix for Bio White Flour Baguettes\n\n| Attribute | 1. Pure Sourdough (Levain) | 2. Hybrid (Levain + Yeast) | 3. Overnight Poolish (Artisanal) |\n| :--- | :--- | :--- | :--- |\n| **Total Hydration** | 70% (64% + 6% bassinage) | 71% (66% + 5% bassinage) | 70% (65% + 5% bassinage) |\n| **Pre-fermented Flour**| 16% (Young Levain) | 24% (12% Levain + 12% Poolish) | 30% (Poolish) |\n| **Yeast Addition** | 0.0% | 0.2% Instant (1g) | 0.3% Instant (0.2g + 1.3g) |\n| **Flavor Profile** | Complex, creamy, mild yogurt-like tang | Balanced, nutty, toasted wheat, clean finish | Sweet wheat, hazelnut, zero sourness |\n| **Crumb Texture** | Custard-like, wild irregular alveoli | Open honeycomb, light, aerated | Glossy, webbed, light and airy |\n| **Crust Character** | Thicker, deeply caramelized, crackled | Thin, crisp, blistered, prominent ears | Ultra-thin, shattering crisp, golden blisters |\n| **Process Length** | ~24 hours (with overnight retard) | ~18\u201320 hours (or 5h direct same-day) | ~18\u201320 hours (14h poolish + cold bulk) |\n| **Difficulty Level** | Advanced (tight fermentation window) | Intermediate (forgiving & high yield) | Beginner\u2013Intermediate (highly reliable) |\n",
   "01_FOUNDATIONS_AND_FLOUR.md": "# 01. Foundations and Flour: The Scientific Architecture of Sourdough Baguettes\n\nThis foundational module establishes the physicochemical parameters of the French baguette, synthesizing insights from Jean-Marie Lanio & J\u00e9r\u00e9my Ballester (*Le grand livre de la baguette*), Maurizio Leo (*The Perfect Loaf*), Chad Robertson (*Tartine Bread*), King Arthur Baking Company, Ken Forkish (*Flour Water Salt Yeast*), Addie Roberts, Teresa Greenway, and Apollonia Poil\u00e2ne.\n\n---\n\n## 1. Flour Specifications & Rheology\n\nThe French baguette relies upon precise flour selection. Unlike dense hearth loaves that demand high-protein strong flours (13\u201314%+ protein), authentic baguettes require flours engineered for extensibility, gas retention, and crisp, blistered crust development.\n\n### French T65 Tradition Flour vs. North American Equivalents\n* **French T65 Tradition (French Decree of 1993 / D\u00e9cret Pain de Tradition Fran\u00e7aise):** Unbleached, stone- or roller-milled wheat flour with an ash content (taux de cendres) between **0.62% and 0.75%** (dry basis). Protein ranges from **10.5% to 12.0%**. It contains zero chemical additives, bleaching agents, or commercial emulsifiers. Enzymes are native and balanced.\n* **North American Equivalents:** \n  * *All-Purpose Flour (unbleached, unbromated, ~11% protein)* blended with *Bread Flour (~12\u201312.5% protein)*, as championed by Chad Robertson (Tartine) and Maurizio Leo, to balance extensibility and strength.\n  * King Arthur unbleached all-purpose or artisan flour (~11.7% protein) provides adequate gluten structure without excessive elasticity that causes baguettes to snap back or shrink during shaping.\n\n### Rheological Indices (Alveograph of Chopin)\n* **W Value (Gluten Strength):** Ideal T65 flour registers a W value between **200 and 240** (moderate strength). Excessively high W (>300) produces tight, rubbery dough that resists elongation and tears during scoring.\n* **P/L Ratio (Tenacity vs. Extensibility):** Optimal P/L is between **0.45 and 0.60**. Low P/L (<0.4) yields slack, runny dough; high P/L (>0.8) yields short, tough dough that refuses to stretch into tapered baguettes.\n* **Falling Number (Enzymatic Activity):** Target Falling Number is **250 to 300 seconds**, ensuring balanced alpha-amylase activity to break down damaged starches into fermentable sugars without degrading structural integrity.\n\n### Native Enzymes vs. Commercial Additives\n* **Alpha- and Beta-Amylase:** Hydrolyze damaged starch into maltose and glucose, fueling yeast and lactic acid bacteria.\n* **Protease:** Softens gluten proteins over time, enhancing extensibility. Excessive protease (from sprouted wheat or high insect-damaged grain) causes slack, sticky dough.\n* **Ascorbic Acid (Vitamin C):** Acting as an oxidizing agent, ascorbic acid strengthens disulfide bonds in gluten. While permitted in industrial baking to accelerate mixing tolerance, artisan tradition (Lanio, Robertson) avoids exogenous oxidizers to allow natural oxidation during long bulk fermentation and manual mixing (*p\u00e9trissage lent*).\n\n---\n\n## 2. Hydration & Water Physics\n\nBaguette hydration typically spans **68% to 74%**, depending on flour absorption capacity and leavening system.\n\n* **Free vs. Bound Water:** Hydration dictates starch gelatinization during baking and enzymatic mobility during bulk fermentation. Free water facilitates yeast motility and enzymatic hydrolysis.\n* **Water Mineral Content & pH:**\n  * **Hardness (Calcium and Magnesium):** Moderate mineral content strengthens gluten ionic bonds. Soft water yields slack, sticky dough; excessively hard water tightens gluten excessively.\n  * **pH:** Slightly acidic water (pH 6.0\u20136.5) optimizes yeast activity and protease function. Highly alkaline water inhibits yeast and slows fermentation.\n\n---\n\n## 3. Thermal Mechanics: The Base Temperature Formula (*Le Coulage*)\n\nIn professional baking (detailed extensively by Lanio in *Le grand livre de la baguette*), dough temperature at the end of mixing (*Temp\u00e9rature de P\u00e2te* or **T\u00b0P**) must be strictly controlled\u2014typically **22\u00b0C to 24\u00b0C (72\u00b0F to 75\u00b0F)**\u2014to regulate fermentation kinetics and prevent premature over-acidification.\n\nThe master formula to determine exact water temperature (**T_water**) is known as *Le Coulage*:\n\n$$\\text{T\\_water} = (3 \\times \\text{Base\\_Temperature}) - (\\text{T\\_room} + \\text{T\\_flour} + \\text{T\\_friction})$$\n\n* **Base Temperature (BT):** A constant derived from room and flour factors, usually set around **60\u00b0C to 65\u00b0C** (in metric units, summing water, flour, and room temps) or calculated in Fahrenheit as:\n  $$\\text{T\\_water} = (3 \\times \\text{Desired\\_Dough\\_Temp}) - (\\text{T\\_room} + \\text{T\\_flour} + \\text{Friction\\_Factor})$$\n* **Friction Factor (FF):** Heat introduced into the dough by mechanical action:\n  * Hand mixing / gentle folding: **1\u00b0C to 2\u00b0C (2\u00b0F to 3\u00b0F)**\n  * Spiral mixer (low speed): **3\u00b0C to 5\u00b0C (5\u00b0F to 9\u00b0F)**\n  * Planetary mixer: **6\u00b0C to 10\u00b0C (10\u00b0F to 18\u00b0F)**\n\n### Practical Example (Metric / Celsius):\n* Desired Dough Temp (T\u00b0P): **24\u00b0C**\n* Multiplier constant (3 \u00d7 24) = **72\u00b0C**\n* Room Temperature (T_room): **21\u00b0C**\n* Flour Temperature (T_flour): **20\u00b0C**\n* Friction Factor (spiral mixer): **5\u00b0C**\n* **Calculation:** $\\text{T\\_water} = 72 - (21 + 20 + 5) = 72 - 46 = \\mathbf{26^\\circ\\text{C}}$\n\n---\n*Reference corpus: `extracted_sources/01_tartine_baguettes.txt`, `extracted_sources/04_all_about_baguette_lanio.txt`, `extracted_sources/02_perfect_loaf_baguettes.txt`.*\n",
@@ -25,50 +27,37 @@ const FLOUR_PROFILES = [
     "max_safe_hydration": 73.0,
     "autolyse_min": 50,
     "bassinage_threshold": 64.0,
-    "notes": "Unbleached, zero chemical oxidizers, native enzymes. Optimal extensibility at 69\u201371%."
+    "notes": "Classic French organic flour with no chemical oxidizers. Best at 69-71% hydration with gentle folding."
   },
   {
     "id": "t65_conv",
-    "name": "French T65 Tradition (Conventional / Malted)",
+    "name": "French T65 Tradition (Label Rouge / Conv.)",
     "protein": 11.8,
-    "ash": 0.65,
+    "ash": 0.68,
     "is_bio": false,
-    "rec_hydration": 71.0,
+    "rec_hydration": 72.0,
     "min_safe_hydration": 66.0,
     "max_safe_hydration": 75.0,
-    "autolyse_min": 50,
+    "autolyse_min": 45,
     "bassinage_threshold": 65.0,
-    "notes": "Allowed wheat malt / fungal amylase. Handles up to 74%."
+    "notes": "Highest standard commercial French baguette flour. Exceptional extensibility and blister potential."
   },
   {
-    "id": "t55",
-    "name": "French T55 (Patisserie / Pain Blanc)",
+    "id": "t55_french",
+    "name": "French T55 Pastry & Bread Flour",
     "protein": 10.5,
     "ash": 0.55,
     "is_bio": false,
-    "rec_hydration": 67.0,
-    "min_safe_hydration": 63.0,
+    "rec_hydration": 66.0,
+    "min_safe_hydration": 62.0,
     "max_safe_hydration": 70.0,
-    "autolyse_min": 35,
-    "bassinage_threshold": 63.0,
-    "notes": "Lower protein & mineral content. Puddle risk if pushed past 71%."
+    "autolyse_min": 30,
+    "bassinage_threshold": 62.0,
+    "notes": "Low ash, lower protein. Extremely crisp thin crust. Do not exceed 68% hydration."
   },
   {
-    "id": "t80",
-    "name": "French T80 (Bise / Campagne)",
-    "protein": 12.2,
-    "ash": 0.82,
-    "is_bio": true,
-    "rec_hydration": 74.0,
-    "min_safe_hydration": 68.0,
-    "max_safe_hydration": 78.0,
-    "autolyse_min": 50,
-    "bassinage_threshold": 66.0,
-    "notes": "High ash/bran content absorbs extra water. Needs gentle handling to protect gluten."
-  },
-  {
-    "id": "na_ap",
-    "name": "North American AP (King Arthur Unbleached)",
+    "id": "ka_ap",
+    "name": "King Arthur Unbleached All-Purpose",
     "protein": 11.7,
     "ash": 0.55,
     "is_bio": false,
@@ -77,223 +66,1240 @@ const FLOUR_PROFILES = [
     "max_safe_hydration": 74.0,
     "autolyse_min": 45,
     "bassinage_threshold": 64.0,
-    "notes": "Hard red winter wheat blend. Good all-around strength and extensibility."
+    "notes": "Hard red winter wheat blend. Consistently high quality and excellent enzymatic balance."
   },
   {
-    "id": "na_bread",
-    "name": "North American Bread Flour (King Arthur / Bob)",
+    "id": "ka_bread",
+    "name": "King Arthur Unbleached Bread Flour",
     "protein": 12.7,
-    "ash": 0.55,
+    "ash": 0.58,
     "is_bio": false,
-    "rec_hydration": 73.0,
+    "rec_hydration": 74.0,
     "min_safe_hydration": 68.0,
     "max_safe_hydration": 78.0,
     "autolyse_min": 60,
     "bassinage_threshold": 66.0,
-    "notes": "High gluten elasticity. Can be stiff/rubbery if under-hydrated."
+    "notes": "High gluten tenacity. Handles up to 76% hydration with bassinage."
   },
   {
-    "id": "manitoba",
-    "name": "Italian Manitoba / Super-Strong Flour",
-    "protein": 14.2,
-    "ash": 0.6,
-    "is_bio": false,
-    "rec_hydration": 78.0,
-    "min_safe_hydration": 72.0,
-    "max_safe_hydration": 84.0,
-    "autolyse_min": 75,
+    "id": "t80_stoneground",
+    "name": "French T80 Semi-Complet (Stoneground / Bio)",
+    "protein": 12.2,
+    "ash": 0.85,
+    "is_bio": true,
+    "rec_hydration": 75.0,
+    "min_safe_hydration": 70.0,
+    "max_safe_hydration": 80.0,
+    "autolyse_min": 60,
     "bassinage_threshold": 68.0,
-    "notes": "Very high tenacity (W > 350). Absorbs massive water (78\u201382%), needs long autolyse."
+    "notes": "Stoneground with germ and high mineral ash. Deep wheaty flavor, fast fermentation kinetics."
+  },
+  {
+    "id": "italian_tipo_0",
+    "name": "Italian Tipo 0 / Manitoba Blend (W 280-320)",
+    "protein": 13.2,
+    "ash": 0.55,
+    "is_bio": false,
+    "rec_hydration": 76.0,
+    "min_safe_hydration": 70.0,
+    "max_safe_hydration": 82.0,
+    "autolyse_min": 60,
+    "bassinage_threshold": 68.0,
+    "notes": "Very strong gluten network with high tenacity. Requires longer autolyse to relax."
   },
   {
     "id": "custom",
-    "name": "Custom Flour Profile",
+    "name": "Custom Baker's Flour Profile",
     "protein": 11.5,
     "ash": 0.65,
-    "is_bio": true,
+    "is_bio": false,
     "rec_hydration": 70.0,
     "min_safe_hydration": 64.0,
-    "max_safe_hydration": 74.0,
+    "max_safe_hydration": 76.0,
     "autolyse_min": 45,
     "bassinage_threshold": 64.0,
-    "notes": "User-defined flour specifications."
+    "notes": "Custom user-defined flour specifications."
   }
 ];
 
 const RECIPES_BAGUETTE = [
   {
-    "id": "sourdough",
-    "title": "1. Pure Sourdough Baguette (100% Levain)",
-    "subtitle": "Zero commercial yeast. Mild lactic yogurt aroma, custard-like open crumb, caramelized blistered crust.",
-    "source": "Maurizio Leo (The Perfect Loaf) + Jean-Marie Lanio + Addie Roberts",
-    "base_hydration": 70.0,
-    "flour_basis": 500,
-    "base_yield": 3,
-    "unit_name": "Baguette",
-    "steps": [
-      {
-        "title": "Levain Build (5h prior)",
-        "text": "Build young liquid levain (1:5:5 or 1:2.5:2.5) with target flour and tepid water (26\u00b0C). Use at peak float before acid spikes."
-      },
-      {
-        "title": "Autolyse (45\u201360 min)",
-        "text": "Mix main flour with base autolyse water (holding back bassinage). Cover and rest to hydrate proteins without mechanical strain."
-      },
-      {
-        "title": "Incorporate Levain",
-        "text": "Spread ripe levain over dough and knead gently (Rubaud method) for 3 min until smooth. Rest 20 min."
-      },
-      {
-        "title": "Bassinage & Salt",
-        "text": "Add fine salt and pour bassinage water. Fold and squeeze until fully emulsified and dough tightens back up."
-      },
-      {
-        "title": "Bulk Fermentation (3.5\u20134h)",
-        "text": "Perform 3 sets of coil folds spaced 30 min apart. Bulk until dough increases 35%\u201340% in volume."
-      },
-      {
-        "title": "Cold Retard (Pointage au Bac - 14\u201316h @ 4\u00b0C)",
-        "text": "Chilling the bulk dough sets the lipids and slows yeast, creating incredible extensibility and blistering."
-      },
-      {
-        "title": "Divide & Bench Rest",
-        "text": "Divide cold dough into portions (approx 310g). Letter fold into loose cylinders. Bench rest 20 min."
-      },
-      {
-        "title": "Final Shaping",
-        "text": "Fold top down 1/3, bottom up 1/3, seal seam with thumb heel, roll gently outward from center to 36\u201338cm with tapered tips."
-      },
-      {
-        "title": "Couche Proof (60\u201375 min)",
-        "text": "Proof seam-side UP in floured linen couche pleats at 23\u00b0C until puffy and buoyant."
-      },
-      {
-        "title": "Score & Steam Bake",
-        "text": "5 slashes at 20\u00b0\u201330\u00b0 blade angle with 1/3 overlap along centerline. Bake @ 245\u00b0C with heavy steam for 10 min. Vent steam, bake @ 230\u00b0C for 12\u201315 min."
-      }
-    ]
-  },
-  {
-    "id": "hybrid",
-    "title": "2. The Hybrid Baguette (Levain + Poolish / Yeast Pinch)",
-    "subtitle": "Tartine & Parisian bakery style. Complex sourdough flavor with commercial yeast lift, thin crust, and prominent ears.",
-    "source": "Chad Robertson (Tartine Bread) + Jean-Marie Lanio",
-    "base_hydration": 71.0,
-    "flour_basis": 500,
-    "base_yield": 3,
-    "unit_name": "Baguette",
-    "steps": [
-      {
-        "title": "Pre-ferments (12h poolish, 5h levain)",
-        "text": "Prepare poolish (100% hydr + tiny speck of yeast) and young sourdough levain."
-      },
-      {
-        "title": "Autolyse (45 min)",
-        "text": "Mix main flour with base water. Rest 45 min."
-      },
-      {
-        "title": "Mix Pre-ferments",
-        "text": "Incorporate both poolish and levain into autolysed dough. Mix 3 min."
-      },
-      {
-        "title": "Bassinage & Yeast/Salt",
-        "text": "Dissolve instant yeast in bassinage water, add salt, and work into dough until silky."
-      },
-      {
-        "title": "Bulk Fermentation (2.5\u20133h)",
-        "text": "Perform 2 folds at 30 and 60 minutes. Ferments faster due to dual leaven."
-      },
-      {
-        "title": "Divide & Bench Rest",
-        "text": "Divide into 315g portions, preshape cylinders, rest 20 min."
-      },
-      {
-        "title": "Shaping & Couche (45\u201360 min)",
-        "text": "Shape 38cm baguettes with tapered ends. Proof in couche pleats for 45\u201360 min."
-      },
-      {
-        "title": "Score & Steam Bake",
-        "text": "Score 5 cuts at 25\u00b0 angle. Bake @ 245\u00b0C with heavy steam for 10 min; vent and bake @ 230\u00b0C for 12\u201314 min."
-      }
-    ]
-  },
-  {
-    "id": "poolish",
-    "title": "3. Artisanal Overnight Poolish Baguette (Commercial Yeast)",
-    "subtitle": "French Tradition with zero sourness. Sweet wheat, hazelnut notes, honeycombed crumb, shattering crisp crust.",
-    "source": "Jean-Marie Lanio (Pointage Retard\u00e9) + King Arthur + Ken Forkish",
-    "base_hydration": 70.0,
-    "flour_basis": 500,
-    "base_yield": 3,
-    "unit_name": "Baguette",
-    "steps": [
-      {
-        "title": "Overnight Poolish (14\u201316h)",
-        "text": "Mix 150g flour, 150g cold water, and 0.2g yeast. Ferment at 18\u00b0\u201320\u00b0C until frothy with craters."
-      },
-      {
-        "title": "Autolyse (30 min)",
-        "text": "Combine main flour, base water, and all poolish. Rest 30 min."
-      },
-      {
-        "title": "Final Mix & Bassinage",
-        "text": "Add remaining yeast, salt, and bassinage water. Mix 4\u20135 min until smooth and elastic (Dough temp 23\u00b0\u201324\u00b0C)."
-      },
-      {
-        "title": "Pointage Retard\u00e9 (14\u201318h @ 4\u00b0C)",
-        "text": "Rest 45 min with 1 fold. Refrigerate at 4\u00b0C overnight to unlock natural sugars."
-      },
-      {
-        "title": "Preshape & Bench Rest",
-        "text": "Divide cold dough into 310g pieces. Preshape into cylinders. Bench rest 25 min."
-      },
-      {
-        "title": "Shape & Couche Proof (60 min)",
-        "text": "Shape 36\u201338cm baguettes, proof on couche for 60 min at 23\u00b0C."
-      },
-      {
-        "title": "Score & Steam Bake",
-        "text": "Score 5 cuts along centerline. Bake @ 245\u00b0C with steam for 10 min; vent and bake @ 225\u00b0C for 12\u201314 min."
-      }
-    ]
-  },
-  {
     "id": "modernist_a_plus",
-    "title": "4. Modernist Bread \"A-Plus Baguette\"",
-    "subtitle": "Modernist competition formula with poolish, liquid levain, and 2.2% toasted corn flour inclusion for extraordinary crust caramelization.",
-    "source": "Modernist Bread Vol 6 (Recipe Manual, p. 32)",
+    "title": "Modernist Bread: A-Plus Baguette",
+    "book": "Modernist Bread Vol 6 (p. 48)",
+    "author": "Nathan Myhrvold & Francisco Migoya",
+    "subtitle": "Dual fermentation (poolish + levain) with 2.2% toasted corn flour for explosive Maillard aromatics.",
+    "leavening_type": "Hybrid (Poolish + Levain + Yeast)",
     "base_hydration": 70.5,
     "flour_basis": 500,
     "base_yield": 3,
     "unit_name": "Baguette",
+    "ingredients": [
+      {
+        "name": "Flour (Active Selected)",
+        "type": "flour_main",
+        "pct": 81.75,
+        "note": "Autolysed with base water"
+      },
+      {
+        "name": "Toasted Corn Flour (175\u00b0C)",
+        "type": "special",
+        "pct": 2.25,
+        "note": "Toasted 20 min in oven until hazelnut brown"
+      },
+      {
+        "name": "Base Water (Autolyse)",
+        "type": "water_base",
+        "pct": 45.75,
+        "note": "Coulage temp adjusted; mixed with poolish & levain"
+      },
+      {
+        "name": "Bassinage Water (Late Addition)",
+        "type": "water_bassinage",
+        "pct": 6.5,
+        "note": "Emulsified with salt during final mix"
+      },
+      {
+        "name": "Young Liquid Levain (100% Hydr)",
+        "type": "levain",
+        "pct": 21.5,
+        "flour_pct": 10.75,
+        "water_pct": 10.75,
+        "note": "100% hydration, used at peak float"
+      },
+      {
+        "name": "Poolish (100% Hydration)",
+        "type": "poolish",
+        "pct": 15.0,
+        "flour_pct": 7.5,
+        "water_pct": 7.5,
+        "note": "12-14h pre-ferment"
+      },
+      {
+        "name": "Instant Dry Yeast",
+        "type": "yeast",
+        "pct": 0.5,
+        "note": "Final dough commercial yeast boost"
+      },
+      {
+        "name": "Fine Sea Salt",
+        "type": "salt",
+        "pct": 2.0,
+        "note": "Controls enzymatic activity"
+      }
+    ],
     "steps": [
       {
-        "title": "Toast Corn Flour & Poolish (12h prior)",
-        "text": "Toast 11g corn flour at 175\u00b0C (350\u00b0F) for 20 min until intensely aromatic. Prepare 100% hydration poolish (75g flour, 75g water, 0.08g yeast)."
+        "title": "Toasted Corn Prep",
+        "time": "20 min",
+        "timer_seconds": 1200,
+        "phase": "Prep",
+        "cues": "Aroma should be rich, nutty, and hazelnut-like.",
+        "text": "Toast finely milled corn flour at 175\u00b0C (350\u00b0F) for 20 min until golden and fragrant. Cool completely before mixing."
       },
       {
-        "title": "Autolyse with Levain (30 min)",
-        "text": "Mix remaining flour, toasted corn flour, poolish, 108g ripe liquid levain, and base water. Autolyse 30 min."
+        "title": "Autolyse Rest",
+        "time": "30 min",
+        "timer_seconds": 1800,
+        "phase": "Autolyse",
+        "cues": "Dough forms a shaggy, wet mass with no dry pockets.",
+        "text": "Combine main flour, toasted corn flour, base water, poolish, and young levain. Rest 30 min covered."
       },
       {
-        "title": "Bassinage with Salt & Yeast",
-        "text": "Dissolve instant dry yeast (2.5g) and salt (10g) in reserved bassinage water (30g). Mix to medium gluten development."
+        "title": "Mix & Bassinage",
+        "time": "6 min",
+        "timer_seconds": 360,
+        "phase": "Mixing",
+        "cues": "Dough tightens and pulls away cleanly from bowl sides.",
+        "text": "Add fine sea salt, instant yeast, and bassinage water. Mix gently until water is completely emulsified."
       },
       {
-        "title": "Bulk Fermentation (3.5h @ 21\u00b0C)",
-        "text": "Perform 3 four-edge folds: 1 fold every hour after the first hour, 30 min rest after final fold."
+        "title": "Bulk Fermentation (Fold #1)",
+        "time": "45 min",
+        "timer_seconds": 2700,
+        "phase": "Bulk",
+        "cues": "Dough shows initial elasticity and smoothing.",
+        "text": "Perform a 4-edge stretch and fold. Check dough temperature (target 21\u00b0C\u201322\u00b0C)."
+      },
+      {
+        "title": "Bulk Fermentation (Fold #2)",
+        "time": "45 min",
+        "timer_seconds": 2700,
+        "phase": "Bulk",
+        "cues": "Noticeable gas bubbles visible beneath the surface.",
+        "text": "Perform second stretch and fold. Dough will feel silkier and hold a domed shape."
+      },
+      {
+        "title": "Bulk Fermentation (Fold #3)",
+        "time": "45 min",
+        "timer_seconds": 2700,
+        "phase": "Bulk",
+        "cues": "Dough expands by ~35% with delicate aerated feel.",
+        "text": "Perform a gentle coil fold. Rest remaining bulk time until aerated by 35%."
       },
       {
         "title": "Divide & Preshape",
-        "text": "Divide into 330g portions. Preshape into loose cylinders; rest 20 min."
+        "time": "20 min",
+        "timer_seconds": 1200,
+        "phase": "Preshape",
+        "cues": "Loose cylinders should feel buoyant and soft.",
+        "text": "Divide dough into 3 equal pieces (~320g). Gently fold into loose cylinders. Bench rest 20 min covered."
       },
       {
-        "title": "Final Shaping & Proof",
-        "text": "Shape into 38cm baguettes. Proof in couche at 21\u00b0C (70\u00b0F) for 1.25\u20131.5 hours."
+        "title": "Final Elongation & Shaping",
+        "time": "10 min",
+        "timer_seconds": 600,
+        "phase": "Shape",
+        "cues": "Taut outer skin with gently tapered, elegant tips.",
+        "text": "Fold top down 1/3, bottom up 1/3, seal seam with thumb heel, roll gently outward to 36cm with pointed ends."
       },
       {
-        "title": "Score & Modernist Steam Bake",
-        "text": "Score 5 cuts. Bake on preheated stone/steel at 240\u00b0C (465\u00b0F) with saturated steam for 10 min. Vent steam thoroughly and bake 14 min until deep mahogany."
+        "title": "Couche Proof",
+        "time": "75 min",
+        "timer_seconds": 4500,
+        "phase": "Proof",
+        "cues": "Dough springs back slowly when lightly poked.",
+        "text": "Transfer seam-side UP into floured linen couche pleats. Proof at 21\u00b0C until aerated."
+      },
+      {
+        "title": "Score & Steam Bake",
+        "time": "25 min (10m steam + 15m vent)",
+        "timer_seconds": 600,
+        "phase": "Bake",
+        "cues": "Crust is deeply blistered mahogany with singing crunch.",
+        "text": "5 overlapping slashes at 25\u00b0 angle along central axis. Bake at 240\u00b0C with saturated steam for 10 min. Vent steam completely; bake 15 min dry at 230\u00b0C."
+      }
+    ]
+  },
+  {
+    "id": "modernist_levain",
+    "title": "Modernist Bread: 100% Levain French Baguette",
+    "book": "Modernist Bread Vol 6 (p. 50)",
+    "author": "Nathan Myhrvold & Francisco Migoya",
+    "subtitle": "Pure sourdough with zero commercial yeast. Controlled acid accumulation and custardy open crumb.",
+    "leavening_type": "Pure Sourdough (100% Levain)",
+    "base_hydration": 72.0,
+    "flour_basis": 500,
+    "base_yield": 3,
+    "unit_name": "Baguette",
+    "ingredients": [
+      {
+        "name": "Flour (Active Selected)",
+        "type": "flour_main",
+        "pct": 90.0,
+        "note": "French T65 or unbleached bread flour"
+      },
+      {
+        "name": "Base Water (Autolyse)",
+        "type": "water_base",
+        "pct": 52.0,
+        "note": "Mixed with flour for initial hydration"
+      },
+      {
+        "name": "Bassinage Water",
+        "type": "water_bassinage",
+        "pct": 10.0,
+        "note": "Added with salt after autolyse"
+      },
+      {
+        "name": "Liquid Levain (100% Hydr)",
+        "type": "levain",
+        "pct": 20.0,
+        "flour_pct": 10.0,
+        "water_pct": 10.0,
+        "note": "Young, sweet lactic levain"
+      },
+      {
+        "name": "Fine Sea Salt",
+        "type": "salt",
+        "pct": 2.0,
+        "note": "Gluten strengthener"
+      }
+    ],
+    "steps": [
+      {
+        "title": "Young Levain Build",
+        "time": "5 hrs prior",
+        "timer_seconds": 18000,
+        "phase": "Prep",
+        "cues": "Levain is domed, sweet-smelling, and passes float test.",
+        "text": "Feed levain at 1:2.5:2.5 ratio with active flour. Use when bubbly, domed, and smells like fresh yogurt."
+      },
+      {
+        "title": "Autolyse",
+        "time": "45 min",
+        "timer_seconds": 2700,
+        "phase": "Autolyse",
+        "cues": "Enzymes activate; dough becomes stretchy without kneading.",
+        "text": "Mix main flour and base water until fully combined. Rest covered 45 min."
+      },
+      {
+        "title": "Incorporate Levain",
+        "time": "4 min",
+        "timer_seconds": 240,
+        "phase": "Mixing",
+        "cues": "Levain blends completely into the autolysed dough.",
+        "text": "Spread young levain over dough. Work in using Rubaud method for 3-4 minutes. Rest 20 min."
+      },
+      {
+        "title": "Bassinage & Salt",
+        "time": "5 min",
+        "timer_seconds": 300,
+        "phase": "Mixing",
+        "cues": "Dough slackens then tightens into a glossy, coherent mass.",
+        "text": "Add salt and bassinage water. Squeeze and fold until fully absorbed."
+      },
+      {
+        "title": "Bulk Fermentation (4 Coil Folds)",
+        "time": "4 hrs (Folds every 45m)",
+        "timer_seconds": 2700,
+        "phase": "Bulk",
+        "cues": "Alveoli start developing; dome shape on top.",
+        "text": "Perform 4 gentle coil folds spaced 45 minutes apart at 23\u00b0C\u201324\u00b0C."
+      },
+      {
+        "title": "Cold Retard (Pointage au Bac)",
+        "time": "14 hrs @ 4\u00b0C",
+        "timer_seconds": 50400,
+        "phase": "Bulk",
+        "cues": "Chilled dough firm to touch with micro-blistering.",
+        "text": "Transfer bulk dough into oiled tub and refrigerate overnight at 4\u00b0C."
+      },
+      {
+        "title": "Divide & Preshape Cold",
+        "time": "20 min",
+        "timer_seconds": 1200,
+        "phase": "Preshape",
+        "cues": "Cold dough cuts cleanly without degassing.",
+        "text": "Divide cold dough into 3 equal portions (~315g). Letter-fold gently. Rest 20 min."
+      },
+      {
+        "title": "Final Shaping",
+        "time": "10 min",
+        "timer_seconds": 600,
+        "phase": "Shape",
+        "cues": "Taut cylinder with sealed bottom seam.",
+        "text": "Shape into 36cm baguettes with gentle hand rolling."
+      },
+      {
+        "title": "Couche Proof",
+        "time": "60 min",
+        "timer_seconds": 3600,
+        "phase": "Proof",
+        "cues": "Puffy and airy; delicate surface skin.",
+        "text": "Proof seam-side UP in linen couche pleats at 23\u00b0C."
+      },
+      {
+        "title": "Score & Steam Bake",
+        "time": "26 min",
+        "timer_seconds": 600,
+        "phase": "Bake",
+        "cues": "Prominent ears burst open; deep caramelized blisters.",
+        "text": "5 cuts at 20\u00b0 angle. Bake at 245\u00b0C with saturated steam for 10 min, vent oven, bake 16 min at 230\u00b0C."
+      }
+    ]
+  },
+  {
+    "id": "lanio_tradition_levain",
+    "title": "Jean-Marie Lanio: Baguette de Tradition au Levain",
+    "book": "All About Baguette (p. 34)",
+    "author": "Jean-Marie Lanio & J\u00e9r\u00e9my Ballester (INBP)",
+    "subtitle": "The definitive French INBP benchmark: 100% Farine de Tradition T65 with liquid levain and micro-yeast.",
+    "leavening_type": "Hybrid (Liquid Levain + Fresh Yeast)",
+    "base_hydration": 72.0,
+    "flour_basis": 500,
+    "base_yield": 3,
+    "unit_name": "Baguette",
+    "ingredients": [
+      {
+        "name": "Farine de Tradition T65",
+        "type": "flour_main",
+        "pct": 87.5,
+        "note": "Unbleached French T65 without additives"
+      },
+      {
+        "name": "Base Water (Autolyse)",
+        "type": "water_base",
+        "pct": 53.5,
+        "note": "Coulage base temp: 54\u00b0C - (T\u00b0Room + T\u00b0Flour)"
+      },
+      {
+        "name": "Bassinage Water (Fin de p\u00e9trissage)",
+        "type": "water_bassinage",
+        "pct": 6.0,
+        "note": "Added at end of mix to loosen crumb"
+      },
+      {
+        "name": "Liquid Levain (Levain liquide)",
+        "type": "levain",
+        "pct": 25.0,
+        "flour_pct": 12.5,
+        "water_pct": 12.5,
+        "note": "100% hydr., fermented at 28\u00b0C"
+      },
+      {
+        "name": "Fresh Yeast (Levure fra\u00eeche)",
+        "type": "yeast",
+        "pct": 0.7,
+        "note": "Or 0.23% Instant Dry Yeast"
+      },
+      {
+        "name": "Sel fin (Fine Salt)",
+        "type": "salt",
+        "pct": 2.3,
+        "note": "Authentic French dosage (23g/kg)"
+      }
+    ],
+    "steps": [
+      {
+        "title": "Autolyse (60 min)",
+        "time": "60 min",
+        "timer_seconds": 3600,
+        "phase": "Autolyse",
+        "cues": "Gluten sheet forms naturally with zero oxidation.",
+        "text": "Mix flour and base water only. Cover and rest for 60 min to fully hydrate T65 proteins."
+      },
+      {
+        "title": "P\u00e9trissage (Mixing)",
+        "time": "8 min",
+        "timer_seconds": 480,
+        "phase": "Mixing",
+        "cues": "Dough is smooth, supple, and passes windowpane test.",
+        "text": "Add liquid levain, fresh yeast, and salt. Mix 5 min on slow speed, 3 min on medium. Add bassinage water in final 2 minutes."
+      },
+      {
+        "title": "Pointage (Ambient Bulk)",
+        "time": "60 min (1 rabat)",
+        "timer_seconds": 3600,
+        "phase": "Bulk",
+        "cues": "Dough develops body and tension after fold.",
+        "text": "Bulk at 24\u00b0C. Give one gentle fold (rabat) at the 45-minute mark."
+      },
+      {
+        "title": "Blocage au Froid (Cold Retard)",
+        "time": "15 hrs @ 5\u00b0C",
+        "timer_seconds": 54000,
+        "phase": "Bulk",
+        "cues": "Dough firms up and accumulates intense maltose.",
+        "text": "Cover in a sealed container and refrigerate at 4\u00b0C\u20136\u00b0C for 15 hours (Pointage au bac)."
+      },
+      {
+        "title": "Division & D\u00e9tente",
+        "time": "20 min",
+        "timer_seconds": 1200,
+        "phase": "Preshape",
+        "cues": "Portions relax enough to elongate without resistance.",
+        "text": "Divide cold dough into 3 pieces (~325g). Shape into loose rolls. Rest 20 min covered."
+      },
+      {
+        "title": "Fa\u00e7onnage (Final Shaping)",
+        "time": "10 min",
+        "timer_seconds": 600,
+        "phase": "Shape",
+        "cues": "38cm long with tight straight seam.",
+        "text": "Classic French two-fold shaping, roll to 38cm on couche canvas."
+      },
+      {
+        "title": "Appr\u00eat (Couche Proof)",
+        "time": "60 min",
+        "timer_seconds": 3600,
+        "phase": "Proof",
+        "cues": "Light, pillowy spring.",
+        "text": "Rest seam-side up in couche pleats at 24\u00b0C."
+      },
+      {
+        "title": "Grignage & Cuisson (Bake)",
+        "time": "24 min",
+        "timer_seconds": 600,
+        "phase": "Bake",
+        "cues": "Deep hazelnut color, jagged golden ears.",
+        "text": "5 slashes along axis. Bake at 250\u00b0C with heavy steam for 10 min, reduce to 230\u00b0C for 14 min."
+      }
+    ]
+  },
+  {
+    "id": "lanio_pointage_bac",
+    "title": "Jean-Marie Lanio: Pointage au Bac (Cold Bulk Retard)",
+    "book": "All About Baguette (p. 42)",
+    "author": "Jean-Marie Lanio & J\u00e9r\u00e9my Ballester",
+    "subtitle": "16-hour cold bulk tub fermentation for maximum blistered skin and effortless scoring.",
+    "leavening_type": "Hybrid (Poolish + Yeast)",
+    "base_hydration": 70.0,
+    "flour_basis": 500,
+    "base_yield": 3,
+    "unit_name": "Baguette",
+    "ingredients": [
+      {
+        "name": "Farine de Tradition T65",
+        "type": "flour_main",
+        "pct": 80.0,
+        "note": "French T65 flour"
+      },
+      {
+        "name": "Base Water (Autolyse)",
+        "type": "water_base",
+        "pct": 45.0,
+        "note": "At Coulage temperature"
+      },
+      {
+        "name": "Bassinage Water",
+        "type": "water_bassinage",
+        "pct": 5.0,
+        "note": "Late addition"
+      },
+      {
+        "name": "Poolish (100% Hydration)",
+        "type": "poolish",
+        "pct": 40.0,
+        "flour_pct": 20.0,
+        "water_pct": 20.0,
+        "note": "12-15h poolish at 18\u00b0C"
+      },
+      {
+        "name": "Fresh Yeast",
+        "type": "yeast",
+        "pct": 0.5,
+        "note": "0.17% Instant Dry Yeast"
+      },
+      {
+        "name": "Fine Sea Salt",
+        "type": "salt",
+        "pct": 2.2,
+        "note": "Standard French ratio"
+      }
+    ],
+    "steps": [
+      {
+        "title": "Poolish Ripening",
+        "time": "12 hrs prior",
+        "timer_seconds": 43200,
+        "phase": "Prep",
+        "cues": "Surface wrinkled and concave, full of pinhead bubbles.",
+        "text": "Mix equal parts flour and water with a tiny pinch of yeast. Rest 12-14h at 18\u00b0C."
+      },
+      {
+        "title": "Autolyse",
+        "time": "30 min",
+        "timer_seconds": 1800,
+        "phase": "Autolyse",
+        "cues": "Wet coherent mass.",
+        "text": "Mix flour, poolish, and base water. Rest 30 min."
+      },
+      {
+        "title": "Mix & Bassinage",
+        "time": "7 min",
+        "timer_seconds": 420,
+        "phase": "Mixing",
+        "cues": "Dough pulls away from bowl.",
+        "text": "Add salt, yeast, and bassinage water. Mix on medium speed to smooth elastic sheet."
+      },
+      {
+        "title": "Ambient Start (Pointage)",
+        "time": "45 min",
+        "timer_seconds": 2700,
+        "phase": "Bulk",
+        "cues": "Dough starts to puff slightly.",
+        "text": "Rest 45 min at room temp in lightly oiled plastic tub. Perform 1 strong envelope fold."
+      },
+      {
+        "title": "Pointage au Bac (Cold Bulk)",
+        "time": "16 hrs @ 4\u00b0C",
+        "timer_seconds": 57600,
+        "phase": "Bulk",
+        "cues": "Doubled in volume, bubbly, cold and firm.",
+        "text": "Seal tub and place in refrigerator at 4\u00b0C for 16 hours."
+      },
+      {
+        "title": "Divide Cold & Shape",
+        "time": "25 min",
+        "timer_seconds": 1500,
+        "phase": "Shape",
+        "cues": "Cold dough holds its shape firmly without sticking.",
+        "text": "Directly divide cold dough into 3 portions (~320g). Preshape gently, rest 15 min, roll to 38cm."
+      },
+      {
+        "title": "Short Couche Proof",
+        "time": "45 min",
+        "timer_seconds": 2700,
+        "phase": "Proof",
+        "cues": "Takes off quickly as chill dissipates.",
+        "text": "Proof in couche for 45 min at ambient room temperature."
+      },
+      {
+        "title": "Score & Bake",
+        "time": "24 min",
+        "timer_seconds": 600,
+        "phase": "Bake",
+        "cues": "Explosive oven spring from cold dough thermal shock.",
+        "text": "Score 5 slashes. Bake at 245\u00b0C with steam for 10 min, then 14 min dry."
+      }
+    ]
+  },
+  {
+    "id": "lanio_ancienne",
+    "title": "Jean-Marie Lanio: Baguette Ancienne (Rustic Open Crumb)",
+    "book": "All About Baguette (p. 56)",
+    "author": "Jean-Marie Lanio",
+    "subtitle": "High hydration (74%), minimal mechanical knead, wide irregular honeycombed alveoli.",
+    "leavening_type": "Hybrid (P\u00e2te Ferment\u00e9e + Yeast)",
+    "base_hydration": 74.0,
+    "flour_basis": 500,
+    "base_yield": 3,
+    "unit_name": "Baguette",
+    "ingredients": [
+      {
+        "name": "Farine de Tradition T65",
+        "type": "flour_main",
+        "pct": 85.0,
+        "note": "Unbleached French T65"
+      },
+      {
+        "name": "Base Water",
+        "type": "water_base",
+        "pct": 58.0,
+        "note": "Autolyse water"
+      },
+      {
+        "name": "Bassinage Water",
+        "type": "water_bassinage",
+        "pct": 8.0,
+        "note": "Essential for 74% hydration"
+      },
+      {
+        "name": "P\u00e2te Ferment\u00e9e (Old Dough)",
+        "type": "preferment",
+        "pct": 20.0,
+        "flour_pct": 15.0,
+        "water_pct": 8.0,
+        "note": "Saved fermented bread dough from previous bake"
+      },
+      {
+        "name": "Fresh Yeast",
+        "type": "yeast",
+        "pct": 0.6,
+        "note": "0.2% Instant Dry Yeast"
+      },
+      {
+        "name": "Fine Sea Salt",
+        "type": "salt",
+        "pct": 2.2,
+        "note": "Artisan salt level"
+      }
+    ],
+    "steps": [
+      {
+        "title": "Autolyse (45 min)",
+        "time": "45 min",
+        "timer_seconds": 2700,
+        "phase": "Autolyse",
+        "cues": "Dough naturally develops gluten without shear.",
+        "text": "Mix main flour and base water. Rest 45 min."
+      },
+      {
+        "title": "Gentle Hand Mix",
+        "time": "6 min",
+        "timer_seconds": 360,
+        "phase": "Mixing",
+        "cues": "Extremely soft, extensible dough.",
+        "text": "Incorporate old dough, yeast, salt, and bassinage water with gentle Rubaud folding."
+      },
+      {
+        "title": "Bulk Fermentation (4 Folds)",
+        "time": "3.5 hrs (Folds every 40m)",
+        "timer_seconds": 2400,
+        "phase": "Bulk",
+        "cues": "Noticeably aerated with huge pockets of gas.",
+        "text": "Bulk at 23\u00b0C. Perform 4 sets of gentle folds to build structural support."
+      },
+      {
+        "title": "Divide & Rustic Shape",
+        "time": "20 min",
+        "timer_seconds": 1200,
+        "phase": "Shape",
+        "cues": "Do not roll tightly; preserve internal air pockets.",
+        "text": "Divide into 3 portions (~330g). Stretch gently into slippers without degassing."
+      },
+      {
+        "title": "Couche Rest",
+        "time": "50 min",
+        "timer_seconds": 3000,
+        "phase": "Proof",
+        "cues": "Wobbly, buoyant, aerated.",
+        "text": "Rest in well-floured linen couche."
+      },
+      {
+        "title": "Rustic Slash & Steam Bake",
+        "time": "25 min",
+        "timer_seconds": 600,
+        "phase": "Bake",
+        "cues": "Extreme ear tearing with honeycombed interior.",
+        "text": "Single long slash or 3 bold cuts. Bake at 245\u00b0C with steam 10 min, vent 15 min."
+      }
+    ]
+  },
+  {
+    "id": "tartine_baguette",
+    "title": "Chad Robertson: Tartine Sourdough Baguette",
+    "book": "Tartine Bread (p. 88)",
+    "author": "Chad Robertson",
+    "subtitle": "The cult San Francisco formula: 50/50 poolish and young leaven, 74% hydration, sweet custardy crumb.",
+    "leavening_type": "Hybrid (Poolish + Young Leaven)",
+    "base_hydration": 74.0,
+    "flour_basis": 500,
+    "base_yield": 3,
+    "unit_name": "Baguette",
+    "ingredients": [
+      {
+        "name": "Flour Blend (65% AP / 35% Bread)",
+        "type": "flour_main",
+        "pct": 60.0,
+        "note": "Unbleached white flour blend"
+      },
+      {
+        "name": "Base Water (Autolyse)",
+        "type": "water_base",
+        "pct": 34.0,
+        "note": "Warm water (26\u00b0C / 78\u00b0F)"
+      },
+      {
+        "name": "Bassinage Water",
+        "type": "water_bassinage",
+        "pct": 6.0,
+        "note": "Reserved water added with salt"
+      },
+      {
+        "name": "Poolish (100% Hydration)",
+        "type": "poolish",
+        "pct": 40.0,
+        "flour_pct": 20.0,
+        "water_pct": 20.0,
+        "note": "Made with 0.1g yeast, 12h overnight"
+      },
+      {
+        "name": "Young Leaven (100% Hydr)",
+        "type": "levain",
+        "pct": 40.0,
+        "flour_pct": 20.0,
+        "water_pct": 20.0,
+        "note": "Used when floats; sweet lactic notes"
+      },
+      {
+        "name": "Fine Sea Salt",
+        "type": "salt",
+        "pct": 2.0,
+        "note": "Artisan sea salt"
+      }
+    ],
+    "steps": [
+      {
+        "title": "Build Leaven & Poolish",
+        "time": "12 hrs prior",
+        "timer_seconds": 43200,
+        "phase": "Prep",
+        "cues": "Both pre-ferments are bubbly and buoyant.",
+        "text": "Set up poolish with pinch of yeast. Feed leaven. Rest overnight at cool room temp (18\u00b0C\u201320\u00b0C)."
+      },
+      {
+        "title": "Autolyse",
+        "time": "40 min",
+        "timer_seconds": 2400,
+        "phase": "Autolyse",
+        "cues": "Soft, cohesive mass.",
+        "text": "Combine main flour, warm water, poolish, and leaven. Rest 40 min covered."
+      },
+      {
+        "title": "Salt & Bassinage Addition",
+        "time": "5 min",
+        "timer_seconds": 300,
+        "phase": "Mixing",
+        "cues": "Dough pulls together into a glossy silk mass.",
+        "text": "Sprinkle salt and add remaining water. Squeeze dough through fingers to incorporate."
+      },
+      {
+        "title": "Bulk Fermentation & Turns",
+        "time": "3.5 hrs (Turns every 40m)",
+        "timer_seconds": 2400,
+        "phase": "Bulk",
+        "cues": "Dough shows 30% volume expansion with domed edges.",
+        "text": "Turn dough in bowl every 40 min for first 2 hours at 24\u00b0C\u201326\u00b0C."
+      },
+      {
+        "title": "Preshape & Rest",
+        "time": "25 min",
+        "timer_seconds": 1500,
+        "phase": "Preshape",
+        "cues": "Cylinders relax completely on wooden board.",
+        "text": "Divide into 3 portions (~330g). Fold into loose cylinders. Bench rest 25 min covered."
+      },
+      {
+        "title": "Final Elongation",
+        "time": "10 min",
+        "timer_seconds": 600,
+        "phase": "Shape",
+        "cues": "38cm long with taut surface skin.",
+        "text": "Roll gently outward from center with light hands to avoid popping interior gas."
+      },
+      {
+        "title": "Couche Proof",
+        "time": "2.5 hrs @ 22\u00b0C",
+        "timer_seconds": 9000,
+        "phase": "Proof",
+        "cues": "Puffier, delicate, buoyant to touch.",
+        "text": "Proof in floured linen couche canvas pleats at room temperature."
+      },
+      {
+        "title": "Steam Bake",
+        "time": "25 min",
+        "timer_seconds": 600,
+        "phase": "Bake",
+        "cues": "Golden brown, paper-thin crisp crust.",
+        "text": "5 swift slashes. Bake at 245\u00b0C with heavy saturated steam for 12 min; vent for 13 min."
+      }
+    ]
+  },
+  {
+    "id": "perfect_loaf_baguette",
+    "title": "Maurizio Leo: The Perfect Loaf Sourdough Baguette",
+    "book": "The Perfect Loaf (p. 214)",
+    "author": "Maurizio Leo",
+    "subtitle": "100% natural levain, sweet levain build, 3 coil folds, blistered crackling ears.",
+    "leavening_type": "Pure Sourdough (100% Levain)",
+    "base_hydration": 70.0,
+    "flour_basis": 500,
+    "base_yield": 3,
+    "unit_name": "Baguette",
+    "ingredients": [
+      {
+        "name": "Unbleached Bread Flour (12.2%)",
+        "type": "flour_main",
+        "pct": 92.0,
+        "note": "King Arthur Bread or artisan white"
+      },
+      {
+        "name": "Base Water (Autolyse)",
+        "type": "water_base",
+        "pct": 54.0,
+        "note": "At 26\u00b0C (78\u00b0F)"
+      },
+      {
+        "name": "Bassinage Water",
+        "type": "water_bassinage",
+        "pct": 6.0,
+        "note": "Reserved water added with salt"
+      },
+      {
+        "name": "Sweet Levain (100% Hydration)",
+        "type": "levain",
+        "pct": 16.0,
+        "flour_pct": 8.0,
+        "water_pct": 8.0,
+        "note": "Built 5h prior at 26\u00b0C"
+      },
+      {
+        "name": "Fine Sea Salt",
+        "type": "salt",
+        "pct": 1.8,
+        "note": "1.8% for sweet wheaty finish"
+      }
+    ],
+    "steps": [
+      {
+        "title": "Sweet Levain Build",
+        "time": "5 hrs prior",
+        "timer_seconds": 18000,
+        "phase": "Prep",
+        "cues": "Aromas of sweet milk and green apple; floating sample.",
+        "text": "Mix starter, flour, and warm water. Rest at 26\u00b0C until ripe, bubbly, and sweet."
+      },
+      {
+        "title": "Autolyse",
+        "time": "60 min",
+        "timer_seconds": 3600,
+        "phase": "Autolyse",
+        "cues": "Dough naturally relaxes into smooth sheet.",
+        "text": "Combine flour and base water only. Cover and rest 60 min."
+      },
+      {
+        "title": "Incorporate Levain",
+        "time": "4 min",
+        "timer_seconds": 240,
+        "phase": "Mixing",
+        "cues": "Dough becomes silky and cohesive.",
+        "text": "Spread levain on dough, knead by hand for 3-4 minutes. Rest 25 min."
+      },
+      {
+        "title": "Salt & Bassinage Addition",
+        "time": "4 min",
+        "timer_seconds": 240,
+        "phase": "Mixing",
+        "cues": "Salt dissolves and gluten tightens up.",
+        "text": "Add salt and bassinage water. Fold and squeeze until fully absorbed."
+      },
+      {
+        "title": "Bulk Fermentation (3 Coil Folds)",
+        "time": "3.5 hrs (Folds every 45m)",
+        "timer_seconds": 2700,
+        "phase": "Bulk",
+        "cues": "Dough holds its shape and releases from bowl cleanly.",
+        "text": "Perform 3 sets of coil folds spaced 45 minutes apart at 24\u00b0C."
+      },
+      {
+        "title": "Cold Bulk Retard",
+        "time": "14 hrs @ 4\u00b0C",
+        "timer_seconds": 50400,
+        "phase": "Bulk",
+        "cues": "Chilled dough with fine skin blisters.",
+        "text": "Refrigerate bulk dough overnight at 4\u00b0C (39\u00b0F)."
+      },
+      {
+        "title": "Preshape & Relax",
+        "time": "20 min",
+        "timer_seconds": 1200,
+        "phase": "Preshape",
+        "cues": "Cylinders relax; gluten softens.",
+        "text": "Divide cold into 3 portions (~310g). Letter fold into cylinders. Rest 20 min."
+      },
+      {
+        "title": "Final Shaping",
+        "time": "10 min",
+        "timer_seconds": 600,
+        "phase": "Shape",
+        "cues": "Taut, straight cylinder, 36cm long.",
+        "text": "Shape carefully to preserve aeration. Place in floured couche pleats."
+      },
+      {
+        "title": "Couche Proof",
+        "time": "60 min",
+        "timer_seconds": 3600,
+        "phase": "Proof",
+        "cues": "Aerated and buoyant.",
+        "text": "Proof seam-side UP at 24\u00b0C for 60 min."
+      },
+      {
+        "title": "Lava Rock Steam Bake",
+        "time": "25 min",
+        "timer_seconds": 600,
+        "phase": "Bake",
+        "cues": "Deep blistered ears and singing crust.",
+        "text": "5 cuts at 25\u00b0 angle. Bake on stone at 245\u00b0C with lava rock steam 10 min, vent 15 min."
+      }
+    ]
+  },
+  {
+    "id": "forkish_poolish_baguette",
+    "title": "Ken Forkish: FWSY Baguette with Poolish",
+    "book": "Flour Water Salt Yeast (p. 158)",
+    "author": "Ken Forkish",
+    "subtitle": "50% poolish pre-ferment, 75% hydration, sweet buttery wheat notes, dark hearth bake.",
+    "leavening_type": "Commercial Yeast (50% Poolish)",
+    "base_hydration": 75.0,
+    "flour_basis": 500,
+    "base_yield": 3,
+    "unit_name": "Baguette",
+    "ingredients": [
+      {
+        "name": "White Bread Flour",
+        "type": "flour_main",
+        "pct": 50.0,
+        "note": "Unbleached white flour"
+      },
+      {
+        "name": "Base Water",
+        "type": "water_base",
+        "pct": 25.0,
+        "note": "Warm water (26\u00b0C)"
+      },
+      {
+        "name": "Bassinage Water",
+        "type": "water_bassinage",
+        "pct": 9.0,
+        "note": "Late addition for high hydration"
+      },
+      {
+        "name": "Poolish (100% Hydration)",
+        "type": "poolish",
+        "pct": 82.0,
+        "flour_pct": 41.0,
+        "water_pct": 41.0,
+        "note": "50% of total flour fermented 12-14h"
+      },
+      {
+        "name": "Instant Dry Yeast",
+        "type": "yeast",
+        "pct": 0.08,
+        "note": "Tiny pinch in poolish and dough"
+      },
+      {
+        "name": "Fine Sea Salt",
+        "type": "salt",
+        "pct": 2.1,
+        "note": "Clean sea salt"
+      }
+    ],
+    "steps": [
+      {
+        "title": "Poolish Fermentation",
+        "time": "12 hrs prior",
+        "timer_seconds": 43200,
+        "phase": "Prep",
+        "cues": "Frothy surface bubbling vigorously.",
+        "text": "Mix poolish with flour, water, and tiny pinch of yeast. Rest 12-14h at 21\u00b0C."
+      },
+      {
+        "title": "Pincer Mix by Hand",
+        "time": "6 min",
+        "timer_seconds": 360,
+        "phase": "Mixing",
+        "cues": "Dough comes together smoothly through fingers.",
+        "text": "Combine main flour, water, salt, yeast, and poolish using Forkish's pincer method."
+      },
+      {
+        "title": "Bulk Fermentation (3 Folds)",
+        "time": "2.5 hrs (Folds every 30m)",
+        "timer_seconds": 1800,
+        "phase": "Bulk",
+        "cues": "Dough increases 2.5x in volume.",
+        "text": "Perform 3 stretch-and-folds during the first 1.5 hours at 24\u00b0C."
+      },
+      {
+        "title": "Divide & Preshape",
+        "time": "20 min",
+        "timer_seconds": 1200,
+        "phase": "Preshape",
+        "cues": "Relaxed oval dough balls.",
+        "text": "Divide into 3 pieces (~330g). Fold into rectangles; rest 20 min."
+      },
+      {
+        "title": "Final Elongation",
+        "time": "10 min",
+        "timer_seconds": 600,
+        "phase": "Shape",
+        "cues": "Uniform cylinder with pointed ends.",
+        "text": "Shape into 36cm baguettes on lightly floured board."
+      },
+      {
+        "title": "Couche Proof",
+        "time": "60 min",
+        "timer_seconds": 3600,
+        "phase": "Proof",
+        "cues": "Puffy and airy.",
+        "text": "Rest in floured linen couche at room temperature."
+      },
+      {
+        "title": "Bake on Hot Stone",
+        "time": "25 min",
+        "timer_seconds": 600,
+        "phase": "Bake",
+        "cues": "Dark amber blistered crust.",
+        "text": "Bake at 245\u00b0C with cast iron steam pan for 10 min, vent 15 min."
+      }
+    ]
+  },
+  {
+    "id": "king_arthur_classic",
+    "title": "King Arthur: Classic Artisanal Baguette",
+    "book": "Big Book of Bread (p. 102)",
+    "author": "King Arthur Baking Company",
+    "subtitle": "Reliable home baker favorite: overnight poolish, crisp thin crust, tender open crumb.",
+    "leavening_type": "Commercial Yeast (Poolish)",
+    "base_hydration": 68.0,
+    "flour_basis": 500,
+    "base_yield": 3,
+    "unit_name": "Baguette",
+    "ingredients": [
+      {
+        "name": "King Arthur Unbleached AP",
+        "type": "flour_main",
+        "pct": 75.0,
+        "note": "11.7% protein unbleached"
+      },
+      {
+        "name": "Base Water",
+        "type": "water_base",
+        "pct": 43.0,
+        "note": "Lukewarm water"
+      },
+      {
+        "name": "Poolish (100% Hydration)",
+        "type": "poolish",
+        "pct": 50.0,
+        "flour_pct": 25.0,
+        "water_pct": 25.0,
+        "note": "Overnight 14h poolish"
+      },
+      {
+        "name": "Instant Dry Yeast",
+        "type": "yeast",
+        "pct": 0.4,
+        "note": "Instant dry yeast"
+      },
+      {
+        "name": "Fine Sea Salt",
+        "type": "salt",
+        "pct": 2.0,
+        "note": "Table or fine sea salt"
+      }
+    ],
+    "steps": [
+      {
+        "title": "Overnight Poolish",
+        "time": "14 hrs prior",
+        "timer_seconds": 50400,
+        "phase": "Prep",
+        "cues": "Dome collapses slightly; surface covered in bubbles.",
+        "text": "Mix 125g flour, 125g water, and pinch of yeast. Rest at room temp for 14 hours."
+      },
+      {
+        "title": "Mix Dough",
+        "time": "8 min",
+        "timer_seconds": 480,
+        "phase": "Mixing",
+        "cues": "Smooth, slightly tacky dough.",
+        "text": "Combine poolish, remaining flour, water, yeast, and salt. Knead 5-7 min until smooth."
+      },
+      {
+        "title": "Bulk Fermentation (3 Folds)",
+        "time": "2 hrs (Folds every 40m)",
+        "timer_seconds": 2400,
+        "phase": "Bulk",
+        "cues": "Light, aerated, doubles in size.",
+        "text": "Rest in oiled bowl. Perform 3 stretch-and-folds every 40 min."
+      },
+      {
+        "title": "Divide & Rest",
+        "time": "15 min",
+        "timer_seconds": 900,
+        "phase": "Preshape",
+        "cues": "Dough pieces relax.",
+        "text": "Divide into 3 pieces (~310g). Letter fold and rest 15 min."
+      },
+      {
+        "title": "Shape Baguettes",
+        "time": "10 min",
+        "timer_seconds": 600,
+        "phase": "Shape",
+        "cues": "Tapered 38cm long cylinders.",
+        "text": "Roll out to 38cm on lightly floured surface."
+      },
+      {
+        "title": "Proof in Couche",
+        "time": "50 min",
+        "timer_seconds": 3000,
+        "phase": "Proof",
+        "cues": "Puffy and resilient.",
+        "text": "Proof in couche for 45-50 min."
+      },
+      {
+        "title": "Score & Steam Bake",
+        "time": "24 min",
+        "timer_seconds": 600,
+        "phase": "Bake",
+        "cues": "Golden brown, shatteringly crisp.",
+        "text": "3-5 cuts. Bake at 235\u00b0C with steam pan for 10 min, vent 14 min."
+      }
+    ]
+  },
+  {
+    "id": "poilane_rustic",
+    "title": "Apollonia Poil\u00e2ne: Baguette Parisienne",
+    "book": "Poil\u00e2ne: Secrets of the World-Famous Bread Bakery (p. 74)",
+    "author": "Apollonia Poil\u00e2ne",
+    "subtitle": "Stiff sourdough levain (levain dur), stoneground wheat, rustic French country crumb.",
+    "leavening_type": "Pure Sourdough (Stiff Levain)",
+    "base_hydration": 70.0,
+    "flour_basis": 500,
+    "base_yield": 3,
+    "unit_name": "Baguette",
+    "ingredients": [
+      {
+        "name": "Stoneground T80 / Wheat Flour",
+        "type": "flour_main",
+        "pct": 88.0,
+        "note": "Stoneground flour rich in germ"
+      },
+      {
+        "name": "Base Water",
+        "type": "water_base",
+        "pct": 58.0,
+        "note": "Pure spring water"
+      },
+      {
+        "name": "Bassinage Water",
+        "type": "water_bassinage",
+        "pct": 4.0,
+        "note": "Late addition"
+      },
+      {
+        "name": "Stiff Levain (Levain Dur 60% Hydr)",
+        "type": "levain",
+        "pct": 20.0,
+        "flour_pct": 12.0,
+        "water_pct": 8.0,
+        "note": "Traditional Poil\u00e2ne stiff sourdough starter"
+      },
+      {
+        "name": "Guerande Grey Sea Salt",
+        "type": "salt",
+        "pct": 2.0,
+        "note": "Mineral-rich unrefined sea salt"
+      }
+    ],
+    "steps": [
+      {
+        "title": "Stiff Starter Feed",
+        "time": "6 hrs prior",
+        "timer_seconds": 21600,
+        "phase": "Prep",
+        "cues": "Dense ball quadruples in size with winey aroma.",
+        "text": "Feed stiff levain with stoneground flour and water. Ferment at 24\u00b0C."
+      },
+      {
+        "title": "Fraisage (Hand Mix)",
+        "time": "8 min",
+        "timer_seconds": 480,
+        "phase": "Mixing",
+        "cues": "Cohesive earthy dough.",
+        "text": "Smear dough against bench using heel of hand (fraisage) to incorporate stiff levain smoothly."
+      },
+      {
+        "title": "Pointage (Bulk Ferment)",
+        "time": "4 hrs (3 turns)",
+        "timer_seconds": 2700,
+        "phase": "Bulk",
+        "cues": "Deep wheaty aroma with lactic richness.",
+        "text": "Rest at 22\u00b0C. Turn every hour for the first 3 hours."
+      },
+      {
+        "title": "Preshape & Rest",
+        "time": "25 min",
+        "timer_seconds": 1500,
+        "phase": "Preshape",
+        "cues": "Dough settles and softens.",
+        "text": "Divide into 3 portions (~320g). Form cylinders; rest 25 min."
+      },
+      {
+        "title": "Rustic Shaping",
+        "time": "10 min",
+        "timer_seconds": 600,
+        "phase": "Shape",
+        "cues": "Thick, rustic cylinder with blunt tips.",
+        "text": "Shape with gentle tension, keeping natural rustic thickness."
+      },
+      {
+        "title": "Couche Proof",
+        "time": "75 min",
+        "timer_seconds": 4500,
+        "phase": "Proof",
+        "cues": "Airy and soft.",
+        "text": "Proof in floured linen cloth for 75 min."
+      },
+      {
+        "title": "Traditional Hearth Bake",
+        "time": "26 min",
+        "timer_seconds": 600,
+        "phase": "Bake",
+        "cues": "Thick caramelized crust, chewy open crumb.",
+        "text": "Single deep slash. Bake at 240\u00b0C with steam 10 min, vent 16 min."
       }
     ]
   }
@@ -302,165 +1308,1391 @@ const RECIPES_BAGUETTE = [
 const RECIPES_BOULE = [
   {
     "id": "tartine_country",
-    "title": "1. Tartine Basic Country Boule (Chad Robertson)",
-    "subtitle": "The iconic California sourdough benchmark. Wild open crumb, translucent alveoli, deep blistered mahogany crust baked in Dutch oven.",
-    "source": "Tartine Bread (Chad Robertson, p. 45)",
+    "title": "Chad Robertson: Tartine Basic Country Loaf",
+    "book": "Tartine Bread (p. 45)",
+    "author": "Chad Robertson",
+    "subtitle": "The worldwide benchmark: 75% hydration, young leaven, wild custard alveoli, Dutch oven blistered ear.",
+    "leavening_type": "Pure Sourdough (Young Leaven)",
     "base_hydration": 75.0,
     "flour_basis": 450,
     "base_yield": 1,
-    "unit_name": "Boule",
+    "unit_name": "Boule / B\u00e2tard",
+    "ingredients": [
+      {
+        "name": "White Bread Flour (90%)",
+        "type": "flour_main",
+        "pct": 80.0,
+        "note": "Unbleached white bread flour"
+      },
+      {
+        "name": "Whole Wheat Flour (10%)",
+        "type": "special",
+        "pct": 10.0,
+        "note": "Fresh whole grain flour for enzymes"
+      },
+      {
+        "name": "Base Water (Autolyse)",
+        "type": "water_base",
+        "pct": 60.0,
+        "note": "Warm water (26\u00b0C / 78\u00b0F)"
+      },
+      {
+        "name": "Bassinage Water",
+        "type": "water_bassinage",
+        "pct": 5.0,
+        "note": "Reserved 50g water added with salt"
+      },
+      {
+        "name": "Young Leaven (100% Hydration)",
+        "type": "levain",
+        "pct": 20.0,
+        "flour_pct": 10.0,
+        "water_pct": 10.0,
+        "note": "100% hydration, used at peak float"
+      },
+      {
+        "name": "Fine Sea Salt",
+        "type": "salt",
+        "pct": 2.0,
+        "note": "Fine sea salt"
+      }
+    ],
     "steps": [
       {
-        "title": "Young Leaven Build (5\u20136h prior)",
-        "text": "Mix 1 tbsp mature starter with 45g flour and 45g water (26\u00b0C). Use when it passes the float test."
+        "title": "Young Leaven Build",
+        "time": "5 hrs prior",
+        "timer_seconds": 18000,
+        "phase": "Prep",
+        "cues": "Floats buoyantly in room-temp water; sweet yogurt smell.",
+        "text": "Feed 1 tbsp mature starter with 50g 50/50 blend and 50g warm water. Rest 4-6h until bubbly and floating."
       },
       {
-        "title": "Autolyse (45\u201360 min)",
-        "text": "Mix main flour with base water (holding back 25g for bassinage). Rest covered for 45\u201360 min."
+        "title": "Autolyse",
+        "time": "40 min",
+        "timer_seconds": 2400,
+        "phase": "Autolyse",
+        "cues": "Flour fully hydrated; shaggy mass softens.",
+        "text": "Disperse young leaven in base water. Add flours and mix until no dry bits remain. Rest 40 min covered."
       },
       {
-        "title": "Incorporate Leaven & Bassinage",
-        "text": "Add 90g ripe leaven; mix with hand. Add salt and reserved 25g water; fold and squeeze until gluten tightens."
+        "title": "Salt & Bassinage Addition",
+        "time": "5 min",
+        "timer_seconds": 300,
+        "phase": "Mixing",
+        "cues": "Dough tightens and becomes smooth.",
+        "text": "Sprinkle salt and add bassinage water. Squeeze dough through fingers to fully incorporate."
       },
       {
-        "title": "Bulk Fermentation (3.5\u20134h @ 25\u00b0C)",
-        "text": "Turn/fold every 30 min for the first 2 hours. Rest undisturbed for the final 1.5\u20132 hours until billowy and domed (30% volume expansion)."
+        "title": "Bulk Fermentation (Turns every 30m)",
+        "time": "3.5 hrs (5 sets of turns)",
+        "timer_seconds": 1800,
+        "phase": "Bulk",
+        "cues": "Dough expands by 30%, aerated, releases cleanly from bowl.",
+        "text": "Perform stretch-and-folds every 30 min for first 2.5 hours at 25\u00b0C\u201326\u00b0C. Handle gently toward end."
       },
       {
-        "title": "Preshape & Bench Rest",
-        "text": "Tip onto lightly floured bench. Shape into round ball with bench knife using surface tension pulls. Rest 25 min covered."
+        "title": "Preshape into Round",
+        "time": "25 min",
+        "timer_seconds": 1500,
+        "phase": "Preshape",
+        "cues": "Round sits tall with smooth, taut top skin.",
+        "text": "Tip dough onto lightly floured surface. Work into a loose round with bench knife. Rest 25 min uncovered (*d\u00e9tente*)."
       },
       {
-        "title": "Final Boule/B\u00e2tard Shaping",
-        "text": "Flip seam up. Envelope fold bottom, left, right, top. Roll and pull against wood counter to create tight spherical skin. Invert into rice-floured banneton."
+        "title": "Final Shape (Boule or B\u00e2tard)",
+        "time": "10 min",
+        "timer_seconds": 600,
+        "phase": "Shape",
+        "cues": "Taut surface skin with tension (*la cl\u00e9* on bottom).",
+        "text": "Flip seam-side up. Fold bottom up, sides in, roll top down. Cupped hands create surface tension. Invert into rice-floured banneton."
       },
       {
-        "title": "Overnight Cold Retard (12\u201316h @ 4\u00b0C)",
-        "text": "Chill in refrigerator. Porous rattan banneton wicks surface moisture for blistered crust and firm scoring skin."
+        "title": "Cold Retardation",
+        "time": "12-16 hrs @ 4\u00b0C",
+        "timer_seconds": 43200,
+        "phase": "Proof",
+        "cues": "Dough is firm, slightly aerated, and chilled through.",
+        "text": "Cover banneton with bag and refrigerate overnight at 3\u00b0C\u20135\u00b0C."
       },
       {
-        "title": "Score & Dutch Oven Bake",
-        "text": "Turn cold boule onto parchment. Score single curved crescent slash (10mm deep). Bake in preheated Dutch oven @ 245\u00b0C (475\u00b0F) with lid ON for 20 min. Remove lid, bake @ 225\u00b0C for 22\u201325 min until deep mahogany."
+        "title": "Dutch Oven Pre-Heat",
+        "time": "60 min",
+        "timer_seconds": 3600,
+        "phase": "Bake",
+        "cues": "Cast iron is scorching hot (250\u00b0C / 485\u00b0F).",
+        "text": "Preheat heavy Dutch oven with lid inside oven at 250\u00b0C for 60 minutes."
+      },
+      {
+        "title": "Score & Bake (Lid ON)",
+        "time": "20 min",
+        "timer_seconds": 1200,
+        "phase": "Bake",
+        "cues": "Steam trapped; loaf springs upward violently.",
+        "text": "Tip cold loaf onto parchment. Single long crescent slash at 30\u00b0 angle (10mm deep). Drop into pot; seal lid. Bake 20 min @ 245\u00b0C."
+      },
+      {
+        "title": "Bake (Lid OFF)",
+        "time": "25 min",
+        "timer_seconds": 1500,
+        "phase": "Bake",
+        "cues": "Crust caramelizes into deep blistered mahogany (*le chant du pain*).",
+        "text": "Remove lid. Continue baking at 225\u00b0C for 22-25 min until dark blistered mahogany."
       }
     ]
   },
   {
-    "id": "leo_country",
-    "title": "2. Maurizio Leo \"My Best Sourdough\" Boule",
-    "subtitle": "High-hydration white sourdough with a touch of whole wheat for enzymatic vitality. Custard-soft crumb, razor-sharp ear.",
-    "source": "The Perfect Loaf (Maurizio Leo, p. 230)",
-    "base_hydration": 76.0,
+    "id": "tartine_whole_wheat",
+    "title": "Chad Robertson: Tartine 50% Whole Wheat B\u00e2tard",
+    "book": "Tartine Bread (p. 112)",
+    "author": "Chad Robertson",
+    "subtitle": "50% whole wheat, 80% high hydration, sweet nutty bran, custardy open interior.",
+    "leavening_type": "Pure Sourdough",
+    "base_hydration": 80.0,
+    "flour_basis": 450,
+    "base_yield": 1,
+    "unit_name": "B\u00e2tard",
+    "ingredients": [
+      {
+        "name": "Stoneground Whole Wheat (50%)",
+        "type": "flour_main",
+        "pct": 45.0,
+        "note": "Fine stoneground whole grain"
+      },
+      {
+        "name": "White Bread Flour (50%)",
+        "type": "special",
+        "pct": 45.0,
+        "note": "High protein bread flour"
+      },
+      {
+        "name": "Base Water",
+        "type": "water_base",
+        "pct": 62.0,
+        "note": "Warm autolyse water"
+      },
+      {
+        "name": "Bassinage Water",
+        "type": "water_bassinage",
+        "pct": 10.0,
+        "note": "Essential for 80% whole wheat hydration"
+      },
+      {
+        "name": "Young Leaven (100%)",
+        "type": "levain",
+        "pct": 20.0,
+        "flour_pct": 10.0,
+        "water_pct": 10.0,
+        "note": "Young sweet lactic leaven"
+      },
+      {
+        "name": "Fine Sea Salt",
+        "type": "salt",
+        "pct": 2.0,
+        "note": "Artisan sea salt"
+      }
+    ],
+    "steps": [
+      {
+        "title": "Extended Autolyse",
+        "time": "60 min",
+        "timer_seconds": 3600,
+        "phase": "Autolyse",
+        "cues": "Coarse bran softens; dough becomes extensible.",
+        "text": "Mix whole wheat and white flour with base water and leaven. Rest 60 min to fully soften bran."
+      },
+      {
+        "title": "Salt & Bassinage",
+        "time": "5 min",
+        "timer_seconds": 300,
+        "phase": "Mixing",
+        "cues": "Water emulsified into whole grain network.",
+        "text": "Add salt and bassinage water. Work in thoroughly."
+      },
+      {
+        "title": "Bulk Fermentation (6 Sets)",
+        "time": "4 hrs (Turns every 30m)",
+        "timer_seconds": 1800,
+        "phase": "Bulk",
+        "cues": "Light, aerated dough with visible bran specks.",
+        "text": "Perform 6 sets of gentle turns spaced 30 min apart at 26\u00b0C."
+      },
+      {
+        "title": "Preshape & Rest",
+        "time": "25 min",
+        "timer_seconds": 1500,
+        "phase": "Preshape",
+        "cues": "Relaxed cylinder.",
+        "text": "Preshape into loose cylinder. Bench rest 25 min."
+      },
+      {
+        "title": "Stitch-Shaping (B\u00e2tard)",
+        "time": "10 min",
+        "timer_seconds": 600,
+        "phase": "Shape",
+        "cues": "Laced lateral tension across seam.",
+        "text": "Roll into tight cylinder, place seam-up in oval banneton, and stitch opposing sides together."
+      },
+      {
+        "title": "Cold Retard",
+        "time": "14 hrs @ 4\u00b0C",
+        "timer_seconds": 50400,
+        "phase": "Proof",
+        "cues": "Cold and firm.",
+        "text": "Refrigerate 14h in banneton."
+      },
+      {
+        "title": "Dutch Oven Bake (Lid ON)",
+        "time": "22 min",
+        "timer_seconds": 1320,
+        "phase": "Bake",
+        "cues": "Steam trapped; maximum oven spring.",
+        "text": "Score single long crescent cut. Bake at 245\u00b0C lid ON for 22 min."
+      },
+      {
+        "title": "Bake (Lid OFF)",
+        "time": "25 min",
+        "timer_seconds": 1500,
+        "phase": "Bake",
+        "cues": "Rich hazelnut-brown whole grain crust.",
+        "text": "Remove lid, bake 25 min at 225\u00b0C."
+      }
+    ]
+  },
+  {
+    "id": "tartine_olive_herb",
+    "title": "Chad Robertson: Tartine Olive & Walnut B\u00e2tard",
+    "book": "Tartine Bread (p. 124)",
+    "author": "Chad Robertson",
+    "subtitle": "Calamata olives, toasted walnuts, and fresh thyme folded into high-hydration sourdough.",
+    "leavening_type": "Pure Sourdough",
+    "base_hydration": 75.0,
+    "flour_basis": 450,
+    "base_yield": 1,
+    "unit_name": "B\u00e2tard",
+    "ingredients": [
+      {
+        "name": "White Bread Flour (80%)",
+        "type": "flour_main",
+        "pct": 72.0,
+        "note": "Unbleached bread flour"
+      },
+      {
+        "name": "Whole Wheat Flour (20%)",
+        "type": "special",
+        "pct": 18.0,
+        "note": "Stoneground whole wheat"
+      },
+      {
+        "name": "Base Water",
+        "type": "water_base",
+        "pct": 60.0,
+        "note": "Warm autolyse water"
+      },
+      {
+        "name": "Bassinage Water",
+        "type": "water_bassinage",
+        "pct": 5.0,
+        "note": "Late addition"
+      },
+      {
+        "name": "Young Leaven (100%)",
+        "type": "levain",
+        "pct": 20.0,
+        "flour_pct": 10.0,
+        "water_pct": 10.0,
+        "note": "Sweet lactic starter"
+      },
+      {
+        "name": "Calamata Olives (Pitted)",
+        "type": "special",
+        "pct": 20.0,
+        "note": "Pitted and drained dry"
+      },
+      {
+        "name": "Toasted Walnuts",
+        "type": "special",
+        "pct": 10.0,
+        "note": "Toasted and coarsely broken"
+      },
+      {
+        "name": "Fresh Thyme Leaves",
+        "type": "special",
+        "pct": 1.0,
+        "note": "Finely minced fresh thyme"
+      },
+      {
+        "name": "Fine Sea Salt",
+        "type": "salt",
+        "pct": 1.8,
+        "note": "Reduced salt for olive salinity"
+      }
+    ],
+    "steps": [
+      {
+        "title": "Autolyse",
+        "time": "40 min",
+        "timer_seconds": 2400,
+        "phase": "Autolyse",
+        "cues": "Cohesive mass.",
+        "text": "Mix flours, water, and leaven. Rest 40 min."
+      },
+      {
+        "title": "Salt & Bassinage",
+        "time": "5 min",
+        "timer_seconds": 300,
+        "phase": "Mixing",
+        "cues": "Gluten strengthens.",
+        "text": "Incorporate salt and bassinage water."
+      },
+      {
+        "title": "Fold in Inclusions (Fold #3)",
+        "time": "30 min",
+        "timer_seconds": 1800,
+        "phase": "Bulk",
+        "cues": "Olives and walnuts evenly distributed through layers.",
+        "text": "At the third turn, spread olives, toasted walnuts, and thyme over dough. Fold to laminate."
+      },
+      {
+        "title": "Complete Bulk Fermentation",
+        "time": "2 hrs (2 more turns)",
+        "timer_seconds": 3600,
+        "phase": "Bulk",
+        "cues": "Dough is airy with trapped aromatic air pockets.",
+        "text": "Continue bulk at 25\u00b0C with 2 gentle turns."
+      },
+      {
+        "title": "Preshape & Rest",
+        "time": "25 min",
+        "timer_seconds": 1500,
+        "phase": "Preshape",
+        "cues": "Relaxed oval.",
+        "text": "Preshape into oval. Bench rest 25 min."
+      },
+      {
+        "title": "Shape B\u00e2tard",
+        "time": "10 min",
+        "timer_seconds": 600,
+        "phase": "Shape",
+        "cues": "Taut oval b\u00e2tard.",
+        "text": "Shape into tight b\u00e2tard. Transfer to oval banneton."
+      },
+      {
+        "title": "Cold Retard",
+        "time": "12 hrs @ 4\u00b0C",
+        "timer_seconds": 43200,
+        "phase": "Proof",
+        "cues": "Chilled through.",
+        "text": "Overnight cold retard."
+      },
+      {
+        "title": "Dutch Oven Steam Bake",
+        "time": "45 min",
+        "timer_seconds": 1200,
+        "phase": "Bake",
+        "cues": "Fragrant roasted herbs and purple-tinged open crumb.",
+        "text": "Bake in hot Dutch oven: 20 min lid ON @ 245\u00b0C; 25 min lid OFF @ 225\u00b0C."
+      }
+    ]
+  },
+  {
+    "id": "perfect_loaf_beginner",
+    "title": "Maurizio Leo: Beginner's Sourdough Hearth Loaf",
+    "book": "The Perfect Loaf (p. 162)",
+    "author": "Maurizio Leo",
+    "subtitle": "Foolproof entry into sourdough: 72% hydration, reliable crumb openness, towering ear.",
+    "leavening_type": "Pure Sourdough",
+    "base_hydration": 72.0,
     "flour_basis": 450,
     "base_yield": 1,
     "unit_name": "Boule",
+    "ingredients": [
+      {
+        "name": "Unbleached Bread Flour (85%)",
+        "type": "flour_main",
+        "pct": 76.5,
+        "note": "High quality white flour"
+      },
+      {
+        "name": "Whole Wheat Flour (15%)",
+        "type": "special",
+        "pct": 13.5,
+        "note": "For fermentation vitality"
+      },
+      {
+        "name": "Base Water",
+        "type": "water_base",
+        "pct": 58.0,
+        "note": "At 26\u00b0C"
+      },
+      {
+        "name": "Bassinage Water",
+        "type": "water_bassinage",
+        "pct": 5.0,
+        "note": "Added with salt"
+      },
+      {
+        "name": "Ripe Sourdough Levain",
+        "type": "levain",
+        "pct": 18.0,
+        "flour_pct": 9.0,
+        "water_pct": 9.0,
+        "note": "100% hydration, bubbly and domed"
+      },
+      {
+        "name": "Fine Sea Salt",
+        "type": "salt",
+        "pct": 2.0,
+        "note": "Fine sea salt"
+      }
+    ],
     "steps": [
       {
-        "title": "Levain Build (5h prior)",
-        "text": "Build 100% hydration liquid levain. Ferment at 24\u00b0\u201326\u00b0C until bubbly, airy, and gently domed."
+        "title": "Levain Build",
+        "time": "5 hrs prior",
+        "timer_seconds": 18000,
+        "phase": "Prep",
+        "cues": "Bubbly, domed, and smells fruity.",
+        "text": "Build levain with active starter at 1:2:2 ratio. Use at peak."
       },
       {
-        "title": "Autolyse (60 min)",
-        "text": "Mix main flours with base water. Rest 1 hour at 24\u00b0C."
+        "title": "Autolyse",
+        "time": "60 min",
+        "timer_seconds": 3600,
+        "phase": "Autolyse",
+        "cues": "Flour fully hydrated with zero dry bits.",
+        "text": "Mix flours and base water only. Rest 60 min covered."
       },
       {
-        "title": "Mix Levain & Bassinage",
-        "text": "Add levain and mix thoroughly. Add fine salt and bassinage water. Perform slap-and-folds or Rubaud until silky."
+        "title": "Add Levain",
+        "time": "4 min",
+        "timer_seconds": 240,
+        "phase": "Mixing",
+        "cues": "Levain incorporated smoothly.",
+        "text": "Spread levain over dough and mix with wet hands for 3-4 minutes. Rest 25 min."
       },
       {
-        "title": "Bulk Fermentation & Strengthening (4h)",
-        "text": "Perform 3 sets of stretch-and-folds, then 2 gentle coil folds. Bulk until dough is 40% aerated and buoyant."
+        "title": "Add Salt & Bassinage",
+        "time": "4 min",
+        "timer_seconds": 240,
+        "phase": "Mixing",
+        "cues": "Gluten regains structure and tension.",
+        "text": "Add salt and bassinage water. Work in until dough is smooth."
       },
       {
-        "title": "Preshape & Bench Rest",
-        "text": "Preshape into smooth round boule. Bench rest 25 min."
+        "title": "Bulk Fermentation (3 Sets Folds)",
+        "time": "3.5 hrs (Folds every 45m)",
+        "timer_seconds": 2700,
+        "phase": "Bulk",
+        "cues": "Dough increases 30%-40% with domed surface.",
+        "text": "Perform 3 sets of stretch-and-folds spaced 45 minutes apart at 24\u00b0C\u201325\u00b0C."
       },
       {
-        "title": "Final B\u00e2tard / Boule Shaping",
-        "text": "Perform envelope fold, roll cylinder with tucks, and use the stitch technique across the seam. Rest in banneton."
+        "title": "Preshape & Rest",
+        "time": "20 min",
+        "timer_seconds": 1200,
+        "phase": "Preshape",
+        "cues": "Smooth, round dome on bench.",
+        "text": "Shape into loose round on floured bench. Rest 20 min uncovered."
       },
       {
-        "title": "Cold Proof & Dutch Oven Bake",
-        "text": "Retard 14h @ 3\u00b0\u20134\u00b0C. Score crescent ear at 30\u00b0 blade angle. Bake in Dutch oven 20 min lid ON @ 245\u00b0C; 22 min lid OFF @ 225\u00b0C."
+        "title": "Final Shape (Boule)",
+        "time": "8 min",
+        "timer_seconds": 480,
+        "phase": "Shape",
+        "cues": "Taut outer membrane pulled tight.",
+        "text": "Envelope fold and pull across un-floured bench to create surface tension. Place seam-up in round banneton."
+      },
+      {
+        "title": "Cold Proof",
+        "time": "14 hrs @ 4\u00b0C",
+        "timer_seconds": 50400,
+        "phase": "Proof",
+        "cues": "Cold and firm; holds razor cut effortlessly.",
+        "text": "Refrigerate 14-16 hours in sealed plastic bag."
+      },
+      {
+        "title": "Dutch Oven Steam (Lid ON)",
+        "time": "20 min",
+        "timer_seconds": 1200,
+        "phase": "Bake",
+        "cues": "Deep expansion along score line.",
+        "text": "Score single crescent cut at 30\u00b0 angle. Bake in Dutch oven @ 245\u00b0C with lid on for 20 min."
+      },
+      {
+        "title": "Vented Bake (Lid OFF)",
+        "time": "25 min",
+        "timer_seconds": 1500,
+        "phase": "Bake",
+        "cues": "Deep golden ear with crispy blisters.",
+        "text": "Remove lid, bake 25 min @ 225\u00b0C."
       }
     ]
   },
   {
-    "id": "forkish_blonde",
-    "title": "3. Ken Forkish Overnight Country Blonde (FWSY)",
-    "subtitle": "Pure levain artisan hearth bread. Extended room temperature bulk followed by morning Dutch oven bake. Resonant singing crust.",
-    "source": "Flour Water Salt Yeast (Ken Forkish, p. 195)",
+    "id": "perfect_loaf_fifty_fifty",
+    "title": "Maurizio Leo: Fifty-Fifty Whole Wheat Loaf",
+    "book": "The Perfect Loaf (p. 182)",
+    "author": "Maurizio Leo",
+    "subtitle": "50% whole grain, 78% hydration, creamy wheat flavor, balanced mild lactic acidity.",
+    "leavening_type": "Pure Sourdough",
     "base_hydration": 78.0,
     "flour_basis": 450,
     "base_yield": 1,
     "unit_name": "Boule",
+    "ingredients": [
+      {
+        "name": "Whole Wheat Flour (50%)",
+        "type": "flour_main",
+        "pct": 42.5,
+        "note": "Stoneground whole wheat"
+      },
+      {
+        "name": "Bread Flour (50%)",
+        "type": "special",
+        "pct": 42.5,
+        "note": "Strong white bread flour"
+      },
+      {
+        "name": "Base Water",
+        "type": "water_base",
+        "pct": 63.0,
+        "note": "Warm autolyse water"
+      },
+      {
+        "name": "Bassinage Water",
+        "type": "water_bassinage",
+        "pct": 8.0,
+        "note": "Late addition"
+      },
+      {
+        "name": "Ripe Levain",
+        "type": "levain",
+        "pct": 15.0,
+        "flour_pct": 7.5,
+        "water_pct": 7.5,
+        "note": "100% hydration levain"
+      },
+      {
+        "name": "Fine Sea Salt",
+        "type": "salt",
+        "pct": 2.0,
+        "note": "Fine salt"
+      }
+    ],
     "steps": [
       {
-        "title": "Morning Levain Build",
-        "text": "Build levain with flour and water at 26\u00b0C. Ferment 7\u20138 hours until fully ripe."
+        "title": "Autolyse",
+        "time": "60 min",
+        "timer_seconds": 3600,
+        "phase": "Autolyse",
+        "cues": "Bran softens; dough becomes extensible.",
+        "text": "Mix flours and base water only. Rest 60 min."
       },
       {
-        "title": "Autolyse (30 min)",
-        "text": "Mix flours with warm water (34\u00b0C). Rest 30 min."
+        "title": "Mix Levain & Bassinage",
+        "time": "6 min",
+        "timer_seconds": 360,
+        "phase": "Mixing",
+        "cues": "Smooth, glossy whole wheat dough.",
+        "text": "Incorporate levain, salt, and bassinage water with Rubaud kneading."
       },
       {
-        "title": "Final Mix by Hand",
-        "text": "Sprinkle salt and levain across dough. Use Forkish pincer method and folding to incorporate."
+        "title": "Bulk Fermentation (4 Coil Folds)",
+        "time": "3.5 hrs (Folds every 45m)",
+        "timer_seconds": 2700,
+        "phase": "Bulk",
+        "cues": "Noticeably aerated with pleasant fermented aroma.",
+        "text": "Perform 4 gentle coil folds spaced 45 minutes apart at 25\u00b0C."
       },
       {
-        "title": "Bulk Fermentation (12\u201315h cool)",
-        "text": "Perform 3\u20134 folds during the first 2 hours. Let ferment overnight at cool room temp (18\u00b0\u201320\u00b0C) until doubled and full of gas."
+        "title": "Preshape & Rest",
+        "time": "20 min",
+        "timer_seconds": 1200,
+        "phase": "Preshape",
+        "cues": "Relaxed round.",
+        "text": "Preshape round; rest 20 min covered."
       },
       {
-        "title": "Shaping into Boule",
-        "text": "Gently ease dough from tub onto floured surface. Shape into round boule with seam on bottom. Proof in proofing basket seam-side DOWN (bakes seam-side UP for natural rupture)."
+        "title": "Final Shape",
+        "time": "8 min",
+        "timer_seconds": 480,
+        "phase": "Shape",
+        "cues": "Taut skin around whole grain sphere.",
+        "text": "Shape into tight boule. Transfer to banneton."
       },
       {
-        "title": "Final Proof (4h room temp or overnight)",
-        "text": "Proof until finger dent slowly springs back halfway."
+        "title": "Cold Retard",
+        "time": "14 hrs @ 4\u00b0C",
+        "timer_seconds": 50400,
+        "phase": "Proof",
+        "cues": "Cold and firm.",
+        "text": "Refrigerate 14h in plastic bag."
       },
       {
-        "title": "Bake in Dutch Oven",
-        "text": "Invert directly into hot Dutch oven (seam side UP - natural burst, no scoring needed). Bake 30m lid ON @ 245\u00b0C; 20m lid OFF @ 225\u00b0C."
+        "title": "Dutch Oven Bake",
+        "time": "45 min",
+        "timer_seconds": 1200,
+        "phase": "Bake",
+        "cues": "Dark roasted wheat crust and tender open crumb.",
+        "text": "Bake 20 min lid ON @ 245\u00b0C; 25 min lid OFF @ 225\u00b0C."
+      }
+    ]
+  },
+  {
+    "id": "perfect_loaf_oat_porridge",
+    "title": "Maurizio Leo: Creamy Oat Porridge Sourdough",
+    "book": "The Perfect Loaf (p. 238)",
+    "author": "Maurizio Leo",
+    "subtitle": "Cooked rolled oats folded into dough create an ultra-custardy, moist crumb that stays fresh for days.",
+    "leavening_type": "Pure Sourdough",
+    "base_hydration": 76.0,
+    "flour_basis": 450,
+    "base_yield": 1,
+    "unit_name": "Boule",
+    "ingredients": [
+      {
+        "name": "Bread Flour (80%)",
+        "type": "flour_main",
+        "pct": 72.0,
+        "note": "Unbleached white bread flour"
+      },
+      {
+        "name": "Whole Wheat (20%)",
+        "type": "special",
+        "pct": 18.0,
+        "note": "Stoneground whole wheat"
+      },
+      {
+        "name": "Base Water",
+        "type": "water_base",
+        "pct": 60.0,
+        "note": "Warm autolyse water"
+      },
+      {
+        "name": "Bassinage Water",
+        "type": "water_bassinage",
+        "pct": 6.0,
+        "note": "Late addition"
+      },
+      {
+        "name": "Cooked Rolled Oats (Porridge)",
+        "type": "special",
+        "pct": 25.0,
+        "note": "Cooked with 2x water until creamy, cooled completely"
+      },
+      {
+        "name": "Ripe Levain",
+        "type": "levain",
+        "pct": 20.0,
+        "flour_pct": 10.0,
+        "water_pct": 10.0,
+        "note": "Active levain"
+      },
+      {
+        "name": "Fine Sea Salt",
+        "type": "salt",
+        "pct": 2.0,
+        "note": "Sea salt"
+      }
+    ],
+    "steps": [
+      {
+        "title": "Cook Oat Porridge",
+        "time": "20 min",
+        "timer_seconds": 1200,
+        "phase": "Prep",
+        "cues": "Thick, gelatinized oatmeal; cooled to room temp.",
+        "text": "Simmer rolled oats with water until thick. Cool completely before folding."
+      },
+      {
+        "title": "Autolyse",
+        "time": "45 min",
+        "timer_seconds": 2700,
+        "phase": "Autolyse",
+        "cues": "Smooth, extensible dough.",
+        "text": "Mix flours, water, and levain. Rest 45 min."
+      },
+      {
+        "title": "Salt & Bassinage",
+        "time": "5 min",
+        "timer_seconds": 300,
+        "phase": "Mixing",
+        "cues": "Gluten tightens.",
+        "text": "Add salt and bassinage water. Work in thoroughly."
+      },
+      {
+        "title": "Laminate Porridge (Fold #2)",
+        "time": "30 min",
+        "timer_seconds": 1800,
+        "phase": "Bulk",
+        "cues": "Porridge folded between dough sheets without tearing.",
+        "text": "At second turn, spread cooled oat porridge over dough. Fold like an envelope."
+      },
+      {
+        "title": "Complete Bulk Fermentation",
+        "time": "2.5 hrs (3 more folds)",
+        "timer_seconds": 3600,
+        "phase": "Bulk",
+        "cues": "Dough is jiggly, full of gas, aerated.",
+        "text": "Perform 3 gentle coil folds at 25\u00b0C until dough is puffy."
+      },
+      {
+        "title": "Preshape & Rest",
+        "time": "20 min",
+        "timer_seconds": 1200,
+        "phase": "Preshape",
+        "cues": "Relaxed round.",
+        "text": "Preshape round; rest 20 min."
+      },
+      {
+        "title": "Final Shape & Oat Coating",
+        "time": "10 min",
+        "timer_seconds": 600,
+        "phase": "Shape",
+        "cues": "Roll wet top of boule in raw oats before banneton.",
+        "text": "Shape into tight boule, roll top in raw oats, invert into banneton."
+      },
+      {
+        "title": "Cold Retard & Bake",
+        "time": "14 hrs cold + 45 min bake",
+        "timer_seconds": 1200,
+        "phase": "Bake",
+        "cues": "Custardy, pudding-like crumb with toasted oat crust.",
+        "text": "Bake in hot Dutch oven 20 min lid ON @ 245\u00b0C; 25 min lid OFF @ 225\u00b0C."
+      }
+    ]
+  },
+  {
+    "id": "forkish_overnight_blonde",
+    "title": "Ken Forkish: FWSY Overnight Country Blonde",
+    "book": "Flour Water Salt Yeast (p. 182)",
+    "author": "Ken Forkish",
+    "subtitle": "78% hydration, pure levain, 12-15h overnight bulk at cool room temperature. Natural burst crust without scoring.",
+    "leavening_type": "Pure Sourdough",
+    "base_hydration": 78.0,
+    "flour_basis": 450,
+    "base_yield": 1,
+    "unit_name": "Boule",
+    "ingredients": [
+      {
+        "name": "White Bread Flour (78%)",
+        "type": "flour_main",
+        "pct": 70.0,
+        "note": "Unbleached white flour"
+      },
+      {
+        "name": "Whole Wheat (17%)",
+        "type": "special",
+        "pct": 15.0,
+        "note": "Stoneground whole wheat"
+      },
+      {
+        "name": "Whole Rye Flour (5%)",
+        "type": "special",
+        "pct": 5.0,
+        "note": "Dark or medium rye for acidity"
+      },
+      {
+        "name": "Base Water",
+        "type": "water_base",
+        "pct": 67.0,
+        "note": "At 26\u00b0C"
+      },
+      {
+        "name": "Bassinage Water",
+        "type": "water_bassinage",
+        "pct": 8.0,
+        "note": "Late addition"
+      },
+      {
+        "name": "Levain (100% Hydration)",
+        "type": "levain",
+        "pct": 21.6,
+        "flour_pct": 10.8,
+        "water_pct": 10.8,
+        "note": "Fed with whole wheat and white blend"
+      },
+      {
+        "name": "Fine Sea Salt",
+        "type": "salt",
+        "pct": 2.2,
+        "note": "Non-iodized sea salt"
+      }
+    ],
+    "steps": [
+      {
+        "title": "Levain Feeding",
+        "time": "7 hrs prior",
+        "timer_seconds": 25200,
+        "phase": "Prep",
+        "cues": "Bubbly, triple in volume, sweet-tart aroma.",
+        "text": "Build levain in warm spot. Use when ripe and domed."
+      },
+      {
+        "title": "Autolyse",
+        "time": "30 min",
+        "timer_seconds": 1800,
+        "phase": "Autolyse",
+        "cues": "Coarse wet mixture.",
+        "text": "Mix flours and base water. Rest 30 min."
+      },
+      {
+        "title": "Pincer Mix & Salt",
+        "time": "6 min",
+        "timer_seconds": 360,
+        "phase": "Mixing",
+        "cues": "Dough emulsified cleanly with salt and levain.",
+        "text": "Add levain, salt, and bassinage water. Use pincer method: cut through dough with fingers and fold."
+      },
+      {
+        "title": "Bulk Fermentation (Overnight 12-15h)",
+        "time": "14 hrs (3 folds in first 2h)",
+        "timer_seconds": 3600,
+        "phase": "Bulk",
+        "cues": "Huge pillowy expansion (2.5x to 3x volume) full of gas.",
+        "text": "Perform 3-4 folds during the first 2 hours. Let ferment undisturbed overnight at cool room temp (18\u00b0C\u201320\u00b0C)."
+      },
+      {
+        "title": "Shape Seam-Down",
+        "time": "15 min",
+        "timer_seconds": 900,
+        "phase": "Shape",
+        "cues": "Smooth ball placed seam-side DOWN in basket.",
+        "text": "Gently ease dough from tub. Shape into round boule. Proof in basket seam-side DOWN (so it bakes seam-side UP!)."
+      },
+      {
+        "title": "Final Proof",
+        "time": "3.5 hrs @ 21\u00b0C",
+        "timer_seconds": 12600,
+        "phase": "Proof",
+        "cues": "Finger poke springs back slowly halfway.",
+        "text": "Proof at room temperature until puffy."
+      },
+      {
+        "title": "Natural Rupture Bake",
+        "time": "50 min",
+        "timer_seconds": 1800,
+        "phase": "Bake",
+        "cues": "Natural fissured volcanic rupture on top without scoring.",
+        "text": "Invert directly into hot Dutch oven (seam-side UP - no scoring!). Bake 30m lid ON @ 245\u00b0C; 20m lid OFF @ 225\u00b0C."
+      }
+    ]
+  },
+  {
+    "id": "forkish_field_blend",
+    "title": "Ken Forkish: FWSY Field Blend #2",
+    "book": "Flour Water Salt Yeast (p. 204)",
+    "author": "Ken Forkish",
+    "subtitle": "Rye + whole wheat + bread flour: deep earthy complexity, thick caramelized crust.",
+    "leavening_type": "Pure Sourdough",
+    "base_hydration": 78.0,
+    "flour_basis": 450,
+    "base_yield": 1,
+    "unit_name": "Boule",
+    "ingredients": [
+      {
+        "name": "White Bread Flour (75%)",
+        "type": "flour_main",
+        "pct": 67.5,
+        "note": "Unbleached bread flour"
+      },
+      {
+        "name": "Whole Wheat Flour (15%)",
+        "type": "special",
+        "pct": 13.5,
+        "note": "Stoneground whole wheat"
+      },
+      {
+        "name": "Whole Rye Flour (10%)",
+        "type": "special",
+        "pct": 9.0,
+        "note": "Dark whole rye"
+      },
+      {
+        "name": "Base Water",
+        "type": "water_base",
+        "pct": 65.0,
+        "note": "Warm water"
+      },
+      {
+        "name": "Bassinage Water",
+        "type": "water_bassinage",
+        "pct": 8.0,
+        "note": "Late addition"
+      },
+      {
+        "name": "Ripe Levain",
+        "type": "levain",
+        "pct": 20.0,
+        "flour_pct": 10.0,
+        "water_pct": 10.0,
+        "note": "Active levain"
+      },
+      {
+        "name": "Fine Sea Salt",
+        "type": "salt",
+        "pct": 2.1,
+        "note": "Sea salt"
+      }
+    ],
+    "steps": [
+      {
+        "title": "Autolyse",
+        "time": "35 min",
+        "timer_seconds": 2100,
+        "phase": "Autolyse",
+        "cues": "Rye hydrates into thick aromatic paste.",
+        "text": "Mix flours and base water. Rest 35 min."
+      },
+      {
+        "title": "Pincer Mix",
+        "time": "6 min",
+        "timer_seconds": 360,
+        "phase": "Mixing",
+        "cues": "Smooth, cohesive whole grain dough.",
+        "text": "Add levain, salt, and bassinage water. Work through fingers until incorporated."
+      },
+      {
+        "title": "Bulk Fermentation (4 Folds)",
+        "time": "5 hrs (Folds every 45m)",
+        "timer_seconds": 2700,
+        "phase": "Bulk",
+        "cues": "Doubles in volume, airy and bubbly.",
+        "text": "Bulk at 24\u00b0C with 4 stretch-and-folds during the first 3 hours."
+      },
+      {
+        "title": "Shape & Basket Proof",
+        "time": "15 min",
+        "timer_seconds": 900,
+        "phase": "Shape",
+        "cues": "Taut boule placed seam-down.",
+        "text": "Shape into round boule. Proof in cane basket seam-side down."
+      },
+      {
+        "title": "Proof (Ambient or Cold)",
+        "time": "4 hrs room temp or 12h cold",
+        "timer_seconds": 14400,
+        "phase": "Proof",
+        "cues": "Puffy and airy.",
+        "text": "Proof until finger poke dent slowly recovers."
+      },
+      {
+        "title": "Dutch Oven Bake",
+        "time": "50 min",
+        "timer_seconds": 1800,
+        "phase": "Bake",
+        "cues": "Deep volcanic crackling crust with dark mahogany finish.",
+        "text": "Invert seam-side UP into hot pot. Bake 30m lid ON @ 245\u00b0C; 20m lid OFF @ 225\u00b0C."
+      }
+    ]
+  },
+  {
+    "id": "forkish_saturday_white",
+    "title": "Ken Forkish: FWSY The Saturday White Bread",
+    "book": "Flour Water Salt Yeast (p. 82)",
+    "author": "Ken Forkish",
+    "subtitle": "Same-day weekend master bread: 72% hydration, commercial yeast, Dutch oven hearth perfection.",
+    "leavening_type": "Commercial Yeast (Same-Day)",
+    "base_hydration": 72.0,
+    "flour_basis": 450,
+    "base_yield": 1,
+    "unit_name": "Boule",
+    "ingredients": [
+      {
+        "name": "Unbleached White Bread Flour",
+        "type": "flour_main",
+        "pct": 100.0,
+        "note": "High quality white flour"
+      },
+      {
+        "name": "Water (Warm 35\u00b0C / 95\u00b0F)",
+        "type": "water_base",
+        "pct": 72.0,
+        "note": "Warm water to accelerate fermentation"
+      },
+      {
+        "name": "Instant Dry Yeast",
+        "type": "yeast",
+        "pct": 0.4,
+        "note": "Active or instant dry yeast"
+      },
+      {
+        "name": "Fine Sea Salt",
+        "type": "salt",
+        "pct": 2.1,
+        "note": "Fine sea salt"
+      }
+    ],
+    "steps": [
+      {
+        "title": "Autolyse",
+        "time": "25 min",
+        "timer_seconds": 1500,
+        "phase": "Autolyse",
+        "cues": "Cohesive warm dough.",
+        "text": "Mix flour and warm water (35\u00b0C). Rest 25 min."
+      },
+      {
+        "title": "Pincer Mix Salt & Yeast",
+        "time": "5 min",
+        "timer_seconds": 300,
+        "phase": "Mixing",
+        "cues": "Yeast and salt dissolved smoothly.",
+        "text": "Sprinkle salt and yeast over dough. Pincer cut with fingers and fold 5 min."
+      },
+      {
+        "title": "Bulk Fermentation (2 Folds)",
+        "time": "5 hrs (Folds in first 90m)",
+        "timer_seconds": 2700,
+        "phase": "Bulk",
+        "cues": "Triples in volume, spongy,domed with bubbles.",
+        "text": "Perform 2 folds in the first 90 minutes. Rest undisturbed until tripled in volume."
+      },
+      {
+        "title": "Shape Round Boule",
+        "time": "15 min",
+        "timer_seconds": 900,
+        "phase": "Shape",
+        "cues": "Taut sphere placed seam-down in basket.",
+        "text": "Gently shape into round boule. Place seam-side DOWN in floured proofing basket."
+      },
+      {
+        "title": "Final Proof",
+        "time": "75 min",
+        "timer_seconds": 4500,
+        "phase": "Proof",
+        "cues": "Light, buoyant, passes finger dent test.",
+        "text": "Proof at room temperature for 1 to 1.25 hours."
+      },
+      {
+        "title": "Dutch Oven Bake",
+        "time": "45 min",
+        "timer_seconds": 1800,
+        "phase": "Bake",
+        "cues": "Golden yellow and brown fissures across top.",
+        "text": "Invert seam-side UP into scorching Dutch oven. Bake 30m lid ON @ 245\u00b0C; 15m lid OFF @ 225\u00b0C."
       }
     ]
   },
   {
     "id": "modernist_country",
-    "title": "4. Modernist Bread Country Sourdough",
-    "subtitle": "Scientifically optimized sourdough loaf with controlled fermentation kinetics and precise crumb cell distribution.",
-    "source": "Modernist Bread Vol 6 (Recipe Manual, p. 52)",
+    "title": "Modernist Bread: Master Sourdough Hearth Loaf",
+    "book": "Modernist Bread Vol 6 (p. 52)",
+    "author": "Nathan Myhrvold & Francisco Migoya",
+    "subtitle": "Scientifically optimized hearth loaf with controlled fermentation kinetics and precise crumb cell distribution.",
+    "leavening_type": "Pure Sourdough",
     "base_hydration": 74.0,
     "flour_basis": 450,
     "base_yield": 1,
     "unit_name": "Boule",
+    "ingredients": [
+      {
+        "name": "Unbleached Bread Flour (85%)",
+        "type": "flour_main",
+        "pct": 76.5,
+        "note": "High extraction or bread flour"
+      },
+      {
+        "name": "Whole Wheat (15%)",
+        "type": "special",
+        "pct": 13.5,
+        "note": "Enzymatically active whole grain"
+      },
+      {
+        "name": "Base Water",
+        "type": "water_base",
+        "pct": 60.0,
+        "note": "At Coulage temperature"
+      },
+      {
+        "name": "Bassinage Water",
+        "type": "water_bassinage",
+        "pct": 8.0,
+        "note": "Late addition"
+      },
+      {
+        "name": "Liquid Levain (100% Hydr)",
+        "type": "levain",
+        "pct": 20.0,
+        "flour_pct": 10.0,
+        "water_pct": 10.0,
+        "note": "Mature liquid levain"
+      },
+      {
+        "name": "Fine Sea Salt",
+        "type": "salt",
+        "pct": 2.0,
+        "note": "Fine sea salt"
+      }
+    ],
     "steps": [
       {
-        "title": "Build Liquid Levain",
+        "title": "Levain Preparation",
+        "time": "5 hrs prior",
+        "timer_seconds": 18000,
+        "phase": "Prep",
+        "cues": "Levain active, bubbly, pH 4.1.",
         "text": "Prepare mature liquid levain at 100% hydration."
       },
       {
-        "title": "Autolyse (40 min)",
-        "text": "Mix flour and base water to a shaggy mass. Autolyse 40 min."
+        "title": "Autolyse",
+        "time": "40 min",
+        "timer_seconds": 2400,
+        "phase": "Autolyse",
+        "cues": "Hydrated gluten matrix.",
+        "text": "Mix flours and base water to a shaggy mass. Autolyse 40 min."
       },
       {
         "title": "Mix & Bassinage",
+        "time": "6 min",
+        "timer_seconds": 360,
+        "phase": "Mixing",
+        "cues": "Medium gluten development; smooth windowpane.",
         "text": "Add levain, salt, and bassinage water. Mix on medium speed to medium gluten development."
       },
       {
-        "title": "Bulk Fermentation (3h @ 24\u00b0C)",
-        "text": "Perform 3 four-edge folds at 45 min intervals. Check for full gluten development with windowpane test."
+        "title": "Bulk Fermentation (3 Folds)",
+        "time": "3.5 hrs @ 24\u00b0C",
+        "timer_seconds": 2700,
+        "phase": "Bulk",
+        "cues": "Check for full gluten development with windowpane test.",
+        "text": "Perform 3 four-edge folds at 45 min intervals. Check for full gluten development."
       },
       {
         "title": "Preshape & Final Shape",
+        "time": "20 min",
+        "timer_seconds": 1200,
+        "phase": "Shape",
+        "cues": "Tight sphere with continuous surface tension.",
         "text": "Preshape into boule; rest 20 min. Final shape into tight sphere with continuous surface tension."
       },
       {
-        "title": "Final Proof (2.5h room temp or 14h cold)",
-        "text": "Proof in rice-floured banneton until aerated."
+        "title": "Final Proof",
+        "time": "14 hrs @ 4\u00b0C",
+        "timer_seconds": 50400,
+        "phase": "Proof",
+        "cues": "Chilled through in rice-floured cane banneton.",
+        "text": "Proof in rice-floured banneton in refrigerator."
       },
       {
         "title": "Score & Combo Cooker Bake",
-        "text": "Score box or cross cut 10mm deep. Bake in combo cooker @ 245\u00b0C with lid on for 22 min; remove lid and bake @ 220\u00b0C for 20 min."
+        "time": "42 min",
+        "timer_seconds": 1320,
+        "phase": "Bake",
+        "cues": "Symmetric expansion with crispy blistered skin.",
+        "text": "Score box or crescent cut 10mm deep. Bake in combo cooker @ 245\u00b0C with lid on for 22 min; remove lid and bake @ 220\u00b0C for 20 min."
+      }
+    ]
+  },
+  {
+    "id": "poilane_punition_miche",
+    "title": "Apollonia Poil\u00e2ne: The Punition Master Miche",
+    "book": "Poil\u00e2ne: Secrets of the World-Famous Bread Bakery (p. 42)",
+    "author": "Apollonia Poil\u00e2ne",
+    "subtitle": "The iconic 1.8kg Parisian country miche: stoneground T80 wheat, stiff levain, signature 'P' score.",
+    "leavening_type": "Pure Sourdough (Stiff Starter)",
+    "base_hydration": 70.0,
+    "flour_basis": 900,
+    "base_yield": 1,
+    "unit_name": "Large Miche (900g Flour)",
+    "ingredients": [
+      {
+        "name": "Stoneground T80 Wheat Flour (80%)",
+        "type": "flour_main",
+        "pct": 70.0,
+        "note": "Stoneground flour rich in germ and bran"
+      },
+      {
+        "name": "White Bread Flour (20%)",
+        "type": "special",
+        "pct": 18.0,
+        "note": "For gluten tensile support"
+      },
+      {
+        "name": "Spring Water",
+        "type": "water_base",
+        "pct": 60.0,
+        "note": "Pure unchlorinated water"
+      },
+      {
+        "name": "Bassinage Water",
+        "type": "water_bassinage",
+        "pct": 4.0,
+        "note": "Late addition"
+      },
+      {
+        "name": "Poil\u00e2ne Stiff Levain (60% Hydr)",
+        "type": "levain",
+        "pct": 20.0,
+        "flour_pct": 12.0,
+        "water_pct": 6.0,
+        "note": "Ancient stiff starter lineage"
+      },
+      {
+        "name": "Guerande Coarse Sea Salt",
+        "type": "salt",
+        "pct": 2.0,
+        "note": "Unrefined grey Atlantic salt"
+      }
+    ],
+    "steps": [
+      {
+        "title": "Prepare Stiff Starter",
+        "time": "8 hrs prior",
+        "timer_seconds": 28800,
+        "phase": "Prep",
+        "cues": "Dense ball with intense fermentation aroma.",
+        "text": "Feed stiff levain with stoneground flour. Ferment at 22\u00b0C."
+      },
+      {
+        "title": "Fraisage (Hand Smearing)",
+        "time": "10 min",
+        "timer_seconds": 600,
+        "phase": "Mixing",
+        "cues": "Homogeneous, earthy dough without clumps.",
+        "text": "Combine flours, water, salt, and stiff levain. Work with heels of hands against bench."
+      },
+      {
+        "title": "Pointage (Ambient Bulk)",
+        "time": "4.5 hrs (Hourly turns)",
+        "timer_seconds": 3600,
+        "phase": "Bulk",
+        "cues": "Deep, pungent sourdough aroma, aerated mass.",
+        "text": "Bulk at 21\u00b0C\u201322\u00b0C. Turn every 60 min for first 3 hours."
+      },
+      {
+        "title": "Boule Shaping for Large Miche",
+        "time": "20 min",
+        "timer_seconds": 1200,
+        "phase": "Shape",
+        "cues": "Large taut sphere with continuous surface skin.",
+        "text": "Shape into giant round boule. Place seam-side UP in large linen-lined wicker basket."
+      },
+      {
+        "title": "Final Proof",
+        "time": "2 hrs @ 22\u00b0C",
+        "timer_seconds": 7200,
+        "phase": "Proof",
+        "cues": "Gentle bounce, expanded and airy.",
+        "text": "Proof at room temperature in basket."
+      },
+      {
+        "title": "Signature 'P' Slash & Hearth Bake",
+        "time": "55 min",
+        "timer_seconds": 1800,
+        "phase": "Bake",
+        "cues": "Thick crust, dark chestnut color, hollow thump when tapped.",
+        "text": "Score signature Poil\u00e2ne 'P' or cross. Bake on baking stone with steam: 30 min @ 240\u00b0C, then 25 min @ 215\u00b0C."
+      }
+    ]
+  },
+  {
+    "id": "greenway_sf_sourdough",
+    "title": "Teresa Greenway: San Francisco Style Sour Boule",
+    "book": "Discovering Sourdough (p. 64)",
+    "author": "Teresa L. Greenway",
+    "subtitle": "24-hour cold bulk retard to maximize acetic acid production for authentic San Francisco sour flavor.",
+    "leavening_type": "Pure Sourdough",
+    "base_hydration": 71.0,
+    "flour_basis": 450,
+    "base_yield": 1,
+    "unit_name": "Boule",
+    "ingredients": [
+      {
+        "name": "Unbleached Bread Flour (90%)",
+        "type": "flour_main",
+        "pct": 80.0,
+        "note": "High protein white flour"
+      },
+      {
+        "name": "Whole Wheat (10%)",
+        "type": "special",
+        "pct": 10.0,
+        "note": "Food for acid bacteria"
+      },
+      {
+        "name": "Base Water",
+        "type": "water_base",
+        "pct": 57.0,
+        "note": "Cool water"
+      },
+      {
+        "name": "Bassinage Water",
+        "type": "water_bassinage",
+        "pct": 4.0,
+        "note": "Late addition"
+      },
+      {
+        "name": "Sourdough Starter (75% Hydr)",
+        "type": "levain",
+        "pct": 20.0,
+        "flour_pct": 10.0,
+        "water_pct": 7.0,
+        "note": "Slightly mature starter with sharp tang"
+      },
+      {
+        "name": "Fine Sea Salt",
+        "type": "salt",
+        "pct": 2.0,
+        "note": "Fine salt"
+      }
+    ],
+    "steps": [
+      {
+        "title": "Starter Feeding",
+        "time": "6 hrs prior",
+        "timer_seconds": 21600,
+        "phase": "Prep",
+        "cues": "Bubbly with strong acetic vinegar tang.",
+        "text": "Feed starter at slightly lower hydration (75%) to stimulate heterofermentative bacteria."
+      },
+      {
+        "title": "Mix & Knead",
+        "time": "8 min",
+        "timer_seconds": 480,
+        "phase": "Mixing",
+        "cues": "Smooth, elastic dough with medium development.",
+        "text": "Combine flours, water, starter, and salt. Knead 6-8 minutes."
+      },
+      {
+        "title": "Warm Start",
+        "time": "2 hrs (2 folds)",
+        "timer_seconds": 3600,
+        "phase": "Bulk",
+        "cues": "Fermentation begins; dough puffs.",
+        "text": "Bulk at 24\u00b0C for 2 hours with 2 folds."
+      },
+      {
+        "title": "Extended Cold Bulk Retard",
+        "time": "24 hrs @ 3\u00b0C",
+        "timer_seconds": 86400,
+        "phase": "Bulk",
+        "cues": "Extreme acetic acid accumulation.",
+        "text": "Transfer covered container to cold refrigerator (3\u00b0C / 37\u00b0F) for full 24 hours."
+      },
+      {
+        "title": "Preshape & Shape Cold",
+        "time": "25 min",
+        "timer_seconds": 1500,
+        "phase": "Shape",
+        "cues": "Cold dough holds tight spherical shape.",
+        "text": "Shape directly from fridge into round boule. Invert into banneton."
+      },
+      {
+        "title": "Final Warm Proof",
+        "time": "2.5 hrs @ 24\u00b0C",
+        "timer_seconds": 9000,
+        "phase": "Proof",
+        "cues": "Puffy and airy; aroma is delightfully sour.",
+        "text": "Proof at room temperature until buoyant."
+      },
+      {
+        "title": "Score & Dutch Oven Bake",
+        "time": "45 min",
+        "timer_seconds": 1200,
+        "phase": "Bake",
+        "cues": "Intense blistering, sharp golden ear, mouthwatering sourdough tang.",
+        "text": "Deep crescent score. Bake 20 min lid ON @ 245\u00b0C; 25 min lid OFF @ 225\u00b0C."
       }
     ]
   }

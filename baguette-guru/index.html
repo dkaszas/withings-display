@@ -8,7 +8,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="manifest" href="manifest.json">
-    <link rel="stylesheet" href="style.css?v=5.0">
+    <link rel="stylesheet" href="style.css?v=6.0">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥖</text></svg>">
 </head>
 <body>
@@ -216,6 +216,18 @@
                     <div id="recipe-selector-pills" class="recipe-pills">
                         <!-- Populated dynamically based on Baguette vs Boule -->
                     </div>
+
+                    <!-- ACTIVE RECIPE ACTION BANNER -->
+                    <div class="recipe-action-banner">
+                        <div class="active-recipe-summary">
+                            <h3 id="display-recipe-title">Selected Master Formula</h3>
+                            <p id="display-recipe-desc" class="recipe-desc-text">Select a master formula above</p>
+                        </div>
+                        <button id="btn-start-baking-mode" class="btn-execute btn-baking-mode" title="Launch Step-by-Step Guided Baker with Alarms">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                            <span>START BAKING MODE</span>
+                        </button>
+                    </div>
                 </div>
 
                 <!-- SCALE MASTER & HYDRATION DIAL -->
@@ -387,6 +399,87 @@
         </main>
     </div>
 
+    <!-- IMMERSIVE BAKING MODE OVERLAY -->
+    <div id="baking-mode-overlay" class="baking-mode-view hidden">
+        <div class="bm-container">
+            <header class="bm-header">
+                <div class="bm-header-left">
+                    <span class="bm-live-indicator"></span>
+                    <div class="bm-header-meta">
+                        <h2 id="bm-recipe-name">Modernist Bread: A-Plus Baguette</h2>
+                        <span id="bm-recipe-specs">Scaled to 500g Flour • Target Hydration: 70.5%</span>
+                    </div>
+                </div>
+                <div class="bm-header-right">
+                    <button id="bm-sound-toggle" class="icon-btn" title="Toggle Alarm Chime" aria-label="Toggle Sound">🔔</button>
+                    <button id="bm-close-btn" class="icon-btn bm-close" title="Exit Baking Mode" aria-label="Exit Baking Mode">&times;</button>
+                </div>
+            </header>
+
+            <!-- PROGRESS BAR -->
+            <div class="bm-progress-bar">
+                <div id="bm-progress-fill" class="bm-progress-fill" style="width: 10%;"></div>
+            </div>
+
+            <!-- STEP JUMP DRAWER -->
+            <div class="bm-step-nav-strip">
+                <div id="bm-step-pills" class="bm-step-pills">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+
+            <!-- MAIN STAGE -->
+            <div class="bm-stage">
+                <!-- STEP DETAIL CARD -->
+                <div class="bm-step-card">
+                    <div class="bm-step-meta">
+                        <span id="bm-step-badge" class="bm-phase-badge">PHASE 1: PREP</span>
+                        <span id="bm-step-counter" class="bm-step-counter">Step 1 of 8</span>
+                    </div>
+                    <h1 id="bm-step-title" class="bm-step-title">Toasted Corn Prep</h1>
+                    <p id="bm-step-instructions" class="bm-step-instructions">
+                        Toast finely milled corn flour at 175°C (350°F) for 20 min until golden and fragrant. Cool completely before mixing.
+                    </p>
+                    <div class="bm-cue-box">
+                        <span class="bm-cue-label">TACTILE & SENSORY CUE</span>
+                        <span id="bm-step-cues" class="bm-step-cues">Aroma should be rich, nutty, and hazelnut-like.</span>
+                    </div>
+                </div>
+
+                <!-- TIMER & ALARM CARD -->
+                <div class="bm-timer-card">
+                    <div class="bm-timer-label">STEP TIMER & ALARM</div>
+                    <div id="bm-timer-display" class="bm-timer-display">20:00</div>
+                    <div id="bm-timer-status" class="bm-timer-status">Timer Ready • Alarm Enabled</div>
+
+                    <!-- TIMER CONTROLS -->
+                    <div class="bm-timer-controls">
+                        <button id="bm-btn-sub5" class="bm-btn-secondary">-5 Min</button>
+                        <button id="bm-btn-toggle-timer" class="bm-btn-primary">START TIMER</button>
+                        <button id="bm-btn-add5" class="bm-btn-secondary">+5 Min</button>
+                        <button id="bm-btn-reset-timer" class="bm-btn-secondary">Reset</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NAVIGATION FOOTER -->
+            <footer class="bm-footer">
+                <button id="bm-btn-prev" class="action-btn secondary-action">◀ Previous Step</button>
+                <button id="bm-btn-complete" class="action-btn primary-action">Complete & Next Step ▶</button>
+            </footer>
+        </div>
+
+        <!-- ALARM NOTIFICATION OVERLAY (WHEN TIMER EXPIRES) -->
+        <div id="bm-alarm-modal" class="bm-alarm-modal hidden">
+            <div class="bm-alarm-card">
+                <div class="bm-alarm-bell">🔔</div>
+                <h2 id="bm-alarm-title">Step Complete!</h2>
+                <p id="bm-alarm-desc">Check on your dough and proceed to the next step.</p>
+                <button id="bm-btn-dismiss-alarm" class="action-btn primary-action">Acknowledge Alarm & Next Step ▶</button>
+            </div>
+        </div>
+    </div>
+
     <!-- SETTINGS MODAL -->
     <div id="settings-modal" class="modal-backdrop hidden">
         <div class="modal-container">
@@ -428,7 +521,7 @@
         </div>
     </div>
 
-    <script src="knowledge_data.js"></script>
-    <script src="app.js"></script>
+    <script src="knowledge_data.js?v=6.0"></script>
+    <script src="app.js?v=6.0"></script>
 </body>
 </html>

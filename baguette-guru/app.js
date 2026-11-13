@@ -1,6 +1,6 @@
-// BREAD GURU LCARS — Core Application Engine
+// BREAD GURU — Core Application Engine
 // Dual Mode: Artisanal Baguettes & Sourdough Boules / Bâtards
-// Dynamic Flour Profiler, Interactive Hydration Slider, and Exact Gram Calculations
+// Dynamic Flour Profiler, Interactive Hydration Slider, Exact Grams, and Immersive Guided Baking Mode
 
 (function() {
     'use strict';
@@ -9,11 +9,24 @@
     let currentFormatMode = 'baguette'; // 'baguette' | 'boule'
     let currentBase64Images = [];
     let selectedModel = 'gemini-2.5-flash';
-    let currentRecipeId = 'sourdough';
+    let currentRecipeId = 'modernist_a_plus';
     let currentFlourBasis = 500;
     let currentLoavesCount = 3;
-    let currentHydration = 70.0;
+    let currentHydration = 70.5;
     let activeFlour = null;
+
+    // Immersive Baking Mode State
+    const bakingState = {
+        recipe: null,
+        stepIndex: 0,
+        timerTotalSeconds: 1200,
+        timerRemainingSeconds: 1200,
+        timerRunning: false,
+        timerInterval: null,
+        timerEndTime: null,
+        soundEnabled: true,
+        alarmInterval: null
+    };
 
     // DOM References
     const DOM = {
@@ -32,14 +45,8 @@
         navPills: document.querySelectorAll('.nav-tab'),
         tabViews: document.querySelectorAll('.tab-view'),
 
-        // Pillar items
+        // Settings
         settingsBtn: document.getElementById('settings-btn'),
-        pillarGallery: document.getElementById('pillar-gallery'),
-        pillarCamera: document.getElementById('pillar-camera'),
-        pillarAnalyze: document.getElementById('pillar-analyze'),
-        pillarRecipes: document.getElementById('pillar-recipes'),
-        pillarCoulage: document.getElementById('pillar-coulage'),
-        pillarClear: document.getElementById('pillar-clear'),
 
         // Telemetry
         headerFlourSelector: document.getElementById('header-flour-selector'),
@@ -62,6 +69,7 @@
         diagnosticPanel: document.getElementById('diagnostic-panel'),
         diagnosticContent: document.getElementById('diagnostic-content'),
         btnClearResult: document.getElementById('btn-clear-result'),
+        pillarClear: document.getElementById('pillar-clear'),
         quickChipsContainer: document.getElementById('quick-chips-container'),
 
         // Flour Profiler (Recipe View)
@@ -77,6 +85,9 @@
 
         // Recipe Scaler
         recipeSelectorPills: document.getElementById('recipe-selector-pills'),
+        displayRecipeTitle: document.getElementById('display-recipe-title'),
+        displayRecipeDesc: document.getElementById('display-recipe-desc'),
+        btnStartBakingMode: document.getElementById('btn-start-baking-mode'),
         labelUnitCount: document.getElementById('label-unit-count'),
         btnDecLoaves: document.getElementById('btn-dec-loaves'),
         btnIncLoaves: document.getElementById('btn-inc-loaves'),
@@ -110,7 +121,33 @@
 
         // Loader
         loaderOverlay: document.getElementById('loader-overlay'),
-        loaderText: document.getElementById('loader-text')
+        loaderText: document.getElementById('loader-text'),
+
+        // Immersive Baking Mode
+        bakingModeOverlay: document.getElementById('baking-mode-overlay'),
+        bmRecipeName: document.getElementById('bm-recipe-name'),
+        bmRecipeSpecs: document.getElementById('bm-recipe-specs'),
+        bmSoundToggle: document.getElementById('bm-sound-toggle'),
+        bmCloseBtn: document.getElementById('bm-close-btn'),
+        bmProgressFill: document.getElementById('bm-progress-fill'),
+        bmStepPills: document.getElementById('bm-step-pills'),
+        bmStepBadge: document.getElementById('bm-step-badge'),
+        bmStepCounter: document.getElementById('bm-step-counter'),
+        bmStepTitle: document.getElementById('bm-step-title'),
+        bmStepInstructions: document.getElementById('bm-step-instructions'),
+        bmStepCues: document.getElementById('bm-step-cues'),
+        bmTimerDisplay: document.getElementById('bm-timer-display'),
+        bmTimerStatus: document.getElementById('bm-timer-status'),
+        bmBtnSub5: document.getElementById('bm-btn-sub5'),
+        bmBtnToggleTimer: document.getElementById('bm-btn-toggle-timer'),
+        bmBtnAdd5: document.getElementById('bm-btn-add5'),
+        bmBtnResetTimer: document.getElementById('bm-btn-reset-timer'),
+        bmBtnPrev: document.getElementById('bm-btn-prev'),
+        bmBtnComplete: document.getElementById('bm-btn-complete'),
+        bmAlarmModal: document.getElementById('bm-alarm-modal'),
+        bmAlarmTitle: document.getElementById('bm-alarm-title'),
+        bmAlarmDesc: document.getElementById('bm-alarm-desc'),
+        bmBtnDismissAlarm: document.getElementById('bm-btn-dismiss-alarm')
     };
 
     // Quick Chip Templates for Baguette vs Boule
@@ -173,24 +210,29 @@
         DOM.btnFormatBaguette.classList.toggle('active', mode === 'baguette');
         DOM.btnFormatBoule.classList.toggle('active', mode === 'boule');
 
+        const recipeList = (mode === 'baguette') ? RECIPES_BAGUETTE : RECIPES_BOULE;
+
         if (mode === 'baguette') {
             DOM.telemetryFormat.textContent = 'BAGUETTE (COUCHE & LAME)';
-            DOM.recipeFormatTitle.textContent = 'ARTISANAL BAGUETTES (COUCHE & LAME)';
-            DOM.recipeFormatSubtitle.textContent = 'SCALED TO EXACT GRAMS WITH INTERACTIVE HYDRATION SLIDER';
+            DOM.recipeFormatTitle.textContent = 'Artisanal Baguettes';
+            DOM.recipeFormatSubtitle.textContent = 'Curated master formulas from 9 texts scaled to exact grams with interactive hydration';
             DOM.labelUnitCount.textContent = 'BAGUETTE COUNT:';
             currentLoavesCount = 3;
             currentFlourBasis = 500;
-            currentRecipeId = 'sourdough';
+            currentRecipeId = recipeList[0]?.id || 'modernist_a_plus';
+            currentHydration = recipeList[0]?.base_hydration || 70.5;
         } else {
             DOM.telemetryFormat.textContent = 'SOURDOUGH BOULE (BANNETON & DUTCH OVEN)';
-            DOM.recipeFormatTitle.textContent = 'SOURDOUGH HEARTH LOAVES (BANNETON & DUTCH OVEN)';
-            DOM.recipeFormatSubtitle.textContent = 'SCALED TO EXACT GRAMS FOR CAST IRON DUTCH OVEN BAKING';
+            DOM.recipeFormatTitle.textContent = 'Sourdough Hearth Loaves (Boules & Bâtards)';
+            DOM.recipeFormatSubtitle.textContent = 'Authoritative hearth formulas from Tartine, The Perfect Loaf, FWSY, and Modernist Bread';
             DOM.labelUnitCount.textContent = 'BOULE / BÂTARD COUNT:';
             currentLoavesCount = 1;
             currentFlourBasis = 450;
-            currentRecipeId = 'tartine_country';
+            currentRecipeId = recipeList[0]?.id || 'tartine_country';
+            currentHydration = recipeList[0]?.base_hydration || 75.0;
         }
 
+        DOM.sliderHydration.value = currentHydration;
         DOM.displayLoaves.textContent = currentLoavesCount;
         DOM.inputFlourBasis.value = currentFlourBasis;
 
@@ -220,7 +262,7 @@
         });
     }
 
-    // Render Recipe Tab Pills (Baguette vs Boule)
+    // Render Recipe Tab Pills (Comprehensive Reference Library)
     function renderRecipeTabs() {
         DOM.recipeSelectorPills.innerHTML = '';
         const recipes = (currentFormatMode === 'baguette') ? RECIPES_BAGUETTE : RECIPES_BOULE;
@@ -228,13 +270,26 @@
 
         recipes.forEach(r => {
             const btn = document.createElement('button');
-            btn.className = `recipe-tab ${r.id === currentRecipeId ? 'active' : ''}`;
+            const isActive = (r.id === currentRecipeId);
+            btn.className = `recipe-pill-btn ${isActive ? 'active' : ''}`;
             btn.dataset.recipe = r.id;
-            btn.textContent = r.title.split('(')[0].trim();
+            
+            // Clean title format
+            const cleanTitle = r.title.replace(/^(Modernist Bread|Jean-Marie Lanio|Chad Robertson|Maurizio Leo|Ken Forkish|King Arthur|Apollonia Poilâne|Teresa Greenway):\s*/i, '');
+            btn.innerHTML = `<strong>${cleanTitle}</strong> <small style="opacity: 0.8; font-size: 10px; margin-left: 4px;">(${r.author?.split('&')[0]?.split(' ')[0] || ''})</small>`;
+
             btn.addEventListener('click', () => {
-                DOM.recipeSelectorPills.querySelectorAll('.recipe-tab').forEach(t => t.classList.remove('active'));
+                DOM.recipeSelectorPills.querySelectorAll('.recipe-pill-btn').forEach(t => t.classList.remove('active'));
                 btn.classList.add('active');
                 currentRecipeId = r.id;
+                
+                // Adjust hydration slider to author's authentic formula
+                if (r.base_hydration) {
+                    currentHydration = r.base_hydration;
+                    DOM.sliderHydration.value = currentHydration;
+                    updateHydrationUI();
+                }
+
                 renderRecipesTable();
             });
             DOM.recipeSelectorPills.appendChild(btn);
@@ -311,22 +366,15 @@
         DOM.headerFlourSelector.addEventListener('change', (e) => setFlourProfile(e.target.value, true));
         DOM.recipeFlourSelector.addEventListener('change', (e) => setFlourProfile(e.target.value, true));
 
-        DOM.inputProtein.addEventListener('input', (e) => {
-            const p = parseFloat(e.target.value);
-            if (p && p >= 8.0 && p <= 18.0) {
-                activeFlour.protein = p;
-                DOM.telemetryProtein.textContent = `${p.toFixed(1)}%`;
-                activeFlour.max_safe_hydration = parseFloat((p * 2.2 + 48.0).toFixed(1));
-                updateHydrationUI();
-                renderRecipesTable();
-            }
+        DOM.inputProtein.addEventListener('change', (e) => {
+            activeFlour.protein = parseFloat(e.target.value) || 11.5;
+            DOM.telemetryProtein.textContent = `${activeFlour.protein.toFixed(1)}%`;
+            updateHydrationUI();
+            renderRecipesTable();
         });
 
         DOM.selectBio.addEventListener('change', (e) => {
             activeFlour.is_bio = (e.target.value === 'true');
-            if (activeFlour.is_bio) {
-                activeFlour.max_safe_hydration = Math.min(activeFlour.max_safe_hydration, 75.0);
-            }
             updateHydrationUI();
             renderRecipesTable();
         });
@@ -340,14 +388,6 @@
 
         // Navigation / Header buttons
         DOM.settingsBtn?.addEventListener('click', () => DOM.settingsModal?.classList.remove('hidden'));
-        DOM.pillarGallery?.addEventListener('click', () => DOM.galleryInput?.click());
-        DOM.pillarCamera?.addEventListener('click', () => DOM.cameraInput?.click());
-        DOM.pillarAnalyze?.addEventListener('click', () => {
-            switchTab('diagnose');
-            analyzePhotos();
-        });
-        DOM.pillarRecipes?.addEventListener('click', () => switchTab('recipes'));
-        DOM.pillarCoulage?.addEventListener('click', () => switchTab('coulage'));
         DOM.pillarClear?.addEventListener('click', clearInputs);
 
         // Settings Modal
@@ -425,6 +465,20 @@
         [DOM.coulageTd, DOM.coulageTr, DOM.coulageTf, DOM.coulageFriction].forEach(el => {
             el.addEventListener('input', calculateCoulage);
         });
+
+        // ======================================================================
+        // BAKING MODE EVENT BINDINGS
+        // ======================================================================
+        DOM.btnStartBakingMode?.addEventListener('click', startBakingMode);
+        DOM.bmCloseBtn?.addEventListener('click', exitBakingMode);
+        DOM.bmSoundToggle?.addEventListener('click', toggleBakingSound);
+        DOM.bmBtnToggleTimer?.addEventListener('click', toggleTimer);
+        DOM.bmBtnSub5?.addEventListener('click', () => adjustTimer(-300));
+        DOM.bmBtnAdd5?.addEventListener('click', () => adjustTimer(300));
+        DOM.bmBtnResetTimer?.addEventListener('click', resetTimer);
+        DOM.bmBtnPrev?.addEventListener('click', prevBakingStep);
+        DOM.bmBtnComplete?.addEventListener('click', nextBakingStep);
+        DOM.bmBtnDismissAlarm?.addEventListener('click', dismissAlarmAndAdvance);
     }
 
     // Hydration UI & Rheology Zone Feedback
@@ -434,39 +488,53 @@
 
         if (!activeFlour) return;
 
-        // Boules in a banneton tolerate ~2% higher hydration than free-standing baguettes
-        const maxSafe = (currentFormatMode === 'boule') ? (activeFlour.max_safe_hydration + 2.5) : activeFlour.max_safe_hydration;
-        const minSafe = activeFlour.min_safe_hydration;
+        // Rheology Safe Limits Evaluation
+        const rec = activeFlour.rec_hydration;
+        const maxSafe = activeFlour.max_safe_hydration;
+        const badge = DOM.hydrZoneBadge;
 
-        if (currentHydration > maxSafe) {
-            DOM.hydrZoneBadge.className = 'badge-danger';
-            DOM.hydrZoneBadge.textContent = `⚠️ DANGER: PUDDLE RISK! Exceeds safe limit for ${activeFlour.name} (${maxSafe.toFixed(1)}%). Risk of slumping & lost ear.`;
-        } else if (currentHydration < minSafe) {
-            DOM.hydrZoneBadge.className = 'badge-warning';
-            DOM.hydrZoneBadge.textContent = `🟡 TIGHT / DRY ZONE (< ${minSafe}%). Crumb will be tight; dense hearth loaf.`;
+        if (currentHydration < 66.0) {
+            badge.textContent = "STIFF / FIRM (Crisp Skin, Fine Alveoli)";
+            badge.className = "zone-badge zone-optimal";
+            badge.style.color = "#38bdf8";
+        } else if (currentHydration <= rec + 1.0) {
+            badge.textContent = `OPTIMAL FOR ${activeFlour.name.toUpperCase()} (High Extensibility, Honeycombed Crumb)`;
+            badge.className = "zone-badge zone-optimal";
+            badge.style.color = "#34d399";
+        } else if (currentHydration <= maxSafe) {
+            badge.textContent = "HIGH HYDRATION (Bassinage Required; Handle Gently to Avoid Slumping)";
+            badge.className = "zone-badge zone-warning";
+            badge.style.color = "#fb923c";
         } else {
-            DOM.hydrZoneBadge.className = 'badge-optimal';
-            DOM.hydrZoneBadge.textContent = `🟢 OPTIMAL ZONE (${minSafe}% – ${maxSafe.toFixed(1)}%). Ideal for open alveoli, crisp ear & oven spring.`;
+            badge.textContent = "CRITICAL HYDRATION WARNING (Exceeds Native Protein Capacity - Risk of Puddle/Flat Loaf)";
+            badge.className = "zone-badge zone-warning";
+            badge.style.color = "#f87171";
         }
     }
 
-    // Image File Processing & Canvas Compression (1200px max)
-    async function handleImageFiles(files) {
-        if (!files || files.length === 0) return;
+    // Handle Image Selection & Downscaling
+    async function handleImageFiles(fileList) {
+        if (!fileList || fileList.length === 0) return;
 
-        for (let file of Array.from(files)) {
-            if (!file.type.startsWith('image/')) continue;
-            try {
-                const b64 = await compressImageToJPEG(file, 1200, 0.82);
+        DOM.loaderOverlay.classList.remove('hidden');
+        DOM.loaderText.textContent = 'Processing & optimizing photos...';
+
+        try {
+            for (let i = 0; i < fileList.length; i++) {
+                const file = fileList[i];
+                if (!file.type.startsWith('image/')) continue;
+                const b64 = await resizeImageToBase64(file, 1600, 0.85);
                 currentBase64Images.push(b64);
-            } catch (err) {
-                console.error("Compression error:", err);
             }
+            updateImagePreviews();
+        } catch (err) {
+            alert('Failed to process image: ' + err.message);
+        } finally {
+            DOM.loaderOverlay.classList.add('hidden');
         }
-        updateImagePreviews();
     }
 
-    function compressImageToJPEG(file, maxDimension, quality) {
+    function resizeImageToBase64(file, maxDimension, quality) {
         return new Promise((resolve, reject) => {
             const reader = new FileReader();
             reader.onload = (e) => {
@@ -510,15 +578,15 @@
             DOM.previewContainer.innerHTML = '';
             currentBase64Images.forEach((b64, idx) => {
                 const item = document.createElement('div');
-                item.className = 'preview-item';
+                item.className = 'preview-thumb-box';
                 item.innerHTML = `
                     <img src="data:image/jpeg;base64,${b64}">
-                    <button class="btn-remove-img" data-idx="${idx}">&times;</button>
+                    <button class="preview-remove-btn" data-idx="${idx}">&times;</button>
                 `;
                 DOM.previewContainer.appendChild(item);
             });
 
-            DOM.previewContainer.querySelectorAll('.btn-remove-img').forEach(btn => {
+            DOM.previewContainer.querySelectorAll('.preview-remove-btn').forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     const idx = parseInt(e.target.dataset.idx, 10);
                     currentBase64Images.splice(idx, 1);
@@ -565,143 +633,116 @@
         const payload = {
             contents: [{ parts: parts }],
             generationConfig: {
-                temperature: 0.35,
+                temperature: 0.2,
                 topK: 40,
                 topP: 0.95,
-                maxOutputTokens: 2500
+                maxOutputTokens: 2048
             }
         };
 
-        const response = await fetch(url, {
+        const resp = await fetch(url, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
         });
 
-        if (!response.ok) {
-            const errData = await response.json().catch(() => ({}));
-            throw new Error(`Gemini API Error (${model}): ${errData.error?.message || response.statusText}`);
+        if (!resp.ok) {
+            const errJson = await resp.json().catch(() => ({}));
+            throw new Error(errJson.error?.message || `Gemini API returned HTTP ${resp.status}`);
         }
 
-        const data = await response.json();
-        if (!data.candidates || data.candidates.length === 0) {
-            throw new Error("No response generated from Gemini.");
-        }
-        return data.candidates[0].content.parts[0].text;
+        const data = await resp.json();
+        return data.candidates[0].content.parts.map(p => p.text).join('\n');
     }
 
-    // Test API Connection
-    async function testGeminiConnection() {
-        const key = DOM.geminiKey.value.trim();
-        if (!key) {
-            DOM.settingsStatus.textContent = "Please enter an API key first.";
-            DOM.settingsStatus.className = "status-msg error";
-            return;
-        }
-
-        DOM.settingsStatus.textContent = "Testing connection...";
-        DOM.settingsStatus.className = "status-msg";
-        DOM.settingsStatus.style.display = "block";
-
-        try {
-            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${key}`;
-            const res = await fetch(url, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    contents: [{ parts: [{ text: "Ping. Reply with 'Artisan Bread Guru Uplink Online' only." }] }]
-                })
-            });
-            if (!res.ok) throw new Error("HTTP " + res.status);
-            const data = await res.json();
-            const text = data.candidates[0].content.parts[0].text.trim();
-            DOM.settingsStatus.textContent = `SUCCESS: ${text}`;
-            DOM.settingsStatus.className = "status-msg success";
-        } catch (e) {
-            DOM.settingsStatus.textContent = `FAILED: ${e.message}`;
-            DOM.settingsStatus.className = "status-msg error";
-        }
-    }
-
-    // Build Guru System Context Prompt (Adapts to Baguette vs Boule!)
-    function constructGuruPrompt(userQuery) {
-        const formatDesc = (currentFormatMode === 'baguette')
-            ? 'ARTISANAL BAGUETTES (Linen Couche Proofed, Elongated Hand Shaping, 5-7 Slashes, Open Stone Baked with Steam)'
-            : 'SOURDOUGH BOULE / BÂTARD (Rattan Banneton Proofed, Round/Oval Tension Stitch Shaping, Single Curved Crescent Ear Slash, Cast Iron Dutch Oven Baked)';
-
-        return `You are the World-Class Artisan Bread & Sourdough Guru, trained across INBP French viennoiserie and West Coast artisan sourdough traditions.
-Your expertise is founded on the definitive synthesis of 9 major bread authorities:
-1. Modernist Bread (Nathan Myhrvold & Francisco Migoya - A-Plus Baguette, Country Loaves, Parametric formulas, Steam physics)
-2. Jean-Marie Lanio & Jérémy Ballester (*All About Baguette* - French T65, Pointage au bac, Couche techniques)
-3. Chad Robertson (*Tartine Bread* - Basic Country Boule & Hybrid Baguettes)
-4. Maurizio Leo (*The Perfect Loaf* - Sourdough Boules, Bâtards, Demi-baguettes)
-5. Addie Roberts (*Secrets of Open Crumb* - Extensibility, protein quality, open alveoli)
-6. Ken Forkish (*Flour Water Salt Yeast* - Dutch oven baking, Overnight Country Blonde)
-7. King Arthur Baking Company (*Big Book of Bread*)
-8. Teresa Greenway (*Discovering Sourdough*)
-9. Apollonia Poilâne (*Poilâne*)
-
-CURRENT BAKE FORMAT:
-${formatDesc}
-
-CURRENT INGREDIENT & FLOUR PARAMETERS CONFIGURED BY USER:
-- ACTIVE FLOUR: ${activeFlour.name}
-- PROTEIN CONTENT: ${activeFlour.protein}%
-- ASH CONTENT / TYPE: ${activeFlour.ash}%
-- ORGANIC / BIO STATUS: ${activeFlour.is_bio ? 'YES (Strictly NO chemical oxidizers/ascorbic acid, native enzymes only)' : 'NO (Conventional / Malted flour)'}
-- TARGET HYDRATION DIALED IN: ${currentHydration.toFixed(1)}% (Recommended: ${activeFlour.rec_hydration}%, Safe Ceiling: ${activeFlour.max_safe_hydration}%)
-- DOUGH BASE TEMPERATURE (*Coulage*): Target 23.5°C–24.5°C
-
-DIAGNOSTIC DIRECTIVES:
-When analyzing photos or troubleshooting:
-1. ADAPT TO ACTIVE FORMAT (${currentFormatMode.toUpperCase()}):
-   - If BOULE: Focus on banneton tension, ear development (grigne) from 30° crescent slash, Dutch oven steam retention (lid on 20 min), and open honeycomb crumb.
-   - If BAGUETTE: Focus on elongation without tearing gluten, 5 overlapping cuts along centerline, couche linen folds, and thin crisp crust.
-2. EVALUATE FLOUR RHEOLOGY: Explicitly judge if ${currentHydration}% hydration is appropriate for ${activeFlour.name} (${activeFlour.protein}% protein).
-3. PROVIDE EXACT GRAMS & ACTIONABLE REMEDIES: Quote exact weights in grams and Baker's percentages, times, temperatures, and hand movements.
-
-USER INQUIRY / CONTEXT:
-"${userQuery || "Please examine my bread photos and current configuration. Provide a full master diagnostic report identifying defects, root causes, and exact corrective actions."}"`;
-    }
-
-    // Main Analysis Execution
+    // Analyze Photos (Multimodal Diagnostic Engine)
     async function analyzePhotos() {
-        const queryText = DOM.contextInput.value.trim();
-        if (!queryText && currentBase64Images.length === 0) {
-            alert("PLEASE PROVIDE A PHOTO OR TYPE A QUESTION FOR THE GURU.");
+        const userPrompt = DOM.contextInput.value.trim();
+        if (!userPrompt && currentBase64Images.length === 0) {
+            alert('Please take or upload a photo, or write a question / select a diagnostic topic.');
             return;
         }
-
-        const prompt = constructGuruPrompt(queryText);
 
         DOM.loaderOverlay.classList.remove('hidden');
-        DOM.loaderText.textContent = `CONSULTING GURU (${selectedModel.toUpperCase()})...`;
+        DOM.loaderText.textContent = `Consulting Bread Guru (${selectedModel.toUpperCase()})...`;
 
         try {
-            let responseText = await queryGemini(selectedModel, prompt, currentBase64Images);
-            renderDiagnosticResult(responseText);
-        } catch (err) {
-            console.error("Analysis failure:", err);
+            // Build Context grounded in our 11 extracted modules
+            let systemContext = `YOU ARE BREAD GURU, an elite master baker specializing in artisanal French baguettes and sourdough hearth loaves (boules & bâtards).
+You have deep mastery over the 9 foundational texts in your knowledge base: Modernist Bread (Myhrvold/Migoya), All About Baguette (Jean-Marie Lanio), Tartine Bread (Chad Robertson), The Perfect Loaf (Maurizio Leo), Flour Water Salt Yeast (Ken Forkish), Secrets of Open Crumb (Addie Roberts), Poilâne (Apollonia Poilâne), King Arthur Big Book of Bread, and Discovering Sourdough (Teresa Greenway).
+
+CURRENT TELEMETRY & PHYSICAL CONDITIONS:
+- ACTIVE BAKE FORMAT: ${currentFormatMode.toUpperCase()}
+- ACTIVE FLOUR: ${activeFlour.name} (${activeFlour.protein}% Protein, ${activeFlour.ash}% Ash, Bio: ${activeFlour.is_bio})
+- TARGET HYDRATION: ${currentHydration.toFixed(1)}% (Base: ${Math.min(currentHydration, 64)}%, Bassinage: ${Math.max(0, currentHydration - 64).toFixed(1)}%)
+- SELECTED RECIPE: ${currentRecipeId}
+- SCALED FLOUR BASIS: ${currentFlourBasis}g (${currentLoavesCount} loaves)
+
+DIAGNOSTIC INSTRUCTIONS:
+1. Examine any attached photos carefully. Inspect crumb alveolation (openness, distribution, cell wall translucency, honeycombing vs gumminess), crust color, blistering, ear (grigne) angle, bloom, or bulk dough tension.
+2. Directly answer the user's prompt: "${userPrompt || 'Analyze and diagnose my bake based on visual cues.'}"
+3. Ground your diagnosis in the physical principles of fermentation kinetics, hydration thresholds for this specific flour, enzymatic degradation, and steam mechanics.
+4. Provide immediate, actionable adjustments for their next bake. Format in clean, readable markdown with bold key takeaways.`;
+
+            const reply = await queryGemini(selectedModel, systemContext, currentBase64Images);
+
             DOM.diagnosticPanel.classList.remove('hidden');
-            DOM.diagnosticContent.innerHTML = `<div style="color: var(--lcars-red); font-weight: bold;">DIAGNOSTIC ERROR: ${err.message}</div>`;
+            DOM.diagnosticContent.innerHTML = parseSimpleMarkdown(reply);
+            DOM.diagnosticPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } catch (err) {
+            alert('Analysis Error: ' + err.message);
         } finally {
             DOM.loaderOverlay.classList.add('hidden');
         }
     }
 
-    // Render Diagnostic Output
-    function renderDiagnosticResult(text) {
-        DOM.diagnosticPanel.classList.remove('hidden');
-        DOM.diagnosticContent.innerHTML = parseSimpleMarkdown(text);
-        DOM.diagnosticPanel.scrollIntoView({ behavior: 'smooth' });
+    // Test Gemini Key
+    async function testGeminiConnection() {
+        const key = DOM.geminiKey.value.trim();
+        const model = DOM.modelPreference.value;
+        if (!key) {
+            DOM.settingsStatus.className = 'status-alert error';
+            DOM.settingsStatus.textContent = 'Please enter an API key.';
+            return;
+        }
+
+        DOM.settingsStatus.className = 'status-alert';
+        DOM.settingsStatus.textContent = 'Testing connection...';
+
+        try {
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${key}`;
+            const res = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ contents: [{ parts: [{ text: 'Respond with: "Connection successful."' }] }] })
+            });
+
+            if (!res.ok) {
+                const e = await res.json().catch(() => ({}));
+                throw new Error(e.error?.message || `HTTP ${res.status}`);
+            }
+
+            DOM.settingsStatus.className = 'status-alert success';
+            DOM.settingsStatus.textContent = 'Connection verified! Key is active and valid.';
+        } catch (e) {
+            DOM.settingsStatus.className = 'status-alert error';
+            DOM.settingsStatus.textContent = `Connection failed: ${e.message}`;
+        }
     }
 
-    // Dynamic Recipe Scaler & Ingredients Table (ALWAYS ADAPTS BAKER'S % TO EXACT GRAMS!)
+    // ==========================================================================
+    // RECIPES & KITCHEN SCALE RENDERER (Dynamic Calculation Engine)
+    // ==========================================================================
     function renderRecipesTable() {
         const recipeList = (currentFormatMode === 'baguette') ? RECIPES_BAGUETTE : RECIPES_BOULE;
-        if (!recipeList) return;
+        if (!recipeList || recipeList.length === 0) return;
 
         const recipe = recipeList.find(r => r.id === currentRecipeId) || recipeList[0];
+        currentRecipeId = recipe.id;
+
+        // Update active recipe banner
+        DOM.displayRecipeTitle.textContent = recipe.title;
+        DOM.displayRecipeDesc.textContent = `${recipe.subtitle} [${recipe.book || recipe.author || ''}]`;
 
         const flourBasis = currentFlourBasis;
         const targetHydr = currentHydration;
@@ -714,169 +755,340 @@ USER INQUIRY / CONTEXT:
         const totalWaterGrams = Math.round(flourBasis * (targetHydr / 100));
         DOM.displayTotalWater.textContent = `${totalWaterGrams}g (${targetHydr.toFixed(1)}%)`;
 
-        // Update portion estimate display
-        const totalDoughGrams = flourBasis + totalWaterGrams + Math.round(flourBasis * 0.02) + Math.round(flourBasis * 0.002);
-        const estWeight = Math.round(totalDoughGrams / Math.max(1, currentLoavesCount));
-        DOM.displayPortionEstimate.textContent = `(~${estWeight}g each raw dough)`;
-
         DOM.recipeTableBody.innerHTML = '';
-
         let formulaRows = [];
+        let totalDoughWeight = 0;
 
-        // Build Formula rows dynamically with EXACT GRAMS ALWAYS FRONT AND CENTER!
-        if (currentFormatMode === 'baguette') {
-            if (recipe.id === 'sourdough') {
-                const levainFlour = flourBasis * 0.08;
-                const mainFlour = flourBasis - levainFlour;
-                const levainWater = flourBasis * 0.08;
-                const netBaseWater = Math.max(0, (flourBasis * (baseWaterPct / 100)) - levainWater);
-                const bassinageWater = flourBasis * (bassinageWaterPct / 100);
+        if (recipe.ingredients && recipe.ingredients.length > 0) {
+            // Calculate preferment water to deduct from base water
+            let prefermentWaterPct = 0;
+            recipe.ingredients.forEach(ing => {
+                if (ing.water_pct) prefermentWaterPct += ing.water_pct;
+            });
 
-                formulaRows = [
-                    { item: `${activeFlour.name} (Main Dough)`, grams: Math.round(mainFlour), pct: 92.0, note: `Autolysed with base water for ${activeFlour.autolyse_min} min.` },
-                    { item: 'Base Water (Mix / Autolyse)', grams: Math.round(netBaseWater), pct: (baseWaterPct - 8.0).toFixed(1), note: 'Adjusted to Coulage temperature. Develops gluten sheath.' },
-                    { item: 'Young Liquid Levain (100% Hydr.)', grams: Math.round(flourBasis * 0.16), pct: 16.0, note: 'Built with active flour, 5h prior. Sweet yogurt lactic aroma.' },
-                    { item: 'Bassinage Water (Late Addition)', grams: Math.round(bassinageWater), pct: bassinageWaterPct.toFixed(1), note: 'Added with salt to open crumb alveoli without slumping.' },
-                    { item: 'Fine Sea Salt', grams: Math.round(flourBasis * 0.02), pct: 2.0, note: 'Controls enzymatic breakdown and strengthens gluten.' }
-                ];
-            } else if (recipe.id === 'hybrid') {
-                const prefermentFlour = flourBasis * 0.12;
-                const mainFlour = flourBasis - prefermentFlour;
-                const prefermentWater = flourBasis * 0.12;
-                const netBaseWater = Math.max(0, (flourBasis * (baseWaterPct / 100)) - prefermentWater);
-                const bassinageWater = flourBasis * (bassinageWaterPct / 100);
+            const netBaseWaterPct = Math.max(0, baseWaterPct - prefermentWaterPct);
 
-                formulaRows = [
-                    { item: `${activeFlour.name} (Main Dough)`, grams: Math.round(mainFlour), pct: 88.0, note: 'Autolysed without leavening.' },
-                    { item: 'Base Water (Autolyse)', grams: Math.round(netBaseWater), pct: (baseWaterPct - 12.0).toFixed(1), note: 'Mix to shaggy mass; rest 45 min.' },
-                    { item: 'Young Liquid Levain (100%)', grams: Math.round(flourBasis * 0.12), pct: 12.0, note: 'Tartine style young leaven for complex lactic aroma.' },
-                    { item: 'Poolish (100% Hydration)', grams: Math.round(flourBasis * 0.12), pct: 12.0, note: '12h poolish for sweet wheat notes and extensibility.' },
-                    { item: 'Bassinage Water (Late)', grams: Math.round(bassinageWater), pct: bassinageWaterPct.toFixed(1), note: 'Dissolves yeast and salt; emulsified into dough.' },
-                    { item: 'Instant Dry Yeast (Pinch)', grams: (flourBasis * 0.002).toFixed(1), pct: 0.2, note: 'Micro-dose commercial yeast for explosive ear opening.' },
-                    { item: 'Fine Sea Salt', grams: Math.round(flourBasis * 0.02), pct: 2.0, note: 'Standard artisan dosage.' }
-                ];
-            } else if (recipe.id === 'poolish') {
-                const poolishFlour = flourBasis * 0.30;
-                const mainFlour = flourBasis - poolishFlour;
-                const poolishWater = flourBasis * 0.30;
-                const netBaseWater = Math.max(0, (flourBasis * (baseWaterPct / 100)) - poolishWater);
-                const bassinageWater = flourBasis * (bassinageWaterPct / 100);
+            formulaRows = recipe.ingredients.map(ing => {
+                let grams = 0;
+                let displayPct = ing.pct;
+                let note = ing.note || '';
 
-                formulaRows = [
-                    { item: `${activeFlour.name} (Main Dough)`, grams: Math.round(mainFlour), pct: 70.0, note: 'Blended with poolish and base water for 30 min autolyse.' },
-                    { item: 'Base Water (Main Mix)', grams: Math.round(netBaseWater), pct: (baseWaterPct - 30.0).toFixed(1), note: 'Calculated via Base Temperature Coulage formula.' },
-                    { item: 'Overnight Poolish (100% Hydr.)', grams: Math.round(flourBasis * 0.60), pct: 60.0, note: 'Contains 150g flour + 150g water + 0.2g yeast per 500g.' },
-                    { item: 'Bassinage Water (Late)', grams: Math.round(bassinageWater), pct: bassinageWaterPct.toFixed(1), note: 'Added with salt and final yeast bump.' },
-                    { item: 'Instant Dry Yeast (Final)', grams: (flourBasis * 0.0026).toFixed(1), pct: 0.26, note: 'Uniform gas generation during cold bulk.' },
-                    { item: 'Fine Sea Salt', grams: Math.round(flourBasis * 0.02), pct: 2.0, note: 'Controls yeast motility.' }
-                ];
-            } else if (recipe.id === 'modernist_a_plus') {
-                const toastedCornFlour = flourBasis * 0.022;
-                const poolishFlour = flourBasis * 0.15;
-                const levainFlour = flourBasis * 0.108;
-                const mainFlour = flourBasis - (poolishFlour + levainFlour + toastedCornFlour);
-                const prefermentWater = flourBasis * (0.15 + 0.108);
-                const netBaseWater = Math.max(0, (flourBasis * (baseWaterPct / 100)) - prefermentWater);
-                const bassinageWater = flourBasis * (bassinageWaterPct / 100);
+                if (ing.type === 'flour_main') {
+                    grams = Math.round(flourBasis * (ing.pct / 100));
+                    return {
+                        item: `${activeFlour.name} (Main Dough)`,
+                        grams: grams,
+                        pct: ing.pct.toFixed(1),
+                        note: `Autolysed with base water for ${activeFlour.autolyse_min} min.`
+                    };
+                } else if (ing.type === 'water_base') {
+                    grams = Math.round(flourBasis * (netBaseWaterPct / 100));
+                    return {
+                        item: 'Base Water (Autolyse / Mix)',
+                        grams: grams,
+                        pct: netBaseWaterPct.toFixed(1),
+                        note: 'At Coulage temperature. Deducts pre-ferment moisture.'
+                    };
+                } else if (ing.type === 'water_bassinage') {
+                    grams = Math.round(flourBasis * (bassinageWaterPct / 100));
+                    return {
+                        item: 'Bassinage Water (Late Addition)',
+                        grams: grams,
+                        pct: bassinageWaterPct.toFixed(1),
+                        note: (bassinageWaterPct > 0) ? 'Held back from autolyse; added with salt to hydrate without slumping.' : 'Zero bassinage required at this hydration.'
+                    };
+                } else if (ing.type === 'yeast') {
+                    grams = (flourBasis * (ing.pct / 100)).toFixed(1);
+                    return { item: ing.name, grams: grams, pct: ing.pct.toFixed(2), note: note };
+                } else {
+                    grams = Math.round(flourBasis * (ing.pct / 100));
+                    return { item: ing.name, grams: grams, pct: ing.pct.toFixed(1), note: note };
+                }
+            });
 
-                formulaRows = [
-                    { item: `${activeFlour.name} (Main Flour)`, grams: Math.round(mainFlour), pct: 72.0, note: 'Modernist base flour.' },
-                    { item: 'Toasted Corn Flour (Inclusion)', grams: Math.round(toastedCornFlour), pct: 2.2, note: 'Toasted 20m @ 175°C. Imparts sweet, nutty caramel Maillard notes.' },
-                    { item: 'Base Water (Autolyse)', grams: Math.round(netBaseWater), pct: (baseWaterPct - 25.8).toFixed(1), note: 'Combined with flours and preferments for 30m autolyse.' },
-                    { item: 'Poolish (100% Hydration)', grams: Math.round(flourBasis * 0.30), pct: 30.0, note: 'Extensibility and alpha-amylase sugar breakdown.' },
-                    { item: 'Mature Liquid Levain', grams: Math.round(flourBasis * 0.216), pct: 21.6, note: 'Acidic strength and shelf-life extension.' },
-                    { item: 'Bassinage Water (Late Addition)', grams: Math.round(bassinageWater), pct: bassinageWaterPct.toFixed(1), note: 'Modernist delayed hydration method.' },
-                    { item: 'Instant Dry Yeast', grams: (flourBasis * 0.005).toFixed(1), pct: 0.5, note: 'Rapid spring and high lift.' },
-                    { item: 'Fine Salt', grams: Math.round(flourBasis * 0.02), pct: 2.0, note: 'Modernist standard.' }
-                ];
-            }
-        } else {
-            // BOULE & BÂTARD RECIPES
-            if (recipe.id === 'tartine_country') {
-                const levainFlour = flourBasis * 0.10;
-                const mainFlour = flourBasis - levainFlour;
-                const levainWater = flourBasis * 0.10;
-                const netBaseWater = Math.max(0, (flourBasis * (baseWaterPct / 100)) - levainWater);
-                const bassinageWater = flourBasis * (bassinageWaterPct / 100);
-
-                formulaRows = [
-                    { item: `${activeFlour.name} (Main Flour)`, grams: Math.round(mainFlour), pct: 90.0, note: 'Autolysed with base water for 45 min.' },
-                    { item: 'Base Water (Autolyse)', grams: Math.round(netBaseWater), pct: (baseWaterPct - 10.0).toFixed(1), note: 'Tepid water (26°C / 79°F).' },
-                    { item: 'Young Liquid Leaven (100% Hydr.)', grams: Math.round(flourBasis * 0.20), pct: 20.0, note: 'Built young (1:5:5 or float stage). Sweet milky aroma.' },
-                    { item: 'Bassinage Water (Late Addition)', grams: Math.round(bassinageWater), pct: bassinageWaterPct.toFixed(1), note: 'Added with salt to open crumb alveoli.' },
-                    { item: 'Fine Sea Salt', grams: Math.round(flourBasis * 0.02), pct: 2.0, note: 'Added after autolyse.' }
-                ];
-            } else if (recipe.id === 'leo_country') {
-                const levainFlour = flourBasis * 0.08;
-                const mainFlour = flourBasis - levainFlour;
-                const levainWater = flourBasis * 0.08;
-                const netBaseWater = Math.max(0, (flourBasis * (baseWaterPct / 100)) - levainWater);
-                const bassinageWater = flourBasis * (bassinageWaterPct / 100);
-
-                formulaRows = [
-                    { item: `${activeFlour.name} (Main Dough)`, grams: Math.round(mainFlour), pct: 92.0, note: 'Maurizio Leo high-hydration white base.' },
-                    { item: 'Base Water (Autolyse)', grams: Math.round(netBaseWater), pct: (baseWaterPct - 8.0).toFixed(1), note: 'Rest 60 min at 24°C DDT.' },
-                    { item: 'Ripe Liquid Levain', grams: Math.round(flourBasis * 0.16), pct: 16.0, note: 'Well aerated, domed, mild sour aroma.' },
-                    { item: 'Bassinage Water (Mix 2)', grams: Math.round(bassinageWater), pct: bassinageWaterPct.toFixed(1), note: 'Dissolves salt; worked in with slap-and-fold.' },
-                    { item: 'Fine Sea Salt', grams: Math.round(flourBasis * 0.018), pct: 1.8, note: '1.8% fine sea salt standard.' }
-                ];
-            } else if (recipe.id === 'forkish_blonde') {
-                const levainFlour = flourBasis * 0.108;
-                const mainFlour = flourBasis - levainFlour;
-                const levainWater = flourBasis * 0.108;
-                const netBaseWater = Math.max(0, (flourBasis * (baseWaterPct / 100)) - levainWater);
-                const bassinageWater = flourBasis * (bassinageWaterPct / 100);
-
-                formulaRows = [
-                    { item: `${activeFlour.name} (Main Flour)`, grams: Math.round(mainFlour), pct: 89.2, note: 'Forkish pure levain blend.' },
-                    { item: 'Water (Warm 34°C Autolyse)', grams: Math.round(netBaseWater), pct: (baseWaterPct - 10.8).toFixed(1), note: 'Warm water to sustain cool overnight fermentation.' },
-                    { item: 'Mature Levain (FWSY)', grams: Math.round(flourBasis * 0.216), pct: 21.6, note: 'Ripe levain fed with active flour.' },
-                    { item: 'Bassinage / Excess Water', grams: Math.round(bassinageWater), pct: bassinageWaterPct.toFixed(1), note: 'Folded in during hand mixing.' },
-                    { item: 'Fine Sea Salt', grams: Math.round(flourBasis * 0.021), pct: 2.1, note: 'Pincer method incorporation.' }
-                ];
-            } else if (recipe.id === 'modernist_country') {
-                const levainFlour = flourBasis * 0.10;
-                const mainFlour = flourBasis - levainFlour;
-                const levainWater = flourBasis * 0.10;
-                const netBaseWater = Math.max(0, (flourBasis * (baseWaterPct / 100)) - levainWater);
-                const bassinageWater = flourBasis * (bassinageWaterPct / 100);
-
-                formulaRows = [
-                    { item: `${activeFlour.name} (Main Flour)`, grams: Math.round(mainFlour), pct: 90.0, note: 'Modernist country blend.' },
-                    { item: 'Base Water (Autolyse)', grams: Math.round(netBaseWater), pct: (baseWaterPct - 10.0).toFixed(1), note: 'Autolysed 40 min to shaggy mass.' },
-                    { item: 'Mature Liquid Levain', grams: Math.round(flourBasis * 0.20), pct: 20.0, note: 'Controlled fermentation leaven.' },
-                    { item: 'Bassinage Water (Late)', grams: Math.round(bassinageWater), pct: bassinageWaterPct.toFixed(1), note: 'Added with salt on medium speed.' },
-                    { item: 'Fine Salt', grams: Math.round(flourBasis * 0.02), pct: 2.0, note: '2% standard.' }
-                ];
-            }
+            totalDoughWeight = formulaRows.reduce((sum, row) => sum + parseFloat(row.grams), 0);
         }
 
-        // Render Formula Rows (EXACT GRAMS IN BOLD HIGHLIGHT FIRST!)
+        // Portion estimate
+        const estWeight = Math.round(totalDoughWeight / Math.max(1, currentLoavesCount));
+        DOM.displayPortionEstimate.textContent = `(~${estWeight}g each raw dough)`;
+
+        // Render Table Rows (EXACT GRAMS IN BOLD HIGHLIGHT)
         formulaRows.forEach(row => {
             const tr = document.createElement('tr');
             tr.innerHTML = `
                 <td><strong>${row.item}</strong></td>
-                <td><strong>${row.grams}g</strong></td>
-                <td>${row.pct}%</td>
-                <td>${row.note}</td>
+                <td class="col-grams">${row.grams}g</td>
+                <td class="col-pct">${row.pct}%</td>
+                <td><small>${row.note}</small></td>
             `;
             DOM.recipeTableBody.appendChild(tr);
         });
 
-        // Steps List
+        // Render Method Steps
         DOM.recipeStepsList.innerHTML = '';
-        recipe.steps.forEach((step, idx) => {
-            const card = document.createElement('div');
-            card.className = 'step-card';
-            card.innerHTML = `
-                <h4>PHASE ${idx + 1}: ${step.title}</h4>
-                <p>${step.text}</p>
-            `;
-            DOM.recipeStepsList.appendChild(card);
-        });
+        if (recipe.steps && recipe.steps.length > 0) {
+            recipe.steps.forEach((step, idx) => {
+                const card = document.createElement('div');
+                card.className = 'phase-step-item';
+                card.innerHTML = `
+                    <div class="phase-step-header">
+                        <span class="phase-step-name">Phase ${idx + 1}: ${step.title}</span>
+                        <span class="phase-step-time">${step.time || ''}</span>
+                    </div>
+                    <p class="phase-step-desc">${step.text}</p>
+                    ${step.cues ? `<div class="flour-advice-callout" style="margin-top: 8px; padding: 6px 10px;"><strong>SENSORY CUE:</strong> ${step.cues}</div>` : ''}
+                `;
+                DOM.recipeStepsList.appendChild(card);
+            });
+        }
     }
 
-    // Render Knowledge Base Module
+    // ==========================================================================
+    // IMMERSIVE GUIDED BAKING MODE ENGINE (With Precision Alarms & Synthesizer)
+    // ==========================================================================
+    function startBakingMode() {
+        const recipeList = (currentFormatMode === 'baguette') ? RECIPES_BAGUETTE : RECIPES_BOULE;
+        const recipe = recipeList.find(r => r.id === currentRecipeId) || recipeList[0];
+        if (!recipe || !recipe.steps || recipe.steps.length === 0) {
+            alert('Please select a recipe with method steps to begin Baking Mode.');
+            return;
+        }
+
+        // Request browser notifications if supported
+        if ('Notification' in window && Notification.permission === 'default') {
+            Notification.requestPermission().catch(() => {});
+        }
+
+        bakingState.recipe = recipe;
+        bakingState.stepIndex = 0;
+
+        DOM.bmRecipeName.textContent = recipe.title;
+        DOM.bmRecipeSpecs.textContent = `Scaled: ${currentFlourBasis}g Flour • Target Hydr: ${currentHydration.toFixed(1)}% • Yield: ${currentLoavesCount} ${recipe.unit_name || 'Loaves'}`;
+
+        DOM.bakingModeOverlay.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+
+        loadBakingStep(0);
+    }
+
+    function exitBakingMode() {
+        pauseTimer();
+        dismissAlarm();
+        DOM.bakingModeOverlay.classList.add('hidden');
+        document.body.style.overflow = '';
+    }
+
+    function toggleBakingSound() {
+        bakingState.soundEnabled = !bakingState.soundEnabled;
+        DOM.bmSoundToggle.textContent = bakingState.soundEnabled ? '🔔' : '🔕';
+        DOM.bmSoundToggle.title = bakingState.soundEnabled ? 'Alarm Sound: Enabled' : 'Alarm Sound: Muted';
+    }
+
+    function loadBakingStep(idx) {
+        const steps = bakingState.recipe.steps;
+        if (idx < 0 || idx >= steps.length) return;
+
+        pauseTimer();
+        dismissAlarm();
+
+        bakingState.stepIndex = idx;
+        const step = steps[idx];
+
+        // Update progress bar
+        const progressPct = Math.round(((idx + 1) / steps.length) * 100);
+        DOM.bmProgressFill.style.width = `${progressPct}%`;
+
+        // Render Step Pills in Drawer
+        DOM.bmStepPills.innerHTML = '';
+        steps.forEach((s, sIdx) => {
+            const btn = document.createElement('button');
+            btn.className = `bm-step-pill-btn ${sIdx === idx ? 'active' : ''} ${sIdx < idx ? 'completed' : ''}`;
+            btn.textContent = `${sIdx < idx ? '✓ ' : ''}${sIdx + 1}. ${s.title.split('(')[0].trim()}`;
+            btn.addEventListener('click', () => loadBakingStep(sIdx));
+            DOM.bmStepPills.appendChild(btn);
+        });
+
+        // Update Step Card
+        DOM.bmStepBadge.textContent = step.phase ? `PHASE: ${step.phase.toUpperCase()}` : `STEP ${idx + 1}`;
+        DOM.bmStepCounter.textContent = `Step ${idx + 1} of ${steps.length}`;
+        DOM.bmStepTitle.textContent = step.title;
+        DOM.bmStepInstructions.textContent = step.text;
+        DOM.bmStepCues.textContent = step.cues || 'Follow tactile cues and dough temperature specifications.';
+
+        // Update Buttons
+        DOM.bmBtnPrev.disabled = (idx === 0);
+        DOM.bmBtnComplete.textContent = (idx === steps.length - 1) ? 'Finish Bake 🎉' : 'Complete & Next Step ▶';
+
+        // Set Step Timer
+        bakingState.timerTotalSeconds = step.timer_seconds || 1200; // default 20m
+        bakingState.timerRemainingSeconds = bakingState.timerTotalSeconds;
+        updateTimerDisplay();
+        DOM.bmTimerStatus.textContent = `Timer Ready (${step.time || formatMinutes(bakingState.timerTotalSeconds)}) • Alarm Active`;
+    }
+
+    function prevBakingStep() {
+        if (bakingState.stepIndex > 0) {
+            loadBakingStep(bakingState.stepIndex - 1);
+        }
+    }
+
+    function nextBakingStep() {
+        const steps = bakingState.recipe.steps;
+        if (bakingState.stepIndex < steps.length - 1) {
+            loadBakingStep(bakingState.stepIndex + 1);
+        } else {
+            alert('🎉 Congratulations! You have completed all baking steps for this master formula!');
+            exitBakingMode();
+        }
+    }
+
+    // ==========================================================================
+    // TIMER ENGINE (Background-Safe with Timestamp Calculations)
+    // ==========================================================================
+    function toggleTimer() {
+        if (bakingState.timerRunning) {
+            pauseTimer();
+        } else {
+            startTimer();
+        }
+    }
+
+    function startTimer() {
+        if (bakingState.timerRemainingSeconds <= 0) {
+            bakingState.timerRemainingSeconds = bakingState.timerTotalSeconds;
+        }
+
+        bakingState.timerRunning = true;
+        bakingState.timerEndTime = Date.now() + (bakingState.timerRemainingSeconds * 1000);
+
+        DOM.bmBtnToggleTimer.textContent = 'PAUSE TIMER';
+        DOM.bmBtnToggleTimer.classList.add('running');
+        DOM.bmTimerStatus.textContent = 'Timer Running...';
+
+        if (bakingState.timerInterval) clearInterval(bakingState.timerInterval);
+
+        bakingState.timerInterval = setInterval(() => {
+            const now = Date.now();
+            const diffSeconds = Math.max(0, Math.round((bakingState.timerEndTime - now) / 1000));
+            bakingState.timerRemainingSeconds = diffSeconds;
+            updateTimerDisplay();
+
+            if (diffSeconds <= 0) {
+                pauseTimer();
+                triggerAlarm();
+            }
+        }, 250);
+    }
+
+    function pauseTimer() {
+        bakingState.timerRunning = false;
+        if (bakingState.timerInterval) {
+            clearInterval(bakingState.timerInterval);
+            bakingState.timerInterval = null;
+        }
+        DOM.bmBtnToggleTimer.textContent = 'START TIMER';
+        DOM.bmBtnToggleTimer.classList.remove('running');
+        DOM.bmTimerStatus.textContent = 'Timer Paused';
+    }
+
+    function resetTimer() {
+        pauseTimer();
+        bakingState.timerRemainingSeconds = bakingState.timerTotalSeconds;
+        updateTimerDisplay();
+        DOM.bmTimerStatus.textContent = 'Timer Reset';
+    }
+
+    function adjustTimer(deltaSeconds) {
+        bakingState.timerRemainingSeconds = Math.max(0, bakingState.timerRemainingSeconds + deltaSeconds);
+        if (bakingState.timerRunning) {
+            bakingState.timerEndTime = Date.now() + (bakingState.timerRemainingSeconds * 1000);
+        }
+        updateTimerDisplay();
+    }
+
+    function updateTimerDisplay() {
+        const s = bakingState.timerRemainingSeconds;
+        const mins = Math.floor(s / 60);
+        const secs = s % 60;
+        DOM.bmTimerDisplay.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+    }
+
+    function formatMinutes(seconds) {
+        const m = Math.round(seconds / 60);
+        return `${m} min`;
+    }
+
+    // ==========================================================================
+    // AUDIO CHIME SYNTHESIZER & ALARM (Web Audio API, Vibration, Notification)
+    // ==========================================================================
+    function playAlarmChime() {
+        if (!bakingState.soundEnabled) return;
+        try {
+            const AudioCtx = window.AudioContext || window.webkitAudioContext;
+            if (!AudioCtx) return;
+            const ctx = new AudioCtx();
+            const notes = [587.33, 880.00, 1174.66, 1760.00]; // D5, A5, D6, A6 luxury arpeggio
+            notes.forEach((freq, i) => {
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(freq, ctx.currentTime + (i * 0.12));
+                gain.gain.setValueAtTime(0.28, ctx.currentTime + (i * 0.12));
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + (i * 0.12) + 0.7);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start(ctx.currentTime + (i * 0.12));
+                osc.stop(ctx.currentTime + (i * 0.12) + 0.8);
+            });
+        } catch (e) {
+            console.warn('AudioContext chime error:', e);
+        }
+    }
+
+    function triggerAlarm() {
+        const step = bakingState.recipe.steps[bakingState.stepIndex];
+        DOM.bmAlarmTitle.textContent = `Time Up: ${step.title}!`;
+        DOM.bmAlarmDesc.textContent = `Phase "${step.title}" is complete. ${step.cues || 'Proceed to the next baking step.'}`;
+        DOM.bmAlarmModal.classList.remove('hidden');
+
+        // Play initial chime and loop every 2.5s
+        playAlarmChime();
+        if (bakingState.alarmInterval) clearInterval(bakingState.alarmInterval);
+        bakingState.alarmInterval = setInterval(playAlarmChime, 2500);
+
+        // Device vibration
+        if ('vibrate' in navigator) {
+            try { navigator.vibrate([300, 150, 300, 150, 500]); } catch (e) {}
+        }
+
+        // System notification
+        if ('Notification' in window && Notification.permission === 'granted') {
+            try {
+                new Notification('Bread Guru — Step Complete!', {
+                    body: `${step.title}: ${step.cues || 'Time for the next baking step.'}`,
+                    icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🥖</text></svg>'
+                });
+            } catch (e) {}
+        }
+    }
+
+    function dismissAlarm() {
+        DOM.bmAlarmModal.classList.add('hidden');
+        if (bakingState.alarmInterval) {
+            clearInterval(bakingState.alarmInterval);
+            bakingState.alarmInterval = null;
+        }
+    }
+
+    function dismissAlarmAndAdvance() {
+        dismissAlarm();
+        nextBakingStep();
+    }
+
+    // ==========================================================================
+    // KNOWLEDGE BASE & COULAGE
+    // ==========================================================================
     function renderKBContent(docName) {
         if (typeof BAGUETTE_KB === 'undefined' || !BAGUETTE_KB[docName]) {
             DOM.kbContent.innerHTML = `<p>Module ${docName} not loaded.</p>`;
@@ -885,7 +1097,6 @@ USER INQUIRY / CONTEXT:
         DOM.kbContent.innerHTML = parseSimpleMarkdown(BAGUETTE_KB[docName]);
     }
 
-    // Coulage Calculator
     function calculateCoulage() {
         const Td = parseFloat(DOM.coulageTd.value) || 24;
         const Tr = parseFloat(DOM.coulageTr.value) || 22;
