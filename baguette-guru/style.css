@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap');
 
 :root {
     --bg-color: #0c0a09;
@@ -175,16 +175,34 @@ button, input, select, textarea {
     border-radius: 6px;
     padding: 6px 12px;
     display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
     justify-content: space-between;
+    align-items: center;
     font-size: 11px;
     text-transform: uppercase;
 }
 
+.telemetry-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
 .telemetry-item .label {
     color: var(--text-secondary);
 }
-.val-active { color: var(--lcars-emerald); font-weight: 700; }
-.val-gold { color: var(--lcars-gold); font-weight: 700; }
+.telemetry-select {
+    background: #1c1815;
+    color: var(--lcars-gold);
+    border: 1px solid #443b35;
+    border-radius: 4px;
+    font-size: 11px;
+    padding: 2px 6px;
+    font-weight: 700;
+}
+
+.val-active { color: var(--lcars-emerald); font-weight: 700; font-family: 'JetBrains Mono', monospace; }
+.val-gold { color: var(--lcars-gold); font-weight: 700; font-family: 'JetBrains Mono', monospace; }
 .val-cyan { color: var(--lcars-cyan); font-weight: 700; }
 
 /* TAB VIEWS */
@@ -431,6 +449,154 @@ button, input, select, textarea {
 }
 .panel-content strong {
     color: var(--lcars-gold);
+}
+
+/* FLOUR PROFILER PANEL */
+.flour-profiler-card {
+    background: #171412;
+    border: 1px solid #3d352e;
+    border-radius: 10px;
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.flour-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    align-items: flex-end;
+}
+
+.flour-col {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+    min-width: 140px;
+}
+
+.flour-col label {
+    font-size: 11px;
+    color: var(--lcars-gold);
+    font-weight: 700;
+}
+
+.flour-dropdown, .flour-col input, .flour-col select {
+    background: #0d0b09;
+    color: #fff;
+    border: 1px solid #443b35;
+    border-radius: 4px;
+    padding: 6px 8px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.flour-notes {
+    font-size: 11px;
+    color: #aaa;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    text-transform: none;
+    line-height: 1.4;
+    border-top: 1px solid #2b2520;
+    padding-top: 6px;
+}
+
+/* HYDRATION CONTROL BOX */
+.hydration-control-box {
+    background: #0d0b09;
+    border: 1px solid #332d29;
+    border-radius: 8px;
+    padding: 12px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.hydr-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.hydr-header label {
+    font-size: 12px;
+    color: var(--text-secondary);
+    font-weight: 700;
+}
+
+.hydr-display {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.hydr-number {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--lcars-cyan);
+    font-family: 'JetBrains Mono', monospace;
+}
+
+/* Badges */
+.badge-optimal {
+    background: rgba(52, 211, 153, 0.2);
+    color: var(--lcars-emerald);
+    border: 1px solid var(--lcars-emerald);
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.badge-warning {
+    background: rgba(245, 158, 11, 0.2);
+    color: var(--lcars-gold);
+    border: 1px solid var(--lcars-gold);
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.badge-danger {
+    background: rgba(248, 113, 113, 0.25);
+    color: var(--lcars-red);
+    border: 1px solid var(--lcars-red);
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.hydr-slider {
+    width: 100%;
+    height: 8px;
+    border-radius: 4px;
+    background: #2b2520;
+    outline: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+}
+.hydr-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--lcars-cyan);
+    cursor: pointer;
+    box-shadow: 0 0 8px rgba(56, 189, 248, 0.6);
+}
+
+.slider-marks {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: #777;
+    text-transform: uppercase;
 }
 
 /* RECIPES & CALCULATOR */

@@ -6,7 +6,7 @@
     <title>BAGUETTE GURU LCARS</title>
     <meta name="theme-color" content="#12100e">
     <link rel="manifest" href="manifest.json">
-    <link rel="stylesheet" href="style.css?v=1.0">
+    <link rel="stylesheet" href="style.css?v=2.0">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥖</text></svg>">
 </head>
 <body>
@@ -33,11 +33,23 @@
                 <div id="nav-coulage" class="lcars-top-pill nav-pill bg-emerald-pill" data-tab="coulage">COULAGE</div>
             </header>
 
-            <!-- SUB-HEADER TELEMETRY -->
+            <!-- SUB-HEADER TELEMETRY (DYNAMIC FLOUR & HYDRATION STATUS) -->
             <div class="lcars-telemetry-bar">
-                <div class="telemetry-item"><span class="label">LEVAIN STATUS:</span> <span id="telemetry-status" class="val-active">ACTIVE (100%)</span></div>
-                <div class="telemetry-item"><span class="label">FLOUR:</span> <span class="val-gold">BIO WHITE (T65)</span></div>
-                <div class="telemetry-item"><span class="label">MODEL:</span> <span id="active-model-display" class="val-cyan">GEMINI 2.5 FLASH</span></div>
+                <div class="telemetry-item">
+                    <span class="label">FLOUR:</span> 
+                    <select id="header-flour-selector" class="telemetry-select">
+                        <!-- Populated by app.js -->
+                    </select>
+                </div>
+                <div class="telemetry-item">
+                    <span class="label">PROTEIN:</span> <span id="telemetry-protein" class="val-gold">11.2%</span>
+                </div>
+                <div class="telemetry-item">
+                    <span class="label">HYDRATION:</span> <span id="telemetry-hydr" class="val-active">70.0%</span>
+                </div>
+                <div class="telemetry-item">
+                    <span class="label">MODEL:</span> <span id="active-model-display" class="val-cyan">GEMINI FLASH</span>
+                </div>
             </div>
 
             <!-- VIEW 1: DIAGNOSE & CAMERA SENSOR (PHOTO HOOK) -->
@@ -66,16 +78,16 @@
 
                 <!-- QUICK CHIPS -->
                 <div class="quick-chips">
-                    <button class="chip-btn" data-prompt="Analyze this crumb structure. Diagnose the alveolation, gelatinization, crumb openness, and whether it shows under-fermentation, over-fermentation, or improper shaping. What specific remedies from Lanio, Robertson, or Addie Roberts should I apply?">🔍 CRUMB DIAGNOSIS</button>
-                    <button class="chip-btn" data-prompt="Evaluate this dough during bulk fermentation. Are the bubbles, doming, and surface tension at the right expansion point for shaping, or does it need more time?">⏱️ BULK PROOF CHECK</button>
-                    <button class="chip-btn" data-prompt="Diagnose the scoring angle, blade depth, and overlap on this baguette. Why did the ear (grigne) open or fail to open? How can I optimize my scoring geometry?">🔪 SCORING & EARS</button>
-                    <button class="chip-btn" data-prompt="I am baking with Bio White Flour (organic T65). Help me calculate and adjust my hydration and bassinage for my current ambient temperature and starter activity.">💧 BASSINAGE & HYDRATION</button>
-                    <button class="chip-btn" data-prompt="Diagnose my baguette's crust: color, blisters, thickness, and crunch. How can I adjust my oven steam setup (lava rocks/cast iron) and venting timing?">🔥 CRUST & STEAM</button>
+                    <button class="chip-btn" data-prompt="Analyze this crumb structure. Diagnose alveoli distribution, gelatinization, and whether it shows under-fermentation, over-fermentation, or shaping flaws. Correlate with my current flour protein and hydration.">🔍 CRUMB DIAGNOSIS</button>
+                    <button class="chip-btn" data-prompt="Evaluate this dough during bulk fermentation. Are the bubbles, doming, and surface tension at the right expansion point for shaping?">⏱️ BULK PROOF CHECK</button>
+                    <button class="chip-btn" data-prompt="Diagnose the scoring angle, blade depth, and overlap on this baguette. Why did the ear (grigne) open or fail to open?">🔪 SCORING & EARS</button>
+                    <button class="chip-btn" data-prompt="Analyze my hydration and bassinage calculation for this flour. Am I pushing past its safe absorption limit?">💧 HYDRATION & BASSINAGE</button>
+                    <button class="chip-btn" data-prompt="Diagnose my baguette crust: blisters, color, thickness, and crunch. How should I adjust my oven steam setup and venting timing?">🔥 CRUST & STEAM</button>
                 </div>
 
                 <!-- CONTEXT / QUESTION INPUT -->
                 <div class="input-panel">
-                    <textarea id="context-input" placeholder="ASK THE BAGUETTE GURU (OR SELECT A QUICK DIAGNOSIS CHIP)..." rows="3"></textarea>
+                    <textarea id="context-input" placeholder="ASK THE BAGUETTE GURU (OR TAP A QUICK CHIP)..." rows="3"></textarea>
                     <div class="action-row">
                         <div class="model-toggle">
                             <button id="btn-flash" class="toggle-btn active">FLASH</button>
@@ -95,28 +107,75 @@
                         <button id="btn-clear-result" class="text-btn">DISMISS</button>
                     </div>
                     <div id="diagnostic-content" class="panel-content">
-                        <!-- AI Response will stream / render here -->
+                        <!-- AI Response renders here -->
                     </div>
                 </div>
 
             </section>
 
-            <!-- VIEW 2: MASTER RECIPES CALCULATOR -->
+            <!-- VIEW 2: MASTER RECIPES & HYDRATION ENGINE -->
             <section id="view-recipes" class="tab-view">
                 <div class="section-title-bar bg-peach">
-                    <h2>BIO WHITE FLOUR MASTER BAGUETTES</h2>
-                    <span class="subtext">3 ALTERNATIVE FORMULAS SCALED WITH BAKER'S PERCENTAGES</span>
+                    <h2>PARAMETRIC MASTER BAGUETTES</h2>
+                    <span class="subtext">FORMULAS CALIBRATED TO FLOUR PROTEIN & ADJUSTABLE HYDRATION</span>
                 </div>
 
-                <!-- RECIPE SELECTOR -->
+                <!-- FLOUR PROFILER PANEL -->
+                <div class="flour-profiler-card">
+                    <div class="flour-row">
+                        <div class="flour-col">
+                            <label>ACTIVE FLOUR:</label>
+                            <select id="recipe-flour-selector" class="flour-dropdown">
+                                <!-- Populated dynamically -->
+                            </select>
+                        </div>
+                        <div class="flour-col">
+                            <label>PROTEIN %:</label>
+                            <input type="number" id="input-protein" step="0.1" min="9.0" max="16.0" value="11.2">
+                        </div>
+                        <div class="flour-col">
+                            <label>ORGANIC / BIO:</label>
+                            <select id="select-bio">
+                                <option value="true">YES (No additives, native enzymes)</option>
+                                <option value="false">NO (Conventional / Malted)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="flour-notes-banner" class="flour-notes">
+                        <!-- Populated by app.js -->
+                    </div>
+                </div>
+
+                <!-- RECIPE SELECTOR TABS -->
                 <div class="recipe-selector-pills">
-                    <button class="recipe-tab active" data-recipe="sourdough">1. PURE SOURDOUGH (100% LEVAIN)</button>
-                    <button class="recipe-tab" data-recipe="hybrid">2. THE HYBRID (LEVAIN + YEAST)</button>
-                    <button class="recipe-tab" data-recipe="poolish">3. OVERNIGHT POOLISH (COMMERCIAL)</button>
+                    <button class="recipe-tab active" data-recipe="sourdough">1. PURE SOURDOUGH</button>
+                    <button class="recipe-tab" data-recipe="hybrid">2. THE HYBRID (TARTINE)</button>
+                    <button class="recipe-tab" data-recipe="poolish">3. OVERNIGHT POOLISH</button>
+                    <button class="recipe-tab" data-recipe="modernist_a_plus">4. MODERNIST A-PLUS</button>
                 </div>
 
-                <!-- BATCH SCALER -->
+                <!-- INTERACTIVE SCALER & HYDRATION DIAL -->
                 <div class="calculator-card">
+                    
+                    <!-- HYDRATION SLIDER & RHEOLOGY INDICATOR -->
+                    <div class="hydration-control-box">
+                        <div class="hydr-header">
+                            <label>TARGET HYDRATION:</label>
+                            <div class="hydr-display">
+                                <span id="val-hydration-display" class="hydr-number">70.0%</span>
+                                <span id="hydr-zone-badge" class="badge-optimal">OPTIMAL EXTENSIBILITY ZONE</span>
+                            </div>
+                        </div>
+                        <input type="range" id="slider-hydration" min="62" max="82" step="0.5" value="70" class="hydr-slider">
+                        <div class="slider-marks">
+                            <span>62% (Stiff)</span>
+                            <span>68% (Standard T55/AP)</span>
+                            <span>71% (Bio T65)</span>
+                            <span>75% (Bread Flour)</span>
+                            <span>80%+ (Manitoba)</span>
+                        </div>
+                    </div>
+
                     <div class="scaler-controls">
                         <div class="scaler-item">
                             <label>BAGUETTE COUNT:</label>
@@ -131,8 +190,8 @@
                             <input type="number" id="input-flour-basis" value="500" step="50" min="200" max="5000">
                         </div>
                         <div class="scaler-item">
-                            <label>TARGET HYDRATION:</label>
-                            <span id="display-hydration" class="val-cyan">70%</span>
+                            <label>TOTAL WATER:</label>
+                            <span id="display-total-water" class="val-cyan">350g</span>
                         </div>
                     </div>
 
@@ -144,7 +203,7 @@
                                     <th>INGREDIENT / STAGE</th>
                                     <th>BAKER'S %</th>
                                     <th>CALCULATED WEIGHT</th>
-                                    <th>PURPOSE & HANDLING</th>
+                                    <th>PURPOSE & HANDLING (MODERNIST & LANIO RULES)</th>
                                 </tr>
                             </thead>
                             <tbody id="recipe-table-body">
@@ -167,18 +226,19 @@
             <section id="view-methods" class="tab-view">
                 <div class="section-title-bar bg-teal">
                     <h2>BAGUETTE METHODOLOGY & SCIENCE REPOSITORY</h2>
-                    <span class="subtext">EXTRACTED FROM LANIO, ROBERTSON, LEO, KING ARTHUR & ADDIE ROBERTS</span>
+                    <span class="subtext">EXTRACTED FROM MODERNIST BREAD, LANIO, ROBERTSON, LEO, KING ARTHUR & ADDIE ROBERTS</span>
                 </div>
 
                 <div class="kb-nav-chips">
-                    <button class="kb-chip active" data-kb="01_FOUNDATIONS_AND_FLOUR.md">01. FLOUR & T65</button>
+                    <button class="kb-chip active" data-kb="09_FLOUR_PROTEIN_AND_HYDRATION_MATRIX.md">00. FLOUR & PROTEIN MATRIX</button>
+                    <button class="kb-chip" data-kb="01_FOUNDATIONS_AND_FLOUR.md">01. FLOUR & T65</button>
                     <button class="kb-chip" data-kb="02_THE_THREE_LEAVENING_SYSTEMS.md">02. 3 SYSTEMS</button>
                     <button class="kb-chip" data-kb="03_DOUGH_METHODS_AND_RHEOLOGY.md">03. AUTOLYSE & MIX</button>
                     <button class="kb-chip" data-kb="04_SHAPING_TECHNIQUE_AND_TENSION.md">04. SHAPING TENSION</button>
                     <button class="kb-chip" data-kb="05_SCORING_AND_OVEN_PHYSICS.md">05. SCORING & EARS</button>
                     <button class="kb-chip" data-kb="06_BAKING_AND_STEAM_SOLUTIONS.md">06. STEAM & OVEN</button>
                     <button class="kb-chip" data-kb="07_DIAGNOSTICS_AND_GURU_DECISION_TREE.md">07. GURU DIAGNOSTICS</button>
-                    <button class="kb-chip" data-kb="08_COMPARATIVE_RECIPES_DATABASE.md">08. COMPARATIVE</button>
+                    <button class="kb-chip" data-kb="08_COMPARATIVE_RECIPES_DATABASE.md">08. COMPARATIVE LITERATURE</button>
                 </div>
 
                 <div id="kb-viewer-card" class="kb-card">
@@ -197,7 +257,7 @@
 
                 <div class="calculator-card">
                     <p class="coulage-intro">
-                        In professional French baking (Lanio, INBP), controlling the dough temperature at the end of mixing (<strong>23°C – 24°C</strong>) is the single most vital factor determining fermentation speed, lactic vs acetic acid ratio, and structural elasticity.
+                        In professional French baking (Lanio, INBP), controlling dough temperature at the end of mixing (<strong>23°C – 24°C</strong>) regulates yeast motility, fermentation kinetics, and prevents over-acidification.
                     </p>
 
                     <div class="coulage-grid">
@@ -257,10 +317,6 @@
                         <option value="gemini-2.5-flash">Gemini 2.5 Flash (Ultra fast & cheap - Recommended)</option>
                         <option value="gemini-2.5-pro">Gemini 2.5 Pro (Deep multimodal reasoning)</option>
                     </select>
-                </div>
-                <div class="form-group">
-                    <label>FLOUR PREFERENCE:</label>
-                    <input type="text" id="pref-flour" value="Bio White Flour (Organic T65 Tradition)" readonly>
                 </div>
                 <div class="modal-actions">
                     <button id="btn-test-key" class="secondary-btn">TEST API CONNECTION</button>
