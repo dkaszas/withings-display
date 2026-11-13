@@ -300,12 +300,21 @@
         let filtered = all.filter(r => r.format === currentFormatMode);
 
         if (currentSourceFilter !== 'all') {
-            filtered = filtered.filter(r => r.book_id === currentSourceFilter);
+            const bySource = filtered.filter(r => r.book_id === currentSourceFilter);
+            if (bySource.length > 0) {
+                filtered = bySource;
+            } else {
+                // If this source only exists in the other format (e.g. Lanio has only baguettes),
+                // smoothly show all recipes from this source so the user is never blocked!
+                const sourceAll = all.filter(r => r.book_id === currentSourceFilter);
+                if (sourceAll.length > 0) {
+                    filtered = sourceAll;
+                }
+            }
         }
 
         if (filtered.length === 0) {
-            DOM.recipeSelectorPills.innerHTML = '<span style="font-size: 13px; color: var(--text-muted); padding: 8px 0;">No recipes found for this filter. Try selecting "All Sources" or switching format.</span>';
-            return;
+            filtered = all.filter(r => r.format === currentFormatMode);
         }
 
         // Validate active recipe in filtered set
@@ -340,6 +349,16 @@
         if (!recipe) return;
 
         currentRecipeId = recipe.id;
+
+        // Automatically sync format display to recipe format
+        if (recipe.format && recipe.format !== currentFormatMode) {
+            currentFormatMode = recipe.format;
+            DOM.btnFormatBaguette.classList.toggle('active', currentFormatMode === 'baguette');
+            DOM.btnFormatBoule.classList.toggle('active', currentFormatMode === 'boule');
+            DOM.telemetryFormat.textContent = (currentFormatMode === 'baguette') ? 'Baguette (Couche)' : 'Boule (Dutch Oven)';
+            DOM.recipeFormatTitle.textContent = (currentFormatMode === 'baguette') ? 'Artisanal Baguettes' : 'Sourdough Boules & Bâtards';
+            DOM.labelUnitCount.textContent = (currentFormatMode === 'baguette') ? 'BAGUETTE COUNT:' : 'BOULE COUNT:';
+        }
 
         // Update active banner
         DOM.recipeBookBadge.textContent = recipe.is_master
