@@ -226,9 +226,7 @@
         DOM.modelPreference.value = savedModel;
         updateModelUI(savedModel);
 
-        if (!savedKey) {
-            setTimeout(() => DOM.settingsModal.classList.remove('hidden'), 500);
-        }
+        // Settings modal only opens when user clicks gear icon
 
         // Set initial format
         setFormatMode(currentFormatMode, false);

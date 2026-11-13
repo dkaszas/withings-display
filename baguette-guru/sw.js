@@ -1,5 +1,5 @@
 // Baguette Guru LCARS Service Worker
-const CACHE_NAME = 'baguette-guru-v9.0';
+const CACHE_NAME = 'baguette-guru-v9.1';
 const ASSETS = [
   './',
   './index.html',

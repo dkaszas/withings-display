@@ -8,7 +8,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="manifest" href="manifest.json">
-    <link rel="stylesheet" href="style.css?v=9.0">
+    <link rel="stylesheet" href="style.css?v=9.1">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥖</text></svg>">
 </head>
 <body>
@@ -121,31 +121,21 @@
                     <input type="file" id="camera-input" accept="image/*" capture="environment" style="display:none;">
                 </div>
 
-                <!-- QUICK TOPIC CHIPS -->
-                <div class="quick-chips-wrapper">
-                    <span class="chips-label">Quick Diagnostics:</span>
-                    <div id="quick-chips-container" class="chips-carousel">
-                        <!-- Populated dynamically based on Baguette vs Boule mode -->
-                    </div>
-                </div>
-
                 <!-- QUESTION / PROMPT INPUT -->
                 <div class="prompt-card">
-                    <textarea id="context-input" placeholder="Ask the Bread Guru a question or select a diagnostic chip above..." rows="3"></textarea>
+                    <div class="card-section-label" style="margin-bottom: 6px;">Ask Bread Guru or Add Bake Context</div>
+                    <textarea id="context-input" class="chat-input-field" placeholder="Ask the Bread Guru a question about your bread, describe dough handling, fermentation, or crumb structure..." rows="3"></textarea>
                     
                     <div class="prompt-card-footer">
                         <div class="model-segmented">
-                            <button id="btn-flash" class="model-opt active">Flash</button>
-                            <button id="btn-pro" class="model-opt">Pro</button>
+                            <button id="btn-flash" class="model-opt active" data-model="gemini-2.5-flash">Gemini Flash</button>
+                            <button id="btn-pro" class="model-opt" data-model="gemini-2.5-pro">Gemini Pro</button>
                         </div>
-
-                        <div class="footer-buttons">
-                            <button id="pillar-clear" class="btn-ghost" title="Clear inputs">Clear</button>
-                            <button id="btn-analyze" class="btn-execute">
-                                <span>Consult Guru</span>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-                            </button>
-                        </div>
+                        
+                        <button id="btn-analyze" class="action-btn primary-action">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                            <span>DIAGNOSE WITH GEMINI</span>
+                        </button>
                     </div>
                 </div>
 
@@ -470,7 +460,7 @@
         </div>
     </div>
 
-    <script src="knowledge_data.js?v=9.0"></script>
-    <script src="app.js?v=9.0"></script>
+    <script src="knowledge_data.js?v=9.1"></script>
+    <script src="app.js?v=9.1"></script>
 </body>
 </html>

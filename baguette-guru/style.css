@@ -267,7 +267,13 @@ html, body {
     padding: 6px 16px;
     gap: 12px;
     overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
     font-size: 12px;
+}
+
+.telemetry-strip::-webkit-scrollbar {
+    display: none;
 }
 
 .telemetry-pill {
@@ -1106,11 +1112,9 @@ html, body {
    ========================================================================== */
 .kb-topic-chips {
     display: flex;
+    flex-wrap: wrap;
     gap: 8px;
-    overflow-x: auto;
-    padding-bottom: 8px;
     margin-bottom: 16px;
-    scrollbar-width: none;
 }
 
 .kb-topic-chips::-webkit-scrollbar {
@@ -1893,3 +1897,48 @@ html, body {
     }
 }
 
+
+/* Clean Modern Chat / Prompt Input */
+.prompt-card {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: var(--shadow-sm);
+    margin-top: 14px;
+}
+
+.prompt-card:focus-within {
+    border-color: var(--amber-500);
+    box-shadow: 0 0 0 3px var(--amber-glow);
+}
+
+.chat-input-field {
+    width: 100%;
+    min-height: 85px;
+    background-color: var(--bg-base);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    line-height: 1.6;
+    padding: 12px 14px;
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.chat-input-field:focus {
+    border-color: var(--amber-500);
+    background-color: #171513;
+}
+
+.chat-input-field::placeholder {
+    color: var(--text-muted);
+    font-size: 13px;
+}
