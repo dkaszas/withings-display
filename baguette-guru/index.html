@@ -2,343 +2,429 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ARTISAN BREAD GURU LCARS</title>
-    <meta name="theme-color" content="#12100e">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Bread Guru — Artisan Sourdough & Baguette Companion</title>
+    <meta name="theme-color" content="#0d0c0a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="manifest" href="manifest.json">
-    <link rel="stylesheet" href="style.css?v=3.0">
+    <link rel="stylesheet" href="style.css?v=5.0">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥖</text></svg>">
 </head>
 <body>
-    
-    <div id="app" class="lcars-app">
-        <!-- LCARS LEFT PILLAR -->
-        <div class="lcars-column">
-            <div id="settings-btn" class="lcars-bar lcars-bar-top bg-gold" title="Settings / API Key">KEY</div>
-            <div id="pillar-gallery" class="lcars-bar lcars-bar-standard bg-blue">GALLERY</div>
-            <div id="pillar-camera" class="lcars-bar lcars-bar-standard bg-purple">CAMERA</div>
-            <div id="pillar-analyze" class="lcars-bar lcars-bar-stretch bg-cyan">ANALYZE</div>
-            <div id="pillar-recipes" class="lcars-bar lcars-bar-standard bg-peach">RECIPES</div>
-            <div id="pillar-coulage" class="lcars-bar lcars-bar-standard bg-emerald">COULAGE</div>
-            <div id="pillar-clear" class="lcars-bar lcars-bar-standard bg-red">CLEAR</div>
+
+    <div id="app" class="app-container">
+        
+        <!-- TOP APP BAR -->
+        <header class="app-header">
+            <div class="brand-section">
+                <div class="brand-logo">🥖</div>
+                <div class="brand-info">
+                    <h1 class="brand-title">BREAD GURU</h1>
+                    <span class="brand-subtitle">ARTISAN KITCHEN COMPANION</span>
+                </div>
+            </div>
+
+            <!-- BAKE FORMAT TOGGLE (PILL SWITCH) -->
+            <div class="format-segmented-control">
+                <button id="btn-format-baguette" class="format-pill active" data-format="baguette">
+                    <span class="icon">🥖</span>
+                    <span class="label">Baguettes</span>
+                </button>
+                <button id="btn-format-boule" class="format-pill" data-format="boule">
+                    <span class="icon">🍞</span>
+                    <span class="label">Boules & Bâtards</span>
+                </button>
+            </div>
+
+            <!-- QUICK ACTIONS -->
+            <div class="header-actions">
+                <button id="settings-btn" class="icon-btn" title="API Configuration" aria-label="Settings">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- MAIN NAVIGATION TABS -->
+        <nav class="main-nav">
+            <button id="nav-diagnose" class="nav-tab active" data-tab="diagnose">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                <span>Diagnose</span>
+            </button>
+            <button id="nav-recipes" class="nav-tab" data-tab="recipes">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                <span>Recipes & Scale</span>
+            </button>
+            <button id="nav-methods" class="nav-tab" data-tab="methods">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                <span>Knowledge Base</span>
+            </button>
+            <button id="nav-coulage" class="nav-tab" data-tab="coulage">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg>
+                <span>Water Temp</span>
+            </button>
+        </nav>
+
+        <!-- LIVE TELEMETRY BAR -->
+        <div class="telemetry-strip">
+            <div class="telemetry-pill">
+                <span class="label">Format:</span>
+                <span id="telemetry-format" class="val val-highlight">Baguette (Couche)</span>
+            </div>
+            <div class="telemetry-pill">
+                <span class="label">Flour:</span>
+                <select id="header-flour-selector" class="strip-select">
+                    <!-- Populated dynamically -->
+                </select>
+            </div>
+            <div class="telemetry-pill">
+                <span class="label">Protein:</span>
+                <span id="telemetry-protein" class="val">11.2%</span>
+            </div>
+            <div class="telemetry-pill">
+                <span class="label">Hydration:</span>
+                <span id="telemetry-hydr" class="val val-accent">70.0%</span>
+            </div>
+            <div class="telemetry-pill model-badge">
+                <span id="active-model-display" class="val">GEMINI FLASH</span>
+            </div>
         </div>
 
-        <!-- MAIN INTERFACE -->
-        <div class="lcars-main">
-            <!-- BAKE FORMAT SWITCHER BAR -->
-            <div class="lcars-format-bar">
-                <span class="format-label">TARGET BAKE FORMAT:</span>
-                <div class="format-toggle">
-                    <button id="btn-format-baguette" class="format-btn active" data-format="baguette">🥖 BAGUETTES</button>
-                    <button id="btn-format-boule" class="format-btn" data-format="boule">🍞 SOURDOUGH BOULES / BÂTARDS</button>
-                </div>
-            </div>
+        <!-- MAIN CONTENT AREA -->
+        <main class="content-area">
 
-            <!-- HEADER WRAPPER -->
-            <header class="lcars-header">
-                <div id="nav-diagnose" class="lcars-top-elbow nav-pill active" data-tab="diagnose">DIAGNOSE</div>
-                <div id="nav-recipes" class="lcars-top-pill nav-pill bg-peach-pill" data-tab="recipes">RECIPES</div>
-                <div id="nav-methods" class="lcars-top-pill nav-pill bg-teal-pill" data-tab="methods">METHODS & KB</div>
-                <div id="nav-coulage" class="lcars-top-pill nav-pill bg-emerald-pill" data-tab="coulage">COULAGE</div>
-            </header>
-
-            <!-- SUB-HEADER TELEMETRY (DYNAMIC FLOUR & HYDRATION STATUS) -->
-            <div class="lcars-telemetry-bar">
-                <div class="telemetry-item">
-                    <span class="label">FORMAT:</span> <span id="telemetry-format" class="val-gold">BAGUETTE (COUCHE)</span>
-                </div>
-                <div class="telemetry-item">
-                    <span class="label">FLOUR:</span> 
-                    <select id="header-flour-selector" class="telemetry-select">
-                        <!-- Populated by app.js -->
-                    </select>
-                </div>
-                <div class="telemetry-item">
-                    <span class="label">PROTEIN:</span> <span id="telemetry-protein" class="val-gold">11.2%</span>
-                </div>
-                <div class="telemetry-item">
-                    <span class="label">HYDRATION:</span> <span id="telemetry-hydr" class="val-active">70.0%</span>
-                </div>
-                <div class="telemetry-item">
-                    <span class="label">MODEL:</span> <span id="active-model-display" class="val-cyan">GEMINI FLASH</span>
-                </div>
-            </div>
-
-            <!-- VIEW 1: DIAGNOSE & CAMERA SENSOR (PHOTO HOOK) -->
+            <!-- TAB 1: DIAGNOSE & CAMERA SENSOR -->
             <section id="view-diagnose" class="tab-view active">
                 
-                <!-- CAMERA/GALLERY SENSOR BLOCK -->
-                <div class="camera-wrapper">
-                    <div id="image-count-badge" class="image-badge hidden">0 PHOTOS</div>
-                    <div id="preview-container" class="preview-grid hidden"></div>
+                <!-- CAMERA / UPLOAD COMPONENT -->
+                <div class="media-card">
+                    <div id="image-count-badge" class="media-badge hidden">0 Photos Attached</div>
                     
-                    <div class="camera-placeholder" id="camera-placeholder">
-                        <div class="input-split">
-                            <label for="gallery-input" class="split-btn split-top bg-blue">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-                                <span>PHOTO GALLERY / UPLOAD</span>
+                    <div id="preview-container" class="thumbnail-strip hidden"></div>
+
+                    <div class="upload-dropzone" id="camera-placeholder">
+                        <div class="dropzone-buttons">
+                            <label for="camera-input" class="action-btn btn-primary">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                                <span>Take Photo</span>
                             </label>
-                            <label for="camera-input" class="split-btn split-bottom bg-purple">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
-                                <span>CAMERA SENSOR</span>
+                            <label for="gallery-input" class="action-btn btn-secondary">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                                <span>Upload Images</span>
                             </label>
                         </div>
+                        <p class="dropzone-hint">Snap your bulk fermentation, shaped dough on couche/banneton, scoring cuts, or crumb cross-section</p>
                     </div>
+
                     <input type="file" id="gallery-input" accept="image/*" multiple style="display:none;">
                     <input type="file" id="camera-input" accept="image/*" capture="environment" style="display:none;">
                 </div>
 
-                <!-- QUICK CHIPS (DYNAMICALLY ADAPTS TO BAGUETTE VS BOULE) -->
-                <div id="quick-chips-container" class="quick-chips">
-                    <!-- Populated dynamically based on format mode -->
+                <!-- QUICK TOPIC CHIPS -->
+                <div class="quick-chips-wrapper">
+                    <span class="chips-label">Quick Diagnostics:</span>
+                    <div id="quick-chips-container" class="chips-carousel">
+                        <!-- Populated dynamically based on Baguette vs Boule mode -->
+                    </div>
                 </div>
 
-                <!-- CONTEXT / QUESTION INPUT -->
-                <div class="input-panel">
-                    <textarea id="context-input" placeholder="ASK THE GURU (OR TAP A QUICK CHIP)..." rows="3"></textarea>
-                    <div class="action-row">
-                        <div class="model-toggle">
-                            <button id="btn-flash" class="toggle-btn active">FLASH</button>
-                            <button id="btn-pro" class="toggle-btn">PRO</button>
+                <!-- QUESTION / PROMPT INPUT -->
+                <div class="prompt-card">
+                    <textarea id="context-input" placeholder="Ask the Bread Guru a question or select a diagnostic chip above..." rows="3"></textarea>
+                    
+                    <div class="prompt-card-footer">
+                        <div class="model-segmented">
+                            <button id="btn-flash" class="model-opt active">Flash</button>
+                            <button id="btn-pro" class="model-opt">Pro</button>
                         </div>
-                        <button id="btn-analyze" class="execute-btn bg-cyan">
-                            <span>CONSULT GURU</span>
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-                        </button>
+
+                        <div class="footer-buttons">
+                            <button id="pillar-clear" class="btn-ghost" title="Clear inputs">Clear</button>
+                            <button id="btn-analyze" class="btn-execute">
+                                <span>Consult Guru</span>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+                            </button>
+                        </div>
                     </div>
                 </div>
 
-                <!-- DIAGNOSTIC RESULT PANEL -->
-                <div id="diagnostic-panel" class="diagnostic-panel hidden">
-                    <div class="panel-header">
-                        <span class="panel-title">GURU DIAGNOSTIC TELEMETRY</span>
-                        <button id="btn-clear-result" class="text-btn">DISMISS</button>
+                <!-- DIAGNOSTIC RESULT CARD -->
+                <div id="diagnostic-panel" class="result-card hidden">
+                    <div class="result-header">
+                        <div class="result-title-group">
+                            <span class="status-indicator"></span>
+                            <h3>Guru Diagnostic Assessment</h3>
+                        </div>
+                        <button id="btn-clear-result" class="btn-text">Dismiss</button>
                     </div>
-                    <div id="diagnostic-content" class="panel-content">
-                        <!-- AI Response renders here -->
+                    <div id="diagnostic-content" class="result-body markdown-body">
+                        <!-- Streamed / rendered Gemini analysis -->
                     </div>
                 </div>
 
             </section>
 
-            <!-- VIEW 2: MASTER RECIPES & HYDRATION ENGINE -->
+            <!-- TAB 2: RECIPES & SCALE COMPANION -->
             <section id="view-recipes" class="tab-view">
-                <div id="recipe-section-title" class="section-title-bar bg-peach">
-                    <h2 id="recipe-format-title">ARTISANAL BAGUETTES (COUCHE & LAME)</h2>
-                    <span id="recipe-format-subtitle" class="subtext">SCALED TO EXACT GRAMS WITH INTERACTIVE HYDRATION SLIDER</span>
+                
+                <div class="card-hero">
+                    <div class="hero-header">
+                        <div>
+                            <h2 id="recipe-format-title">Artisanal Baguettes</h2>
+                            <p id="recipe-format-subtitle" class="hero-desc">Exact kitchen scale weights dynamically tuned to your flour and hydration</p>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- FLOUR PROFILER PANEL -->
-                <div class="flour-profiler-card">
-                    <div class="flour-row">
-                        <div class="flour-col">
-                            <label>ACTIVE FLOUR:</label>
-                            <select id="recipe-flour-selector" class="flour-dropdown">
+                <!-- FLOUR PROFILER CARD -->
+                <div class="panel-card">
+                    <div class="card-section-label">Flour Rheology Profile</div>
+                    
+                    <div class="flour-config-grid">
+                        <div class="config-field">
+                            <label for="recipe-flour-selector">Selected Flour</label>
+                            <select id="recipe-flour-selector" class="clean-select">
                                 <!-- Populated dynamically -->
                             </select>
                         </div>
-                        <div class="flour-col">
-                            <label>PROTEIN %:</label>
-                            <input type="number" id="input-protein" step="0.1" min="9.0" max="16.0" value="11.2">
+
+                        <div class="config-field">
+                            <label for="input-protein">Protein Content (%)</label>
+                            <input type="number" id="input-protein" step="0.1" min="9.0" max="18.0" value="11.2" class="clean-input">
                         </div>
-                        <div class="flour-col">
-                            <label>ORGANIC / BIO:</label>
-                            <select id="select-bio">
-                                <option value="true">YES (No additives, native enzymes)</option>
-                                <option value="false">NO (Conventional / Malted)</option>
+
+                        <div class="config-field">
+                            <label for="select-bio">Type / Certification</label>
+                            <select id="select-bio" class="clean-select">
+                                <option value="true">Organic / Bio (Native enzymes, no additives)</option>
+                                <option value="false">Conventional (Malted / Ascorbic acid)</option>
                             </select>
                         </div>
                     </div>
-                    <div id="flour-notes-banner" class="flour-notes">
-                        <!-- Populated by app.js -->
+
+                    <div id="flour-notes-banner" class="flour-advice-callout">
+                        <!-- Populated dynamically -->
                     </div>
                 </div>
 
-                <!-- RECIPE SELECTOR TABS -->
-                <div id="recipe-selector-pills" class="recipe-selector-pills">
-                    <!-- Populated dynamically based on Baguette vs Boule mode -->
+                <!-- RECIPE VARIANT SELECTOR -->
+                <div class="recipe-selector-wrap">
+                    <div class="card-section-label">Master Recipe Formula</div>
+                    <div id="recipe-selector-pills" class="recipe-pills">
+                        <!-- Populated dynamically based on Baguette vs Boule -->
+                    </div>
                 </div>
 
-                <!-- INTERACTIVE SCALER & HYDRATION DIAL -->
-                <div class="calculator-card">
+                <!-- SCALE MASTER & HYDRATION DIAL -->
+                <div class="panel-card highlight-card">
                     
-                    <!-- HYDRATION SLIDER & RHEOLOGY INDICATOR -->
-                    <div class="hydration-control-box">
-                        <div class="hydr-header">
-                            <label>TARGET HYDRATION:</label>
-                            <div class="hydr-display">
-                                <span id="val-hydration-display" class="hydr-number">70.0%</span>
-                                <span id="hydr-zone-badge" class="badge-optimal">OPTIMAL EXTENSIBILITY ZONE</span>
+                    <!-- HYDRATION SLIDER WITH LIVE ZONE EVALUATION -->
+                    <div class="hydration-module">
+                        <div class="hydration-header">
+                            <div>
+                                <label for="slider-hydration" class="hydr-title">Target Hydration</label>
+                                <div class="hydr-metrics">
+                                    <span id="val-hydration-display" class="hydr-hero-num">70.0%</span>
+                                    <span id="display-total-water" class="hydr-water-grams">350 g total water</span>
+                                </div>
                             </div>
+                            <div id="hydr-zone-badge" class="zone-badge zone-optimal">Optimal Zone</div>
                         </div>
-                        <input type="range" id="slider-hydration" min="62" max="84" step="0.5" value="70" class="hydr-slider">
-                        <div class="slider-marks">
-                            <span>62% (Stiff)</span>
-                            <span>68% (Standard T55)</span>
-                            <span>71% (Bio T65)</span>
-                            <span>76% (Country Boule)</span>
-                            <span>82%+ (High Hydr.)</span>
+
+                        <div class="slider-wrapper">
+                            <input type="range" id="slider-hydration" min="62" max="84" step="0.5" value="70" class="custom-range">
+                            <div class="slider-scale-labels">
+                                <span>62% (Stiff)</span>
+                                <span>68% (T55/AP)</span>
+                                <span>71% (Bio T65)</span>
+                                <span>76% (Boule)</span>
+                                <span>82%+ (Manitoba)</span>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="scaler-controls">
-                        <div class="scaler-item">
-                            <label id="label-unit-count">PORTION COUNT:</label>
-                            <div class="number-stepper">
-                                <button id="btn-dec-loaves">-</button>
-                                <span id="display-loaves">3</span>
-                                <button id="btn-inc-loaves">+</button>
+                    <!-- BATCH SCALER CONTROLS -->
+                    <div class="batch-scaler-row">
+                        <div class="batch-control-group">
+                            <label id="label-unit-count">Portions</label>
+                            <div class="stepper-widget">
+                                <button id="btn-dec-loaves" class="stepper-btn" aria-label="Decrease portions">−</button>
+                                <span id="display-loaves" class="stepper-val">3</span>
+                                <button id="btn-inc-loaves" class="stepper-btn" aria-label="Increase portions">+</button>
                             </div>
-                            <span id="display-portion-estimate" class="portion-estimate">(~320g each)</span>
+                            <span id="display-portion-estimate" class="batch-estimate">(~320g each)</span>
                         </div>
-                        <div class="scaler-item">
-                            <label>TOTAL FLOUR BASIS (G):</label>
-                            <input type="number" id="input-flour-basis" value="500" step="50" min="200" max="5000">
-                        </div>
-                        <div class="scaler-item">
-                            <label>TOTAL WATER:</label>
-                            <span id="display-total-water" class="val-cyan">350g (70.0%)</span>
+
+                        <div class="batch-control-group">
+                            <label for="input-flour-basis">Total Flour Basis (g)</label>
+                            <div class="input-with-unit">
+                                <input type="number" id="input-flour-basis" value="500" step="50" min="100" max="5000" class="clean-input input-bold">
+                                <span class="unit-tag">g</span>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- FORMULA INGREDIENTS TABLE (GRAMS ALWAYS FRONT AND CENTER!) -->
-                    <div class="table-wrapper">
-                        <table class="recipe-table">
+                    <!-- KITCHEN SCALE WEIGHTS TABLE (GRAMS EMPHASIZED!) -->
+                    <div class="table-responsive">
+                        <table class="scale-table">
                             <thead>
                                 <tr>
-                                    <th>INGREDIENT / STAGE</th>
-                                    <th>EXACT WEIGHT (GRAMS)</th>
-                                    <th>BAKER'S %</th>
-                                    <th>PURPOSE & TECHNIQUE</th>
+                                    <th>Ingredient / Stage</th>
+                                    <th class="col-grams">Kitchen Scale Weight</th>
+                                    <th class="col-pct">Baker's %</th>
+                                    <th>Technique & Timing</th>
                                 </tr>
                             </thead>
                             <tbody id="recipe-table-body">
-                                <!-- Populated dynamically by app.js -->
+                                <!-- Populated dynamically with large readable grams -->
                             </tbody>
                         </table>
                     </div>
 
-                    <!-- STEP BY STEP TIMETABLE -->
-                    <div class="timeline-container">
-                        <h3 class="timeline-title">PRODUCTION TIMETABLE & CRITICAL CHECKS</h3>
-                        <div id="recipe-steps-list" class="steps-list">
+                    <!-- TIMELINE & METHOD PHASES -->
+                    <div class="timeline-module">
+                        <div class="card-section-label">Step-by-Step Production Protocol</div>
+                        <div id="recipe-steps-list" class="phases-accordion">
                             <!-- Populated dynamically -->
                         </div>
                     </div>
+
                 </div>
+
             </section>
 
-            <!-- VIEW 3: METHODS & KNOWLEDGE BASE EXPLORER -->
+            <!-- TAB 3: METHODS & KNOWLEDGE BASE EXPLORER -->
             <section id="view-methods" class="tab-view">
-                <div class="section-title-bar bg-teal">
-                    <h2>ARTISAN BREAD METHODOLOGY & SCIENCE REPOSITORY</h2>
-                    <span class="subtext">EXTRACTED FROM MODERNIST BREAD, LANIO, ROBERTSON, LEO, KING ARTHUR & ADDIE ROBERTS</span>
+                
+                <div class="card-hero">
+                    <h2>Artisan Bread Science & Methodology</h2>
+                    <p class="hero-desc">Synthesized from Modernist Bread, Jean-Marie Lanio, Chad Robertson, Maurizio Leo, Ken Forkish, and Addie Roberts</p>
                 </div>
 
-                <div class="kb-nav-chips">
-                    <button class="kb-chip active" data-kb="10_SOURDOUGH_BOULE_AND_BATARD_MASTERY.md">10. SOURDOUGH BOULES</button>
-                    <button class="kb-chip" data-kb="09_FLOUR_PROTEIN_AND_HYDRATION_MATRIX.md">09. FLOUR & PROTEIN MATRIX</button>
-                    <button class="kb-chip" data-kb="01_FOUNDATIONS_AND_FLOUR.md">01. FLOUR & T65</button>
-                    <button class="kb-chip" data-kb="02_THE_THREE_LEAVENING_SYSTEMS.md">02. 3 SYSTEMS</button>
-                    <button class="kb-chip" data-kb="03_DOUGH_METHODS_AND_RHEOLOGY.md">03. AUTOLYSE & MIX</button>
-                    <button class="kb-chip" data-kb="04_SHAPING_TECHNIQUE_AND_TENSION.md">04. SHAPING TENSION</button>
-                    <button class="kb-chip" data-kb="05_SCORING_AND_OVEN_PHYSICS.md">05. SCORING & EARS</button>
-                    <button class="kb-chip" data-kb="06_BAKING_AND_STEAM_SOLUTIONS.md">06. STEAM & OVEN</button>
-                    <button class="kb-chip" data-kb="07_DIAGNOSTICS_AND_GURU_DECISION_TREE.md">07. GURU DIAGNOSTICS</button>
-                    <button class="kb-chip" data-kb="08_COMPARATIVE_RECIPES_DATABASE.md">08. COMPARATIVE LITERATURE</button>
+                <div class="kb-topic-chips">
+                    <button class="kb-chip active" data-kb="10_SOURDOUGH_BOULE_AND_BATARD_MASTERY.md">10. Sourdough Boules</button>
+                    <button class="kb-chip" data-kb="09_FLOUR_PROTEIN_AND_HYDRATION_MATRIX.md">09. Flour & Protein Matrix</button>
+                    <button class="kb-chip" data-kb="01_FOUNDATIONS_AND_FLOUR.md">01. Flour Specs & T65</button>
+                    <button class="kb-chip" data-kb="02_THE_THREE_LEAVENING_SYSTEMS.md">02. 3 Leavening Systems</button>
+                    <button class="kb-chip" data-kb="03_DOUGH_METHODS_AND_RHEOLOGY.md">03. Autolyse & Bassinage</button>
+                    <button class="kb-chip" data-kb="04_SHAPING_TECHNIQUE_AND_TENSION.md">04. Shaping & Tension</button>
+                    <button class="kb-chip" data-kb="05_SCORING_AND_OVEN_PHYSICS.md">05. Scoring & Ear Physics</button>
+                    <button class="kb-chip" data-kb="06_BAKING_AND_STEAM_SOLUTIONS.md">06. Steam & Baking Stones</button>
+                    <button class="kb-chip" data-kb="07_DIAGNOSTICS_AND_GURU_DECISION_TREE.md">07. Diagnostic Decision Tree</button>
+                    <button class="kb-chip" data-kb="08_COMPARATIVE_RECIPES_DATABASE.md">08. Literature Formulas</button>
                 </div>
 
-                <div id="kb-viewer-card" class="kb-card">
-                    <div id="kb-markdown-content" class="kb-content markdown-body">
+                <div class="panel-card kb-display-card">
+                    <div id="kb-markdown-content" class="kb-article markdown-body">
                         <!-- Loaded from knowledge_data.js -->
                     </div>
                 </div>
+
             </section>
 
-            <!-- VIEW 4: COULAGE / BASE TEMPERATURE CALCULATOR -->
+            <!-- TAB 4: COULAGE / BASE TEMPERATURE CALCULATOR -->
             <section id="view-coulage" class="tab-view">
-                <div class="section-title-bar bg-emerald">
-                    <h2>LE COULAGE — BASE TEMPERATURE CALCULATOR</h2>
-                    <span class="subtext">FRENCH TRADITION (T° BASE = T° ROOM + T° FLOUR + T° WATER + T° FRICTION)</span>
+                
+                <div class="card-hero">
+                    <h2>Le Coulage — Water Temperature Calculator</h2>
+                    <p class="hero-desc">French Base Temperature Formula: Target Dough Temp = Room + Flour + Water + Mixer Friction</p>
                 </div>
 
-                <div class="calculator-card">
-                    <p class="coulage-intro">
-                        In professional baking (Lanio, Tartine, INBP), controlling dough temperature at the end of mixing (<strong>23.5°C – 24.5°C</strong>) regulates yeast motility, fermentation kinetics, and prevents excessive acid degradation.
+                <div class="panel-card">
+                    <p class="card-intro-text">
+                        Controlling final dough temperature (<strong>23.5°C – 24.5°C</strong>) is essential to govern fermentation speed, regulate enzyme activity, and keep wild yeast in balance with lactic acid bacteria.
                     </p>
 
-                    <div class="coulage-grid">
-                        <div class="coulage-input-group">
-                            <label>TARGET DOUGH TEMPERATURE (T°D):</label>
-                            <input type="number" id="coulage-td" value="24" step="0.5">
-                            <span class="unit">°C (Standard: 23.5°C – 24.5°C)</span>
+                    <div class="coulage-inputs-grid">
+                        <div class="config-field">
+                            <label for="coulage-td">Target Dough Temp (T°D)</label>
+                            <div class="input-with-unit">
+                                <input type="number" id="coulage-td" value="24" step="0.5" class="clean-input input-bold">
+                                <span class="unit-tag">°C</span>
+                            </div>
                         </div>
-                        <div class="coulage-input-group">
-                            <label>ROOM / AMBIENT TEMPERATURE (T°R):</label>
-                            <input type="number" id="coulage-tr" value="22" step="0.5">
-                            <span class="unit">°C</span>
+
+                        <div class="config-field">
+                            <label for="coulage-tr">Room / Ambient Temp (T°R)</label>
+                            <div class="input-with-unit">
+                                <input type="number" id="coulage-tr" value="22" step="0.5" class="clean-input">
+                                <span class="unit-tag">°C</span>
+                            </div>
                         </div>
-                        <div class="coulage-input-group">
-                            <label>FLOUR TEMPERATURE (T°F):</label>
-                            <input type="number" id="coulage-tf" value="21" step="0.5">
-                            <span class="unit">°C</span>
+
+                        <div class="config-field">
+                            <label for="coulage-tf">Flour Temp (T°F)</label>
+                            <div class="input-with-unit">
+                                <input type="number" id="coulage-tf" value="21" step="0.5" class="clean-input">
+                                <span class="unit-tag">°C</span>
+                            </div>
                         </div>
-                        <div class="coulage-input-group">
-                            <label>MIXING FRICTION FACTOR (T°FR):</label>
-                            <select id="coulage-friction">
-                                <option value="0">Manual Hand Kneading / Rubaud (0°C friction)</option>
-                                <option value="2">Gentle Slow Mixer / Pétrissage Lent (2°C)</option>
-                                <option value="4" selected>Standard Spiral / Stand Mixer Speed 1+2 (4°C)</option>
-                                <option value="6">Intensive Mixer (6°C friction)</option>
+
+                        <div class="config-field">
+                            <label for="coulage-friction">Mixing Method (Friction Factor)</label>
+                            <select id="coulage-friction" class="clean-select">
+                                <option value="0">Manual Hand Mixing / Folds (0°C)</option>
+                                <option value="2">Gentle Slow Mixer (2°C)</option>
+                                <option value="4" selected>Spiral / Stand Mixer Spd 1+2 (4°C)</option>
+                                <option value="6">Intensive High-Speed Mixer (6°C)</option>
                             </select>
                         </div>
                     </div>
 
-                    <div class="coulage-result-banner">
-                        <div class="result-title">CALCULATED WATER TEMPERATURE NEEDED (T°W):</div>
-                        <div id="coulage-water-result" class="result-temp">25.0°C</div>
-                        <div id="coulage-advice" class="result-subtext">Use slightly tepid water to hit target dough temp of 24°C.</div>
+                    <!-- HERO WATER TEMPERATURE BANNER -->
+                    <div class="coulage-hero-card">
+                        <div class="coulage-hero-label">Calculated Water Temperature Needed</div>
+                        <div id="coulage-water-result" class="coulage-hero-number">25.0°C</div>
+                        <p id="coulage-advice" class="coulage-hero-advice">Use slightly tepid water to hit target dough temp of 24°C.</p>
                     </div>
                 </div>
+
             </section>
 
-        </div>
+        </main>
     </div>
 
     <!-- SETTINGS MODAL -->
-    <div id="settings-modal" class="modal-overlay hidden">
-        <div class="modal-card">
+    <div id="settings-modal" class="modal-backdrop hidden">
+        <div class="modal-container">
             <div class="modal-header">
-                <h3>BREAD GURU CONFIGURATION</h3>
-                <button id="btn-close-settings" class="modal-close-btn">&times;</button>
+                <h3>Settings & API Configuration</h3>
+                <button id="btn-close-settings" class="modal-close" aria-label="Close modal">&times;</button>
             </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label for="gemini-key">GOOGLE GEMINI API KEY:</label>
-                    <input type="password" id="gemini-key" placeholder="AIzaSy...">
-                    <small>Key is saved locally in your browser (localStorage). Never sent to any 3rd party.</small>
+            
+            <div class="modal-content">
+                <div class="modal-field">
+                    <label for="gemini-key">Google Gemini API Key</label>
+                    <input type="password" id="gemini-key" placeholder="AIzaSy..." class="clean-input">
+                    <small>Stored securely in your local browser storage. Never sent to any third party.</small>
                 </div>
-                <div class="form-group">
-                    <label for="model-preference">DEFAULT GEMINI MODEL:</label>
-                    <select id="model-preference">
-                        <option value="gemini-2.5-flash">Gemini 2.5 Flash (Ultra fast & cheap - Recommended)</option>
-                        <option value="gemini-2.5-pro">Gemini 2.5 Pro (Deep multimodal reasoning)</option>
+
+                <div class="modal-field">
+                    <label for="model-preference">Preferred Model</label>
+                    <select id="model-preference" class="clean-select">
+                        <option value="gemini-2.5-flash">Gemini 2.5 Flash (Fast, responsive & cost-effective)</option>
+                        <option value="gemini-2.5-pro">Gemini 2.5 Pro (Deep reasoning for complex diagnostics)</option>
                     </select>
                 </div>
+
                 <div class="modal-actions">
-                    <button id="btn-test-key" class="secondary-btn">TEST API CONNECTION</button>
-                    <button id="btn-save-settings" class="primary-btn bg-gold">SAVE SETTINGS</button>
+                    <button id="btn-test-key" class="btn-secondary">Test Connection</button>
+                    <button id="btn-save-settings" class="btn-primary">Save Settings</button>
                 </div>
-                <div id="settings-status" class="status-msg"></div>
+
+                <div id="settings-status" class="status-alert"></div>
             </div>
         </div>
     </div>
 
-    <!-- LOADER OVERLAY -->
-    <div id="loader-overlay" class="loader-overlay hidden">
-        <div class="loader-content">
-            <div class="spinner"></div>
-            <div id="loader-text" class="loader-text">CONSULTING GURU KNOWLEDGE BASE...</div>
+    <!-- LOADING OVERLAY -->
+    <div id="loader-overlay" class="loading-overlay hidden">
+        <div class="loading-card">
+            <div class="spinner-ring"></div>
+            <div id="loader-text" class="loading-label">Consulting Bread Guru...</div>
         </div>
     </div>
 

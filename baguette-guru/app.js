@@ -24,12 +24,12 @@
         recipeFormatTitle: document.getElementById('recipe-format-title'),
         recipeFormatSubtitle: document.getElementById('recipe-format-subtitle'),
 
-        // Nav Pills
+        // Nav Tabs
         navDiagnose: document.getElementById('nav-diagnose'),
         navRecipes: document.getElementById('nav-recipes'),
         navMethods: document.getElementById('nav-methods'),
         navCoulage: document.getElementById('nav-coulage'),
-        navPills: document.querySelectorAll('.nav-pill'),
+        navPills: document.querySelectorAll('.nav-tab'),
         tabViews: document.querySelectorAll('.tab-view'),
 
         // Pillar items
@@ -338,17 +338,17 @@
             renderRecipesTable();
         });
 
-        // Left Pillar buttons
-        DOM.settingsBtn.addEventListener('click', () => DOM.settingsModal.classList.remove('hidden'));
-        DOM.pillarGallery.addEventListener('click', () => DOM.galleryInput.click());
-        DOM.pillarCamera.addEventListener('click', () => DOM.cameraInput.click());
-        DOM.pillarAnalyze.addEventListener('click', () => {
+        // Navigation / Header buttons
+        DOM.settingsBtn?.addEventListener('click', () => DOM.settingsModal?.classList.remove('hidden'));
+        DOM.pillarGallery?.addEventListener('click', () => DOM.galleryInput?.click());
+        DOM.pillarCamera?.addEventListener('click', () => DOM.cameraInput?.click());
+        DOM.pillarAnalyze?.addEventListener('click', () => {
             switchTab('diagnose');
             analyzePhotos();
         });
-        DOM.pillarRecipes.addEventListener('click', () => switchTab('recipes'));
-        DOM.pillarCoulage.addEventListener('click', () => switchTab('coulage'));
-        DOM.pillarClear.addEventListener('click', clearInputs);
+        DOM.pillarRecipes?.addEventListener('click', () => switchTab('recipes'));
+        DOM.pillarCoulage?.addEventListener('click', () => switchTab('coulage'));
+        DOM.pillarClear?.addEventListener('click', clearInputs);
 
         // Settings Modal
         DOM.btnCloseSettings.addEventListener('click', () => DOM.settingsModal.classList.add('hidden'));
