@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>BAGUETTE GURU LCARS</title>
+    <meta name="theme-color" content="#12100e">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="style.css?v=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥖</text></svg>">
+</head>
+<body>
+    
+    <div id="app" class="lcars-app">
+        <!-- LCARS LEFT PILLAR -->
+        <div class="lcars-column">
+            <div id="settings-btn" class="lcars-bar lcars-bar-top bg-gold" title="Settings / API Key">KEY</div>
+            <div id="pillar-gallery" class="lcars-bar lcars-bar-standard bg-blue">GALLERY</div>
+            <div id="pillar-camera" class="lcars-bar lcars-bar-standard bg-purple">CAMERA</div>
+            <div id="pillar-analyze" class="lcars-bar lcars-bar-stretch bg-cyan">ANALYZE</div>
+            <div id="pillar-recipes" class="lcars-bar lcars-bar-standard bg-peach">RECIPES</div>
+            <div id="pillar-coulage" class="lcars-bar lcars-bar-standard bg-emerald">COULAGE</div>
+            <div id="pillar-clear" class="lcars-bar lcars-bar-standard bg-red">CLEAR</div>
+        </div>
+
+        <!-- MAIN INTERFACE -->
+        <div class="lcars-main">
+            <!-- HEADER WRAPPER -->
+            <header class="lcars-header">
+                <div id="nav-diagnose" class="lcars-top-elbow nav-pill active" data-tab="diagnose">DIAGNOSE</div>
+                <div id="nav-recipes" class="lcars-top-pill nav-pill bg-peach-pill" data-tab="recipes">RECIPES</div>
+                <div id="nav-methods" class="lcars-top-pill nav-pill bg-teal-pill" data-tab="methods">METHODS & KB</div>
+                <div id="nav-coulage" class="lcars-top-pill nav-pill bg-emerald-pill" data-tab="coulage">COULAGE</div>
+            </header>
+
+            <!-- SUB-HEADER TELEMETRY -->
+            <div class="lcars-telemetry-bar">
+                <div class="telemetry-item"><span class="label">LEVAIN STATUS:</span> <span id="telemetry-status" class="val-active">ACTIVE (100%)</span></div>
+                <div class="telemetry-item"><span class="label">FLOUR:</span> <span class="val-gold">BIO WHITE (T65)</span></div>
+                <div class="telemetry-item"><span class="label">MODEL:</span> <span id="active-model-display" class="val-cyan">GEMINI 2.5 FLASH</span></div>
+            </div>
+
+            <!-- VIEW 1: DIAGNOSE & CAMERA SENSOR (PHOTO HOOK) -->
+            <section id="view-diagnose" class="tab-view active">
+                
+                <!-- CAMERA/GALLERY SENSOR BLOCK -->
+                <div class="camera-wrapper">
+                    <div id="image-count-badge" class="image-badge hidden">0 PHOTOS</div>
+                    <div id="preview-container" class="preview-grid hidden"></div>
+                    
+                    <div class="camera-placeholder" id="camera-placeholder">
+                        <div class="input-split">
+                            <label for="gallery-input" class="split-btn split-top bg-blue">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                                <span>PHOTO GALLERY / UPLOAD</span>
+                            </label>
+                            <label for="camera-input" class="split-btn split-bottom bg-purple">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                                <span>CAMERA SENSOR</span>
+                            </label>
+                        </div>
+                    </div>
+                    <input type="file" id="gallery-input" accept="image/*" multiple style="display:none;">
+                    <input type="file" id="camera-input" accept="image/*" capture="environment" style="display:none;">
+                </div>
+
+                <!-- QUICK CHIPS -->
+                <div class="quick-chips">
+                    <button class="chip-btn" data-prompt="Analyze this crumb structure. Diagnose the alveolation, gelatinization, crumb openness, and whether it shows under-fermentation, over-fermentation, or improper shaping. What specific remedies from Lanio, Robertson, or Addie Roberts should I apply?">🔍 CRUMB DIAGNOSIS</button>
+                    <button class="chip-btn" data-prompt="Evaluate this dough during bulk fermentation. Are the bubbles, doming, and surface tension at the right expansion point for shaping, or does it need more time?">⏱️ BULK PROOF CHECK</button>
+                    <button class="chip-btn" data-prompt="Diagnose the scoring angle, blade depth, and overlap on this baguette. Why did the ear (grigne) open or fail to open? How can I optimize my scoring geometry?">🔪 SCORING & EARS</button>
+                    <button class="chip-btn" data-prompt="I am baking with Bio White Flour (organic T65). Help me calculate and adjust my hydration and bassinage for my current ambient temperature and starter activity.">💧 BASSINAGE & HYDRATION</button>
+                    <button class="chip-btn" data-prompt="Diagnose my baguette's crust: color, blisters, thickness, and crunch. How can I adjust my oven steam setup (lava rocks/cast iron) and venting timing?">🔥 CRUST & STEAM</button>
+                </div>
+
+                <!-- CONTEXT / QUESTION INPUT -->
+                <div class="input-panel">
+                    <textarea id="context-input" placeholder="ASK THE BAGUETTE GURU (OR SELECT A QUICK DIAGNOSIS CHIP)..." rows="3"></textarea>
+                    <div class="action-row">
+                        <div class="model-toggle">
+                            <button id="btn-flash" class="toggle-btn active">FLASH</button>
+                            <button id="btn-pro" class="toggle-btn">PRO</button>
+                        </div>
+                        <button id="btn-analyze" class="execute-btn bg-cyan">
+                            <span>CONSULT GURU</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- DIAGNOSTIC RESULT PANEL -->
+                <div id="diagnostic-panel" class="diagnostic-panel hidden">
+                    <div class="panel-header">
+                        <span class="panel-title">GURU DIAGNOSTIC TELEMETRY</span>
+                        <button id="btn-clear-result" class="text-btn">DISMISS</button>
+                    </div>
+                    <div id="diagnostic-content" class="panel-content">
+                        <!-- AI Response will stream / render here -->
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- VIEW 2: MASTER RECIPES CALCULATOR -->
+            <section id="view-recipes" class="tab-view">
+                <div class="section-title-bar bg-peach">
+                    <h2>BIO WHITE FLOUR MASTER BAGUETTES</h2>
+                    <span class="subtext">3 ALTERNATIVE FORMULAS SCALED WITH BAKER'S PERCENTAGES</span>
+                </div>
+
+                <!-- RECIPE SELECTOR -->
+                <div class="recipe-selector-pills">
+                    <button class="recipe-tab active" data-recipe="sourdough">1. PURE SOURDOUGH (100% LEVAIN)</button>
+                    <button class="recipe-tab" data-recipe="hybrid">2. THE HYBRID (LEVAIN + YEAST)</button>
+                    <button class="recipe-tab" data-recipe="poolish">3. OVERNIGHT POOLISH (COMMERCIAL)</button>
+                </div>
+
+                <!-- BATCH SCALER -->
+                <div class="calculator-card">
+                    <div class="scaler-controls">
+                        <div class="scaler-item">
+                            <label>BAGUETTE COUNT:</label>
+                            <div class="number-stepper">
+                                <button id="btn-dec-loaves">-</button>
+                                <span id="display-loaves">3</span>
+                                <button id="btn-inc-loaves">+</button>
+                            </div>
+                        </div>
+                        <div class="scaler-item">
+                            <label>TOTAL FLOUR BASIS (G):</label>
+                            <input type="number" id="input-flour-basis" value="500" step="50" min="200" max="5000">
+                        </div>
+                        <div class="scaler-item">
+                            <label>TARGET HYDRATION:</label>
+                            <span id="display-hydration" class="val-cyan">70%</span>
+                        </div>
+                    </div>
+
+                    <!-- FORMULA INGREDIENTS TABLE -->
+                    <div class="table-wrapper">
+                        <table class="recipe-table">
+                            <thead>
+                                <tr>
+                                    <th>INGREDIENT / STAGE</th>
+                                    <th>BAKER'S %</th>
+                                    <th>CALCULATED WEIGHT</th>
+                                    <th>PURPOSE & HANDLING</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recipe-table-body">
+                                <!-- Populated dynamically by app.js -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- STEP BY STEP TIMETABLE -->
+                    <div class="timeline-container">
+                        <h3 class="timeline-title">PRODUCTION TIMETABLE & CRITICAL CHECKS</h3>
+                        <div id="recipe-steps-list" class="steps-list">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- VIEW 3: METHODS & KNOWLEDGE BASE EXPLORER -->
+            <section id="view-methods" class="tab-view">
+                <div class="section-title-bar bg-teal">
+                    <h2>BAGUETTE METHODOLOGY & SCIENCE REPOSITORY</h2>
+                    <span class="subtext">EXTRACTED FROM LANIO, ROBERTSON, LEO, KING ARTHUR & ADDIE ROBERTS</span>
+                </div>
+
+                <div class="kb-nav-chips">
+                    <button class="kb-chip active" data-kb="01_FOUNDATIONS_AND_FLOUR.md">01. FLOUR & T65</button>
+                    <button class="kb-chip" data-kb="02_THE_THREE_LEAVENING_SYSTEMS.md">02. 3 SYSTEMS</button>
+                    <button class="kb-chip" data-kb="03_DOUGH_METHODS_AND_RHEOLOGY.md">03. AUTOLYSE & MIX</button>
+                    <button class="kb-chip" data-kb="04_SHAPING_TECHNIQUE_AND_TENSION.md">04. SHAPING TENSION</button>
+                    <button class="kb-chip" data-kb="05_SCORING_AND_OVEN_PHYSICS.md">05. SCORING & EARS</button>
+                    <button class="kb-chip" data-kb="06_BAKING_AND_STEAM_SOLUTIONS.md">06. STEAM & OVEN</button>
+                    <button class="kb-chip" data-kb="07_DIAGNOSTICS_AND_GURU_DECISION_TREE.md">07. GURU DIAGNOSTICS</button>
+                    <button class="kb-chip" data-kb="08_COMPARATIVE_RECIPES_DATABASE.md">08. COMPARATIVE</button>
+                </div>
+
+                <div id="kb-viewer-card" class="kb-card">
+                    <div id="kb-markdown-content" class="kb-content markdown-body">
+                        <!-- Loaded from knowledge_data.js -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- VIEW 4: COULAGE / BASE TEMPERATURE CALCULATOR -->
+            <section id="view-coulage" class="tab-view">
+                <div class="section-title-bar bg-emerald">
+                    <h2>LE COULAGE — BASE TEMPERATURE CALCULATOR</h2>
+                    <span class="subtext">FRENCH TRADITION (T° BASE = T° ROOM + T° FLOUR + T° WATER + T° FRICTION)</span>
+                </div>
+
+                <div class="calculator-card">
+                    <p class="coulage-intro">
+                        In professional French baking (Lanio, INBP), controlling the dough temperature at the end of mixing (<strong>23°C – 24°C</strong>) is the single most vital factor determining fermentation speed, lactic vs acetic acid ratio, and structural elasticity.
+                    </p>
+
+                    <div class="coulage-grid">
+                        <div class="coulage-input-group">
+                            <label>TARGET DOUGH TEMPERATURE (T°D):</label>
+                            <input type="number" id="coulage-td" value="24" step="0.5">
+                            <span class="unit">°C (Standard: 23.5°C – 24.5°C)</span>
+                        </div>
+                        <div class="coulage-input-group">
+                            <label>ROOM / AMBIENT TEMPERATURE (T°R):</label>
+                            <input type="number" id="coulage-tr" value="22" step="0.5">
+                            <span class="unit">°C</span>
+                        </div>
+                        <div class="coulage-input-group">
+                            <label>FLOUR TEMPERATURE (T°F):</label>
+                            <input type="number" id="coulage-tf" value="21" step="0.5">
+                            <span class="unit">°C</span>
+                        </div>
+                        <div class="coulage-input-group">
+                            <label>MIXING FRICTION FACTOR (T°FR):</label>
+                            <select id="coulage-friction">
+                                <option value="0">Manual Hand Kneading / Rubaud (0°C friction)</option>
+                                <option value="2">Gentle Slow Mixer / Pétrissage Lent (2°C)</option>
+                                <option value="4" selected>Standard Spiral / Stand Mixer Speed 1+2 (4°C)</option>
+                                <option value="6">Intensive Mixer (6°C friction)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="coulage-result-banner">
+                        <div class="result-title">CALCULATED WATER TEMPERATURE NEEDED (T°W):</div>
+                        <div id="coulage-water-result" class="result-temp">25.0°C</div>
+                        <div id="coulage-advice" class="result-subtext">Use slightly tepid water to hit target dough temp of 24°C.</div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- SETTINGS MODAL -->
+    <div id="settings-modal" class="modal-overlay hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>BAGUETTE GURU CONFIGURATION</h3>
+                <button id="btn-close-settings" class="modal-close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="gemini-key">GOOGLE GEMINI API KEY:</label>
+                    <input type="password" id="gemini-key" placeholder="AIzaSy...">
+                    <small>Key is saved locally in your browser (localStorage). Never sent to any 3rd party.</small>
+                </div>
+                <div class="form-group">
+                    <label for="model-preference">DEFAULT GEMINI MODEL:</label>
+                    <select id="model-preference">
+                        <option value="gemini-2.5-flash">Gemini 2.5 Flash (Ultra fast & cheap - Recommended)</option>
+                        <option value="gemini-2.5-pro">Gemini 2.5 Pro (Deep multimodal reasoning)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>FLOUR PREFERENCE:</label>
+                    <input type="text" id="pref-flour" value="Bio White Flour (Organic T65 Tradition)" readonly>
+                </div>
+                <div class="modal-actions">
+                    <button id="btn-test-key" class="secondary-btn">TEST API CONNECTION</button>
+                    <button id="btn-save-settings" class="primary-btn bg-gold">SAVE SETTINGS</button>
+                </div>
+                <div id="settings-status" class="status-msg"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LOADER OVERLAY -->
+    <div id="loader-overlay" class="loader-overlay hidden">
+        <div class="loader-content">
+            <div class="spinner"></div>
+            <div id="loader-text" class="loader-text">CONSULTING GURU KNOWLEDGE BASE...</div>
+        </div>
+    </div>
+
+    <script src="knowledge_data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
