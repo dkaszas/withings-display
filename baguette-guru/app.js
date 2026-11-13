@@ -1,6 +1,7 @@
 // BREAD GURU — Core Application Engine
 // Dual Mode: Artisanal Baguettes & Sourdough Boules / Bâtards
-// Dynamic Flour Profiler, Interactive Hydration Slider, Exact Grams, and Immersive Guided Baking Mode
+// Dynamic Flour Profiler, Interactive Hydration Slider, Exact Grams,
+// OG Book Recipes Library (25 Master Formulas from 9 Books), and Immersive Guided Baking Mode
 
 (function() {
     'use strict';
@@ -14,6 +15,10 @@
     let currentLoavesCount = 3;
     let currentHydration = 70.5;
     let activeFlour = null;
+
+    // OG Literature Archive State
+    let currentOgBookFilter = 'all';
+    let currentOgRecipeId = 'og_modernist_a_plus';
 
     // Immersive Baking Mode State
     const bakingState = {
@@ -40,8 +45,8 @@
         // Nav Tabs
         navDiagnose: document.getElementById('nav-diagnose'),
         navRecipes: document.getElementById('nav-recipes'),
+        navOg: document.getElementById('nav-og'),
         navMethods: document.getElementById('nav-methods'),
-        navCoulage: document.getElementById('nav-coulage'),
         navPills: document.querySelectorAll('.nav-tab'),
         tabViews: document.querySelectorAll('.tab-view'),
 
@@ -83,7 +88,7 @@
         valHydrationDisplay: document.getElementById('val-hydration-display'),
         hydrZoneBadge: document.getElementById('hydr-zone-badge'),
 
-        // Recipe Scaler
+        // Recipe Scaler (Tab 2)
         recipeSelectorPills: document.getElementById('recipe-selector-pills'),
         displayRecipeTitle: document.getElementById('display-recipe-title'),
         displayRecipeDesc: document.getElementById('display-recipe-desc'),
@@ -98,17 +103,20 @@
         recipeTableBody: document.getElementById('recipe-table-body'),
         recipeStepsList: document.getElementById('recipe-steps-list'),
 
-        // Methods View
+        // OG Book Recipes Archive (Tab 3)
+        ogBookFilters: document.getElementById('og-book-filters'),
+        ogRecipePills: document.getElementById('og-recipe-pills'),
+        ogBookBadge: document.getElementById('og-book-badge'),
+        ogRecipeTitle: document.getElementById('og-recipe-title'),
+        ogRecipeMeta: document.getElementById('og-recipe-meta'),
+        ogAuthorNotes: document.getElementById('og-author-notes'),
+        ogRecipeTableBody: document.getElementById('og-recipe-table-body'),
+        ogRecipeStepsList: document.getElementById('og-recipe-steps-list'),
+        btnStartOgBakingMode: document.getElementById('btn-start-og-baking-mode'),
+
+        // Methods / Knowledge Base View (Tab 4)
         kbChips: document.querySelectorAll('.kb-chip'),
         kbContent: document.getElementById('kb-markdown-content'),
-
-        // Coulage View
-        coulageTd: document.getElementById('coulage-td'),
-        coulageTr: document.getElementById('coulage-tr'),
-        coulageTf: document.getElementById('coulage-tf'),
-        coulageFriction: document.getElementById('coulage-friction'),
-        coulageWaterResult: document.getElementById('coulage-water-result'),
-        coulageAdvice: document.getElementById('coulage-advice'),
 
         // Settings Modal
         settingsModal: document.getElementById('settings-modal'),
@@ -195,10 +203,12 @@
         // Apply Format Mode
         setFormatMode(currentFormatMode, false);
 
-        // Initial Calculations
+        // Initial Calculations & OG View
         updateHydrationUI();
         renderKBContent('10_SOURDOUGH_BOULE_AND_BATARD_MASTERY.md');
-        calculateCoulage();
+        renderOgBookFilters();
+        renderOgRecipePills();
+        renderOgRecipeView();
         bindEvents();
     }
 
@@ -213,7 +223,7 @@
         const recipeList = (mode === 'baguette') ? RECIPES_BAGUETTE : RECIPES_BOULE;
 
         if (mode === 'baguette') {
-            DOM.telemetryFormat.textContent = 'BAGUETTE (COUCHE & LAME)';
+            DOM.telemetryFormat.textContent = 'Baguette (Couche)';
             DOM.recipeFormatTitle.textContent = 'Artisanal Baguettes';
             DOM.recipeFormatSubtitle.textContent = 'Curated master formulas from 9 texts scaled to exact grams with interactive hydration';
             DOM.labelUnitCount.textContent = 'BAGUETTE COUNT:';
@@ -221,8 +231,9 @@
             currentFlourBasis = 500;
             currentRecipeId = recipeList[0]?.id || 'modernist_a_plus';
             currentHydration = recipeList[0]?.base_hydration || 70.5;
+            currentOgRecipeId = 'og_modernist_a_plus';
         } else {
-            DOM.telemetryFormat.textContent = 'SOURDOUGH BOULE (BANNETON & DUTCH OVEN)';
+            DOM.telemetryFormat.textContent = 'Sourdough Boule (Dutch Oven)';
             DOM.recipeFormatTitle.textContent = 'Sourdough Hearth Loaves (Boules & Bâtards)';
             DOM.recipeFormatSubtitle.textContent = 'Authoritative hearth formulas from Tartine, The Perfect Loaf, FWSY, and Modernist Bread';
             DOM.labelUnitCount.textContent = 'BOULE / BÂTARD COUNT:';
@@ -230,6 +241,7 @@
             currentFlourBasis = 450;
             currentRecipeId = recipeList[0]?.id || 'tartine_country';
             currentHydration = recipeList[0]?.base_hydration || 75.0;
+            currentOgRecipeId = 'og_tartine_country';
         }
 
         DOM.sliderHydration.value = currentHydration;
@@ -238,6 +250,8 @@
 
         renderQuickChips();
         renderRecipeTabs();
+        renderOgRecipePills();
+        renderOgRecipeView();
 
         if (triggerRender) {
             updateHydrationUI();
@@ -262,7 +276,7 @@
         });
     }
 
-    // Render Recipe Tab Pills (Comprehensive Reference Library)
+    // Render Recipe Tab Pills for Interactive Scaler (Tab 2)
     function renderRecipeTabs() {
         DOM.recipeSelectorPills.innerHTML = '';
         const recipes = (currentFormatMode === 'baguette') ? RECIPES_BAGUETTE : RECIPES_BOULE;
@@ -274,7 +288,6 @@
             btn.className = `recipe-pill-btn ${isActive ? 'active' : ''}`;
             btn.dataset.recipe = r.id;
             
-            // Clean title format
             const cleanTitle = r.title.replace(/^(Modernist Bread|Jean-Marie Lanio|Chad Robertson|Maurizio Leo|Ken Forkish|King Arthur|Apollonia Poilâne|Teresa Greenway):\s*/i, '');
             btn.innerHTML = `<strong>${cleanTitle}</strong> <small style="opacity: 0.8; font-size: 10px; margin-left: 4px;">(${r.author?.split('&')[0]?.split(' ')[0] || ''})</small>`;
 
@@ -283,7 +296,6 @@
                 btn.classList.add('active');
                 currentRecipeId = r.id;
                 
-                // Adjust hydration slider to author's authentic formula
                 if (r.base_hydration) {
                     currentHydration = r.base_hydration;
                     DOM.sliderHydration.value = currentHydration;
@@ -461,15 +473,21 @@
             });
         });
 
-        // Coulage View
-        [DOM.coulageTd, DOM.coulageTr, DOM.coulageTf, DOM.coulageFriction].forEach(el => {
-            el.addEventListener('input', calculateCoulage);
-        });
-
         // ======================================================================
         // BAKING MODE EVENT BINDINGS
         // ======================================================================
-        DOM.btnStartBakingMode?.addEventListener('click', startBakingMode);
+        DOM.btnStartBakingMode?.addEventListener('click', () => {
+            const recipeList = (currentFormatMode === 'baguette') ? RECIPES_BAGUETTE : RECIPES_BOULE;
+            const r = recipeList.find(x => x.id === currentRecipeId) || recipeList[0];
+            startBakingMode(r);
+        });
+
+        DOM.btnStartOgBakingMode?.addEventListener('click', () => {
+            if (typeof OG_RECIPES === 'undefined') return;
+            const ogR = OG_RECIPES.find(x => x.id === currentOgRecipeId) || OG_RECIPES[0];
+            startBakingMode(ogR);
+        });
+
         DOM.bmCloseBtn?.addEventListener('click', exitBakingMode);
         DOM.bmSoundToggle?.addEventListener('click', toggleBakingSound);
         DOM.bmBtnToggleTimer?.addEventListener('click', toggleTimer);
@@ -488,7 +506,6 @@
 
         if (!activeFlour) return;
 
-        // Rheology Safe Limits Evaluation
         const rec = activeFlour.rec_hydration;
         const maxSafe = activeFlour.max_safe_hydration;
         const badge = DOM.hydrZoneBadge;
@@ -506,7 +523,7 @@
             badge.className = "zone-badge zone-warning";
             badge.style.color = "#fb923c";
         } else {
-            badge.textContent = "CRITICAL HYDRATION WARNING (Exceeds Native Protein Capacity - Risk of Puddle/Flat Loaf)";
+            badge.textContent = "CRITICAL HYDRATION WARNING (Exceeds Native Protein Capacity - Risk of Flat Loaf)";
             badge.className = "zone-badge zone-warning";
             badge.style.color = "#f87171";
         }
@@ -667,7 +684,6 @@
         DOM.loaderText.textContent = `Consulting Bread Guru (${selectedModel.toUpperCase()})...`;
 
         try {
-            // Build Context grounded in our 11 extracted modules
             let systemContext = `YOU ARE BREAD GURU, an elite master baker specializing in artisanal French baguettes and sourdough hearth loaves (boules & bâtards).
 You have deep mastery over the 9 foundational texts in your knowledge base: Modernist Bread (Myhrvold/Migoya), All About Baguette (Jean-Marie Lanio), Tartine Bread (Chad Robertson), The Perfect Loaf (Maurizio Leo), Flour Water Salt Yeast (Ken Forkish), Secrets of Open Crumb (Addie Roberts), Poilâne (Apollonia Poilâne), King Arthur Big Book of Bread, and Discovering Sourdough (Teresa Greenway).
 
@@ -731,7 +747,7 @@ DIAGNOSTIC INSTRUCTIONS:
     }
 
     // ==========================================================================
-    // RECIPES & KITCHEN SCALE RENDERER (Dynamic Calculation Engine)
+    // TAB 2: INTERACTIVE RECIPES & KITCHEN SCALE RENDERER
     // ==========================================================================
     function renderRecipesTable() {
         const recipeList = (currentFormatMode === 'baguette') ? RECIPES_BAGUETTE : RECIPES_BOULE;
@@ -740,14 +756,12 @@ DIAGNOSTIC INSTRUCTIONS:
         const recipe = recipeList.find(r => r.id === currentRecipeId) || recipeList[0];
         currentRecipeId = recipe.id;
 
-        // Update active recipe banner
         DOM.displayRecipeTitle.textContent = recipe.title;
         DOM.displayRecipeDesc.textContent = `${recipe.subtitle} [${recipe.book || recipe.author || ''}]`;
 
         const flourBasis = currentFlourBasis;
         const targetHydr = currentHydration;
 
-        // Base water capped at 64% (or 66% for boules). Excess water is bassinage.
         const baseThreshold = (currentFormatMode === 'boule') ? 66.0 : 64.0;
         const baseWaterPct = Math.min(targetHydr, baseThreshold);
         const bassinageWaterPct = Math.max(0, targetHydr - baseWaterPct);
@@ -760,7 +774,6 @@ DIAGNOSTIC INSTRUCTIONS:
         let totalDoughWeight = 0;
 
         if (recipe.ingredients && recipe.ingredients.length > 0) {
-            // Calculate preferment water to deduct from base water
             let prefermentWaterPct = 0;
             recipe.ingredients.forEach(ing => {
                 if (ing.water_pct) prefermentWaterPct += ing.water_pct;
@@ -770,7 +783,6 @@ DIAGNOSTIC INSTRUCTIONS:
 
             formulaRows = recipe.ingredients.map(ing => {
                 let grams = 0;
-                let displayPct = ing.pct;
                 let note = ing.note || '';
 
                 if (ing.type === 'flour_main') {
@@ -787,7 +799,7 @@ DIAGNOSTIC INSTRUCTIONS:
                         item: 'Base Water (Autolyse / Mix)',
                         grams: grams,
                         pct: netBaseWaterPct.toFixed(1),
-                        note: 'At Coulage temperature. Deducts pre-ferment moisture.'
+                        note: 'At room / ambient temp. Deducts pre-ferment water.'
                     };
                 } else if (ing.type === 'water_bassinage') {
                     grams = Math.round(flourBasis * (bassinageWaterPct / 100));
@@ -809,11 +821,9 @@ DIAGNOSTIC INSTRUCTIONS:
             totalDoughWeight = formulaRows.reduce((sum, row) => sum + parseFloat(row.grams), 0);
         }
 
-        // Portion estimate
         const estWeight = Math.round(totalDoughWeight / Math.max(1, currentLoavesCount));
         DOM.displayPortionEstimate.textContent = `(~${estWeight}g each raw dough)`;
 
-        // Render Table Rows (EXACT GRAMS IN BOLD HIGHLIGHT)
         formulaRows.forEach(row => {
             const tr = document.createElement('tr');
             tr.innerHTML = `
@@ -825,7 +835,6 @@ DIAGNOSTIC INSTRUCTIONS:
             DOM.recipeTableBody.appendChild(tr);
         });
 
-        // Render Method Steps
         DOM.recipeStepsList.innerHTML = '';
         if (recipe.steps && recipe.steps.length > 0) {
             recipe.steps.forEach((step, idx) => {
@@ -845,17 +854,127 @@ DIAGNOSTIC INSTRUCTIONS:
     }
 
     // ==========================================================================
+    // TAB 3: OG BOOK RECIPES (ORIGINAL LITERATURE ARCHIVE)
+    // ==========================================================================
+    const OG_BOOK_LIST = [
+        { id: 'all', label: 'All Literature (25)' },
+        { id: 'modernist', label: 'Modernist Bread' },
+        { id: 'tartine', label: 'Tartine Bread' },
+        { id: 'lanio', label: 'All About Baguette (Lanio)' },
+        { id: 'perfect_loaf', label: 'The Perfect Loaf (Leo)' },
+        { id: 'forkish', label: 'FWSY (Ken Forkish)' },
+        { id: 'poilane', label: 'Poilâne' },
+        { id: 'king_arthur', label: 'King Arthur' },
+        { id: 'greenway', label: 'Discovering Sourdough' }
+    ];
+
+    function renderOgBookFilters() {
+        if (!DOM.ogBookFilters) return;
+        DOM.ogBookFilters.innerHTML = '';
+
+        OG_BOOK_LIST.forEach(b => {
+            const btn = document.createElement('button');
+            btn.className = `kb-chip ${b.id === currentOgBookFilter ? 'active' : ''}`;
+            btn.textContent = b.label;
+            btn.addEventListener('click', () => {
+                DOM.ogBookFilters.querySelectorAll('.kb-chip').forEach(c => c.classList.remove('active'));
+                btn.classList.add('active');
+                currentOgBookFilter = b.id;
+                renderOgRecipePills();
+                renderOgRecipeView();
+            });
+            DOM.ogBookFilters.appendChild(btn);
+        });
+    }
+
+    function renderOgRecipePills() {
+        if (!DOM.ogRecipePills || typeof OG_RECIPES === 'undefined') return;
+        DOM.ogRecipePills.innerHTML = '';
+
+        // Filter by book filter AND active format mode (baguette vs boule)
+        let filtered = OG_RECIPES.filter(r => r.format === currentFormatMode);
+        if (currentOgBookFilter !== 'all') {
+            filtered = filtered.filter(r => r.book_id === currentOgBookFilter);
+        }
+
+        if (filtered.length === 0) {
+            DOM.ogRecipePills.innerHTML = '<span style="font-size: 13px; color: var(--text-muted); padding: 6px 0;">No recipes in this format from this book. Switch book filter or bake format above.</span>';
+            return;
+        }
+
+        // Ensure active recipe is valid
+        if (!filtered.some(r => r.id === currentOgRecipeId)) {
+            currentOgRecipeId = filtered[0].id;
+        }
+
+        filtered.forEach(r => {
+            const btn = document.createElement('button');
+            const isActive = (r.id === currentOgRecipeId);
+            btn.className = `recipe-pill-btn ${isActive ? 'active' : ''}`;
+            btn.innerHTML = `<strong>${r.title}</strong> <small style="opacity: 0.8; font-size: 10px; margin-left: 4px;">(${r.book})</small>`;
+            btn.addEventListener('click', () => {
+                DOM.ogRecipePills.querySelectorAll('.recipe-pill-btn').forEach(p => p.classList.remove('active'));
+                btn.classList.add('active');
+                currentOgRecipeId = r.id;
+                renderOgRecipeView();
+            });
+            DOM.ogRecipePills.appendChild(btn);
+        });
+    }
+
+    function renderOgRecipeView() {
+        if (typeof OG_RECIPES === 'undefined') return;
+        const recipe = OG_RECIPES.find(r => r.id === currentOgRecipeId) || OG_RECIPES[0];
+        if (!recipe) return;
+
+        DOM.ogBookBadge.textContent = recipe.book;
+        DOM.ogRecipeTitle.textContent = recipe.title;
+        DOM.ogRecipeMeta.textContent = `${recipe.author} • ${recipe.citation}`;
+        DOM.ogAuthorNotes.innerHTML = recipe.author_notes || 'Authentic unadulterated formula directly transcribed from original source literature.';
+
+        // Formula Table
+        DOM.ogRecipeTableBody.innerHTML = '';
+        if (recipe.ingredients && recipe.ingredients.length > 0) {
+            recipe.ingredients.forEach(ing => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><strong>${ing.name}</strong></td>
+                    <td class="col-grams">${ing.weight}</td>
+                    <td class="col-pct">${ing.pct}%</td>
+                    <td><small>${ing.note || ''}</small></td>
+                `;
+                DOM.ogRecipeTableBody.appendChild(tr);
+            });
+        }
+
+        // Method Steps
+        DOM.ogRecipeStepsList.innerHTML = '';
+        if (recipe.steps && recipe.steps.length > 0) {
+            recipe.steps.forEach((step, idx) => {
+                const card = document.createElement('div');
+                card.className = 'phase-step-item';
+                card.innerHTML = `
+                    <div class="phase-step-header">
+                        <span class="phase-step-name">Phase ${idx + 1}: ${step.title}</span>
+                        <span class="phase-step-time">${step.time || ''}</span>
+                    </div>
+                    <p class="phase-step-desc">${step.text}</p>
+                    ${step.cues ? `<div class="flour-advice-callout" style="margin-top: 8px; padding: 6px 10px;"><strong>SENSORY CUE:</strong> ${step.cues}</div>` : ''}
+                `;
+                DOM.ogRecipeStepsList.appendChild(card);
+            });
+        }
+    }
+
+    // ==========================================================================
     // IMMERSIVE GUIDED BAKING MODE ENGINE (With Precision Alarms & Synthesizer)
     // ==========================================================================
-    function startBakingMode() {
-        const recipeList = (currentFormatMode === 'baguette') ? RECIPES_BAGUETTE : RECIPES_BOULE;
-        const recipe = recipeList.find(r => r.id === currentRecipeId) || recipeList[0];
+    function startBakingMode(recipe) {
         if (!recipe || !recipe.steps || recipe.steps.length === 0) {
             alert('Please select a recipe with method steps to begin Baking Mode.');
             return;
         }
 
-        // Request browser notifications if supported
         if ('Notification' in window && Notification.permission === 'default') {
             Notification.requestPermission().catch(() => {});
         }
@@ -864,7 +983,7 @@ DIAGNOSTIC INSTRUCTIONS:
         bakingState.stepIndex = 0;
 
         DOM.bmRecipeName.textContent = recipe.title;
-        DOM.bmRecipeSpecs.textContent = `Scaled: ${currentFlourBasis}g Flour • Target Hydr: ${currentHydration.toFixed(1)}% • Yield: ${currentLoavesCount} ${recipe.unit_name || 'Loaves'}`;
+        DOM.bmRecipeSpecs.textContent = `${recipe.book || ''} • ${recipe.author || ''} • Target Hydr: ${recipe.base_hydration || 70}%`;
 
         DOM.bakingModeOverlay.classList.remove('hidden');
         document.body.style.overflow = 'hidden';
@@ -895,11 +1014,9 @@ DIAGNOSTIC INSTRUCTIONS:
         bakingState.stepIndex = idx;
         const step = steps[idx];
 
-        // Update progress bar
         const progressPct = Math.round(((idx + 1) / steps.length) * 100);
         DOM.bmProgressFill.style.width = `${progressPct}%`;
 
-        // Render Step Pills in Drawer
         DOM.bmStepPills.innerHTML = '';
         steps.forEach((s, sIdx) => {
             const btn = document.createElement('button');
@@ -909,19 +1026,16 @@ DIAGNOSTIC INSTRUCTIONS:
             DOM.bmStepPills.appendChild(btn);
         });
 
-        // Update Step Card
         DOM.bmStepBadge.textContent = step.phase ? `PHASE: ${step.phase.toUpperCase()}` : `STEP ${idx + 1}`;
         DOM.bmStepCounter.textContent = `Step ${idx + 1} of ${steps.length}`;
         DOM.bmStepTitle.textContent = step.title;
         DOM.bmStepInstructions.textContent = step.text;
         DOM.bmStepCues.textContent = step.cues || 'Follow tactile cues and dough temperature specifications.';
 
-        // Update Buttons
         DOM.bmBtnPrev.disabled = (idx === 0);
         DOM.bmBtnComplete.textContent = (idx === steps.length - 1) ? 'Finish Bake 🎉' : 'Complete & Next Step ▶';
 
-        // Set Step Timer
-        bakingState.timerTotalSeconds = step.timer_seconds || 1200; // default 20m
+        bakingState.timerTotalSeconds = step.timer_seconds || 1200;
         bakingState.timerRemainingSeconds = bakingState.timerTotalSeconds;
         updateTimerDisplay();
         DOM.bmTimerStatus.textContent = `Timer Ready (${step.time || formatMinutes(bakingState.timerTotalSeconds)}) • Alarm Active`;
@@ -1028,7 +1142,7 @@ DIAGNOSTIC INSTRUCTIONS:
             const AudioCtx = window.AudioContext || window.webkitAudioContext;
             if (!AudioCtx) return;
             const ctx = new AudioCtx();
-            const notes = [587.33, 880.00, 1174.66, 1760.00]; // D5, A5, D6, A6 luxury arpeggio
+            const notes = [587.33, 880.00, 1174.66, 1760.00];
             notes.forEach((freq, i) => {
                 const osc = ctx.createOscillator();
                 const gain = ctx.createGain();
@@ -1052,17 +1166,14 @@ DIAGNOSTIC INSTRUCTIONS:
         DOM.bmAlarmDesc.textContent = `Phase "${step.title}" is complete. ${step.cues || 'Proceed to the next baking step.'}`;
         DOM.bmAlarmModal.classList.remove('hidden');
 
-        // Play initial chime and loop every 2.5s
         playAlarmChime();
         if (bakingState.alarmInterval) clearInterval(bakingState.alarmInterval);
         bakingState.alarmInterval = setInterval(playAlarmChime, 2500);
 
-        // Device vibration
         if ('vibrate' in navigator) {
             try { navigator.vibrate([300, 150, 300, 150, 500]); } catch (e) {}
         }
 
-        // System notification
         if ('Notification' in window && Notification.permission === 'granted') {
             try {
                 new Notification('Bread Guru — Step Complete!', {
@@ -1087,7 +1198,7 @@ DIAGNOSTIC INSTRUCTIONS:
     }
 
     // ==========================================================================
-    // KNOWLEDGE BASE & COULAGE
+    // KNOWLEDGE BASE VIEWER
     // ==========================================================================
     function renderKBContent(docName) {
         if (typeof BAGUETTE_KB === 'undefined' || !BAGUETTE_KB[docName]) {
@@ -1095,28 +1206,6 @@ DIAGNOSTIC INSTRUCTIONS:
             return;
         }
         DOM.kbContent.innerHTML = parseSimpleMarkdown(BAGUETTE_KB[docName]);
-    }
-
-    function calculateCoulage() {
-        const Td = parseFloat(DOM.coulageTd.value) || 24;
-        const Tr = parseFloat(DOM.coulageTr.value) || 22;
-        const Tf = parseFloat(DOM.coulageTf.value) || 21;
-        const Tfr = parseFloat(DOM.coulageFriction.value) || 4;
-
-        const Tw = (3 * Td) - (Tr + Tf + Tfr);
-        DOM.coulageWaterResult.textContent = `${Tw.toFixed(1)}°C`;
-
-        let advice = "";
-        if (Tw < 12) {
-            advice = "CAUTION: Required water is very cold! Use ice water or chilled water from refrigerator to avoid overheating the dough.";
-        } else if (Tw <= 22) {
-            advice = "Use cool tap water. Dough will maintain steady fermentation kinetics without early acid accumulation.";
-        } else if (Tw <= 28) {
-            advice = "Use tepid water. Ideal for autumn/winter ambient conditions to hit the 24°C target dough temperature.";
-        } else {
-            advice = "Room or flour is quite cold! Use warm water (30°C–35°C) to give the yeast and enzymes adequate thermal energy.";
-        }
-        DOM.coulageAdvice.textContent = advice;
     }
 
     // Lightweight Markdown Parser
