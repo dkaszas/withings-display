@@ -1,11 +1,12 @@
-// BAGUETTE GURU LCARS — Core Application Engine
-// Integrates multimodal Gemini API with deep-context Baguette Knowledge Base,
-// dynamic flour profiler (protein %, ash, bio status), and interactive hydration engine.
+// BREAD GURU LCARS — Core Application Engine
+// Dual Mode: Artisanal Baguettes & Sourdough Boules / Bâtards
+// Dynamic Flour Profiler, Interactive Hydration Slider, and Exact Gram Calculations
 
 (function() {
     'use strict';
 
     // Application State
+    let currentFormatMode = 'baguette'; // 'baguette' | 'boule'
     let currentBase64Images = [];
     let selectedModel = 'gemini-2.5-flash';
     let currentRecipeId = 'sourdough';
@@ -16,6 +17,13 @@
 
     // DOM References
     const DOM = {
+        // Format Switcher
+        btnFormatBaguette: document.getElementById('btn-format-baguette'),
+        btnFormatBoule: document.getElementById('btn-format-boule'),
+        telemetryFormat: document.getElementById('telemetry-format'),
+        recipeFormatTitle: document.getElementById('recipe-format-title'),
+        recipeFormatSubtitle: document.getElementById('recipe-format-subtitle'),
+
         // Nav Pills
         navDiagnose: document.getElementById('nav-diagnose'),
         navRecipes: document.getElementById('nav-recipes'),
@@ -54,7 +62,7 @@
         diagnosticPanel: document.getElementById('diagnostic-panel'),
         diagnosticContent: document.getElementById('diagnostic-content'),
         btnClearResult: document.getElementById('btn-clear-result'),
-        quickChips: document.querySelectorAll('.chip-btn'),
+        quickChipsContainer: document.getElementById('quick-chips-container'),
 
         // Flour Profiler (Recipe View)
         recipeFlourSelector: document.getElementById('recipe-flour-selector'),
@@ -68,10 +76,12 @@
         hydrZoneBadge: document.getElementById('hydr-zone-badge'),
 
         // Recipe Scaler
-        recipeTabs: document.querySelectorAll('.recipe-tab'),
+        recipeSelectorPills: document.getElementById('recipe-selector-pills'),
+        labelUnitCount: document.getElementById('label-unit-count'),
         btnDecLoaves: document.getElementById('btn-dec-loaves'),
         btnIncLoaves: document.getElementById('btn-inc-loaves'),
         displayLoaves: document.getElementById('display-loaves'),
+        displayPortionEstimate: document.getElementById('display-portion-estimate'),
         inputFlourBasis: document.getElementById('input-flour-basis'),
         displayTotalWater: document.getElementById('display-total-water'),
         recipeTableBody: document.getElementById('recipe-table-body'),
@@ -103,11 +113,32 @@
         loaderText: document.getElementById('loader-text')
     };
 
+    // Quick Chip Templates for Baguette vs Boule
+    const QUICK_CHIPS_DATA = {
+        baguette: [
+            { label: '🔍 CRUMB DIAGNOSIS', prompt: 'Analyze this baguette crumb structure. Diagnose alveoli distribution, gelatinization, and whether it shows under-fermentation, over-fermentation, or shaping flaws. Correlate with my current flour protein and hydration.' },
+            { label: '⏱️ BULK PROOF CHECK', prompt: 'Evaluate this dough during bulk fermentation. Are the bubbles, doming, and surface tension at the right expansion point for shaping into baguettes?' },
+            { label: '🔪 BAGUETTE SCORING (5 CUTS)', prompt: 'Diagnose the scoring angle, blade depth, and overlap on this baguette. Why did the ear (grigne) open or fail to open along the central longitudinal axis?' },
+            { label: '💧 HYDRATION & BASSINAGE', prompt: 'Analyze my hydration and bassinage calculation for this flour in a baguette format. Am I pushing past its safe absorption limit without chemical oxidizers?' },
+            { label: '🔥 CRUST & STEAM VENTING', prompt: 'Diagnose my baguette crust: blisters, color, thickness, and crunch. How should I adjust my oven steam setup (lava rocks/ice) and the 10-minute steam venting timing?' }
+        ],
+        boule: [
+            { label: '🔍 CRUMB & ALVEOLI (BOULE)', prompt: 'Analyze this sourdough boule / bâtard crumb. Evaluate openness, cell wall translucency, honeycombing, and check for signs of dense gummy streaks or fool\'s holes.' },
+            { label: '🧺 BANNETON PROOF & POKE TEST', prompt: 'Evaluate my sourdough loaf in the banneton basket. Is it ready to bake or should I extend the cold retardation? How does the finger poke test rebound feel?' },
+            { label: '🔪 EAR & CRESCENT SCORE (30°)', prompt: 'Evaluate the scoring cut on this boule/bâtard. Did the razor angle (target 30°) and depth (10mm) produce a prominent jagged ear (grigne) and belly burst?' },
+            { label: '🍲 DUTCH OVEN STEAM & CRUST', prompt: 'Diagnose the blistering and crust caramelization on this sourdough boule. How can I optimize the lid-on steam phase (20 min) vs lid-off browning phase (25 min)?' },
+            { label: '🥐 SHAPING & STITCH TENSION', prompt: 'Evaluate the surface tension and shape of my boule / bâtard. Did the envelope folding and stitching technique build adequate lateral support?' }
+        ]
+    };
+
     // Initialize App
     function init() {
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('./sw.js').catch(err => console.log('SW error:', err));
         }
+
+        // Restore Format Mode
+        currentFormatMode = localStorage.getItem('baguette_format_mode') || 'baguette';
 
         // Initialize Flour Profiles
         initFlourProfiles();
@@ -124,19 +155,96 @@
             setTimeout(() => DOM.settingsModal.classList.remove('hidden'), 500);
         }
 
+        // Apply Format Mode
+        setFormatMode(currentFormatMode, false);
+
         // Initial Calculations
         updateHydrationUI();
-        renderRecipesTable();
-        renderKBContent('09_FLOUR_PROTEIN_AND_HYDRATION_MATRIX.md');
+        renderKBContent('10_SOURDOUGH_BOULE_AND_BATARD_MASTERY.md');
         calculateCoulage();
         bindEvents();
+    }
+
+    // Set Format Mode (Baguette vs Boule)
+    function setFormatMode(mode, triggerRender = true) {
+        currentFormatMode = mode;
+        localStorage.setItem('baguette_format_mode', mode);
+
+        DOM.btnFormatBaguette.classList.toggle('active', mode === 'baguette');
+        DOM.btnFormatBoule.classList.toggle('active', mode === 'boule');
+
+        if (mode === 'baguette') {
+            DOM.telemetryFormat.textContent = 'BAGUETTE (COUCHE & LAME)';
+            DOM.recipeFormatTitle.textContent = 'ARTISANAL BAGUETTES (COUCHE & LAME)';
+            DOM.recipeFormatSubtitle.textContent = 'SCALED TO EXACT GRAMS WITH INTERACTIVE HYDRATION SLIDER';
+            DOM.labelUnitCount.textContent = 'BAGUETTE COUNT:';
+            currentLoavesCount = 3;
+            currentFlourBasis = 500;
+            currentRecipeId = 'sourdough';
+        } else {
+            DOM.telemetryFormat.textContent = 'SOURDOUGH BOULE (BANNETON & DUTCH OVEN)';
+            DOM.recipeFormatTitle.textContent = 'SOURDOUGH HEARTH LOAVES (BANNETON & DUTCH OVEN)';
+            DOM.recipeFormatSubtitle.textContent = 'SCALED TO EXACT GRAMS FOR CAST IRON DUTCH OVEN BAKING';
+            DOM.labelUnitCount.textContent = 'BOULE / BÂTARD COUNT:';
+            currentLoavesCount = 1;
+            currentFlourBasis = 450;
+            currentRecipeId = 'tartine_country';
+        }
+
+        DOM.displayLoaves.textContent = currentLoavesCount;
+        DOM.inputFlourBasis.value = currentFlourBasis;
+
+        renderQuickChips();
+        renderRecipeTabs();
+
+        if (triggerRender) {
+            updateHydrationUI();
+            renderRecipesTable();
+        }
+    }
+
+    // Render Quick Prompt Chips
+    function renderQuickChips() {
+        DOM.quickChipsContainer.innerHTML = '';
+        const chips = QUICK_CHIPS_DATA[currentFormatMode] || QUICK_CHIPS_DATA.baguette;
+        chips.forEach(c => {
+            const btn = document.createElement('button');
+            btn.className = 'chip-btn';
+            btn.textContent = c.label;
+            btn.dataset.prompt = c.prompt;
+            btn.addEventListener('click', () => {
+                DOM.contextInput.value = c.prompt;
+                DOM.contextInput.focus();
+            });
+            DOM.quickChipsContainer.appendChild(btn);
+        });
+    }
+
+    // Render Recipe Tab Pills (Baguette vs Boule)
+    function renderRecipeTabs() {
+        DOM.recipeSelectorPills.innerHTML = '';
+        const recipes = (currentFormatMode === 'baguette') ? RECIPES_BAGUETTE : RECIPES_BOULE;
+        if (!recipes) return;
+
+        recipes.forEach(r => {
+            const btn = document.createElement('button');
+            btn.className = `recipe-tab ${r.id === currentRecipeId ? 'active' : ''}`;
+            btn.dataset.recipe = r.id;
+            btn.textContent = r.title.split('(')[0].trim();
+            btn.addEventListener('click', () => {
+                DOM.recipeSelectorPills.querySelectorAll('.recipe-tab').forEach(t => t.classList.remove('active'));
+                btn.classList.add('active');
+                currentRecipeId = r.id;
+                renderRecipesTable();
+            });
+            DOM.recipeSelectorPills.appendChild(btn);
+        });
     }
 
     // Flour Profiles Initialization
     function initFlourProfiles() {
         if (typeof FLOUR_PROFILES === 'undefined') return;
 
-        // Populate both header and recipe flour dropdowns
         [DOM.headerFlourSelector, DOM.recipeFlourSelector].forEach(select => {
             select.innerHTML = '';
             FLOUR_PROFILES.forEach(fp => {
@@ -147,7 +255,6 @@
             });
         });
 
-        // Set default active flour (T65 Bio or saved)
         const savedFlourId = localStorage.getItem('baguette_active_flour') || 't65_bio';
         setFlourProfile(savedFlourId, false);
     }
@@ -166,7 +273,7 @@
         localStorage.setItem('baguette_active_flour', flourId);
 
         if (syncSliders) {
-            currentHydration = activeFlour.rec_hydration;
+            currentHydration = (currentFormatMode === 'boule') ? Math.min(activeFlour.max_safe_hydration + 2, 76.0) : activeFlour.rec_hydration;
             DOM.sliderHydration.value = currentHydration;
         }
 
@@ -191,6 +298,10 @@
 
     // Bind UI Events
     function bindEvents() {
+        // Format Switcher
+        DOM.btnFormatBaguette.addEventListener('click', () => setFormatMode('baguette', true));
+        DOM.btnFormatBoule.addEventListener('click', () => setFormatMode('boule', true));
+
         // Nav header clicks
         DOM.navPills.forEach(pill => {
             pill.addEventListener('click', () => switchTab(pill.dataset.tab));
@@ -205,7 +316,6 @@
             if (p && p >= 8.0 && p <= 18.0) {
                 activeFlour.protein = p;
                 DOM.telemetryProtein.textContent = `${p.toFixed(1)}%`;
-                // Adjust max safe hydration dynamically based on protein
                 activeFlour.max_safe_hydration = parseFloat((p * 2.2 + 48.0).toFixed(1));
                 updateHydrationUI();
                 renderRecipesTable();
@@ -215,7 +325,7 @@
         DOM.selectBio.addEventListener('change', (e) => {
             activeFlour.is_bio = (e.target.value === 'true');
             if (activeFlour.is_bio) {
-                activeFlour.max_safe_hydration = Math.min(activeFlour.max_safe_hydration, 74.0);
+                activeFlour.max_safe_hydration = Math.min(activeFlour.max_safe_hydration, 75.0);
             }
             updateHydrationUI();
             renderRecipesTable();
@@ -266,32 +376,16 @@
         DOM.galleryInput.addEventListener('change', (e) => handleImageFiles(e.target.files));
         DOM.cameraInput.addEventListener('change', (e) => handleImageFiles(e.target.files));
 
-        // Quick prompt chips
-        DOM.quickChips.forEach(chip => {
-            chip.addEventListener('click', () => {
-                DOM.contextInput.value = chip.dataset.prompt;
-                DOM.contextInput.focus();
-            });
-        });
-
         // Analyze button
         DOM.btnAnalyze.addEventListener('click', analyzePhotos);
         DOM.btnClearResult.addEventListener('click', () => DOM.diagnosticPanel.classList.add('hidden'));
 
-        // Recipe View
-        DOM.recipeTabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                DOM.recipeTabs.forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
-                currentRecipeId = tab.dataset.recipe;
-                renderRecipesTable();
-            });
-        });
-
+        // Stepper Controls
         DOM.btnDecLoaves.addEventListener('click', () => {
             if (currentLoavesCount > 1) {
                 currentLoavesCount--;
-                currentFlourBasis = Math.round(currentLoavesCount * (500 / 3));
+                const flourPerUnit = (currentFormatMode === 'baguette') ? (500 / 3) : 450;
+                currentFlourBasis = Math.round(currentLoavesCount * flourPerUnit);
                 DOM.displayLoaves.textContent = currentLoavesCount;
                 DOM.inputFlourBasis.value = currentFlourBasis;
                 renderRecipesTable();
@@ -300,7 +394,8 @@
 
         DOM.btnIncLoaves.addEventListener('click', () => {
             currentLoavesCount++;
-            currentFlourBasis = Math.round(currentLoavesCount * (500 / 3));
+            const flourPerUnit = (currentFormatMode === 'baguette') ? (500 / 3) : 450;
+            currentFlourBasis = Math.round(currentLoavesCount * flourPerUnit);
             DOM.displayLoaves.textContent = currentLoavesCount;
             DOM.inputFlourBasis.value = currentFlourBasis;
             renderRecipesTable();
@@ -310,7 +405,8 @@
             const val = parseInt(e.target.value, 10);
             if (val && val >= 100) {
                 currentFlourBasis = val;
-                currentLoavesCount = Math.max(1, Math.round(val / (500 / 3)));
+                const flourPerUnit = (currentFormatMode === 'baguette') ? (500 / 3) : 450;
+                currentLoavesCount = Math.max(1, Math.round(val / flourPerUnit));
                 DOM.displayLoaves.textContent = currentLoavesCount;
                 renderRecipesTable();
             }
@@ -338,18 +434,19 @@
 
         if (!activeFlour) return;
 
-        const maxSafe = activeFlour.max_safe_hydration;
+        // Boules in a banneton tolerate ~2% higher hydration than free-standing baguettes
+        const maxSafe = (currentFormatMode === 'boule') ? (activeFlour.max_safe_hydration + 2.5) : activeFlour.max_safe_hydration;
         const minSafe = activeFlour.min_safe_hydration;
 
         if (currentHydration > maxSafe) {
             DOM.hydrZoneBadge.className = 'badge-danger';
-            DOM.hydrZoneBadge.textContent = `⚠️ DANGER: PUDDLE RISK! Exceeds ${activeFlour.name} limit (${maxSafe}%). High risk of flattening & lost ears without oxidizers.`;
+            DOM.hydrZoneBadge.textContent = `⚠️ DANGER: PUDDLE RISK! Exceeds safe limit for ${activeFlour.name} (${maxSafe.toFixed(1)}%). Risk of slumping & lost ear.`;
         } else if (currentHydration < minSafe) {
             DOM.hydrZoneBadge.className = 'badge-warning';
-            DOM.hydrZoneBadge.textContent = `🟡 TIGHT / DRY ZONE (< ${minSafe}%). Crumb will be denser; requires intense elongating pressure.`;
+            DOM.hydrZoneBadge.textContent = `🟡 TIGHT / DRY ZONE (< ${minSafe}%). Crumb will be tight; dense hearth loaf.`;
         } else {
             DOM.hydrZoneBadge.className = 'badge-optimal';
-            DOM.hydrZoneBadge.textContent = `🟢 OPTIMAL EXTENSIBILITY ZONE (${minSafe}% – ${maxSafe}%). Ideal for open custard alveolation and crisp grigne.`;
+            DOM.hydrZoneBadge.textContent = `🟢 OPTIMAL ZONE (${minSafe}% – ${maxSafe.toFixed(1)}%). Ideal for open alveoli, crisp ear & oven spring.`;
         }
     }
 
@@ -421,7 +518,6 @@
                 DOM.previewContainer.appendChild(item);
             });
 
-            // Bind remove buttons
             DOM.previewContainer.querySelectorAll('.btn-remove-img').forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     const idx = parseInt(e.target.dataset.idx, 10);
@@ -513,7 +609,7 @@
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    contents: [{ parts: [{ text: "Ping. Reply with 'Baguette Guru Uplink Online' only." }] }]
+                    contents: [{ parts: [{ text: "Ping. Reply with 'Artisan Bread Guru Uplink Online' only." }] }]
                 })
             });
             if (!res.ok) throw new Error("HTTP " + res.status);
@@ -527,37 +623,45 @@
         }
     }
 
-    // Build Guru System Context Prompt (Dynamically Injects Active Flour Profile!)
+    // Build Guru System Context Prompt (Adapts to Baguette vs Boule!)
     function constructGuruPrompt(userQuery) {
-        return `You are the World-Class Sourdough Baguette Guru and Master Baker, trained in the prestigious INBP French tradition.
-Your expertise is founded on the definitive synthesis of 9 major bread authorities, with rigorous grounding in the literature:
-1. Modernist Bread (Nathan Myhrvold & Francisco Migoya, Volume 6 Kitchen Manual - A-Plus Baguette, Parametric Lean Breads, Van Over method)
-2. Jean-Marie Lanio & Jérémy Ballester (*All About Baguette* / *Le grand livre de la baguette* - Tradition T65, Pointage au bac, Bassinage)
-3. Addie Roberts (*Secrets of Open Crumb* - Protein absorption, gluten extensibility vs tenacity, avoiding the high-protein toughness trap)
-4. Chad Robertson (*Tartine Bread* - Poolish + Levain hybrid baguettes)
-5. Maurizio Leo (*The Perfect Loaf* - Pure liquid levain baguettes)
-6. King Arthur Baking Company (*Big Book of Bread* - Yeasted & Levain Baguettes)
-7. Ken Forkish (*Flour Water Salt Yeast* - Poolish mechanics & Dutch oven physics)
-8. Teresa Greenway (*Discovering Sourdough* - Wild yeast fermentation)
-9. Apollonia Poilâne (*Poilâne* - Natural starter fermentation & French wheat heritage)
+        const formatDesc = (currentFormatMode === 'baguette')
+            ? 'ARTISANAL BAGUETTES (Linen Couche Proofed, Elongated Hand Shaping, 5-7 Slashes, Open Stone Baked with Steam)'
+            : 'SOURDOUGH BOULE / BÂTARD (Rattan Banneton Proofed, Round/Oval Tension Stitch Shaping, Single Curved Crescent Ear Slash, Cast Iron Dutch Oven Baked)';
 
-CRITICAL CURRENT INGREDIENT & FLOUR PARAMETERS CONFIGURED BY USER:
+        return `You are the World-Class Artisan Bread & Sourdough Guru, trained across INBP French viennoiserie and West Coast artisan sourdough traditions.
+Your expertise is founded on the definitive synthesis of 9 major bread authorities:
+1. Modernist Bread (Nathan Myhrvold & Francisco Migoya - A-Plus Baguette, Country Loaves, Parametric formulas, Steam physics)
+2. Jean-Marie Lanio & Jérémy Ballester (*All About Baguette* - French T65, Pointage au bac, Couche techniques)
+3. Chad Robertson (*Tartine Bread* - Basic Country Boule & Hybrid Baguettes)
+4. Maurizio Leo (*The Perfect Loaf* - Sourdough Boules, Bâtards, Demi-baguettes)
+5. Addie Roberts (*Secrets of Open Crumb* - Extensibility, protein quality, open alveoli)
+6. Ken Forkish (*Flour Water Salt Yeast* - Dutch oven baking, Overnight Country Blonde)
+7. King Arthur Baking Company (*Big Book of Bread*)
+8. Teresa Greenway (*Discovering Sourdough*)
+9. Apollonia Poilâne (*Poilâne*)
+
+CURRENT BAKE FORMAT:
+${formatDesc}
+
+CURRENT INGREDIENT & FLOUR PARAMETERS CONFIGURED BY USER:
 - ACTIVE FLOUR: ${activeFlour.name}
 - PROTEIN CONTENT: ${activeFlour.protein}%
 - ASH CONTENT / TYPE: ${activeFlour.ash}%
 - ORGANIC / BIO STATUS: ${activeFlour.is_bio ? 'YES (Strictly NO chemical oxidizers/ascorbic acid, native enzymes only)' : 'NO (Conventional / Malted flour)'}
-- TARGET HYDRATION DIALED IN: ${currentHydration.toFixed(1)}% (Recommended: ${activeFlour.rec_hydration}%, Safe Absorption Ceiling: ${activeFlour.max_safe_hydration}%)
+- TARGET HYDRATION DIALED IN: ${currentHydration.toFixed(1)}% (Recommended: ${activeFlour.rec_hydration}%, Safe Ceiling: ${activeFlour.max_safe_hydration}%)
 - DOUGH BASE TEMPERATURE (*Coulage*): Target 23.5°C–24.5°C
 
 DIAGNOSTIC DIRECTIVES:
-When analyzing photos or troubleshooting questions:
-1. EVALUATE RHEOLOGY & FLOUR COMPATIBILITY: Explicitly state whether the user's dialed hydration (${currentHydration}%) is appropriate for their flour (${activeFlour.name}, ${activeFlour.protein}% protein). If over-hydrated, explain how lack of tenacity or native enzymatic breakdown caused dough slumping, flat cross-section, or melted score marks.
-2. CRUMB & ALVEOLATION ANALYSIS: If analyzing a crumb photo, evaluate cell wall translucency, gelatinization, and whether it shows under-fermentation (dense base with uneven huge holes), over-fermentation (small uniform flat bubbles, pale crust), or optimal open honeycomb.
-3. SCORING & OVEN SPRING: Check if cuts were made at a 20°–30° shallow flap angle along a single central longitudinal axis with 1/3 overlap, or if they were 90° sausage cuts. Evaluate steam sufficiency and venting timing (10-minute mark per Modernist Bread).
-4. PRECISE STEP-BY-STEP REMEDY: Provide actionable measurements in Baker's percentages, times, temperatures, and physical hand movements from Lanio, Modernist Bread, or Addie Roberts.
+When analyzing photos or troubleshooting:
+1. ADAPT TO ACTIVE FORMAT (${currentFormatMode.toUpperCase()}):
+   - If BOULE: Focus on banneton tension, ear development (grigne) from 30° crescent slash, Dutch oven steam retention (lid on 20 min), and open honeycomb crumb.
+   - If BAGUETTE: Focus on elongation without tearing gluten, 5 overlapping cuts along centerline, couche linen folds, and thin crisp crust.
+2. EVALUATE FLOUR RHEOLOGY: Explicitly judge if ${currentHydration}% hydration is appropriate for ${activeFlour.name} (${activeFlour.protein}% protein).
+3. PROVIDE EXACT GRAMS & ACTIONABLE REMEDIES: Quote exact weights in grams and Baker's percentages, times, temperatures, and hand movements.
 
 USER INQUIRY / CONTEXT:
-"${userQuery || "Please examine my baguette photos and current flour/hydration configuration. Provide a full master diagnostic report identifying defects, root causes, and exact corrective actions."}"`;
+"${userQuery || "Please examine my bread photos and current configuration. Provide a full master diagnostic report identifying defects, root causes, and exact corrective actions."}"`;
     }
 
     // Main Analysis Execution
@@ -592,102 +696,168 @@ USER INQUIRY / CONTEXT:
         DOM.diagnosticPanel.scrollIntoView({ behavior: 'smooth' });
     }
 
-    // Dynamic Recipe Scaler & Ingredients Table
+    // Dynamic Recipe Scaler & Ingredients Table (ALWAYS ADAPTS BAKER'S % TO EXACT GRAMS!)
     function renderRecipesTable() {
-        if (typeof MASTER_RECIPES_DATA === 'undefined') return;
-        const recipe = MASTER_RECIPES_DATA.find(r => r.id === currentRecipeId) || MASTER_RECIPES_DATA[0];
+        const recipeList = (currentFormatMode === 'baguette') ? RECIPES_BAGUETTE : RECIPES_BOULE;
+        if (!recipeList) return;
+
+        const recipe = recipeList.find(r => r.id === currentRecipeId) || recipeList[0];
 
         const flourBasis = currentFlourBasis;
         const targetHydr = currentHydration;
 
-        // Modernist Bread Bassinage Rule:
-        // Base water is capped at 64% (or 65%). Any hydration above 64% is added as late bassinage.
-        const baseWaterPct = Math.min(targetHydr, 64.0);
+        // Base water capped at 64% (or 66% for boules). Excess water is bassinage.
+        const baseThreshold = (currentFormatMode === 'boule') ? 66.0 : 64.0;
+        const baseWaterPct = Math.min(targetHydr, baseThreshold);
         const bassinageWaterPct = Math.max(0, targetHydr - baseWaterPct);
 
         const totalWaterGrams = Math.round(flourBasis * (targetHydr / 100));
         DOM.displayTotalWater.textContent = `${totalWaterGrams}g (${targetHydr.toFixed(1)}%)`;
 
+        // Update portion estimate display
+        const totalDoughGrams = flourBasis + totalWaterGrams + Math.round(flourBasis * 0.02) + Math.round(flourBasis * 0.002);
+        const estWeight = Math.round(totalDoughGrams / Math.max(1, currentLoavesCount));
+        DOM.displayPortionEstimate.textContent = `(~${estWeight}g each raw dough)`;
+
         DOM.recipeTableBody.innerHTML = '';
 
-        // Build Formula rows dynamically based on recipe type and hydration!
         let formulaRows = [];
 
-        if (recipe.id === 'sourdough') {
-            const levainPct = 16.0;
-            const levainFlour = flourBasis * 0.08;
-            const mainFlour = flourBasis - levainFlour;
-            const levainWater = flourBasis * 0.08;
-            const netBaseWater = (flourBasis * (baseWaterPct / 100)) - levainWater;
-            const bassinageWater = flourBasis * (bassinageWaterPct / 100);
+        // Build Formula rows dynamically with EXACT GRAMS ALWAYS FRONT AND CENTER!
+        if (currentFormatMode === 'baguette') {
+            if (recipe.id === 'sourdough') {
+                const levainFlour = flourBasis * 0.08;
+                const mainFlour = flourBasis - levainFlour;
+                const levainWater = flourBasis * 0.08;
+                const netBaseWater = Math.max(0, (flourBasis * (baseWaterPct / 100)) - levainWater);
+                const bassinageWater = flourBasis * (bassinageWaterPct / 100);
 
-            formulaRows = [
-                { item: `${activeFlour.name} (Main Dough)`, pct: 92.0, grams: Math.round(mainFlour), note: `Autolysed with base water for ${activeFlour.autolyse_min} min.` },
-                { item: 'Base Water (Mix / Autolyse)', pct: (baseWaterPct - 8.0).toFixed(1), grams: Math.round(netBaseWater), note: 'Adjusted to Coulage temperature. Form gluten before adding excess water.' },
-                { item: 'Young Liquid Levain (100% Hydr.)', pct: 16.0, grams: Math.round(flourBasis * 0.16), note: 'Built with active flour, 5h prior. Sweet yogurt lactic aroma.' },
-                { item: 'Bassinage Water (Late Addition)', pct: bassinageWaterPct.toFixed(1), grams: Math.round(bassinageWater), note: 'Added with salt to open crumb alveoli without slumping.' },
-                { item: 'Fine Sea Salt', pct: 2.0, grams: Math.round(flourBasis * 0.02), note: 'Stiffens gluten ionic bonds and controls enzyme activity.' }
-            ];
-        } else if (recipe.id === 'hybrid') {
-            const levainPct = 12.0;
-            const poolishPct = 12.0;
-            const prefermentFlour = flourBasis * 0.12;
-            const mainFlour = flourBasis - prefermentFlour;
-            const prefermentWater = flourBasis * 0.12;
-            const netBaseWater = Math.max(0, (flourBasis * (baseWaterPct / 100)) - prefermentWater);
-            const bassinageWater = flourBasis * (bassinageWaterPct / 100);
+                formulaRows = [
+                    { item: `${activeFlour.name} (Main Dough)`, grams: Math.round(mainFlour), pct: 92.0, note: `Autolysed with base water for ${activeFlour.autolyse_min} min.` },
+                    { item: 'Base Water (Mix / Autolyse)', grams: Math.round(netBaseWater), pct: (baseWaterPct - 8.0).toFixed(1), note: 'Adjusted to Coulage temperature. Develops gluten sheath.' },
+                    { item: 'Young Liquid Levain (100% Hydr.)', grams: Math.round(flourBasis * 0.16), pct: 16.0, note: 'Built with active flour, 5h prior. Sweet yogurt lactic aroma.' },
+                    { item: 'Bassinage Water (Late Addition)', grams: Math.round(bassinageWater), pct: bassinageWaterPct.toFixed(1), note: 'Added with salt to open crumb alveoli without slumping.' },
+                    { item: 'Fine Sea Salt', grams: Math.round(flourBasis * 0.02), pct: 2.0, note: 'Controls enzymatic breakdown and strengthens gluten.' }
+                ];
+            } else if (recipe.id === 'hybrid') {
+                const prefermentFlour = flourBasis * 0.12;
+                const mainFlour = flourBasis - prefermentFlour;
+                const prefermentWater = flourBasis * 0.12;
+                const netBaseWater = Math.max(0, (flourBasis * (baseWaterPct / 100)) - prefermentWater);
+                const bassinageWater = flourBasis * (bassinageWaterPct / 100);
 
-            formulaRows = [
-                { item: `${activeFlour.name} (Main Dough)`, pct: 88.0, grams: Math.round(mainFlour), note: 'Unbleached flour autolysed without leaven.' },
-                { item: 'Base Water (Autolyse)', pct: (baseWaterPct - 12.0).toFixed(1), grams: Math.round(netBaseWater), note: 'Mix until shaggy mass; rest 45 min.' },
-                { item: 'Young Liquid Levain (100%)', pct: 12.0, grams: Math.round(flourBasis * 0.12), note: 'Tartine style young leaven for complex lactic aroma.' },
-                { item: 'Poolish (100% Hydration)', pct: 12.0, grams: Math.round(flourBasis * 0.12), note: '12h poolish for sweet wheat notes and extensibility.' },
-                { item: 'Bassinage Water (Late)', pct: bassinageWaterPct.toFixed(1), grams: Math.round(bassinageWater), note: 'Dissolves yeast and salt; emulsified into dough.' },
-                { item: 'Instant Dry Yeast (Pinch)', pct: 0.2, grams: (flourBasis * 0.002).toFixed(1), note: 'Micro-dose commercial yeast for explosive ear opening.' },
-                { item: 'Fine Sea Salt', pct: 2.0, grams: Math.round(flourBasis * 0.02), note: 'Standard artisan dosage.' }
-            ];
-        } else if (recipe.id === 'poolish') {
-            const poolishFlour = flourBasis * 0.30;
-            const mainFlour = flourBasis - poolishFlour;
-            const poolishWater = flourBasis * 0.30;
-            const netBaseWater = Math.max(0, (flourBasis * (baseWaterPct / 100)) - poolishWater);
-            const bassinageWater = flourBasis * (bassinageWaterPct / 100);
+                formulaRows = [
+                    { item: `${activeFlour.name} (Main Dough)`, grams: Math.round(mainFlour), pct: 88.0, note: 'Autolysed without leavening.' },
+                    { item: 'Base Water (Autolyse)', grams: Math.round(netBaseWater), pct: (baseWaterPct - 12.0).toFixed(1), note: 'Mix to shaggy mass; rest 45 min.' },
+                    { item: 'Young Liquid Levain (100%)', grams: Math.round(flourBasis * 0.12), pct: 12.0, note: 'Tartine style young leaven for complex lactic aroma.' },
+                    { item: 'Poolish (100% Hydration)', grams: Math.round(flourBasis * 0.12), pct: 12.0, note: '12h poolish for sweet wheat notes and extensibility.' },
+                    { item: 'Bassinage Water (Late)', grams: Math.round(bassinageWater), pct: bassinageWaterPct.toFixed(1), note: 'Dissolves yeast and salt; emulsified into dough.' },
+                    { item: 'Instant Dry Yeast (Pinch)', grams: (flourBasis * 0.002).toFixed(1), pct: 0.2, note: 'Micro-dose commercial yeast for explosive ear opening.' },
+                    { item: 'Fine Sea Salt', grams: Math.round(flourBasis * 0.02), pct: 2.0, note: 'Standard artisan dosage.' }
+                ];
+            } else if (recipe.id === 'poolish') {
+                const poolishFlour = flourBasis * 0.30;
+                const mainFlour = flourBasis - poolishFlour;
+                const poolishWater = flourBasis * 0.30;
+                const netBaseWater = Math.max(0, (flourBasis * (baseWaterPct / 100)) - poolishWater);
+                const bassinageWater = flourBasis * (bassinageWaterPct / 100);
 
-            formulaRows = [
-                { item: `${activeFlour.name} (Main Dough)`, pct: 70.0, grams: Math.round(mainFlour), note: 'Blended with poolish and base water for 30 min autolyse.' },
-                { item: 'Base Water (Main Mix)', pct: (baseWaterPct - 30.0).toFixed(1), grams: Math.round(netBaseWater), note: 'Calculated via Base Temperature Coulage formula.' },
-                { item: 'Overnight Poolish (100% Hydr.)', pct: 60.0, grams: Math.round(flourBasis * 0.60), note: 'Contains 150g flour + 150g water + 0.2g yeast per 500g.' },
-                { item: 'Bassinage Water (Late)', pct: bassinageWaterPct.toFixed(1), grams: Math.round(bassinageWater), note: 'Added with salt and final yeast bump.' },
-                { item: 'Instant Dry Yeast (Final)', pct: 0.26, grams: (flourBasis * 0.0026).toFixed(1), note: 'Provides uniform gas generation during cold bulk.' },
-                { item: 'Fine Sea Salt', pct: 2.0, grams: Math.round(flourBasis * 0.02), note: 'Controls yeast motility.' }
-            ];
-        } else if (recipe.id === 'modernist_a_plus') {
-            const toastedCornFlour = flourBasis * 0.022;
-            const poolishFlour = flourBasis * 0.15;
-            const levainFlour = flourBasis * 0.108;
-            const mainFlour = flourBasis - (poolishFlour + levainFlour + toastedCornFlour);
-            const prefermentWater = flourBasis * (0.15 + 0.108);
-            const netBaseWater = Math.max(0, (flourBasis * (baseWaterPct / 100)) - prefermentWater);
-            const bassinageWater = flourBasis * (bassinageWaterPct / 100);
+                formulaRows = [
+                    { item: `${activeFlour.name} (Main Dough)`, grams: Math.round(mainFlour), pct: 70.0, note: 'Blended with poolish and base water for 30 min autolyse.' },
+                    { item: 'Base Water (Main Mix)', grams: Math.round(netBaseWater), pct: (baseWaterPct - 30.0).toFixed(1), note: 'Calculated via Base Temperature Coulage formula.' },
+                    { item: 'Overnight Poolish (100% Hydr.)', grams: Math.round(flourBasis * 0.60), pct: 60.0, note: 'Contains 150g flour + 150g water + 0.2g yeast per 500g.' },
+                    { item: 'Bassinage Water (Late)', grams: Math.round(bassinageWater), pct: bassinageWaterPct.toFixed(1), note: 'Added with salt and final yeast bump.' },
+                    { item: 'Instant Dry Yeast (Final)', grams: (flourBasis * 0.0026).toFixed(1), pct: 0.26, note: 'Uniform gas generation during cold bulk.' },
+                    { item: 'Fine Sea Salt', grams: Math.round(flourBasis * 0.02), pct: 2.0, note: 'Controls yeast motility.' }
+                ];
+            } else if (recipe.id === 'modernist_a_plus') {
+                const toastedCornFlour = flourBasis * 0.022;
+                const poolishFlour = flourBasis * 0.15;
+                const levainFlour = flourBasis * 0.108;
+                const mainFlour = flourBasis - (poolishFlour + levainFlour + toastedCornFlour);
+                const prefermentWater = flourBasis * (0.15 + 0.108);
+                const netBaseWater = Math.max(0, (flourBasis * (baseWaterPct / 100)) - prefermentWater);
+                const bassinageWater = flourBasis * (bassinageWaterPct / 100);
 
-            formulaRows = [
-                { item: `${activeFlour.name} (Main Flour)`, pct: 72.0, grams: Math.round(mainFlour), note: 'Modernist base flour.' },
-                { item: 'Toasted Corn Flour (Inclusion)', pct: 2.2, grams: Math.round(toastedCornFlour), note: 'Toasted 20m @ 175°C. Imparts sweet, nutty caramel Maillard notes.' },
-                { item: 'Base Water (Autolyse)', pct: (baseWaterPct - 25.8).toFixed(1), grams: Math.round(netBaseWater), note: 'Combined with flours and preferments for 30m autolyse.' },
-                { item: 'Poolish (100% Hydration)', pct: 30.0, grams: Math.round(flourBasis * 0.30), note: 'Extensibility and alpha-amylase sugar breakdown.' },
-                { item: 'Mature Liquid Levain', pct: 21.6, grams: Math.round(flourBasis * 0.216), note: 'Acidic strength and shelf-life extension.' },
-                { item: 'Bassinage Water (Late Addition)', pct: bassinageWaterPct.toFixed(1), grams: Math.round(bassinageWater), note: 'Modernist delayed hydration method.' },
-                { item: 'Instant Dry Yeast', pct: 0.5, grams: (flourBasis * 0.005).toFixed(1), note: 'Rapid spring and high lift.' },
-                { item: 'Fine Salt', pct: 2.0, grams: Math.round(flourBasis * 0.02), note: 'Modernist standard.' }
-            ];
+                formulaRows = [
+                    { item: `${activeFlour.name} (Main Flour)`, grams: Math.round(mainFlour), pct: 72.0, note: 'Modernist base flour.' },
+                    { item: 'Toasted Corn Flour (Inclusion)', grams: Math.round(toastedCornFlour), pct: 2.2, note: 'Toasted 20m @ 175°C. Imparts sweet, nutty caramel Maillard notes.' },
+                    { item: 'Base Water (Autolyse)', grams: Math.round(netBaseWater), pct: (baseWaterPct - 25.8).toFixed(1), note: 'Combined with flours and preferments for 30m autolyse.' },
+                    { item: 'Poolish (100% Hydration)', grams: Math.round(flourBasis * 0.30), pct: 30.0, note: 'Extensibility and alpha-amylase sugar breakdown.' },
+                    { item: 'Mature Liquid Levain', grams: Math.round(flourBasis * 0.216), pct: 21.6, note: 'Acidic strength and shelf-life extension.' },
+                    { item: 'Bassinage Water (Late Addition)', grams: Math.round(bassinageWater), pct: bassinageWaterPct.toFixed(1), note: 'Modernist delayed hydration method.' },
+                    { item: 'Instant Dry Yeast', grams: (flourBasis * 0.005).toFixed(1), pct: 0.5, note: 'Rapid spring and high lift.' },
+                    { item: 'Fine Salt', grams: Math.round(flourBasis * 0.02), pct: 2.0, note: 'Modernist standard.' }
+                ];
+            }
+        } else {
+            // BOULE & BÂTARD RECIPES
+            if (recipe.id === 'tartine_country') {
+                const levainFlour = flourBasis * 0.10;
+                const mainFlour = flourBasis - levainFlour;
+                const levainWater = flourBasis * 0.10;
+                const netBaseWater = Math.max(0, (flourBasis * (baseWaterPct / 100)) - levainWater);
+                const bassinageWater = flourBasis * (bassinageWaterPct / 100);
+
+                formulaRows = [
+                    { item: `${activeFlour.name} (Main Flour)`, grams: Math.round(mainFlour), pct: 90.0, note: 'Autolysed with base water for 45 min.' },
+                    { item: 'Base Water (Autolyse)', grams: Math.round(netBaseWater), pct: (baseWaterPct - 10.0).toFixed(1), note: 'Tepid water (26°C / 79°F).' },
+                    { item: 'Young Liquid Leaven (100% Hydr.)', grams: Math.round(flourBasis * 0.20), pct: 20.0, note: 'Built young (1:5:5 or float stage). Sweet milky aroma.' },
+                    { item: 'Bassinage Water (Late Addition)', grams: Math.round(bassinageWater), pct: bassinageWaterPct.toFixed(1), note: 'Added with salt to open crumb alveoli.' },
+                    { item: 'Fine Sea Salt', grams: Math.round(flourBasis * 0.02), pct: 2.0, note: 'Added after autolyse.' }
+                ];
+            } else if (recipe.id === 'leo_country') {
+                const levainFlour = flourBasis * 0.08;
+                const mainFlour = flourBasis - levainFlour;
+                const levainWater = flourBasis * 0.08;
+                const netBaseWater = Math.max(0, (flourBasis * (baseWaterPct / 100)) - levainWater);
+                const bassinageWater = flourBasis * (bassinageWaterPct / 100);
+
+                formulaRows = [
+                    { item: `${activeFlour.name} (Main Dough)`, grams: Math.round(mainFlour), pct: 92.0, note: 'Maurizio Leo high-hydration white base.' },
+                    { item: 'Base Water (Autolyse)', grams: Math.round(netBaseWater), pct: (baseWaterPct - 8.0).toFixed(1), note: 'Rest 60 min at 24°C DDT.' },
+                    { item: 'Ripe Liquid Levain', grams: Math.round(flourBasis * 0.16), pct: 16.0, note: 'Well aerated, domed, mild sour aroma.' },
+                    { item: 'Bassinage Water (Mix 2)', grams: Math.round(bassinageWater), pct: bassinageWaterPct.toFixed(1), note: 'Dissolves salt; worked in with slap-and-fold.' },
+                    { item: 'Fine Sea Salt', grams: Math.round(flourBasis * 0.018), pct: 1.8, note: '1.8% fine sea salt standard.' }
+                ];
+            } else if (recipe.id === 'forkish_blonde') {
+                const levainFlour = flourBasis * 0.108;
+                const mainFlour = flourBasis - levainFlour;
+                const levainWater = flourBasis * 0.108;
+                const netBaseWater = Math.max(0, (flourBasis * (baseWaterPct / 100)) - levainWater);
+                const bassinageWater = flourBasis * (bassinageWaterPct / 100);
+
+                formulaRows = [
+                    { item: `${activeFlour.name} (Main Flour)`, grams: Math.round(mainFlour), pct: 89.2, note: 'Forkish pure levain blend.' },
+                    { item: 'Water (Warm 34°C Autolyse)', grams: Math.round(netBaseWater), pct: (baseWaterPct - 10.8).toFixed(1), note: 'Warm water to sustain cool overnight fermentation.' },
+                    { item: 'Mature Levain (FWSY)', grams: Math.round(flourBasis * 0.216), pct: 21.6, note: 'Ripe levain fed with active flour.' },
+                    { item: 'Bassinage / Excess Water', grams: Math.round(bassinageWater), pct: bassinageWaterPct.toFixed(1), note: 'Folded in during hand mixing.' },
+                    { item: 'Fine Sea Salt', grams: Math.round(flourBasis * 0.021), pct: 2.1, note: 'Pincer method incorporation.' }
+                ];
+            } else if (recipe.id === 'modernist_country') {
+                const levainFlour = flourBasis * 0.10;
+                const mainFlour = flourBasis - levainFlour;
+                const levainWater = flourBasis * 0.10;
+                const netBaseWater = Math.max(0, (flourBasis * (baseWaterPct / 100)) - levainWater);
+                const bassinageWater = flourBasis * (bassinageWaterPct / 100);
+
+                formulaRows = [
+                    { item: `${activeFlour.name} (Main Flour)`, grams: Math.round(mainFlour), pct: 90.0, note: 'Modernist country blend.' },
+                    { item: 'Base Water (Autolyse)', grams: Math.round(netBaseWater), pct: (baseWaterPct - 10.0).toFixed(1), note: 'Autolysed 40 min to shaggy mass.' },
+                    { item: 'Mature Liquid Levain', grams: Math.round(flourBasis * 0.20), pct: 20.0, note: 'Controlled fermentation leaven.' },
+                    { item: 'Bassinage Water (Late)', grams: Math.round(bassinageWater), pct: bassinageWaterPct.toFixed(1), note: 'Added with salt on medium speed.' },
+                    { item: 'Fine Salt', grams: Math.round(flourBasis * 0.02), pct: 2.0, note: '2% standard.' }
+                ];
+            }
         }
 
+        // Render Formula Rows (EXACT GRAMS IN BOLD HIGHLIGHT FIRST!)
         formulaRows.forEach(row => {
             const tr = document.createElement('tr');
             tr.innerHTML = `
                 <td><strong>${row.item}</strong></td>
+                <td><strong>${row.grams}g</strong></td>
                 <td>${row.pct}%</td>
-                <td>${row.grams}g</td>
                 <td>${row.note}</td>
             `;
             DOM.recipeTableBody.appendChild(tr);
@@ -722,7 +892,6 @@ USER INQUIRY / CONTEXT:
         const Tf = parseFloat(DOM.coulageTf.value) || 21;
         const Tfr = parseFloat(DOM.coulageFriction.value) || 4;
 
-        // Base Temperature formula: 3 * T_target = T_room + T_flour + T_water + T_friction
         const Tw = (3 * Td) - (Tr + Tf + Tfr);
         DOM.coulageWaterResult.textContent = `${Tw.toFixed(1)}°C`;
 

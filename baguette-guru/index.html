@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BAGUETTE GURU LCARS</title>
+    <title>ARTISAN BREAD GURU LCARS</title>
     <meta name="theme-color" content="#12100e">
     <link rel="manifest" href="manifest.json">
-    <link rel="stylesheet" href="style.css?v=2.0">
+    <link rel="stylesheet" href="style.css?v=3.0">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥖</text></svg>">
 </head>
 <body>
@@ -25,6 +25,15 @@
 
         <!-- MAIN INTERFACE -->
         <div class="lcars-main">
+            <!-- BAKE FORMAT SWITCHER BAR -->
+            <div class="lcars-format-bar">
+                <span class="format-label">TARGET BAKE FORMAT:</span>
+                <div class="format-toggle">
+                    <button id="btn-format-baguette" class="format-btn active" data-format="baguette">🥖 BAGUETTES</button>
+                    <button id="btn-format-boule" class="format-btn" data-format="boule">🍞 SOURDOUGH BOULES / BÂTARDS</button>
+                </div>
+            </div>
+
             <!-- HEADER WRAPPER -->
             <header class="lcars-header">
                 <div id="nav-diagnose" class="lcars-top-elbow nav-pill active" data-tab="diagnose">DIAGNOSE</div>
@@ -35,6 +44,9 @@
 
             <!-- SUB-HEADER TELEMETRY (DYNAMIC FLOUR & HYDRATION STATUS) -->
             <div class="lcars-telemetry-bar">
+                <div class="telemetry-item">
+                    <span class="label">FORMAT:</span> <span id="telemetry-format" class="val-gold">BAGUETTE (COUCHE)</span>
+                </div>
                 <div class="telemetry-item">
                     <span class="label">FLOUR:</span> 
                     <select id="header-flour-selector" class="telemetry-select">
@@ -76,18 +88,14 @@
                     <input type="file" id="camera-input" accept="image/*" capture="environment" style="display:none;">
                 </div>
 
-                <!-- QUICK CHIPS -->
-                <div class="quick-chips">
-                    <button class="chip-btn" data-prompt="Analyze this crumb structure. Diagnose alveoli distribution, gelatinization, and whether it shows under-fermentation, over-fermentation, or shaping flaws. Correlate with my current flour protein and hydration.">🔍 CRUMB DIAGNOSIS</button>
-                    <button class="chip-btn" data-prompt="Evaluate this dough during bulk fermentation. Are the bubbles, doming, and surface tension at the right expansion point for shaping?">⏱️ BULK PROOF CHECK</button>
-                    <button class="chip-btn" data-prompt="Diagnose the scoring angle, blade depth, and overlap on this baguette. Why did the ear (grigne) open or fail to open?">🔪 SCORING & EARS</button>
-                    <button class="chip-btn" data-prompt="Analyze my hydration and bassinage calculation for this flour. Am I pushing past its safe absorption limit?">💧 HYDRATION & BASSINAGE</button>
-                    <button class="chip-btn" data-prompt="Diagnose my baguette crust: blisters, color, thickness, and crunch. How should I adjust my oven steam setup and venting timing?">🔥 CRUST & STEAM</button>
+                <!-- QUICK CHIPS (DYNAMICALLY ADAPTS TO BAGUETTE VS BOULE) -->
+                <div id="quick-chips-container" class="quick-chips">
+                    <!-- Populated dynamically based on format mode -->
                 </div>
 
                 <!-- CONTEXT / QUESTION INPUT -->
                 <div class="input-panel">
-                    <textarea id="context-input" placeholder="ASK THE BAGUETTE GURU (OR TAP A QUICK CHIP)..." rows="3"></textarea>
+                    <textarea id="context-input" placeholder="ASK THE GURU (OR TAP A QUICK CHIP)..." rows="3"></textarea>
                     <div class="action-row">
                         <div class="model-toggle">
                             <button id="btn-flash" class="toggle-btn active">FLASH</button>
@@ -115,9 +123,9 @@
 
             <!-- VIEW 2: MASTER RECIPES & HYDRATION ENGINE -->
             <section id="view-recipes" class="tab-view">
-                <div class="section-title-bar bg-peach">
-                    <h2>PARAMETRIC MASTER BAGUETTES</h2>
-                    <span class="subtext">FORMULAS CALIBRATED TO FLOUR PROTEIN & ADJUSTABLE HYDRATION</span>
+                <div id="recipe-section-title" class="section-title-bar bg-peach">
+                    <h2 id="recipe-format-title">ARTISANAL BAGUETTES (COUCHE & LAME)</h2>
+                    <span id="recipe-format-subtitle" class="subtext">SCALED TO EXACT GRAMS WITH INTERACTIVE HYDRATION SLIDER</span>
                 </div>
 
                 <!-- FLOUR PROFILER PANEL -->
@@ -147,11 +155,8 @@
                 </div>
 
                 <!-- RECIPE SELECTOR TABS -->
-                <div class="recipe-selector-pills">
-                    <button class="recipe-tab active" data-recipe="sourdough">1. PURE SOURDOUGH</button>
-                    <button class="recipe-tab" data-recipe="hybrid">2. THE HYBRID (TARTINE)</button>
-                    <button class="recipe-tab" data-recipe="poolish">3. OVERNIGHT POOLISH</button>
-                    <button class="recipe-tab" data-recipe="modernist_a_plus">4. MODERNIST A-PLUS</button>
+                <div id="recipe-selector-pills" class="recipe-selector-pills">
+                    <!-- Populated dynamically based on Baguette vs Boule mode -->
                 </div>
 
                 <!-- INTERACTIVE SCALER & HYDRATION DIAL -->
@@ -166,24 +171,25 @@
                                 <span id="hydr-zone-badge" class="badge-optimal">OPTIMAL EXTENSIBILITY ZONE</span>
                             </div>
                         </div>
-                        <input type="range" id="slider-hydration" min="62" max="82" step="0.5" value="70" class="hydr-slider">
+                        <input type="range" id="slider-hydration" min="62" max="84" step="0.5" value="70" class="hydr-slider">
                         <div class="slider-marks">
                             <span>62% (Stiff)</span>
-                            <span>68% (Standard T55/AP)</span>
+                            <span>68% (Standard T55)</span>
                             <span>71% (Bio T65)</span>
-                            <span>75% (Bread Flour)</span>
-                            <span>80%+ (Manitoba)</span>
+                            <span>76% (Country Boule)</span>
+                            <span>82%+ (High Hydr.)</span>
                         </div>
                     </div>
 
                     <div class="scaler-controls">
                         <div class="scaler-item">
-                            <label>BAGUETTE COUNT:</label>
+                            <label id="label-unit-count">PORTION COUNT:</label>
                             <div class="number-stepper">
                                 <button id="btn-dec-loaves">-</button>
                                 <span id="display-loaves">3</span>
                                 <button id="btn-inc-loaves">+</button>
                             </div>
+                            <span id="display-portion-estimate" class="portion-estimate">(~320g each)</span>
                         </div>
                         <div class="scaler-item">
                             <label>TOTAL FLOUR BASIS (G):</label>
@@ -191,19 +197,19 @@
                         </div>
                         <div class="scaler-item">
                             <label>TOTAL WATER:</label>
-                            <span id="display-total-water" class="val-cyan">350g</span>
+                            <span id="display-total-water" class="val-cyan">350g (70.0%)</span>
                         </div>
                     </div>
 
-                    <!-- FORMULA INGREDIENTS TABLE -->
+                    <!-- FORMULA INGREDIENTS TABLE (GRAMS ALWAYS FRONT AND CENTER!) -->
                     <div class="table-wrapper">
                         <table class="recipe-table">
                             <thead>
                                 <tr>
                                     <th>INGREDIENT / STAGE</th>
+                                    <th>EXACT WEIGHT (GRAMS)</th>
                                     <th>BAKER'S %</th>
-                                    <th>CALCULATED WEIGHT</th>
-                                    <th>PURPOSE & HANDLING (MODERNIST & LANIO RULES)</th>
+                                    <th>PURPOSE & TECHNIQUE</th>
                                 </tr>
                             </thead>
                             <tbody id="recipe-table-body">
@@ -225,12 +231,13 @@
             <!-- VIEW 3: METHODS & KNOWLEDGE BASE EXPLORER -->
             <section id="view-methods" class="tab-view">
                 <div class="section-title-bar bg-teal">
-                    <h2>BAGUETTE METHODOLOGY & SCIENCE REPOSITORY</h2>
+                    <h2>ARTISAN BREAD METHODOLOGY & SCIENCE REPOSITORY</h2>
                     <span class="subtext">EXTRACTED FROM MODERNIST BREAD, LANIO, ROBERTSON, LEO, KING ARTHUR & ADDIE ROBERTS</span>
                 </div>
 
                 <div class="kb-nav-chips">
-                    <button class="kb-chip active" data-kb="09_FLOUR_PROTEIN_AND_HYDRATION_MATRIX.md">00. FLOUR & PROTEIN MATRIX</button>
+                    <button class="kb-chip active" data-kb="10_SOURDOUGH_BOULE_AND_BATARD_MASTERY.md">10. SOURDOUGH BOULES</button>
+                    <button class="kb-chip" data-kb="09_FLOUR_PROTEIN_AND_HYDRATION_MATRIX.md">09. FLOUR & PROTEIN MATRIX</button>
                     <button class="kb-chip" data-kb="01_FOUNDATIONS_AND_FLOUR.md">01. FLOUR & T65</button>
                     <button class="kb-chip" data-kb="02_THE_THREE_LEAVENING_SYSTEMS.md">02. 3 SYSTEMS</button>
                     <button class="kb-chip" data-kb="03_DOUGH_METHODS_AND_RHEOLOGY.md">03. AUTOLYSE & MIX</button>
@@ -257,7 +264,7 @@
 
                 <div class="calculator-card">
                     <p class="coulage-intro">
-                        In professional French baking (Lanio, INBP), controlling dough temperature at the end of mixing (<strong>23°C – 24°C</strong>) regulates yeast motility, fermentation kinetics, and prevents over-acidification.
+                        In professional baking (Lanio, Tartine, INBP), controlling dough temperature at the end of mixing (<strong>23.5°C – 24.5°C</strong>) regulates yeast motility, fermentation kinetics, and prevents excessive acid degradation.
                     </p>
 
                     <div class="coulage-grid">
@@ -302,7 +309,7 @@
     <div id="settings-modal" class="modal-overlay hidden">
         <div class="modal-card">
             <div class="modal-header">
-                <h3>BAGUETTE GURU CONFIGURATION</h3>
+                <h3>BREAD GURU CONFIGURATION</h3>
                 <button id="btn-close-settings" class="modal-close-btn">&times;</button>
             </div>
             <div class="modal-body">
