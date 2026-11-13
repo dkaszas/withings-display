@@ -2884,12 +2884,12 @@ const OG_RECIPES = [
   {
     "id": "og_modernist_levain",
     "format": "baguette",
-    "title": "100% Levain French Baguette",
+    "title": "100% Levain French Baguette (Direct Sourdough, Zero Yeast)",
     "book": "Modernist Bread",
     "book_id": "modernist",
     "author": "Nathan Myhrvold & Francisco Migoya",
     "citation": "Volume 6 (Recipe Manual), Page 50",
-    "author_notes": "Modernist Bread: 'This recipe uses 100% natural levain with no commercial yeast added. The secret to an open crumb without excess acidity is using a young liquid levain (pH 4.1) and holding back 10% water for late bassinage addition after the autolyse has formed a continuous gluten sheath.'",
+    "author_notes": "Modernist Bread: 'This recipe uses 100% natural liquid levain with zero commercial yeast added. The secret to an open crumb without excess acidity is using a young liquid levain (pH 4.1) and holding back 10% water for late bassinage addition after the autolyse has formed a continuous gluten sheath.'",
     "base_hydration": 72.0,
     "ingredients": [
       {
@@ -3195,6 +3195,527 @@ const OG_RECIPES = [
         "phase": "Bake",
         "cues": "Toasted nutty whole grain aroma.",
         "text": "Bake in hot pot: 22 min lid ON @ 245\u00b0C; 23 min lid OFF @ 225\u00b0C."
+      }
+    ]
+  },
+  {
+    "id": "og_modernist_direct_sourdough",
+    "format": "boule",
+    "title": "Direct Sourdough (Zero Commercial Yeast)",
+    "book": "Modernist Bread",
+    "book_id": "modernist",
+    "author": "Nathan Myhrvold & Francisco Migoya",
+    "citation": "Volume 6 (Recipe Manual), Page 39 & 68",
+    "author_notes": "Modernist Bread: 'Our master sourdough recipe is a pure direct dough leavened exclusively with liquid levain, containing zero commercial yeast. By autolysing the flour and water for 30 minutes, adding a young liquid levain (pH ~4.1), and performing 6 gentle folds during a 4-hour bulk fermentation at 24\u00b0C, it develops a deep lactic profile and soaring oven spring without commercial boosters.'",
+    "base_hydration": 71.5,
+    "ingredients": [
+      {
+        "name": "Bread Flour (12.7%)",
+        "weight": "480g",
+        "pct": 100.0,
+        "note": "High extraction artisan unbleached flour"
+      },
+      {
+        "name": "Base Water (24\u00b0C)",
+        "weight": "315g",
+        "pct": 65.6,
+        "note": "Autolyse water with flour"
+      },
+      {
+        "name": "Bassinage Water",
+        "weight": "28g",
+        "pct": 5.8,
+        "note": "Added with salt and malt"
+      },
+      {
+        "name": "Liquid Levain (100% Hydr)",
+        "weight": "195g",
+        "pct": 40.6,
+        "note": "Mature young liquid levain (pH 4.1)"
+      },
+      {
+        "name": "Fine Sea Salt",
+        "weight": "10g",
+        "pct": 2.1,
+        "note": "Non-iodized fine salt"
+      },
+      {
+        "name": "Wheat Bran",
+        "weight": "10g",
+        "pct": 2.1,
+        "note": "Toasted coarse wheat bran"
+      },
+      {
+        "name": "Diastatic Malt Powder",
+        "weight": "1g",
+        "pct": 0.2,
+        "note": "Enzymic booster for cold retard >12h"
+      }
+    ],
+    "steps": [
+      {
+        "title": "Autolyse",
+        "time": "30 min",
+        "timer_seconds": 1800,
+        "phase": "Autolyse",
+        "cues": "Shaggy mass, flour fully hydrated.",
+        "text": "Combine bread flour and base water (315g). Autolyse at room temp 30 min."
+      },
+      {
+        "title": "Mix Levain & Salt",
+        "time": "5 min",
+        "timer_seconds": 300,
+        "phase": "Mixing",
+        "cues": "Homogeneous dough, supple texture.",
+        "text": "Add 195g liquid levain, 10g salt, 1g diastatic malt, and 28g bassinage water. Mix by hand or machine on low to medium development."
+      },
+      {
+        "title": "Bulk Fermentation (6 Folds)",
+        "time": "4 hrs @ 24\u00b0C",
+        "timer_seconds": 1800,
+        "phase": "Bulk",
+        "cues": "Increases 40-50% in volume, domed edges, gas bubbles on surface.",
+        "text": "Ferment at 24\u00b0C for 4 hours total. Perform 6 four-edge folds: 1 fold every 30 minutes after the first hour. Rest 30 min after final fold."
+      },
+      {
+        "title": "Preshape & Bench Rest",
+        "time": "20 min",
+        "timer_seconds": 1200,
+        "phase": "Shape",
+        "cues": "Smooth relaxed sphere.",
+        "text": "Divide dough into 1 large boule (~1kg) or 2 medium boules (~500g). Preshape round. Rest covered 20 min."
+      },
+      {
+        "title": "Final Shaping (Boule)",
+        "time": "5 min",
+        "timer_seconds": 300,
+        "phase": "Shape",
+        "cues": "Taut round surface skin.",
+        "text": "Shape into tight boule using the Tuck-In or Square Method. Place seam-side up in rice-floured cane banneton."
+      },
+      {
+        "title": "Cold Retardation",
+        "time": "12-16 hrs @ 4\u00b0C",
+        "timer_seconds": 50400,
+        "phase": "Proof",
+        "cues": "Cold, firm, matte leathery skin.",
+        "text": "Transfer banneton to refrigerator (4\u00b0C / 39\u00b0F) for 12 to 16 hours."
+      },
+      {
+        "title": "Combo Cooker Bake",
+        "time": "42 min",
+        "timer_seconds": 1320,
+        "phase": "Bake",
+        "cues": "Blistered mahogany crust with dramatic singing ear.",
+        "text": "Preheat Dutch oven to 245\u00b0C. Tip out onto parchment. Score curved crescent cut. Bake 22 min lid ON, then 20 min lid OFF @ 225\u00b0C."
+      }
+    ]
+  },
+  {
+    "id": "og_modernist_modernist_boule",
+    "format": "boule",
+    "title": "Modernist Sourdough (Vital Gluten & Polydextrose)",
+    "book": "Modernist Bread",
+    "book_id": "modernist",
+    "author": "Nathan Myhrvold & Francisco Migoya",
+    "citation": "Volume 6 (Recipe Manual), Page 42",
+    "author_notes": "Modernist Bread: 'We designed Modernist Sourdough to push the physical limits of hearth baking without commercial yeast. Adding 2.86% vital wheat gluten reinforces dough tensile strength, while 0.97% polydextrose contributes non-sweet soluble fiber that enhances crumb gelatinization, keeps the crust shatteringly crisp, and retains moisture over several days.'",
+    "base_hydration": 72.0,
+    "ingredients": [
+      {
+        "name": "Bread Flour (12.7%)",
+        "weight": "465g",
+        "pct": 96.6,
+        "note": "High extraction artisan unbleached flour"
+      },
+      {
+        "name": "Vital Wheat Gluten",
+        "weight": "14g",
+        "pct": 2.9,
+        "note": "Gluten fortification (75% protein)"
+      },
+      {
+        "name": "Polydextrose",
+        "weight": "5g",
+        "pct": 1.0,
+        "note": "Non-sweet soluble fiber for crumb succulent texture"
+      },
+      {
+        "name": "Base Water (24\u00b0C)",
+        "weight": "305g",
+        "pct": 63.4,
+        "note": "Autolyse water"
+      },
+      {
+        "name": "Bassinage Water",
+        "weight": "29g",
+        "pct": 6.0,
+        "note": "Late addition with salt"
+      },
+      {
+        "name": "Liquid Levain (100% Hydr)",
+        "weight": "188g",
+        "pct": 39.2,
+        "note": "Pure natural levain"
+      },
+      {
+        "name": "Fine Sea Salt",
+        "weight": "10g",
+        "pct": 2.0,
+        "note": "Fine sea salt"
+      },
+      {
+        "name": "Diastatic Malt Powder",
+        "weight": "1g",
+        "pct": 0.17,
+        "note": "Enzymic balance"
+      }
+    ],
+    "steps": [
+      {
+        "title": "Autolyse",
+        "time": "30 min",
+        "timer_seconds": 1800,
+        "phase": "Autolyse",
+        "cues": "Gluten and polydextrose dispersed.",
+        "text": "Whisk flour, vital wheat gluten, and polydextrose. Add base water and autolyse 30 min."
+      },
+      {
+        "title": "Incorporate Levain & Salt",
+        "time": "6 min",
+        "timer_seconds": 360,
+        "phase": "Mixing",
+        "cues": "Glossy, high-tension dough.",
+        "text": "Add levain, salt, malt, and bassinage water. Mix on medium speed or hand fold to medium gluten development."
+      },
+      {
+        "title": "Bulk Fermentation (4 Folds)",
+        "time": "3.5 hrs @ 25\u00b0C",
+        "timer_seconds": 2400,
+        "phase": "Bulk",
+        "cues": "High elasticity and billowy expansion.",
+        "text": "Ferment at 25\u00b0C for 3.5 hours with 4 four-edge folds spaced 40 min apart."
+      },
+      {
+        "title": "Shape & Banneton",
+        "time": "25 min",
+        "timer_seconds": 1500,
+        "phase": "Shape",
+        "cues": "Tight spherical surface tension.",
+        "text": "Preshape round (20 min rest). Final shape into boule. Transfer to floured banneton."
+      },
+      {
+        "title": "Cold Retard",
+        "time": "14 hrs @ 4\u00b0C",
+        "timer_seconds": 50400,
+        "phase": "Proof",
+        "cues": "Solid cold structure.",
+        "text": "Cold proof in refrigerator for 14 hours."
+      },
+      {
+        "title": "Dutch Oven Bake",
+        "time": "40 min",
+        "timer_seconds": 1320,
+        "phase": "Bake",
+        "cues": "Glass-like crackled crust.",
+        "text": "Bake in hot cast iron combo cooker: 22 min lid ON @ 245\u00b0C, 18 min lid OFF @ 225\u00b0C."
+      }
+    ]
+  },
+  {
+    "id": "og_modernist_pain_de_campagne",
+    "format": "boule",
+    "title": "Pain de Campagne (Country Sourdough Boule)",
+    "book": "Modernist Bread",
+    "book_id": "modernist",
+    "author": "Nathan Myhrvold & Francisco Migoya",
+    "citation": "Volume 6 (Recipe Manual), Page 52",
+    "author_notes": "Modernist Bread: 'The classic French Country Loaf, leavened 100% naturally with liquid levain. A tripartite blend of high-gluten flour (69.5%), whole wheat (17.1%), and dark rye (17.1%) provides an earthy rustic crumb with complex fermentative aroma and extraordinary crust blister density.'",
+    "base_hydration": 75.0,
+    "ingredients": [
+      {
+        "name": "High-Gluten Bread Flour",
+        "weight": "345g",
+        "pct": 69.5,
+        "note": "High-strength white flour"
+      },
+      {
+        "name": "Whole Wheat Flour",
+        "weight": "85g",
+        "pct": 17.1,
+        "note": "Fine stoneground whole wheat"
+      },
+      {
+        "name": "Dark Rye Flour",
+        "weight": "85g",
+        "pct": 17.1,
+        "note": "Type 1740 stoneground rye"
+      },
+      {
+        "name": "Base Water (26\u00b0C)",
+        "weight": "295g",
+        "pct": 60.0,
+        "note": "Warm autolyse water"
+      },
+      {
+        "name": "Bassinage Water",
+        "weight": "47g",
+        "pct": 9.5,
+        "note": "Late addition"
+      },
+      {
+        "name": "Liquid Levain (100% Hydr)",
+        "weight": "140g",
+        "pct": 28.6,
+        "note": "Mature sourdough starter"
+      },
+      {
+        "name": "Fine Sea Salt",
+        "weight": "11g",
+        "pct": 2.3,
+        "note": "Sea salt"
+      },
+      {
+        "name": "Diastatic Malt Powder",
+        "weight": "2.4g",
+        "pct": 0.48,
+        "note": "Malt flour"
+      }
+    ],
+    "steps": [
+      {
+        "title": "Autolyse",
+        "time": "30 min",
+        "timer_seconds": 1800,
+        "phase": "Autolyse",
+        "cues": "Rye and wheat starches hydrate.",
+        "text": "Combine white, whole wheat, and dark rye flours with base water. Rest 30 min."
+      },
+      {
+        "title": "Mix Levain & Bassinage",
+        "time": "5 min",
+        "timer_seconds": 300,
+        "phase": "Mixing",
+        "cues": "Smooth, supple dough with subtle stickiness from rye.",
+        "text": "Add levain, salt, malt, and bassinage water. Mix to medium development."
+      },
+      {
+        "title": "Bulk Fermentation (3 Folds)",
+        "time": "3.5 hrs @ 25\u00b0C",
+        "timer_seconds": 2700,
+        "phase": "Bulk",
+        "cues": "Light, aerated, sweet earthy aroma.",
+        "text": "Ferment 3.5h with 3 folds every 50 min. Rest 30 min after last fold."
+      },
+      {
+        "title": "Preshape & Shape Boule",
+        "time": "25 min",
+        "timer_seconds": 1500,
+        "phase": "Shape",
+        "cues": "Taut round boule.",
+        "text": "Preshape round; rest 20 min. Final shape into boule. Place in banneton."
+      },
+      {
+        "title": "Overnight Cold Retard",
+        "time": "14 hrs @ 4\u00b0C",
+        "timer_seconds": 50400,
+        "phase": "Proof",
+        "cues": "Cold and firm.",
+        "text": "Cold retard in refrigerator 14 hours."
+      },
+      {
+        "title": "Dutch Oven Bake",
+        "time": "45 min",
+        "timer_seconds": 1320,
+        "phase": "Bake",
+        "cues": "Dark rustic mahogany crust.",
+        "text": "Bake in hot cast iron Dutch oven: 22 min lid ON @ 245\u00b0C, 23 min lid OFF @ 220\u00b0C."
+      }
+    ]
+  },
+  {
+    "id": "og_modernist_90_sourdough",
+    "format": "boule",
+    "title": "Super High-Hydration 90% Sourdough",
+    "book": "Modernist Bread",
+    "book_id": "modernist",
+    "author": "Nathan Myhrvold & Francisco Migoya",
+    "citation": "Volume 6 (Recipe Manual), Page 67",
+    "author_notes": "Modernist Bread: 'At 90.4% hydration with 100% natural levain and zero commercial yeast, this dough requires intensive high-speed machine mixing to full gluten development and very cold water (15\u00b0C) to prevent frictional overheating. The dough is so delicate it must be proofed in bran-lined bannetons to prevent linen sticking.'",
+    "base_hydration": 90.4,
+    "ingredients": [
+      {
+        "name": "High-Gluten Flour (Manitoba / 13%+)",
+        "weight": "450g",
+        "pct": 100.0,
+        "note": "High strength flour (W 360+)"
+      },
+      {
+        "name": "Chilled Water (15\u00b0C)",
+        "weight": "407g",
+        "pct": 90.4,
+        "note": "Chilled water to control friction"
+      },
+      {
+        "name": "Liquid Levain (100% Hydr)",
+        "weight": "96g",
+        "pct": 21.3,
+        "note": "Young active sourdough"
+      },
+      {
+        "name": "Fine Sea Salt",
+        "weight": "11.3g",
+        "pct": 2.5,
+        "note": "Sea salt"
+      },
+      {
+        "name": "Toasted Wheat / Oat Bran",
+        "weight": "20g",
+        "pct": 4.4,
+        "note": "For dusting banneton to prevent sticking"
+      }
+    ],
+    "steps": [
+      {
+        "title": "Initial Mix",
+        "time": "4 min",
+        "timer_seconds": 240,
+        "phase": "Mixing",
+        "cues": "Wet shaggy mass.",
+        "text": "Combine high-gluten flour, chilled water (15\u00b0C), and levain on low speed."
+      },
+      {
+        "title": "Full Gluten Development",
+        "time": "8 min",
+        "timer_seconds": 480,
+        "phase": "Mixing",
+        "cues": "Dough pulls cleanly off bowl sides; glossy, sheer windowpane.",
+        "text": "Add salt. Mix on high speed until dough pulls cleanly off the sides of the bowl."
+      },
+      {
+        "title": "Bulk Fermentation (2 Folds)",
+        "time": "2.5 hrs @ 24\u00b0C",
+        "timer_seconds": 3600,
+        "phase": "Bulk",
+        "cues": "Massively aerated, fragile matrix.",
+        "text": "Ferment 2.5h. Perform 2 coil folds: one right after mixing, second after 60 min. Rest 30 min."
+      },
+      {
+        "title": "Shape & Bran-Lined Proof",
+        "time": "20 min",
+        "timer_seconds": 1200,
+        "phase": "Shape",
+        "cues": "Handle like silk; place in bran-lined basket.",
+        "text": "Divide into 2 medium loaves. Shape gently into loose boules. Invert into bran-lined banneton."
+      },
+      {
+        "title": "Cold Retard",
+        "time": "12-16 hrs @ 13\u00b0C / 4\u00b0C",
+        "timer_seconds": 46800,
+        "phase": "Proof",
+        "cues": "Set cold gelatinized structure.",
+        "text": "Retard 12-16 hours."
+      },
+      {
+        "title": "Bake in Combo Cooker",
+        "time": "42 min",
+        "timer_seconds": 1320,
+        "phase": "Bake",
+        "cues": "Extravagant open gelatinized honeycomb.",
+        "text": "Bake 22 min lid ON @ 245\u00b0C, 20 min lid OFF @ 225\u00b0C."
+      }
+    ]
+  },
+  {
+    "id": "og_modernist_ancient_grain",
+    "format": "boule",
+    "title": "Ancient Grain Sourdough Boule",
+    "book": "Modernist Bread",
+    "book_id": "modernist",
+    "author": "Nathan Myhrvold & Francisco Migoya",
+    "citation": "Volume 6 (Recipe Manual), Page 59 & 61",
+    "author_notes": "Modernist Bread: 'Blending ancient grain flours (buckwheat, Khorasan, and spelt) gives a nutty, complex flavor and dark amber crust. Because ancient grains contain weaker gluten, we utilize a gentle mixing technique and moderate hydration with a 16-hour cold proof to maximize extensibility.'",
+    "base_hydration": 74.0,
+    "ingredients": [
+      {
+        "name": "Artisan Bread Flour",
+        "weight": "250g",
+        "pct": 50.0,
+        "note": "High extraction white flour"
+      },
+      {
+        "name": "Ancient Grain Mix (Buckwheat, Spelt, Khorasan)",
+        "weight": "250g",
+        "pct": 50.0,
+        "note": "Stoneground ancient grain flour blend"
+      },
+      {
+        "name": "Water (26\u00b0C)",
+        "weight": "370g",
+        "pct": 74.0,
+        "note": "Coulage adjusted water"
+      },
+      {
+        "name": "Liquid Levain (100% Hydr)",
+        "weight": "125g",
+        "pct": 25.0,
+        "note": "Active levain"
+      },
+      {
+        "name": "Fine Sea Salt",
+        "weight": "10.5g",
+        "pct": 2.1,
+        "note": "Sea salt"
+      }
+    ],
+    "steps": [
+      {
+        "title": "Autolyse",
+        "time": "45 min",
+        "timer_seconds": 2700,
+        "phase": "Autolyse",
+        "cues": "Ancient flours fully absorb water.",
+        "text": "Combine flours and water. Autolyse 45 min."
+      },
+      {
+        "title": "Mix Levain & Salt",
+        "time": "5 min",
+        "timer_seconds": 300,
+        "phase": "Mixing",
+        "cues": "Smooth cohesive mass.",
+        "text": "Add levain and salt. Mix gently to medium development."
+      },
+      {
+        "title": "Bulk Fermentation (4 Folds)",
+        "time": "3.5 hrs @ 25\u00b0C",
+        "timer_seconds": 2400,
+        "phase": "Bulk",
+        "cues": "Aerated and domed.",
+        "text": "Ferment 3.5h with 4 gentle folds every 40 min."
+      },
+      {
+        "title": "Shape & Banneton",
+        "time": "20 min",
+        "timer_seconds": 1200,
+        "phase": "Shape",
+        "cues": "Taut round boule.",
+        "text": "Preshape round (20m rest). Final shape into boule. Place in banneton."
+      },
+      {
+        "title": "Cold Retard",
+        "time": "14 hrs @ 4\u00b0C",
+        "timer_seconds": 50400,
+        "phase": "Proof",
+        "cues": "Firm chilled loaf.",
+        "text": "Proof in refrigerator 14 hours."
+      },
+      {
+        "title": "Dutch Oven Bake",
+        "time": "42 min",
+        "timer_seconds": 1320,
+        "phase": "Bake",
+        "cues": "Nutty, deeply caramelized crust.",
+        "text": "Bake 22 min lid ON @ 245\u00b0C, 20 min lid OFF @ 225\u00b0C."
       }
     ]
   },
