@@ -1107,6 +1107,18 @@ html, body {
     line-height: 1.5;
 }
 
+.step-gram-val {
+    font-weight: 700;
+    color: var(--amber-400, #fbbf24);
+    background: rgba(245, 158, 11, 0.12);
+    padding: 1px 6px;
+    border-radius: var(--radius-sm, 4px);
+    font-size: 0.95em;
+    display: inline-block;
+    border: 1px solid rgba(245, 158, 11, 0.28);
+    letter-spacing: 0.02em;
+}
+
 /* ==========================================================================
    METHODS / KNOWLEDGE BASE VIEW
    ========================================================================== */

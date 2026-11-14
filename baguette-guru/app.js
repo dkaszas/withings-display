@@ -575,11 +575,179 @@
         // Update portions estimate
         const pieceGrams = Math.round(totalDoughWeight / Math.max(1, currentLoavesCount));
         DOM.displayPortionEstimate.textContent = `(~${pieceGrams}g each)`;
+
+        // Render dynamic steps synchronized with current batch scale & hydration
+        renderRecipeSteps(recipe);
+        if (bakingState.recipe && DOM.bakingModeOverlay && !DOM.bakingModeOverlay.classList.contains('hidden')) {
+            renderBakingStep(bakingState.stepIndex);
+        }
+    }
+
+    // =========================================================================
+    // DYNAMIC STEP QUANTITY RESOLUTION ENGINE
+    // =========================================================================
+    function calculateRecipeQuantities(recipe, flourBasis, targetHydr, loavesCount) {
+        const q = {};
+        let totalDoughWeight = 0;
+        const isMaster = recipe.is_master || (recipe.ingredients && recipe.ingredients.some(i => i.type));
+
+        if (isMaster) {
+            const bassinageThreshold = (currentFormatMode === 'boule' ? (activeFlour?.bassinage_threshold || 66.0) : (activeFlour?.bassinage_threshold || 64.0));
+            const baseWaterPct = Math.min(targetHydr, bassinageThreshold);
+            const bassinageWaterPct = Math.max(0, targetHydr - baseWaterPct);
+
+            let prefermentWaterPct = 0;
+            recipe.ingredients.forEach(ing => {
+                if (ing.water_pct) prefermentWaterPct += ing.water_pct;
+            });
+            const netBaseWaterPct = Math.max(0, baseWaterPct - prefermentWaterPct);
+
+            recipe.ingredients.forEach(ing => {
+                let grams = 0;
+                if (ing.type === 'flour_main') {
+                    grams = Math.round(flourBasis * (ing.pct / 100));
+                    q['flour_main'] = grams + 'g';
+                    q['flour'] = grams + 'g';
+                } else if (ing.type === 'water_base') {
+                    grams = Math.round(flourBasis * (netBaseWaterPct / 100));
+                    q['water_base'] = grams + 'g';
+                    q['water_main'] = grams + 'g';
+                } else if (ing.type === 'water_bassinage') {
+                    grams = Math.round(flourBasis * (bassinageWaterPct / 100));
+                    q['water_bassinage'] = grams + 'g';
+                    q['water_reserved'] = grams + 'g';
+                } else {
+                    grams = Math.round(flourBasis * (ing.pct / 100) * 10) / 10;
+                    if (grams < 1 && grams > 0) grams = grams.toFixed(1);
+                    else if (grams < 10 && (grams % 1 !== 0)) grams = grams.toFixed(1);
+                    else grams = Math.round(grams);
+                    if (ing.type) q[ing.type] = grams + 'g';
+                }
+                totalDoughWeight += parseFloat(grams) || 0;
+
+                const nameLow = ing.name.toLowerCase();
+                const slug = nameLow.replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
+                const fmtGrams = (parseFloat(grams) >= 1 && (parseFloat(grams) % 1 === 0)) ? Math.round(grams) : grams;
+                q[slug] = fmtGrams + 'g';
+
+                if (nameLow.includes('salt') || nameLow.includes('sel')) q['salt'] = fmtGrams + 'g';
+                if (nameLow.includes('yeast') || nameLow.includes('levure')) q['yeast'] = fmtGrams + 'g';
+                if (nameLow.includes('levain') || nameLow.includes('leaven')) q['levain'] = fmtGrams + 'g';
+                if (nameLow.includes('poolish')) q['poolish'] = fmtGrams + 'g';
+                if (nameLow.includes('corn')) q['corn_flour'] = fmtGrams + 'g';
+                if (nameLow.includes('whole wheat')) q['flour_ww'] = fmtGrams + 'g';
+                if (nameLow.includes('white bread') || nameLow.includes('ap')) q['flour_white'] = fmtGrams + 'g';
+                if (nameLow.includes('fermentée') || nameLow.includes('old dough')) q['pate_fermentee'] = fmtGrams + 'g';
+                if (nameLow.includes('olive')) q['olives'] = fmtGrams + 'g';
+                if (nameLow.includes('walnut')) q['walnuts'] = fmtGrams + 'g';
+                if (nameLow.includes('thyme')) q['thyme'] = fmtGrams + 'g';
+                if (nameLow.includes('oat')) q['oat_porridge'] = fmtGrams + 'g';
+                if (nameLow.includes('rye')) q['flour_rye'] = fmtGrams + 'g';
+                if (nameLow.includes('malt')) q['malt'] = fmtGrams + 'g';
+                if (nameLow.includes('ascorbic')) q['ascorbic_acid'] = fmtGrams + 'g';
+                if (nameLow.includes('seed')) q['seeds'] = fmtGrams + 'g';
+                if (nameLow.includes('t80')) q['flour_t80'] = fmtGrams + 'g';
+                if (nameLow.includes('gluten')) q['vital_gluten'] = fmtGrams + 'g';
+                if (nameLow.includes('polydextrose')) q['polydextrose'] = fmtGrams + 'g';
+                if (nameLow.includes('bran')) q['wheat_bran'] = fmtGrams + 'g';
+                if (nameLow.includes('ancient')) q['ancient_grains'] = fmtGrams + 'g';
+            });
+
+            q['water_total'] = Math.round(flourBasis * (targetHydr / 100)) + 'g';
+            q['water_half'] = Math.round(flourBasis * (targetHydr / 100) / 2) + 'g';
+        } else {
+            // OG Literature recipe
+            let totalWaterGrams = 0;
+            (recipe.ingredients || []).forEach(ing => {
+                const pct = ing.pct || 0;
+                let grams = Math.round(flourBasis * (pct / 100) * 10) / 10;
+                if (grams < 1 && grams > 0) grams = grams.toFixed(1);
+                else if (grams < 10 && (grams % 1 !== 0)) grams = grams.toFixed(1);
+                else grams = Math.round(grams);
+                totalDoughWeight += parseFloat(grams) || 0;
+
+                const nameLow = ing.name.toLowerCase();
+                const slug = nameLow.replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
+                const fmtGrams = (parseFloat(grams) >= 1 && (parseFloat(grams) % 1 === 0)) ? Math.round(grams) : grams;
+                q[slug] = fmtGrams + 'g';
+
+                if (nameLow.includes('salt') || nameLow.includes('sel')) q['salt'] = fmtGrams + 'g';
+                if (nameLow.includes('yeast') || nameLow.includes('levure')) q['yeast'] = fmtGrams + 'g';
+                if (nameLow.includes('levain') || nameLow.includes('leaven') || nameLow.includes('starter') || nameLow.includes('motherdough')) q['levain'] = fmtGrams + 'g';
+                if (nameLow.includes('poolish')) q['poolish'] = fmtGrams + 'g';
+                if (nameLow.includes('pâte fermentée') || nameLow.includes('old dough')) q['pate_fermentee'] = fmtGrams + 'g';
+                if (nameLow.includes('bassinage') || (nameLow.includes('water') && (nameLow.includes('reserved') || nameLow.includes('water 2')))) {
+                    q['water_bassinage'] = fmtGrams + 'g';
+                    q['water_reserved'] = fmtGrams + 'g';
+                }
+                if ((nameLow.includes('water') || nameLow.includes('spring water')) && !nameLow.includes('bassinage') && !nameLow.includes('reserved') && !nameLow.includes('water 2')) {
+                    q['water_base'] = fmtGrams + 'g';
+                    q['water_main'] = fmtGrams + 'g';
+                }
+                if (nameLow.includes('water')) {
+                    totalWaterGrams += parseFloat(grams) || 0;
+                }
+                if (nameLow.includes('flour') && !nameLow.includes('levain') && !nameLow.includes('poolish') && !nameLow.includes('corn')) {
+                    if (!q['flour_main']) q['flour_main'] = fmtGrams + 'g';
+                }
+                if (nameLow.includes('white') || nameLow.includes('bread flour') || nameLow.includes('ap') || nameLow.includes('high-gluten')) q['flour_white'] = fmtGrams + 'g';
+                if (nameLow.includes('whole wheat')) q['flour_ww'] = fmtGrams + 'g';
+                if (nameLow.includes('rye')) q['flour_rye'] = fmtGrams + 'g';
+                if (nameLow.includes('t80')) q['flour_t80'] = fmtGrams + 'g';
+                if (nameLow.includes('corn')) q['corn_flour'] = fmtGrams + 'g';
+                if (nameLow.includes('malt')) q['malt'] = fmtGrams + 'g';
+                if (nameLow.includes('ascorbic')) q['ascorbic_acid'] = fmtGrams + 'g';
+                if (nameLow.includes('olive')) q['olives'] = fmtGrams + 'g';
+                if (nameLow.includes('walnut')) q['walnuts'] = fmtGrams + 'g';
+                if (nameLow.includes('thyme')) q['thyme'] = fmtGrams + 'g';
+                if (nameLow.includes('oat') || nameLow.includes('porridge')) q['oat_porridge'] = fmtGrams + 'g';
+                if (nameLow.includes('gluten')) q['vital_gluten'] = fmtGrams + 'g';
+                if (nameLow.includes('polydextrose')) q['polydextrose'] = fmtGrams + 'g';
+                if (nameLow.includes('bran')) q['wheat_bran'] = fmtGrams + 'g';
+                if (nameLow.includes('grain')) q['ancient_grains'] = fmtGrams + 'g';
+                if (nameLow.includes('seed')) q['seeds'] = fmtGrams + 'g';
+            });
+
+            q['water_total'] = Math.round(totalWaterGrams) + 'g';
+            q['water_half'] = Math.round(totalWaterGrams / 2) + 'g';
+            if (q['water_reserved'] && q['salt']) {
+                const resG = parseFloat(q['water_reserved']) || 0;
+                const saltG = parseFloat(q['salt']) || 0;
+                q['salt_solution'] = Math.round(resG + saltG) + 'g';
+            }
+        }
+
+        if (q['poolish']) {
+            const pG = parseFloat(q['poolish']) || 0;
+            q['poolish_flour'] = Math.round(pG / 2) + 'g';
+            q['poolish_water'] = Math.round(pG / 2) + 'g';
+            q['poolish_yeast'] = (pG * 0.0004 >= 1 ? Math.round(pG * 0.0004) : (pG * 0.0004).toFixed(1)) + 'g';
+        }
+
+        const pw = Math.round(totalDoughWeight / Math.max(1, loavesCount));
+        q['piece_weight'] = '~' + pw + 'g';
+        q['total_dough'] = Math.round(totalDoughWeight) + 'g';
+
+        return q;
+    }
+
+    function resolveStepText(text, quantities, wrapHtml = false) {
+        if (!text) return '';
+        return text.replace(/\[\{([^}]+)\}\]/g, (match, token) => {
+            const parts = token.split('|');
+            const key = parts[0].trim();
+            const fallback = parts[1] ? parts[1].trim() : '';
+            let val = quantities[key] || fallback;
+            if (!val) val = match;
+            return wrapHtml ? `<strong class="step-gram-val">[${val}]</strong>` : `[${val}]`;
+        });
     }
 
     function renderRecipeSteps(recipe) {
         if (!DOM.recipeStepsList || !recipe || !recipe.steps) return;
         DOM.recipeStepsList.innerHTML = '';
+
+        const quantities = calculateRecipeQuantities(recipe, currentFlourBasis, currentHydration, currentLoavesCount);
 
         recipe.steps.forEach((step, idx) => {
             const card = document.createElement('div');
@@ -589,7 +757,7 @@
                     <span class="phase-step-name">Phase ${idx + 1}: ${step.title}</span>
                     <span class="phase-step-time">${step.time || ''}</span>
                 </div>
-                <div class="phase-step-desc">${step.text}</div>
+                <div class="phase-step-desc">${resolveStepText(step.text, quantities, true)}</div>
                 ${step.cues ? `<div class="phase-step-cues"><strong>Sensory Cues:</strong> ${step.cues}</div>` : ''}
             `;
             DOM.recipeStepsList.appendChild(card);
@@ -671,10 +839,13 @@
         bakingState.stepIndex = idx;
         const step = recipe.steps[idx];
 
+        const quantities = calculateRecipeQuantities(recipe, currentFlourBasis, currentHydration, currentLoavesCount);
+
+        DOM.bmRecipeSpecs.textContent = `${recipe.book || 'Bread Guru'} • ${currentFlourBasis}g Flour • ${currentHydration}% Hydr • ${activeFlour?.name || 'T65'}`;
         DOM.bmStepBadge.textContent = step.phase ? `Phase ${idx + 1}: ${step.phase}` : `Step ${idx + 1}`;
         DOM.bmStepCounter.textContent = `Step ${idx + 1} of ${recipe.steps.length}`;
         DOM.bmStepTitle.textContent = step.title;
-        DOM.bmStepInstructions.textContent = step.text;
+        DOM.bmStepInstructions.innerHTML = resolveStepText(step.text, quantities, true);
         DOM.bmStepCues.textContent = step.cues || 'Follow tactile resistance and visual volume expansion.';
 
         // Progress Fill
