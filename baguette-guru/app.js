@@ -13,6 +13,7 @@
     let selectedModel = 'gemini-2.5-flash';
     let currentRecipeId = 'modernist_a_plus';
     let currentSourceFilter = 'all';
+    let currentLeavenFilter = 'all'; // 'all' | 'sourdough' | 'yeast' | 'hybrid'
     let currentFlourBasis = 500;
     let currentLoavesCount = 3;
     let currentHydration = 70.5;
@@ -81,6 +82,7 @@
 
         // Unified Recipe Section
         recipeBookFilters: document.getElementById('recipe-book-filters'),
+        recipeLeavenFilters: document.getElementById('recipe-leaven-filters'),
         recipeSelectorPills: document.getElementById('recipe-selector-pills'),
         recipeBookBadge: document.getElementById('recipe-book-badge'),
         displayRecipeTitle: document.getElementById('display-recipe-title'),
@@ -199,6 +201,31 @@
         return list;
     }
 
+    const LEAVEN_FILTERS = [
+        { id: 'all', label: 'Any leavening' },
+        { id: 'sourdough', label: '🫙 Sourdough only' },
+        { id: 'yeast', label: '🧪 Commercial yeast only' },
+        { id: 'hybrid', label: '🔀 Hybrid (both)' }
+    ];
+    const LEAVEN_BADGE = { sourdough: '🫙 Sourdough', yeast: '🧪 Yeast', hybrid: '🔀 Hybrid' };
+
+    function renderLeavenFilters() {
+        if (!DOM.recipeLeavenFilters) return;
+        DOM.recipeLeavenFilters.innerHTML = '';
+        LEAVEN_FILTERS.forEach(lf => {
+            const btn = document.createElement('button');
+            btn.className = `kb-chip ${lf.id === currentLeavenFilter ? 'active' : ''}`;
+            btn.textContent = lf.label;
+            btn.addEventListener('click', () => {
+                DOM.recipeLeavenFilters.querySelectorAll('.kb-chip').forEach(c => c.classList.remove('active'));
+                btn.classList.add('active');
+                currentLeavenFilter = lf.id;
+                renderRecipePills();
+            });
+            DOM.recipeLeavenFilters.appendChild(btn);
+        });
+    }
+
     const SOURCE_FILTERS = [
         { id: 'all', label: 'All Sources' },
         { id: 'master', label: '🌟 Master Methods' },
@@ -236,6 +263,7 @@
         renderKBContent('10_SOURDOUGH_BOULE_AND_BATARD_MASTERY.md');
 
         renderSourceFilters();
+        renderLeavenFilters();
         renderRecipePills();
 
         bindEvents();
@@ -296,7 +324,8 @@
         if (!DOM.recipeSelectorPills) return;
         DOM.recipeSelectorPills.innerHTML = '';
 
-        const all = getAllRecipes();
+        const allRecipes = getAllRecipes();
+        const all = (currentLeavenFilter === 'all') ? allRecipes : allRecipes.filter(r => r.leavening === currentLeavenFilter);
         let filtered = all.filter(r => r.format === currentFormatMode);
 
         if (currentSourceFilter !== 'all') {
@@ -316,6 +345,13 @@
         if (filtered.length === 0) {
             filtered = all.filter(r => r.format === currentFormatMode);
         }
+        if (filtered.length === 0) {
+            filtered = all; // e.g. hybrid boules don't exist → show hybrid baguettes
+        }
+        if (filtered.length === 0) {
+            DOM.recipeSelectorPills.innerHTML = '<span style="font-size: 13px; color: var(--text-muted); padding: 8px 0;">No recipe matches this source + leavening combination.</span>';
+            return;
+        }
 
         // Validate active recipe in filtered set
         if (!filtered.some(r => r.id === currentRecipeId)) {
@@ -330,7 +366,8 @@
 
             const icon = r.is_master ? '🌟' : ((r.format === 'baguette') ? '🥖' : '🍞');
             const sourceTag = r.is_master ? 'Master' : (r.book || '');
-            btn.innerHTML = `${icon} <strong>${r.title}</strong> <small style="opacity: 0.8; font-size: 10px; margin-left: 4px;">(${sourceTag})</small>`;
+            const leavenTag = LEAVEN_BADGE[r.leavening] || '';
+            btn.innerHTML = `${icon} <strong>${r.title}</strong> <small style="opacity: 0.8; font-size: 10px; margin-left: 4px;">(${sourceTag}${leavenTag ? ' · ' + leavenTag : ''})</small>`;
 
             btn.addEventListener('click', () => {
                 DOM.recipeSelectorPills.querySelectorAll('.recipe-pill-btn').forEach(t => t.classList.remove('active'));

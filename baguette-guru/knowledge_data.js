@@ -181,7 +181,7 @@ const RECIPES_BAGUETTE = [
         "note": "Autolysed with base water"
       },
       {
-        "name": "Toasted Corn Flour (175\u00b0C)",
+        "name": "Toasted Corn Flour (175°C)",
         "type": "special",
         "pct": 2.25,
         "note": "Toasted 20 min in oven until hazelnut brown"
@@ -234,7 +234,7 @@ const RECIPES_BAGUETTE = [
         "timer_seconds": 1200,
         "phase": "Prep",
         "cues": "Aroma should be rich, nutty, and hazelnut-like.",
-        "text": "Toast finely milled corn flour at 175\u00b0C (350\u00b0F) for 20 min until golden and fragrant. Cool completely before mixing."
+        "text": "Toast finely milled corn flour at 175°C (350°F) for 20 min until golden and fragrant. Cool completely before mixing."
       },
       {
         "title": "Autolyse Rest",
@@ -258,7 +258,7 @@ const RECIPES_BAGUETTE = [
         "timer_seconds": 2700,
         "phase": "Bulk",
         "cues": "Dough shows initial elasticity and smoothing.",
-        "text": "Perform a 4-edge stretch and fold. Check dough temperature (target 21\u00b0C\u201322\u00b0C)."
+        "text": "Perform a 4-edge stretch and fold. Check dough temperature (target 21°C–22°C)."
       },
       {
         "title": "Bulk Fermentation (Fold #2)",
@@ -298,7 +298,7 @@ const RECIPES_BAGUETTE = [
         "timer_seconds": 4500,
         "phase": "Proof",
         "cues": "Dough springs back slowly when lightly poked.",
-        "text": "Transfer seam-side UP into floured linen couche pleats. Proof at 21\u00b0C until aerated."
+        "text": "Transfer seam-side UP into floured linen couche pleats. Proof at 21°C until aerated."
       },
       {
         "title": "Score & Steam Bake",
@@ -306,9 +306,10 @@ const RECIPES_BAGUETTE = [
         "timer_seconds": 600,
         "phase": "Bake",
         "cues": "Crust is deeply blistered mahogany with singing crunch.",
-        "text": "5 overlapping slashes at 25\u00b0 angle along central axis. Bake at 240\u00b0C with saturated steam for 10 min. Vent steam completely; bake 15 min dry at 230\u00b0C."
+        "text": "5 overlapping slashes at 25° angle along central axis. Bake at 240°C with saturated steam for 10 min. Vent steam completely; bake 15 min dry at 230°C."
       }
-    ]
+    ],
+    "leavening": "hybrid"
   },
   {
     "id": "modernist_levain",
@@ -394,15 +395,15 @@ const RECIPES_BAGUETTE = [
         "timer_seconds": 2700,
         "phase": "Bulk",
         "cues": "Alveoli start developing; dome shape on top.",
-        "text": "Perform 4 gentle coil folds spaced 45 minutes apart at 23\u00b0C\u201324\u00b0C."
+        "text": "Perform 4 gentle coil folds spaced 45 minutes apart at 23°C–24°C."
       },
       {
         "title": "Cold Retard (Pointage au Bac)",
-        "time": "14 hrs @ 4\u00b0C",
+        "time": "14 hrs @ 4°C",
         "timer_seconds": 50400,
         "phase": "Bulk",
         "cues": "Chilled dough firm to touch with micro-blistering.",
-        "text": "Transfer bulk dough into oiled tub and refrigerate overnight at 4\u00b0C."
+        "text": "Transfer bulk dough into oiled tub and refrigerate overnight at 4°C."
       },
       {
         "title": "Divide & Preshape Cold",
@@ -426,7 +427,7 @@ const RECIPES_BAGUETTE = [
         "timer_seconds": 3600,
         "phase": "Proof",
         "cues": "Puffy and airy; delicate surface skin.",
-        "text": "Proof seam-side UP in linen couche pleats at 23\u00b0C."
+        "text": "Proof seam-side UP in linen couche pleats at 23°C."
       },
       {
         "title": "Score & Steam Bake",
@@ -434,15 +435,16 @@ const RECIPES_BAGUETTE = [
         "timer_seconds": 600,
         "phase": "Bake",
         "cues": "Prominent ears burst open; deep caramelized blisters.",
-        "text": "5 cuts at 20\u00b0 angle. Bake at 245\u00b0C with saturated steam for 10 min, vent oven, bake 16 min at 230\u00b0C."
+        "text": "5 cuts at 20° angle. Bake at 245°C with saturated steam for 10 min, vent oven, bake 16 min at 230°C."
       }
-    ]
+    ],
+    "leavening": "sourdough"
   },
   {
     "id": "lanio_tradition_levain",
     "title": "Jean-Marie Lanio: Baguette de Tradition au Levain",
     "book": "All About Baguette (p. 34)",
-    "author": "Jean-Marie Lanio & J\u00e9r\u00e9my Ballester (INBP)",
+    "author": "Jean-Marie Lanio & Jérémy Ballester (INBP)",
     "subtitle": "The definitive French INBP benchmark: 100% Farine de Tradition T65 with liquid levain and micro-yeast.",
     "leavening_type": "Hybrid (Liquid Levain + Fresh Yeast)",
     "base_hydration": 72.0,
@@ -460,10 +462,10 @@ const RECIPES_BAGUETTE = [
         "name": "Base Water (Autolyse)",
         "type": "water_base",
         "pct": 53.5,
-        "note": "Coulage base temp: 54\u00b0C - (T\u00b0Room + T\u00b0Flour)"
+        "note": "Coulage base temp: 54°C - (T°Room + T°Flour)"
       },
       {
-        "name": "Bassinage Water (Fin de p\u00e9trissage)",
+        "name": "Bassinage Water (Fin de pétrissage)",
         "type": "water_bassinage",
         "pct": 6.0,
         "note": "Added at end of mix to loosen crumb"
@@ -474,10 +476,10 @@ const RECIPES_BAGUETTE = [
         "pct": 25.0,
         "flour_pct": 12.5,
         "water_pct": 12.5,
-        "note": "100% hydr., fermented at 28\u00b0C"
+        "note": "100% hydr., fermented at 28°C"
       },
       {
-        "name": "Fresh Yeast (Levure fra\u00eeche)",
+        "name": "Fresh Yeast (Levure fraîche)",
         "type": "yeast",
         "pct": 0.7,
         "note": "Or 0.23% Instant Dry Yeast"
@@ -499,7 +501,7 @@ const RECIPES_BAGUETTE = [
         "text": "Mix flour and base water only. Cover and rest for 60 min to fully hydrate T65 proteins."
       },
       {
-        "title": "P\u00e9trissage (Mixing)",
+        "title": "Pétrissage (Mixing)",
         "time": "8 min",
         "timer_seconds": 480,
         "phase": "Mixing",
@@ -512,18 +514,18 @@ const RECIPES_BAGUETTE = [
         "timer_seconds": 3600,
         "phase": "Bulk",
         "cues": "Dough develops body and tension after fold.",
-        "text": "Bulk at 24\u00b0C. Give one gentle fold (rabat) at the 45-minute mark."
+        "text": "Bulk at 24°C. Give one gentle fold (rabat) at the 45-minute mark."
       },
       {
         "title": "Blocage au Froid (Cold Retard)",
-        "time": "15 hrs @ 5\u00b0C",
+        "time": "15 hrs @ 5°C",
         "timer_seconds": 54000,
         "phase": "Bulk",
         "cues": "Dough firms up and accumulates intense maltose.",
-        "text": "Cover in a sealed container and refrigerate at 4\u00b0C\u20136\u00b0C for 15 hours (Pointage au bac)."
+        "text": "Cover in a sealed container and refrigerate at 4°C–6°C for 15 hours (Pointage au bac)."
       },
       {
-        "title": "Division & D\u00e9tente",
+        "title": "Division & Détente",
         "time": "20 min",
         "timer_seconds": 1200,
         "phase": "Preshape",
@@ -531,7 +533,7 @@ const RECIPES_BAGUETTE = [
         "text": "Divide cold dough into 3 pieces (~325g). Shape into loose rolls. Rest 20 min covered."
       },
       {
-        "title": "Fa\u00e7onnage (Final Shaping)",
+        "title": "Façonnage (Final Shaping)",
         "time": "10 min",
         "timer_seconds": 600,
         "phase": "Shape",
@@ -539,12 +541,12 @@ const RECIPES_BAGUETTE = [
         "text": "Classic French two-fold shaping, roll to 38cm on couche canvas."
       },
       {
-        "title": "Appr\u00eat (Couche Proof)",
+        "title": "Apprêt (Couche Proof)",
         "time": "60 min",
         "timer_seconds": 3600,
         "phase": "Proof",
         "cues": "Light, pillowy spring.",
-        "text": "Rest seam-side up in couche pleats at 24\u00b0C."
+        "text": "Rest seam-side up in couche pleats at 24°C."
       },
       {
         "title": "Grignage & Cuisson (Bake)",
@@ -552,15 +554,16 @@ const RECIPES_BAGUETTE = [
         "timer_seconds": 600,
         "phase": "Bake",
         "cues": "Deep hazelnut color, jagged golden ears.",
-        "text": "5 slashes along axis. Bake at 250\u00b0C with heavy steam for 10 min, reduce to 230\u00b0C for 14 min."
+        "text": "5 slashes along axis. Bake at 250°C with heavy steam for 10 min, reduce to 230°C for 14 min."
       }
-    ]
+    ],
+    "leavening": "hybrid"
   },
   {
     "id": "lanio_pointage_bac",
     "title": "Jean-Marie Lanio: Pointage au Bac (Cold Bulk Retard)",
     "book": "All About Baguette (p. 42)",
-    "author": "Jean-Marie Lanio & J\u00e9r\u00e9my Ballester",
+    "author": "Jean-Marie Lanio & Jérémy Ballester",
     "subtitle": "16-hour cold bulk tub fermentation for maximum blistered skin and effortless scoring.",
     "leavening_type": "Hybrid (Poolish + Yeast)",
     "base_hydration": 70.0,
@@ -592,7 +595,7 @@ const RECIPES_BAGUETTE = [
         "pct": 40.0,
         "flour_pct": 20.0,
         "water_pct": 20.0,
-        "note": "12-15h poolish at 18\u00b0C"
+        "note": "12-15h poolish at 18°C"
       },
       {
         "name": "Fresh Yeast",
@@ -614,7 +617,7 @@ const RECIPES_BAGUETTE = [
         "timer_seconds": 43200,
         "phase": "Prep",
         "cues": "Surface wrinkled and concave, full of pinhead bubbles.",
-        "text": "Mix equal parts flour and water with a tiny pinch of yeast. Rest 12-14h at 18\u00b0C."
+        "text": "Mix equal parts flour and water with a tiny pinch of yeast. Rest 12-14h at 18°C."
       },
       {
         "title": "Autolyse",
@@ -642,11 +645,11 @@ const RECIPES_BAGUETTE = [
       },
       {
         "title": "Pointage au Bac (Cold Bulk)",
-        "time": "16 hrs @ 4\u00b0C",
+        "time": "16 hrs @ 4°C",
         "timer_seconds": 57600,
         "phase": "Bulk",
         "cues": "Doubled in volume, bubbly, cold and firm.",
-        "text": "Seal tub and place in refrigerator at 4\u00b0C for 16 hours."
+        "text": "Seal tub and place in refrigerator at 4°C for 16 hours."
       },
       {
         "title": "Divide Cold & Shape",
@@ -670,9 +673,10 @@ const RECIPES_BAGUETTE = [
         "timer_seconds": 600,
         "phase": "Bake",
         "cues": "Explosive oven spring from cold dough thermal shock.",
-        "text": "Score 5 slashes. Bake at 245\u00b0C with steam for 10 min, then 14 min dry."
+        "text": "Score 5 slashes. Bake at 245°C with steam for 10 min, then 14 min dry."
       }
-    ]
+    ],
+    "leavening": "yeast"
   },
   {
     "id": "lanio_ancienne",
@@ -680,7 +684,7 @@ const RECIPES_BAGUETTE = [
     "book": "All About Baguette (p. 56)",
     "author": "Jean-Marie Lanio",
     "subtitle": "High hydration (74%), minimal mechanical knead, wide irregular honeycombed alveoli.",
-    "leavening_type": "Hybrid (P\u00e2te Ferment\u00e9e + Yeast)",
+    "leavening_type": "Hybrid (Pâte Fermentée + Yeast)",
     "base_hydration": 74.0,
     "flour_basis": 500,
     "base_yield": 3,
@@ -705,7 +709,7 @@ const RECIPES_BAGUETTE = [
         "note": "Essential for 74% hydration"
       },
       {
-        "name": "P\u00e2te Ferment\u00e9e (Old Dough)",
+        "name": "Pâte Fermentée (Old Dough)",
         "type": "preferment",
         "pct": 20.0,
         "flour_pct": 15.0,
@@ -748,7 +752,7 @@ const RECIPES_BAGUETTE = [
         "timer_seconds": 2400,
         "phase": "Bulk",
         "cues": "Noticeably aerated with huge pockets of gas.",
-        "text": "Bulk at 23\u00b0C. Perform 4 sets of gentle folds to build structural support."
+        "text": "Bulk at 23°C. Perform 4 sets of gentle folds to build structural support."
       },
       {
         "title": "Divide & Rustic Shape",
@@ -772,9 +776,10 @@ const RECIPES_BAGUETTE = [
         "timer_seconds": 600,
         "phase": "Bake",
         "cues": "Extreme ear tearing with honeycombed interior.",
-        "text": "Single long slash or 3 bold cuts. Bake at 245\u00b0C with steam 10 min, vent 15 min."
+        "text": "Single long slash or 3 bold cuts. Bake at 245°C with steam 10 min, vent 15 min."
       }
-    ]
+    ],
+    "leavening": "yeast"
   },
   {
     "id": "tartine_baguette",
@@ -798,7 +803,7 @@ const RECIPES_BAGUETTE = [
         "name": "Base Water (Autolyse)",
         "type": "water_base",
         "pct": 34.0,
-        "note": "Warm water (26\u00b0C / 78\u00b0F)"
+        "note": "Warm water (26°C / 78°F)"
       },
       {
         "name": "Bassinage Water",
@@ -836,7 +841,7 @@ const RECIPES_BAGUETTE = [
         "timer_seconds": 43200,
         "phase": "Prep",
         "cues": "Both pre-ferments are bubbly and buoyant.",
-        "text": "Set up poolish with pinch of yeast. Feed leaven. Rest overnight at cool room temp (18\u00b0C\u201320\u00b0C)."
+        "text": "Set up poolish with pinch of yeast. Feed leaven. Rest overnight at cool room temp (18°C–20°C)."
       },
       {
         "title": "Autolyse",
@@ -860,7 +865,7 @@ const RECIPES_BAGUETTE = [
         "timer_seconds": 2400,
         "phase": "Bulk",
         "cues": "Dough shows 30% volume expansion with domed edges.",
-        "text": "Turn dough in bowl every 40 min for first 2 hours at 24\u00b0C\u201326\u00b0C."
+        "text": "Turn dough in bowl every 40 min for first 2 hours at 24°C–26°C."
       },
       {
         "title": "Preshape & Rest",
@@ -880,7 +885,7 @@ const RECIPES_BAGUETTE = [
       },
       {
         "title": "Couche Proof",
-        "time": "2.5 hrs @ 22\u00b0C",
+        "time": "2.5 hrs @ 22°C",
         "timer_seconds": 9000,
         "phase": "Proof",
         "cues": "Puffier, delicate, buoyant to touch.",
@@ -892,9 +897,10 @@ const RECIPES_BAGUETTE = [
         "timer_seconds": 600,
         "phase": "Bake",
         "cues": "Golden brown, paper-thin crisp crust.",
-        "text": "5 swift slashes. Bake at 245\u00b0C with heavy saturated steam for 12 min; vent for 13 min."
+        "text": "5 swift slashes. Bake at 245°C with heavy saturated steam for 12 min; vent for 13 min."
       }
-    ]
+    ],
+    "leavening": "hybrid"
   },
   {
     "id": "perfect_loaf_baguette",
@@ -918,7 +924,7 @@ const RECIPES_BAGUETTE = [
         "name": "Base Water (Autolyse)",
         "type": "water_base",
         "pct": 54.0,
-        "note": "At 26\u00b0C (78\u00b0F)"
+        "note": "At 26°C (78°F)"
       },
       {
         "name": "Bassinage Water",
@@ -932,7 +938,7 @@ const RECIPES_BAGUETTE = [
         "pct": 16.0,
         "flour_pct": 8.0,
         "water_pct": 8.0,
-        "note": "Built 5h prior at 26\u00b0C"
+        "note": "Built 5h prior at 26°C"
       },
       {
         "name": "Fine Sea Salt",
@@ -948,7 +954,7 @@ const RECIPES_BAGUETTE = [
         "timer_seconds": 18000,
         "phase": "Prep",
         "cues": "Aromas of sweet milk and green apple; floating sample.",
-        "text": "Mix starter, flour, and warm water. Rest at 26\u00b0C until ripe, bubbly, and sweet."
+        "text": "Mix starter, flour, and warm water. Rest at 26°C until ripe, bubbly, and sweet."
       },
       {
         "title": "Autolyse",
@@ -980,15 +986,15 @@ const RECIPES_BAGUETTE = [
         "timer_seconds": 2700,
         "phase": "Bulk",
         "cues": "Dough holds its shape and releases from bowl cleanly.",
-        "text": "Perform 3 sets of coil folds spaced 45 minutes apart at 24\u00b0C."
+        "text": "Perform 3 sets of coil folds spaced 45 minutes apart at 24°C."
       },
       {
         "title": "Cold Bulk Retard",
-        "time": "14 hrs @ 4\u00b0C",
+        "time": "14 hrs @ 4°C",
         "timer_seconds": 50400,
         "phase": "Bulk",
         "cues": "Chilled dough with fine skin blisters.",
-        "text": "Refrigerate bulk dough overnight at 4\u00b0C (39\u00b0F)."
+        "text": "Refrigerate bulk dough overnight at 4°C (39°F)."
       },
       {
         "title": "Preshape & Relax",
@@ -1012,7 +1018,7 @@ const RECIPES_BAGUETTE = [
         "timer_seconds": 3600,
         "phase": "Proof",
         "cues": "Aerated and buoyant.",
-        "text": "Proof seam-side UP at 24\u00b0C for 60 min."
+        "text": "Proof seam-side UP at 24°C for 60 min."
       },
       {
         "title": "Lava Rock Steam Bake",
@@ -1020,9 +1026,10 @@ const RECIPES_BAGUETTE = [
         "timer_seconds": 600,
         "phase": "Bake",
         "cues": "Deep blistered ears and singing crust.",
-        "text": "5 cuts at 25\u00b0 angle. Bake on stone at 245\u00b0C with lava rock steam 10 min, vent 15 min."
+        "text": "5 cuts at 25° angle. Bake on stone at 245°C with lava rock steam 10 min, vent 15 min."
       }
-    ]
+    ],
+    "leavening": "sourdough"
   },
   {
     "id": "forkish_poolish_baguette",
@@ -1046,7 +1053,7 @@ const RECIPES_BAGUETTE = [
         "name": "Base Water",
         "type": "water_base",
         "pct": 25.0,
-        "note": "Warm water (26\u00b0C)"
+        "note": "Warm water (26°C)"
       },
       {
         "name": "Bassinage Water",
@@ -1082,7 +1089,7 @@ const RECIPES_BAGUETTE = [
         "timer_seconds": 43200,
         "phase": "Prep",
         "cues": "Frothy surface bubbling vigorously.",
-        "text": "Mix poolish with flour, water, and tiny pinch of yeast. Rest 12-14h at 21\u00b0C."
+        "text": "Mix poolish with flour, water, and tiny pinch of yeast. Rest 12-14h at 21°C."
       },
       {
         "title": "Pincer Mix by Hand",
@@ -1098,7 +1105,7 @@ const RECIPES_BAGUETTE = [
         "timer_seconds": 1800,
         "phase": "Bulk",
         "cues": "Dough increases 2.5x in volume.",
-        "text": "Perform 3 stretch-and-folds during the first 1.5 hours at 24\u00b0C."
+        "text": "Perform 3 stretch-and-folds during the first 1.5 hours at 24°C."
       },
       {
         "title": "Divide & Preshape",
@@ -1130,9 +1137,10 @@ const RECIPES_BAGUETTE = [
         "timer_seconds": 600,
         "phase": "Bake",
         "cues": "Dark amber blistered crust.",
-        "text": "Bake at 245\u00b0C with cast iron steam pan for 10 min, vent 15 min."
+        "text": "Bake at 245°C with cast iron steam pan for 10 min, vent 15 min."
       }
-    ]
+    ],
+    "leavening": "yeast"
   },
   {
     "id": "king_arthur_classic",
@@ -1234,15 +1242,16 @@ const RECIPES_BAGUETTE = [
         "timer_seconds": 600,
         "phase": "Bake",
         "cues": "Golden brown, shatteringly crisp.",
-        "text": "3-5 cuts. Bake at 235\u00b0C with steam pan for 10 min, vent 14 min."
+        "text": "3-5 cuts. Bake at 235°C with steam pan for 10 min, vent 14 min."
       }
-    ]
+    ],
+    "leavening": "yeast"
   },
   {
     "id": "poilane_rustic",
-    "title": "Apollonia Poil\u00e2ne: Baguette Parisienne",
-    "book": "Poil\u00e2ne: Secrets of the World-Famous Bread Bakery (p. 74)",
-    "author": "Apollonia Poil\u00e2ne",
+    "title": "Apollonia Poilâne: Baguette Parisienne",
+    "book": "Poilâne: Secrets of the World-Famous Bread Bakery (p. 74)",
+    "author": "Apollonia Poilâne",
     "subtitle": "Stiff sourdough levain (levain dur), stoneground wheat, rustic French country crumb.",
     "leavening_type": "Pure Sourdough (Stiff Levain)",
     "base_hydration": 70.0,
@@ -1274,7 +1283,7 @@ const RECIPES_BAGUETTE = [
         "pct": 20.0,
         "flour_pct": 12.0,
         "water_pct": 8.0,
-        "note": "Traditional Poil\u00e2ne stiff sourdough starter"
+        "note": "Traditional Poilâne stiff sourdough starter"
       },
       {
         "name": "Guerande Grey Sea Salt",
@@ -1290,7 +1299,7 @@ const RECIPES_BAGUETTE = [
         "timer_seconds": 21600,
         "phase": "Prep",
         "cues": "Dense ball quadruples in size with winey aroma.",
-        "text": "Feed stiff levain with stoneground flour and water. Ferment at 24\u00b0C."
+        "text": "Feed stiff levain with stoneground flour and water. Ferment at 24°C."
       },
       {
         "title": "Fraisage (Hand Mix)",
@@ -1306,7 +1315,7 @@ const RECIPES_BAGUETTE = [
         "timer_seconds": 2700,
         "phase": "Bulk",
         "cues": "Deep wheaty aroma with lactic richness.",
-        "text": "Rest at 22\u00b0C. Turn every hour for the first 3 hours."
+        "text": "Rest at 22°C. Turn every hour for the first 3 hours."
       },
       {
         "title": "Preshape & Rest",
@@ -1338,9 +1347,10 @@ const RECIPES_BAGUETTE = [
         "timer_seconds": 600,
         "phase": "Bake",
         "cues": "Thick caramelized crust, chewy open crumb.",
-        "text": "Single deep slash. Bake at 240\u00b0C with steam 10 min, vent 16 min."
+        "text": "Single deep slash. Bake at 240°C with steam 10 min, vent 16 min."
       }
-    ]
+    ],
+    "leavening": "sourdough"
   }
 ];
 
@@ -1355,7 +1365,7 @@ const RECIPES_BOULE = [
     "base_hydration": 75.0,
     "flour_basis": 450,
     "base_yield": 1,
-    "unit_name": "Boule / B\u00e2tard",
+    "unit_name": "Boule / Bâtard",
     "ingredients": [
       {
         "name": "White Bread Flour (90%)",
@@ -1373,7 +1383,7 @@ const RECIPES_BOULE = [
         "name": "Base Water (Autolyse)",
         "type": "water_base",
         "pct": 60.0,
-        "note": "Warm water (26\u00b0C / 78\u00b0F)"
+        "note": "Warm water (26°C / 78°F)"
       },
       {
         "name": "Bassinage Water",
@@ -1427,7 +1437,7 @@ const RECIPES_BOULE = [
         "timer_seconds": 1800,
         "phase": "Bulk",
         "cues": "Dough expands by 30%, aerated, releases cleanly from bowl.",
-        "text": "Perform stretch-and-folds every 30 min for first 2.5 hours at 25\u00b0C\u201326\u00b0C. Handle gently toward end."
+        "text": "Perform stretch-and-folds every 30 min for first 2.5 hours at 25°C–26°C. Handle gently toward end."
       },
       {
         "title": "Preshape into Round",
@@ -1435,31 +1445,31 @@ const RECIPES_BOULE = [
         "timer_seconds": 1500,
         "phase": "Preshape",
         "cues": "Round sits tall with smooth, taut top skin.",
-        "text": "Tip dough onto lightly floured surface. Work into a loose round with bench knife. Rest 25 min uncovered (*d\u00e9tente*)."
+        "text": "Tip dough onto lightly floured surface. Work into a loose round with bench knife. Rest 25 min uncovered (*détente*)."
       },
       {
-        "title": "Final Shape (Boule or B\u00e2tard)",
+        "title": "Final Shape (Boule or Bâtard)",
         "time": "10 min",
         "timer_seconds": 600,
         "phase": "Shape",
-        "cues": "Taut surface skin with tension (*la cl\u00e9* on bottom).",
+        "cues": "Taut surface skin with tension (*la clé* on bottom).",
         "text": "Flip seam-side up. Fold bottom up, sides in, roll top down. Cupped hands create surface tension. Invert into rice-floured banneton."
       },
       {
         "title": "Cold Retardation",
-        "time": "12-16 hrs @ 4\u00b0C",
+        "time": "12-16 hrs @ 4°C",
         "timer_seconds": 43200,
         "phase": "Proof",
         "cues": "Dough is firm, slightly aerated, and chilled through.",
-        "text": "Cover banneton with bag and refrigerate overnight at 3\u00b0C\u20135\u00b0C."
+        "text": "Cover banneton with bag and refrigerate overnight at 3°C–5°C."
       },
       {
         "title": "Dutch Oven Pre-Heat",
         "time": "60 min",
         "timer_seconds": 3600,
         "phase": "Bake",
-        "cues": "Cast iron is scorching hot (250\u00b0C / 485\u00b0F).",
-        "text": "Preheat heavy Dutch oven with lid inside oven at 250\u00b0C for 60 minutes."
+        "cues": "Cast iron is scorching hot (250°C / 485°F).",
+        "text": "Preheat heavy Dutch oven with lid inside oven at 250°C for 60 minutes."
       },
       {
         "title": "Score & Bake (Lid ON)",
@@ -1467,7 +1477,7 @@ const RECIPES_BOULE = [
         "timer_seconds": 1200,
         "phase": "Bake",
         "cues": "Steam trapped; loaf springs upward violently.",
-        "text": "Tip cold loaf onto parchment. Single long crescent slash at 30\u00b0 angle (10mm deep). Drop into pot; seal lid. Bake 20 min @ 245\u00b0C."
+        "text": "Tip cold loaf onto parchment. Single long crescent slash at 30° angle (10mm deep). Drop into pot; seal lid. Bake 20 min @ 245°C."
       },
       {
         "title": "Bake (Lid OFF)",
@@ -1475,13 +1485,14 @@ const RECIPES_BOULE = [
         "timer_seconds": 1500,
         "phase": "Bake",
         "cues": "Crust caramelizes into deep blistered mahogany (*le chant du pain*).",
-        "text": "Remove lid. Continue baking at 225\u00b0C for 22-25 min until dark blistered mahogany."
+        "text": "Remove lid. Continue baking at 225°C for 22-25 min until dark blistered mahogany."
       }
-    ]
+    ],
+    "leavening": "sourdough"
   },
   {
     "id": "tartine_whole_wheat",
-    "title": "Chad Robertson: Tartine 50% Whole Wheat B\u00e2tard",
+    "title": "Chad Robertson: Tartine 50% Whole Wheat Bâtard",
     "book": "Tartine Bread (p. 112)",
     "author": "Chad Robertson",
     "subtitle": "50% whole wheat, 80% high hydration, sweet nutty bran, custardy open interior.",
@@ -1489,7 +1500,7 @@ const RECIPES_BOULE = [
     "base_hydration": 80.0,
     "flour_basis": 450,
     "base_yield": 1,
-    "unit_name": "B\u00e2tard",
+    "unit_name": "Bâtard",
     "ingredients": [
       {
         "name": "Stoneground Whole Wheat (50%)",
@@ -1553,7 +1564,7 @@ const RECIPES_BOULE = [
         "timer_seconds": 1800,
         "phase": "Bulk",
         "cues": "Light, aerated dough with visible bran specks.",
-        "text": "Perform 6 sets of gentle turns spaced 30 min apart at 26\u00b0C."
+        "text": "Perform 6 sets of gentle turns spaced 30 min apart at 26°C."
       },
       {
         "title": "Preshape & Rest",
@@ -1564,7 +1575,7 @@ const RECIPES_BOULE = [
         "text": "Preshape into loose cylinder. Bench rest 25 min."
       },
       {
-        "title": "Stitch-Shaping (B\u00e2tard)",
+        "title": "Stitch-Shaping (Bâtard)",
         "time": "10 min",
         "timer_seconds": 600,
         "phase": "Shape",
@@ -1573,7 +1584,7 @@ const RECIPES_BOULE = [
       },
       {
         "title": "Cold Retard",
-        "time": "14 hrs @ 4\u00b0C",
+        "time": "14 hrs @ 4°C",
         "timer_seconds": 50400,
         "phase": "Proof",
         "cues": "Cold and firm.",
@@ -1585,7 +1596,7 @@ const RECIPES_BOULE = [
         "timer_seconds": 1320,
         "phase": "Bake",
         "cues": "Steam trapped; maximum oven spring.",
-        "text": "Score single long crescent cut. Bake at 245\u00b0C lid ON for 22 min."
+        "text": "Score single long crescent cut. Bake at 245°C lid ON for 22 min."
       },
       {
         "title": "Bake (Lid OFF)",
@@ -1593,13 +1604,14 @@ const RECIPES_BOULE = [
         "timer_seconds": 1500,
         "phase": "Bake",
         "cues": "Rich hazelnut-brown whole grain crust.",
-        "text": "Remove lid, bake 25 min at 225\u00b0C."
+        "text": "Remove lid, bake 25 min at 225°C."
       }
-    ]
+    ],
+    "leavening": "sourdough"
   },
   {
     "id": "tartine_olive_herb",
-    "title": "Chad Robertson: Tartine Olive & Walnut B\u00e2tard",
+    "title": "Chad Robertson: Tartine Olive & Walnut Bâtard",
     "book": "Tartine Bread (p. 124)",
     "author": "Chad Robertson",
     "subtitle": "Calamata olives, toasted walnuts, and fresh thyme folded into high-hydration sourdough.",
@@ -1607,7 +1619,7 @@ const RECIPES_BOULE = [
     "base_hydration": 75.0,
     "flour_basis": 450,
     "base_yield": 1,
-    "unit_name": "B\u00e2tard",
+    "unit_name": "Bâtard",
     "ingredients": [
       {
         "name": "White Bread Flour (80%)",
@@ -1697,7 +1709,7 @@ const RECIPES_BOULE = [
         "timer_seconds": 3600,
         "phase": "Bulk",
         "cues": "Dough is airy with trapped aromatic air pockets.",
-        "text": "Continue bulk at 25\u00b0C with 2 gentle turns."
+        "text": "Continue bulk at 25°C with 2 gentle turns."
       },
       {
         "title": "Preshape & Rest",
@@ -1708,16 +1720,16 @@ const RECIPES_BOULE = [
         "text": "Preshape into oval. Bench rest 25 min."
       },
       {
-        "title": "Shape B\u00e2tard",
+        "title": "Shape Bâtard",
         "time": "10 min",
         "timer_seconds": 600,
         "phase": "Shape",
-        "cues": "Taut oval b\u00e2tard.",
-        "text": "Shape into tight b\u00e2tard. Transfer to oval banneton."
+        "cues": "Taut oval bâtard.",
+        "text": "Shape into tight bâtard. Transfer to oval banneton."
       },
       {
         "title": "Cold Retard",
-        "time": "12 hrs @ 4\u00b0C",
+        "time": "12 hrs @ 4°C",
         "timer_seconds": 43200,
         "phase": "Proof",
         "cues": "Chilled through.",
@@ -1729,9 +1741,10 @@ const RECIPES_BOULE = [
         "timer_seconds": 1200,
         "phase": "Bake",
         "cues": "Fragrant roasted herbs and purple-tinged open crumb.",
-        "text": "Bake in hot Dutch oven: 20 min lid ON @ 245\u00b0C; 25 min lid OFF @ 225\u00b0C."
+        "text": "Bake in hot Dutch oven: 20 min lid ON @ 245°C; 25 min lid OFF @ 225°C."
       }
-    ]
+    ],
+    "leavening": "sourdough"
   },
   {
     "id": "perfect_loaf_beginner",
@@ -1761,7 +1774,7 @@ const RECIPES_BOULE = [
         "name": "Base Water",
         "type": "water_base",
         "pct": 58.0,
-        "note": "At 26\u00b0C"
+        "note": "At 26°C"
       },
       {
         "name": "Bassinage Water",
@@ -1823,7 +1836,7 @@ const RECIPES_BOULE = [
         "timer_seconds": 2700,
         "phase": "Bulk",
         "cues": "Dough increases 30%-40% with domed surface.",
-        "text": "Perform 3 sets of stretch-and-folds spaced 45 minutes apart at 24\u00b0C\u201325\u00b0C."
+        "text": "Perform 3 sets of stretch-and-folds spaced 45 minutes apart at 24°C–25°C."
       },
       {
         "title": "Preshape & Rest",
@@ -1843,7 +1856,7 @@ const RECIPES_BOULE = [
       },
       {
         "title": "Cold Proof",
-        "time": "14 hrs @ 4\u00b0C",
+        "time": "14 hrs @ 4°C",
         "timer_seconds": 50400,
         "phase": "Proof",
         "cues": "Cold and firm; holds razor cut effortlessly.",
@@ -1855,7 +1868,7 @@ const RECIPES_BOULE = [
         "timer_seconds": 1200,
         "phase": "Bake",
         "cues": "Deep expansion along score line.",
-        "text": "Score single crescent cut at 30\u00b0 angle. Bake in Dutch oven @ 245\u00b0C with lid on for 20 min."
+        "text": "Score single crescent cut at 30° angle. Bake in Dutch oven @ 245°C with lid on for 20 min."
       },
       {
         "title": "Vented Bake (Lid OFF)",
@@ -1863,9 +1876,10 @@ const RECIPES_BOULE = [
         "timer_seconds": 1500,
         "phase": "Bake",
         "cues": "Deep golden ear with crispy blisters.",
-        "text": "Remove lid, bake 25 min @ 225\u00b0C."
+        "text": "Remove lid, bake 25 min @ 225°C."
       }
-    ]
+    ],
+    "leavening": "sourdough"
   },
   {
     "id": "perfect_loaf_fifty_fifty",
@@ -1941,7 +1955,7 @@ const RECIPES_BOULE = [
         "timer_seconds": 2700,
         "phase": "Bulk",
         "cues": "Noticeably aerated with pleasant fermented aroma.",
-        "text": "Perform 4 gentle coil folds spaced 45 minutes apart at 25\u00b0C."
+        "text": "Perform 4 gentle coil folds spaced 45 minutes apart at 25°C."
       },
       {
         "title": "Preshape & Rest",
@@ -1961,7 +1975,7 @@ const RECIPES_BOULE = [
       },
       {
         "title": "Cold Retard",
-        "time": "14 hrs @ 4\u00b0C",
+        "time": "14 hrs @ 4°C",
         "timer_seconds": 50400,
         "phase": "Proof",
         "cues": "Cold and firm.",
@@ -1973,9 +1987,10 @@ const RECIPES_BOULE = [
         "timer_seconds": 1200,
         "phase": "Bake",
         "cues": "Dark roasted wheat crust and tender open crumb.",
-        "text": "Bake 20 min lid ON @ 245\u00b0C; 25 min lid OFF @ 225\u00b0C."
+        "text": "Bake 20 min lid ON @ 245°C; 25 min lid OFF @ 225°C."
       }
-    ]
+    ],
+    "leavening": "sourdough"
   },
   {
     "id": "perfect_loaf_oat_porridge",
@@ -2073,7 +2088,7 @@ const RECIPES_BOULE = [
         "timer_seconds": 3600,
         "phase": "Bulk",
         "cues": "Dough is jiggly, full of gas, aerated.",
-        "text": "Perform 3 gentle coil folds at 25\u00b0C until dough is puffy."
+        "text": "Perform 3 gentle coil folds at 25°C until dough is puffy."
       },
       {
         "title": "Preshape & Rest",
@@ -2097,9 +2112,10 @@ const RECIPES_BOULE = [
         "timer_seconds": 1200,
         "phase": "Bake",
         "cues": "Custardy, pudding-like crumb with toasted oat crust.",
-        "text": "Bake in hot Dutch oven 20 min lid ON @ 245\u00b0C; 25 min lid OFF @ 225\u00b0C."
+        "text": "Bake in hot Dutch oven 20 min lid ON @ 245°C; 25 min lid OFF @ 225°C."
       }
-    ]
+    ],
+    "leavening": "sourdough"
   },
   {
     "id": "forkish_overnight_blonde",
@@ -2135,7 +2151,7 @@ const RECIPES_BOULE = [
         "name": "Base Water",
         "type": "water_base",
         "pct": 67.0,
-        "note": "At 26\u00b0C"
+        "note": "At 26°C"
       },
       {
         "name": "Bassinage Water",
@@ -2189,7 +2205,7 @@ const RECIPES_BOULE = [
         "timer_seconds": 3600,
         "phase": "Bulk",
         "cues": "Huge pillowy expansion (2.5x to 3x volume) full of gas.",
-        "text": "Perform 3-4 folds during the first 2 hours. Let ferment undisturbed overnight at cool room temp (18\u00b0C\u201320\u00b0C)."
+        "text": "Perform 3-4 folds during the first 2 hours. Let ferment undisturbed overnight at cool room temp (18°C–20°C)."
       },
       {
         "title": "Shape Seam-Down",
@@ -2201,7 +2217,7 @@ const RECIPES_BOULE = [
       },
       {
         "title": "Final Proof",
-        "time": "3.5 hrs @ 21\u00b0C",
+        "time": "3.5 hrs @ 21°C",
         "timer_seconds": 12600,
         "phase": "Proof",
         "cues": "Finger poke springs back slowly halfway.",
@@ -2213,9 +2229,10 @@ const RECIPES_BOULE = [
         "timer_seconds": 1800,
         "phase": "Bake",
         "cues": "Natural fissured volcanic rupture on top without scoring.",
-        "text": "Invert directly into hot Dutch oven (seam-side UP - no scoring!). Bake 30m lid ON @ 245\u00b0C; 20m lid OFF @ 225\u00b0C."
+        "text": "Invert directly into hot Dutch oven (seam-side UP - no scoring!). Bake 30m lid ON @ 245°C; 20m lid OFF @ 225°C."
       }
-    ]
+    ],
+    "leavening": "sourdough"
   },
   {
     "id": "forkish_field_blend",
@@ -2297,7 +2314,7 @@ const RECIPES_BOULE = [
         "timer_seconds": 2700,
         "phase": "Bulk",
         "cues": "Doubles in volume, airy and bubbly.",
-        "text": "Bulk at 24\u00b0C with 4 stretch-and-folds during the first 3 hours."
+        "text": "Bulk at 24°C with 4 stretch-and-folds during the first 3 hours."
       },
       {
         "title": "Shape & Basket Proof",
@@ -2321,9 +2338,10 @@ const RECIPES_BOULE = [
         "timer_seconds": 1800,
         "phase": "Bake",
         "cues": "Deep volcanic crackling crust with dark mahogany finish.",
-        "text": "Invert seam-side UP into hot pot. Bake 30m lid ON @ 245\u00b0C; 20m lid OFF @ 225\u00b0C."
+        "text": "Invert seam-side UP into hot pot. Bake 30m lid ON @ 245°C; 20m lid OFF @ 225°C."
       }
-    ]
+    ],
+    "leavening": "sourdough"
   },
   {
     "id": "forkish_saturday_white",
@@ -2344,7 +2362,7 @@ const RECIPES_BOULE = [
         "note": "High quality white flour"
       },
       {
-        "name": "Water (Warm 35\u00b0C / 95\u00b0F)",
+        "name": "Water (Warm 35°C / 95°F)",
         "type": "water_base",
         "pct": 72.0,
         "note": "Warm water to accelerate fermentation"
@@ -2369,7 +2387,7 @@ const RECIPES_BOULE = [
         "timer_seconds": 1500,
         "phase": "Autolyse",
         "cues": "Cohesive warm dough.",
-        "text": "Mix flour and warm water (35\u00b0C). Rest 25 min."
+        "text": "Mix flour and warm water (35°C). Rest 25 min."
       },
       {
         "title": "Pincer Mix Salt & Yeast",
@@ -2409,9 +2427,10 @@ const RECIPES_BOULE = [
         "timer_seconds": 1800,
         "phase": "Bake",
         "cues": "Golden yellow and brown fissures across top.",
-        "text": "Invert seam-side UP into scorching Dutch oven. Bake 30m lid ON @ 245\u00b0C; 15m lid OFF @ 225\u00b0C."
+        "text": "Invert seam-side UP into scorching Dutch oven. Bake 30m lid ON @ 245°C; 15m lid OFF @ 225°C."
       }
-    ]
+    ],
+    "leavening": "yeast"
   },
   {
     "id": "modernist_country",
@@ -2491,7 +2510,7 @@ const RECIPES_BOULE = [
       },
       {
         "title": "Bulk Fermentation (3 Folds)",
-        "time": "3.5 hrs @ 24\u00b0C",
+        "time": "3.5 hrs @ 24°C",
         "timer_seconds": 2700,
         "phase": "Bulk",
         "cues": "Check for full gluten development with windowpane test.",
@@ -2507,7 +2526,7 @@ const RECIPES_BOULE = [
       },
       {
         "title": "Final Proof",
-        "time": "14 hrs @ 4\u00b0C",
+        "time": "14 hrs @ 4°C",
         "timer_seconds": 50400,
         "phase": "Proof",
         "cues": "Chilled through in rice-floured cane banneton.",
@@ -2519,15 +2538,16 @@ const RECIPES_BOULE = [
         "timer_seconds": 1320,
         "phase": "Bake",
         "cues": "Symmetric expansion with crispy blistered skin.",
-        "text": "Score box or crescent cut 10mm deep. Bake in combo cooker @ 245\u00b0C with lid on for 22 min; remove lid and bake @ 220\u00b0C for 20 min."
+        "text": "Score box or crescent cut 10mm deep. Bake in combo cooker @ 245°C with lid on for 22 min; remove lid and bake @ 220°C for 20 min."
       }
-    ]
+    ],
+    "leavening": "sourdough"
   },
   {
     "id": "poilane_punition_miche",
-    "title": "Apollonia Poil\u00e2ne: The Punition Master Miche",
-    "book": "Poil\u00e2ne: Secrets of the World-Famous Bread Bakery (p. 42)",
-    "author": "Apollonia Poil\u00e2ne",
+    "title": "Apollonia Poilâne: The Punition Master Miche",
+    "book": "Poilâne: Secrets of the World-Famous Bread Bakery (p. 42)",
+    "author": "Apollonia Poilâne",
     "subtitle": "The iconic 1.8kg Parisian country miche: stoneground T80 wheat, stiff levain, signature 'P' score.",
     "leavening_type": "Pure Sourdough (Stiff Starter)",
     "base_hydration": 70.0,
@@ -2560,7 +2580,7 @@ const RECIPES_BOULE = [
         "note": "Late addition"
       },
       {
-        "name": "Poil\u00e2ne Stiff Levain (60% Hydr)",
+        "name": "Poilâne Stiff Levain (60% Hydr)",
         "type": "levain",
         "pct": 20.0,
         "flour_pct": 12.0,
@@ -2581,7 +2601,7 @@ const RECIPES_BOULE = [
         "timer_seconds": 28800,
         "phase": "Prep",
         "cues": "Dense ball with intense fermentation aroma.",
-        "text": "Feed stiff levain with stoneground flour. Ferment at 22\u00b0C."
+        "text": "Feed stiff levain with stoneground flour. Ferment at 22°C."
       },
       {
         "title": "Fraisage (Hand Smearing)",
@@ -2597,7 +2617,7 @@ const RECIPES_BOULE = [
         "timer_seconds": 3600,
         "phase": "Bulk",
         "cues": "Deep, pungent sourdough aroma, aerated mass.",
-        "text": "Bulk at 21\u00b0C\u201322\u00b0C. Turn every 60 min for first 3 hours."
+        "text": "Bulk at 21°C–22°C. Turn every 60 min for first 3 hours."
       },
       {
         "title": "Boule Shaping for Large Miche",
@@ -2609,7 +2629,7 @@ const RECIPES_BOULE = [
       },
       {
         "title": "Final Proof",
-        "time": "2 hrs @ 22\u00b0C",
+        "time": "2 hrs @ 22°C",
         "timer_seconds": 7200,
         "phase": "Proof",
         "cues": "Gentle bounce, expanded and airy.",
@@ -2621,9 +2641,10 @@ const RECIPES_BOULE = [
         "timer_seconds": 1800,
         "phase": "Bake",
         "cues": "Thick crust, dark chestnut color, hollow thump when tapped.",
-        "text": "Score signature Poil\u00e2ne 'P' or cross. Bake on baking stone with steam: 30 min @ 240\u00b0C, then 25 min @ 215\u00b0C."
+        "text": "Score signature Poilâne 'P' or cross. Bake on baking stone with steam: 30 min @ 240°C, then 25 min @ 215°C."
       }
-    ]
+    ],
+    "leavening": "sourdough"
   },
   {
     "id": "greenway_sf_sourdough",
@@ -2699,15 +2720,15 @@ const RECIPES_BOULE = [
         "timer_seconds": 3600,
         "phase": "Bulk",
         "cues": "Fermentation begins; dough puffs.",
-        "text": "Bulk at 24\u00b0C for 2 hours with 2 folds."
+        "text": "Bulk at 24°C for 2 hours with 2 folds."
       },
       {
         "title": "Extended Cold Bulk Retard",
-        "time": "24 hrs @ 3\u00b0C",
+        "time": "24 hrs @ 3°C",
         "timer_seconds": 86400,
         "phase": "Bulk",
         "cues": "Extreme acetic acid accumulation.",
-        "text": "Transfer covered container to cold refrigerator (3\u00b0C / 37\u00b0F) for full 24 hours."
+        "text": "Transfer covered container to cold refrigerator (3°C / 37°F) for full 24 hours."
       },
       {
         "title": "Preshape & Shape Cold",
@@ -2719,7 +2740,7 @@ const RECIPES_BOULE = [
       },
       {
         "title": "Final Warm Proof",
-        "time": "2.5 hrs @ 24\u00b0C",
+        "time": "2.5 hrs @ 24°C",
         "timer_seconds": 9000,
         "phase": "Proof",
         "cues": "Puffy and airy; aroma is delightfully sour.",
@@ -2731,9 +2752,10 @@ const RECIPES_BOULE = [
         "timer_seconds": 1200,
         "phase": "Bake",
         "cues": "Intense blistering, sharp golden ear, mouthwatering sourdough tang.",
-        "text": "Deep crescent score. Bake 20 min lid ON @ 245\u00b0C; 25 min lid OFF @ 225\u00b0C."
+        "text": "Deep crescent score. Bake 20 min lid ON @ 245°C; 25 min lid OFF @ 225°C."
       }
-    ]
+    ],
+    "leavening": "sourdough"
   }
 ];
 
@@ -2756,13 +2778,13 @@ const OG_RECIPES = [
         "note": "Main dough flour"
       },
       {
-        "name": "Toasted Corn Flour (175\u00b0C)",
+        "name": "Toasted Corn Flour (175°C)",
         "weight": "11.3g",
         "pct": 2.26,
         "note": "Toasted 20 min until hazelnut brown"
       },
       {
-        "name": "Water (Autolyse @ 24\u00b0C)",
+        "name": "Water (Autolyse @ 24°C)",
         "weight": "229g",
         "pct": 45.8,
         "note": "Base mix water"
@@ -2805,7 +2827,7 @@ const OG_RECIPES = [
         "timer_seconds": 1200,
         "phase": "Prep",
         "cues": "Hazelnut brown aroma.",
-        "text": "Toast finely milled corn flour in a 175\u00b0C (350\u00b0F) oven for 20 minutes until golden brown. Cool completely."
+        "text": "Toast finely milled corn flour in a 175°C (350°F) oven for 20 minutes until golden brown. Cool completely."
       },
       {
         "title": "Autolyse",
@@ -2829,7 +2851,7 @@ const OG_RECIPES = [
         "timer_seconds": 2700,
         "phase": "Bulk",
         "cues": "Dough tightens and smooths.",
-        "text": "Bulk ferment at 21\u00b0C. Perform a 4-edge stretch and fold."
+        "text": "Bulk ferment at 21°C. Perform a 4-edge stretch and fold."
       },
       {
         "title": "Bulk Fermentation (Fold 2)",
@@ -2869,7 +2891,7 @@ const OG_RECIPES = [
         "timer_seconds": 4500,
         "phase": "Proof",
         "cues": "Puffy and resilient to light touch.",
-        "text": "Proof seam-side UP in floured linen couche at 21\u00b0C."
+        "text": "Proof seam-side UP in floured linen couche at 21°C."
       },
       {
         "title": "Score & Steam Bake",
@@ -2877,9 +2899,10 @@ const OG_RECIPES = [
         "timer_seconds": 600,
         "phase": "Bake",
         "cues": "Venting steam at 10m is mandatory for crisp crust.",
-        "text": "5 cuts at 25\u00b0 angle. Bake on stone @ 240\u00b0C with steam for 10 min. Vent oven completely; bake 15 min dry at 230\u00b0C."
+        "text": "5 cuts at 25° angle. Bake on stone @ 240°C with steam for 10 min. Vent oven completely; bake 15 min dry at 230°C."
       }
-    ]
+    ],
+    "leavening": "hybrid"
   },
   {
     "id": "og_modernist_levain",
@@ -2899,7 +2922,7 @@ const OG_RECIPES = [
         "note": "Unbleached bread flour"
       },
       {
-        "name": "Base Water (24\u00b0C)",
+        "name": "Base Water (24°C)",
         "weight": "260g",
         "pct": 52.0,
         "note": "Autolyse water"
@@ -2954,15 +2977,15 @@ const OG_RECIPES = [
         "timer_seconds": 2700,
         "phase": "Bulk",
         "cues": "Airy with domed edges.",
-        "text": "Perform 4 sets of coil folds at 24\u00b0C spaced 45 min apart."
+        "text": "Perform 4 sets of coil folds at 24°C spaced 45 min apart."
       },
       {
         "title": "Cold Retard (Pointage au Bac)",
-        "time": "14 hrs @ 4\u00b0C",
+        "time": "14 hrs @ 4°C",
         "timer_seconds": 50400,
         "phase": "Bulk",
         "cues": "Cold and firm; micro-blistering on surface.",
-        "text": "Place bulk tub in refrigerator at 4\u00b0C overnight."
+        "text": "Place bulk tub in refrigerator at 4°C overnight."
       },
       {
         "title": "Divide & Preshape Cold",
@@ -2986,7 +3009,7 @@ const OG_RECIPES = [
         "timer_seconds": 3600,
         "phase": "Proof",
         "cues": "Airy, buoyant spring.",
-        "text": "Proof seam-side UP at 23\u00b0C for 60 min."
+        "text": "Proof seam-side UP at 23°C for 60 min."
       },
       {
         "title": "Steam Bake & Vent",
@@ -2994,9 +3017,10 @@ const OG_RECIPES = [
         "timer_seconds": 600,
         "phase": "Bake",
         "cues": "Deep caramel blisters with crackling ear.",
-        "text": "5 slashes at 20\u00b0 angle. Bake @ 245\u00b0C with steam 10 min, vent 16 min."
+        "text": "5 slashes at 20° angle. Bake @ 245°C with steam 10 min, vent 16 min."
       }
-    ]
+    ],
+    "leavening": "sourdough"
   },
   {
     "id": "og_modernist_country",
@@ -3006,7 +3030,7 @@ const OG_RECIPES = [
     "book_id": "modernist",
     "author": "Nathan Myhrvold & Francisco Migoya",
     "citation": "Volume 6 (Recipe Manual), Page 52",
-    "author_notes": "Modernist Bread: 'By maintaining dough temperature at 24\u00b0C throughout bulk fermentation and retarding in a cane banneton lined with rice flour, this loaf achieves maximal oven spring. Baking in a preheated cast iron combo cooker traps 100% of the loaf\\'s endogenous steam during the first 22 minutes.'",
+    "author_notes": "Modernist Bread: 'By maintaining dough temperature at 24°C throughout bulk fermentation and retarding in a cane banneton lined with rice flour, this loaf achieves maximal oven spring. Baking in a preheated cast iron combo cooker traps 100% of the loaf\\'s endogenous steam during the first 22 minutes.'",
     "base_hydration": 74.0,
     "ingredients": [
       {
@@ -3053,7 +3077,7 @@ const OG_RECIPES = [
         "timer_seconds": 18000,
         "phase": "Prep",
         "cues": "Peak float, domed, pH 4.1.",
-        "text": "Feed levain and ferment at 24\u00b0C until domed."
+        "text": "Feed levain and ferment at 24°C until domed."
       },
       {
         "title": "Autolyse",
@@ -3073,7 +3097,7 @@ const OG_RECIPES = [
       },
       {
         "title": "Bulk Fermentation (3 Folds)",
-        "time": "3.5 hrs @ 24\u00b0C",
+        "time": "3.5 hrs @ 24°C",
         "timer_seconds": 2700,
         "phase": "Bulk",
         "cues": "Dough increases 35% in volume with strong dome.",
@@ -3089,7 +3113,7 @@ const OG_RECIPES = [
       },
       {
         "title": "Banneton Cold Retard",
-        "time": "14 hrs @ 4\u00b0C",
+        "time": "14 hrs @ 4°C",
         "timer_seconds": 50400,
         "phase": "Proof",
         "cues": "Firm, chilled through.",
@@ -3101,9 +3125,10 @@ const OG_RECIPES = [
         "timer_seconds": 1320,
         "phase": "Bake",
         "cues": "Volcanic blistered ear.",
-        "text": "Score single crescent cut. Bake in combo cooker @ 245\u00b0C lid ON for 22 min; lid OFF for 20 min."
+        "text": "Score single crescent cut. Bake in combo cooker @ 245°C lid ON for 22 min; lid OFF for 20 min."
       }
-    ]
+    ],
+    "leavening": "sourdough"
   },
   {
     "id": "og_modernist_ww",
@@ -3123,7 +3148,7 @@ const OG_RECIPES = [
         "note": "Fine stoneground whole grain"
       },
       {
-        "name": "Base Water (30\u00b0C)",
+        "name": "Base Water (30°C)",
         "weight": "288g",
         "pct": 64.0,
         "note": "Warm autolyse water"
@@ -3154,7 +3179,7 @@ const OG_RECIPES = [
         "timer_seconds": 3600,
         "phase": "Autolyse",
         "cues": "Bran flakes soften; dough becomes stretchy.",
-        "text": "Mix whole wheat flour with warm water (30\u00b0C). Rest 60 min."
+        "text": "Mix whole wheat flour with warm water (30°C). Rest 60 min."
       },
       {
         "title": "Incorporate Levain & Salt",
@@ -3170,7 +3195,7 @@ const OG_RECIPES = [
         "timer_seconds": 2100,
         "phase": "Bulk",
         "cues": "Light and aerated.",
-        "text": "Perform 4 gentle folds at 25\u00b0C."
+        "text": "Perform 4 gentle folds at 25°C."
       },
       {
         "title": "Preshape & Shape",
@@ -3182,7 +3207,7 @@ const OG_RECIPES = [
       },
       {
         "title": "Cold Retard",
-        "time": "12 hrs @ 4\u00b0C",
+        "time": "12 hrs @ 4°C",
         "timer_seconds": 43200,
         "phase": "Proof",
         "cues": "Cold and firm.",
@@ -3194,9 +3219,10 @@ const OG_RECIPES = [
         "timer_seconds": 1320,
         "phase": "Bake",
         "cues": "Toasted nutty whole grain aroma.",
-        "text": "Bake in hot pot: 22 min lid ON @ 245\u00b0C; 23 min lid OFF @ 225\u00b0C."
+        "text": "Bake in hot pot: 22 min lid ON @ 245°C; 23 min lid OFF @ 225°C."
       }
-    ]
+    ],
+    "leavening": "sourdough"
   },
   {
     "id": "og_modernist_direct_sourdough",
@@ -3206,7 +3232,7 @@ const OG_RECIPES = [
     "book_id": "modernist",
     "author": "Nathan Myhrvold & Francisco Migoya",
     "citation": "Volume 6 (Recipe Manual), Page 39 & 68",
-    "author_notes": "Modernist Bread: 'Our master sourdough recipe is a pure direct dough leavened exclusively with liquid levain, containing zero commercial yeast. By autolysing the flour and water for 30 minutes, adding a young liquid levain (pH ~4.1), and performing 6 gentle folds during a 4-hour bulk fermentation at 24\u00b0C, it develops a deep lactic profile and soaring oven spring without commercial boosters.'",
+    "author_notes": "Modernist Bread: 'Our master sourdough recipe is a pure direct dough leavened exclusively with liquid levain, containing zero commercial yeast. By autolysing the flour and water for 30 minutes, adding a young liquid levain (pH ~4.1), and performing 6 gentle folds during a 4-hour bulk fermentation at 24°C, it develops a deep lactic profile and soaring oven spring without commercial boosters.'",
     "base_hydration": 71.5,
     "ingredients": [
       {
@@ -3216,7 +3242,7 @@ const OG_RECIPES = [
         "note": "High extraction artisan unbleached flour"
       },
       {
-        "name": "Base Water (24\u00b0C)",
+        "name": "Base Water (24°C)",
         "weight": "315g",
         "pct": 65.6,
         "note": "Autolyse water with flour"
@@ -3271,11 +3297,11 @@ const OG_RECIPES = [
       },
       {
         "title": "Bulk Fermentation (6 Folds)",
-        "time": "4 hrs @ 24\u00b0C",
+        "time": "4 hrs @ 24°C",
         "timer_seconds": 1800,
         "phase": "Bulk",
         "cues": "Increases 40-50% in volume, domed edges, gas bubbles on surface.",
-        "text": "Ferment at 24\u00b0C for 4 hours total. Perform 6 four-edge folds: 1 fold every 30 minutes after the first hour. Rest 30 min after final fold."
+        "text": "Ferment at 24°C for 4 hours total. Perform 6 four-edge folds: 1 fold every 30 minutes after the first hour. Rest 30 min after final fold."
       },
       {
         "title": "Preshape & Bench Rest",
@@ -3295,11 +3321,11 @@ const OG_RECIPES = [
       },
       {
         "title": "Cold Retardation",
-        "time": "12-16 hrs @ 4\u00b0C",
+        "time": "12-16 hrs @ 4°C",
         "timer_seconds": 50400,
         "phase": "Proof",
         "cues": "Cold, firm, matte leathery skin.",
-        "text": "Transfer banneton to refrigerator (4\u00b0C / 39\u00b0F) for 12 to 16 hours."
+        "text": "Transfer banneton to refrigerator (4°C / 39°F) for 12 to 16 hours."
       },
       {
         "title": "Combo Cooker Bake",
@@ -3307,9 +3333,10 @@ const OG_RECIPES = [
         "timer_seconds": 1320,
         "phase": "Bake",
         "cues": "Blistered mahogany crust with dramatic singing ear.",
-        "text": "Preheat Dutch oven to 245\u00b0C. Tip out onto parchment. Score curved crescent cut. Bake 22 min lid ON, then 20 min lid OFF @ 225\u00b0C."
+        "text": "Preheat Dutch oven to 245°C. Tip out onto parchment. Score curved crescent cut. Bake 22 min lid ON, then 20 min lid OFF @ 225°C."
       }
-    ]
+    ],
+    "leavening": "sourdough"
   },
   {
     "id": "og_modernist_modernist_boule",
@@ -3341,7 +3368,7 @@ const OG_RECIPES = [
         "note": "Non-sweet soluble fiber for crumb succulent texture"
       },
       {
-        "name": "Base Water (24\u00b0C)",
+        "name": "Base Water (24°C)",
         "weight": "305g",
         "pct": 63.4,
         "note": "Autolyse water"
@@ -3390,11 +3417,11 @@ const OG_RECIPES = [
       },
       {
         "title": "Bulk Fermentation (4 Folds)",
-        "time": "3.5 hrs @ 25\u00b0C",
+        "time": "3.5 hrs @ 25°C",
         "timer_seconds": 2400,
         "phase": "Bulk",
         "cues": "High elasticity and billowy expansion.",
-        "text": "Ferment at 25\u00b0C for 3.5 hours with 4 four-edge folds spaced 40 min apart."
+        "text": "Ferment at 25°C for 3.5 hours with 4 four-edge folds spaced 40 min apart."
       },
       {
         "title": "Shape & Banneton",
@@ -3406,7 +3433,7 @@ const OG_RECIPES = [
       },
       {
         "title": "Cold Retard",
-        "time": "14 hrs @ 4\u00b0C",
+        "time": "14 hrs @ 4°C",
         "timer_seconds": 50400,
         "phase": "Proof",
         "cues": "Solid cold structure.",
@@ -3418,9 +3445,10 @@ const OG_RECIPES = [
         "timer_seconds": 1320,
         "phase": "Bake",
         "cues": "Glass-like crackled crust.",
-        "text": "Bake in hot cast iron combo cooker: 22 min lid ON @ 245\u00b0C, 18 min lid OFF @ 225\u00b0C."
+        "text": "Bake in hot cast iron combo cooker: 22 min lid ON @ 245°C, 18 min lid OFF @ 225°C."
       }
-    ]
+    ],
+    "leavening": "sourdough"
   },
   {
     "id": "og_modernist_pain_de_campagne",
@@ -3452,7 +3480,7 @@ const OG_RECIPES = [
         "note": "Type 1740 stoneground rye"
       },
       {
-        "name": "Base Water (26\u00b0C)",
+        "name": "Base Water (26°C)",
         "weight": "295g",
         "pct": 60.0,
         "note": "Warm autolyse water"
@@ -3501,7 +3529,7 @@ const OG_RECIPES = [
       },
       {
         "title": "Bulk Fermentation (3 Folds)",
-        "time": "3.5 hrs @ 25\u00b0C",
+        "time": "3.5 hrs @ 25°C",
         "timer_seconds": 2700,
         "phase": "Bulk",
         "cues": "Light, aerated, sweet earthy aroma.",
@@ -3517,7 +3545,7 @@ const OG_RECIPES = [
       },
       {
         "title": "Overnight Cold Retard",
-        "time": "14 hrs @ 4\u00b0C",
+        "time": "14 hrs @ 4°C",
         "timer_seconds": 50400,
         "phase": "Proof",
         "cues": "Cold and firm.",
@@ -3529,9 +3557,10 @@ const OG_RECIPES = [
         "timer_seconds": 1320,
         "phase": "Bake",
         "cues": "Dark rustic mahogany crust.",
-        "text": "Bake in hot cast iron Dutch oven: 22 min lid ON @ 245\u00b0C, 23 min lid OFF @ 220\u00b0C."
+        "text": "Bake in hot cast iron Dutch oven: 22 min lid ON @ 245°C, 23 min lid OFF @ 220°C."
       }
-    ]
+    ],
+    "leavening": "sourdough"
   },
   {
     "id": "og_modernist_90_sourdough",
@@ -3541,7 +3570,7 @@ const OG_RECIPES = [
     "book_id": "modernist",
     "author": "Nathan Myhrvold & Francisco Migoya",
     "citation": "Volume 6 (Recipe Manual), Page 67",
-    "author_notes": "Modernist Bread: 'At 90.4% hydration with 100% natural levain and zero commercial yeast, this dough requires intensive high-speed machine mixing to full gluten development and very cold water (15\u00b0C) to prevent frictional overheating. The dough is so delicate it must be proofed in bran-lined bannetons to prevent linen sticking.'",
+    "author_notes": "Modernist Bread: 'At 90.4% hydration with 100% natural levain and zero commercial yeast, this dough requires intensive high-speed machine mixing to full gluten development and very cold water (15°C) to prevent frictional overheating. The dough is so delicate it must be proofed in bran-lined bannetons to prevent linen sticking.'",
     "base_hydration": 90.4,
     "ingredients": [
       {
@@ -3551,7 +3580,7 @@ const OG_RECIPES = [
         "note": "High strength flour (W 360+)"
       },
       {
-        "name": "Chilled Water (15\u00b0C)",
+        "name": "Chilled Water (15°C)",
         "weight": "407g",
         "pct": 90.4,
         "note": "Chilled water to control friction"
@@ -3582,7 +3611,7 @@ const OG_RECIPES = [
         "timer_seconds": 240,
         "phase": "Mixing",
         "cues": "Wet shaggy mass.",
-        "text": "Combine high-gluten flour, chilled water (15\u00b0C), and levain on low speed."
+        "text": "Combine high-gluten flour, chilled water (15°C), and levain on low speed."
       },
       {
         "title": "Full Gluten Development",
@@ -3594,7 +3623,7 @@ const OG_RECIPES = [
       },
       {
         "title": "Bulk Fermentation (2 Folds)",
-        "time": "2.5 hrs @ 24\u00b0C",
+        "time": "2.5 hrs @ 24°C",
         "timer_seconds": 3600,
         "phase": "Bulk",
         "cues": "Massively aerated, fragile matrix.",
@@ -3610,7 +3639,7 @@ const OG_RECIPES = [
       },
       {
         "title": "Cold Retard",
-        "time": "12-16 hrs @ 13\u00b0C / 4\u00b0C",
+        "time": "12-16 hrs @ 13°C / 4°C",
         "timer_seconds": 46800,
         "phase": "Proof",
         "cues": "Set cold gelatinized structure.",
@@ -3622,9 +3651,10 @@ const OG_RECIPES = [
         "timer_seconds": 1320,
         "phase": "Bake",
         "cues": "Extravagant open gelatinized honeycomb.",
-        "text": "Bake 22 min lid ON @ 245\u00b0C, 20 min lid OFF @ 225\u00b0C."
+        "text": "Bake 22 min lid ON @ 245°C, 20 min lid OFF @ 225°C."
       }
-    ]
+    ],
+    "leavening": "sourdough"
   },
   {
     "id": "og_modernist_ancient_grain",
@@ -3650,7 +3680,7 @@ const OG_RECIPES = [
         "note": "Stoneground ancient grain flour blend"
       },
       {
-        "name": "Water (26\u00b0C)",
+        "name": "Water (26°C)",
         "weight": "370g",
         "pct": 74.0,
         "note": "Coulage adjusted water"
@@ -3687,7 +3717,7 @@ const OG_RECIPES = [
       },
       {
         "title": "Bulk Fermentation (4 Folds)",
-        "time": "3.5 hrs @ 25\u00b0C",
+        "time": "3.5 hrs @ 25°C",
         "timer_seconds": 2400,
         "phase": "Bulk",
         "cues": "Aerated and domed.",
@@ -3703,7 +3733,7 @@ const OG_RECIPES = [
       },
       {
         "title": "Cold Retard",
-        "time": "14 hrs @ 4\u00b0C",
+        "time": "14 hrs @ 4°C",
         "timer_seconds": 50400,
         "phase": "Proof",
         "cues": "Firm chilled loaf.",
@@ -3715,9 +3745,262 @@ const OG_RECIPES = [
         "timer_seconds": 1320,
         "phase": "Bake",
         "cues": "Nutty, deeply caramelized crust.",
-        "text": "Bake 22 min lid ON @ 245\u00b0C, 20 min lid OFF @ 225\u00b0C."
+        "text": "Bake 22 min lid ON @ 245°C, 20 min lid OFF @ 225°C."
       }
-    ]
+    ],
+    "leavening": "sourdough"
+  },
+  {
+    "id": "og_modernist_direct_dough",
+    "format": "boule",
+    "title": "Direct Dough Loaves (Commercial Yeast, No Preferment)",
+    "book": "Modernist Bread",
+    "book_id": "modernist",
+    "author": "Nathan Myhrvold & Francisco Migoya",
+    "citation": "Volume 6 (Recipe Manual), home variation of French Lean Bread (p. 44) — Direct Dough Loaves",
+    "author_notes": "Modernist Bread home variation: a straight dough of bread flour, water, salt and 0.7% instant dry yeast — no poolish, no levain. 'Follow the instructions for French Lean Bread on page 44.' Salt is dissolved in a small reserved portion of the water (20 g) and added after the autolyse. Yields ~1 kg: one large boule/bâtard, two small boules, or baguettes (350 g / 250 g pieces).",
+    "base_hydration": 68.4,
+    "ingredients": [
+      {
+        "name": "Bread Flour",
+        "weight": "585g",
+        "pct": 100.0,
+        "note": "Book: 585 g bread flour"
+      },
+      {
+        "name": "Water (main, with yeast)",
+        "weight": "380g",
+        "pct": 64.96,
+        "note": "Dissolve the yeast in this water, then add flour"
+      },
+      {
+        "name": "Water (reserved, with salt)",
+        "weight": "20g",
+        "pct": 3.42,
+        "note": "Stir salt into this; add after autolyse"
+      },
+      {
+        "name": "Fine Salt",
+        "weight": "12g",
+        "pct": 2.05,
+        "note": "Dissolved in the reserved water"
+      },
+      {
+        "name": "Instant Dry Yeast",
+        "weight": "4.1g",
+        "pct": 0.7,
+        "note": "Commercial yeast only"
+      }
+    ],
+    "steps": [
+      {
+        "title": "Salt Solution",
+        "time": "1 min",
+        "timer_seconds": 60,
+        "phase": "Prep",
+        "cues": "Salt fully dissolved.",
+        "text": "Stir the 12 g salt into the reserved 20 g water and set aside."
+      },
+      {
+        "title": "Mix & Autolyse",
+        "time": "30 min",
+        "timer_seconds": 1800,
+        "phase": "Autolyse",
+        "cues": "Shaggy mass, no dry flour.",
+        "text": "Dissolve 4.1 g instant yeast in 380 g water. Add 585 g bread flour and mix to a shaggy mass. Autolyse 30 min (20–30 min if machine mixing)."
+      },
+      {
+        "title": "Final Mix",
+        "time": "5 min",
+        "timer_seconds": 300,
+        "phase": "Mixing",
+        "cues": "Homogeneous by hand; medium gluten development by machine.",
+        "text": "Add the salt solution and mix until homogeneous (by hand) or to medium gluten development (machine, medium speed). Transfer to a lightly oiled tub and cover."
+      },
+      {
+        "title": "Bulk Ferment — Fold 1",
+        "time": "1 h",
+        "timer_seconds": 3600,
+        "phase": "Bulk",
+        "cues": "Dough relaxing and starting to rise.",
+        "text": "By hand: 3½ h total bulk with 3 four-edge folds, one every hour after the first hour. Rest 1 h, then do fold 1. (By machine: 1½ h total, fold right after mixing and again at 45 min, then 45 min rest.)"
+      },
+      {
+        "title": "Bulk Ferment — Fold 2",
+        "time": "1 h",
+        "timer_seconds": 3600,
+        "phase": "Bulk",
+        "cues": "Gaining strength and volume.",
+        "text": "Perform the second four-edge fold."
+      },
+      {
+        "title": "Bulk Ferment — Fold 3",
+        "time": "1 h",
+        "timer_seconds": 3600,
+        "phase": "Bulk",
+        "cues": "Smooth, airy, holds shape.",
+        "text": "Perform the third four-edge fold."
+      },
+      {
+        "title": "Final Bulk Rest",
+        "time": "30 min",
+        "timer_seconds": 1800,
+        "phase": "Bulk",
+        "cues": "Full gluten development (windowpane).",
+        "text": "Rest 30 min after the final fold."
+      },
+      {
+        "title": "Divide & Preshape",
+        "time": "20 min",
+        "timer_seconds": 1200,
+        "phase": "Shape",
+        "cues": "Relaxed rounds/cylinders.",
+        "text": "Large boule/bâtard: do not divide. Small boule/bâtard: 500 g. Baguette: 350 g; short baguette: 250 g. Preshape and rest 20 min."
+      },
+      {
+        "title": "Shape & Final Proof",
+        "time": "~1¼ h @ 27 °C",
+        "timer_seconds": 4500,
+        "phase": "Proof",
+        "cues": "Fingertip test: dent springs back slowly.",
+        "text": "Shape. Proof at 27 °C: large boule/bâtard 1¼–1½ h, small 1–1¼ h, baguette 45 min–1 h. At 21 °C allow roughly 1½–2 h."
+      },
+      {
+        "title": "Score & Bake",
+        "time": "~40 min @ 245 °C",
+        "timer_seconds": 2400,
+        "phase": "Bake",
+        "cues": "Deep golden crust, hollow sound.",
+        "text": "Score. Bake at 245 °C with steam — at home in a preheated cast-iron combo cooker (lid on for most of the bake, then lid off to finish), or on a stone with a cover for baguettes (~15 min covered + ~10 min uncovered). See the book's French Lean Bread baking table (p. 46) for exact times per size."
+      }
+    ],
+    "leavening": "yeast"
+  },
+  {
+    "id": "og_modernist_direct_country",
+    "format": "boule",
+    "title": "Direct Country-Style Bread (Commercial Yeast)",
+    "book": "Modernist Bread",
+    "book_id": "modernist",
+    "author": "Nathan Myhrvold & Francisco Migoya",
+    "citation": "Volume 6 (Recipe Manual), ingredient variation of Country-Style Bread",
+    "author_notes": "Modernist Bread ingredient variation: the Pain de Campagne flour blend (high-gluten white, whole wheat, dark rye) made as a straight dough with 0.5% instant yeast instead of levain. Book note: regular bread flour can be used with added vital wheat gluten.",
+    "base_hydration": 78.3,
+    "ingredients": [
+      {
+        "name": "High-Gluten Bread Flour",
+        "weight": "420g",
+        "pct": 70.0,
+        "note": "Or bread flour + vital wheat gluten"
+      },
+      {
+        "name": "Whole Wheat Flour",
+        "weight": "90g",
+        "pct": 15.0,
+        "note": ""
+      },
+      {
+        "name": "Dark Rye Flour",
+        "weight": "90g",
+        "pct": 15.0,
+        "note": ""
+      },
+      {
+        "name": "Water (main, with yeast)",
+        "weight": "445g",
+        "pct": 74.17,
+        "note": "Dissolve yeast in this water"
+      },
+      {
+        "name": "Water (reserved, with salt)",
+        "weight": "25g",
+        "pct": 4.17,
+        "note": "Stir salt into this; add after autolyse"
+      },
+      {
+        "name": "Fine Salt",
+        "weight": "12g",
+        "pct": 2.0,
+        "note": ""
+      },
+      {
+        "name": "Instant Dry Yeast",
+        "weight": "3g",
+        "pct": 0.5,
+        "note": "Commercial yeast only"
+      },
+      {
+        "name": "Diastatic Malt Powder",
+        "weight": "2.5g",
+        "pct": 0.42,
+        "note": ""
+      },
+      {
+        "name": "Ascorbic Acid",
+        "weight": "1.25g",
+        "pct": 0.21,
+        "note": "Optional dough strengthener"
+      }
+    ],
+    "steps": [
+      {
+        "title": "Salt Solution",
+        "time": "1 min",
+        "timer_seconds": 60,
+        "phase": "Prep",
+        "cues": "Salt dissolved.",
+        "text": "Stir salt into the reserved 25 g water; set aside."
+      },
+      {
+        "title": "Mix & Autolyse",
+        "time": "30 min",
+        "timer_seconds": 1800,
+        "phase": "Autolyse",
+        "cues": "Shaggy mass.",
+        "text": "Dissolve yeast in 445 g water; add flours, malt and ascorbic acid; mix to a shaggy mass. Autolyse 20–30 min."
+      },
+      {
+        "title": "Final Mix",
+        "time": "5 min",
+        "timer_seconds": 300,
+        "phase": "Mixing",
+        "cues": "Medium gluten development.",
+        "text": "Add the salt solution and mix to medium gluten development. Transfer to an oiled tub, cover."
+      },
+      {
+        "title": "Bulk Ferment (2 Folds)",
+        "time": "2½ h",
+        "timer_seconds": 9000,
+        "phase": "Bulk",
+        "cues": "Full gluten development (windowpane).",
+        "text": "2½ h total; 2 four-edge folds, one every hour after the first hour; 30 min rest after the final fold."
+      },
+      {
+        "title": "Divide, Preshape, Shape",
+        "time": "20 min",
+        "timer_seconds": 1200,
+        "phase": "Shape",
+        "cues": "Taut skin.",
+        "text": "Large boule/bâtard: do not divide; small: 500 g. Preshape, rest 20 min, shape."
+      },
+      {
+        "title": "Final Proof",
+        "time": "1–1½ h @ 27 °C",
+        "timer_seconds": 4500,
+        "phase": "Proof",
+        "cues": "Fingertip test.",
+        "text": "Proof at 27 °C / 65% RH for 1–1½ h (longer, ~2–3 h, at 21 °C)."
+      },
+      {
+        "title": "Score & Bake",
+        "time": "~45 min",
+        "timer_seconds": 2700,
+        "phase": "Bake",
+        "cues": "Dark rustic crust.",
+        "text": "Score and bake with steam per the book's Country-Style Breads baking table (combo cooker at home, lid on then lid off)."
+      }
+    ],
+    "leavening": "yeast"
   },
   {
     "id": "og_lanio_tradition",
@@ -3725,9 +4008,9 @@ const OG_RECIPES = [
     "title": "Baguette de Tradition au Levain",
     "book": "All About Baguette",
     "book_id": "lanio",
-    "author": "Jean-Marie Lanio & J\u00e9r\u00e9my Ballester (INBP)",
+    "author": "Jean-Marie Lanio & Jérémy Ballester (INBP)",
     "citation": "Chapter 2, Page 34",
-    "author_notes": "Jean-Marie Lanio: 'La Baguette de Tradition Fran\u00e7aise au levain is regulated by the D\u00e9cret Pain of 1993: zero chemical additives, no freezing at any stage. The combination of 25% liquid levain and 0.7% fresh yeast yields the holy grail of French baking: an ivory, translucent, open crumb with sweet wheaty sweetness and zero pungent vinegar notes.'",
+    "author_notes": "Jean-Marie Lanio: 'La Baguette de Tradition Française au levain is regulated by the Décret Pain of 1993: zero chemical additives, no freezing at any stage. The combination of 25% liquid levain and 0.7% fresh yeast yields the holy grail of French baking: an ivory, translucent, open crumb with sweet wheaty sweetness and zero pungent vinegar notes.'",
     "base_hydration": 72.0,
     "ingredients": [
       {
@@ -3740,7 +4023,7 @@ const OG_RECIPES = [
         "name": "Base Water (Autolyse)",
         "weight": "267.5g",
         "pct": 53.5,
-        "note": "Coulage: Base temp 54\u00b0C"
+        "note": "Coulage: Base temp 54°C"
       },
       {
         "name": "Bassinage Water (Bassinage fin)",
@@ -3752,10 +4035,10 @@ const OG_RECIPES = [
         "name": "Levain Liquide (100% Hydr)",
         "weight": "125g",
         "pct": 25.0,
-        "note": "Fermented at 28\u00b0C"
+        "note": "Fermented at 28°C"
       },
       {
-        "name": "Levure Fra\u00eeche (Fresh Yeast)",
+        "name": "Levure Fraîche (Fresh Yeast)",
         "weight": "3.5g",
         "pct": 0.7,
         "note": "Or 1.1g Instant Dry Yeast"
@@ -3777,7 +4060,7 @@ const OG_RECIPES = [
         "text": "Mix flour and base water only. Cover and rest for 60 min to fully hydrate T65 proteins."
       },
       {
-        "title": "P\u00e9trissage (Mixing)",
+        "title": "Pétrissage (Mixing)",
         "time": "8 min",
         "timer_seconds": 480,
         "phase": "Mixing",
@@ -3790,18 +4073,18 @@ const OG_RECIPES = [
         "timer_seconds": 3600,
         "phase": "Bulk",
         "cues": "Dough develops body and tension after fold.",
-        "text": "Bulk at 24\u00b0C. Give one gentle fold (rabat) at the 45-minute mark."
+        "text": "Bulk at 24°C. Give one gentle fold (rabat) at the 45-minute mark."
       },
       {
         "title": "Pointage au Bac (Cold Bulk)",
-        "time": "15 hrs @ 5\u00b0C",
+        "time": "15 hrs @ 5°C",
         "timer_seconds": 54000,
         "phase": "Bulk",
         "cues": "Dough firms up and accumulates intense maltose.",
-        "text": "Cover in a sealed container and refrigerate at 4\u00b0C\u20136\u00b0C for 15 hours (Pointage au bac)."
+        "text": "Cover in a sealed container and refrigerate at 4°C–6°C for 15 hours (Pointage au bac)."
       },
       {
-        "title": "Division & D\u00e9tente",
+        "title": "Division & Détente",
         "time": "20 min",
         "timer_seconds": 1200,
         "phase": "Preshape",
@@ -3809,7 +4092,7 @@ const OG_RECIPES = [
         "text": "Divide cold dough into 3 pieces (~325g). Shape into loose rolls. Rest 20 min covered."
       },
       {
-        "title": "Fa\u00e7onnage (Final Shaping)",
+        "title": "Façonnage (Final Shaping)",
         "time": "10 min",
         "timer_seconds": 600,
         "phase": "Shape",
@@ -3817,12 +4100,12 @@ const OG_RECIPES = [
         "text": "Classic French two-fold shaping, roll to 38cm on couche canvas."
       },
       {
-        "title": "Appr\u00eat (Couche Proof)",
+        "title": "Apprêt (Couche Proof)",
         "time": "60 min",
         "timer_seconds": 3600,
         "phase": "Proof",
         "cues": "Light, pillowy spring.",
-        "text": "Rest seam-side up in couche pleats at 24\u00b0C."
+        "text": "Rest seam-side up in couche pleats at 24°C."
       },
       {
         "title": "Grignage & Cuisson (Bake)",
@@ -3830,9 +4113,10 @@ const OG_RECIPES = [
         "timer_seconds": 600,
         "phase": "Bake",
         "cues": "Deep hazelnut color, jagged golden ears.",
-        "text": "5 slashes along axis. Bake at 250\u00b0C with heavy steam for 10 min, reduce to 230\u00b0C for 14 min."
+        "text": "5 slashes along axis. Bake at 250°C with heavy steam for 10 min, reduce to 230°C for 14 min."
       }
-    ]
+    ],
+    "leavening": "hybrid"
   },
   {
     "id": "og_lanio_bac",
@@ -3840,7 +4124,7 @@ const OG_RECIPES = [
     "title": "Tradition: Pointage au Bac",
     "book": "All About Baguette",
     "book_id": "lanio",
-    "author": "Jean-Marie Lanio & J\u00e9r\u00e9my Ballester",
+    "author": "Jean-Marie Lanio & Jérémy Ballester",
     "citation": "Chapter 2, Page 42",
     "author_notes": "Jean-Marie Lanio: 'Pointage au bac (bulk retarding in a tub) allows the baker to shape and bake cold dough directly in the morning. Chilling the dough stops yeast proliferation while alpha-amylase and protease enzymes slowly tenderize the gluten. Cold dough scores with razor sharpness and exhibits explosive oven spring.'",
     "base_hydration": 70.0,
@@ -3867,10 +4151,10 @@ const OG_RECIPES = [
         "name": "Poolish (100% Hydration)",
         "weight": "200g",
         "pct": 40.0,
-        "note": "12-15h poolish at 18\u00b0C"
+        "note": "12-15h poolish at 18°C"
       },
       {
-        "name": "Levure Fra\u00eeche (Fresh Yeast)",
+        "name": "Levure Fraîche (Fresh Yeast)",
         "weight": "2.5g",
         "pct": 0.5,
         "note": "0.17% Instant Dry Yeast"
@@ -3889,7 +4173,7 @@ const OG_RECIPES = [
         "timer_seconds": 43200,
         "phase": "Prep",
         "cues": "Surface wrinkled and concave, full of pinhead bubbles.",
-        "text": "Mix equal parts flour and water with a tiny pinch of yeast. Rest 12-14h at 18\u00b0C."
+        "text": "Mix equal parts flour and water with a tiny pinch of yeast. Rest 12-14h at 18°C."
       },
       {
         "title": "Autolyse",
@@ -3917,11 +4201,11 @@ const OG_RECIPES = [
       },
       {
         "title": "Pointage au Bac (Cold Bulk)",
-        "time": "16 hrs @ 4\u00b0C",
+        "time": "16 hrs @ 4°C",
         "timer_seconds": 57600,
         "phase": "Bulk",
         "cues": "Doubled in volume, bubbly, cold and firm.",
-        "text": "Seal tub and place in refrigerator at 4\u00b0C for 16 hours."
+        "text": "Seal tub and place in refrigerator at 4°C for 16 hours."
       },
       {
         "title": "Divide Cold & Shape",
@@ -3945,9 +4229,10 @@ const OG_RECIPES = [
         "timer_seconds": 600,
         "phase": "Bake",
         "cues": "Explosive oven spring from cold dough thermal shock.",
-        "text": "Score 5 slashes. Bake at 245\u00b0C with steam for 10 min, then 14 min dry."
+        "text": "Score 5 slashes. Bake at 245°C with steam for 10 min, then 14 min dry."
       }
-    ]
+    ],
+    "leavening": "yeast"
   },
   {
     "id": "og_lanio_ancienne",
@@ -3957,7 +4242,7 @@ const OG_RECIPES = [
     "book_id": "lanio",
     "author": "Jean-Marie Lanio",
     "citation": "Chapter 3, Page 56",
-    "author_notes": "Jean-Marie Lanio: 'Baguette \u00e0 l\\'ancienne is characterized by high hydration (74%), minimal mechanical manipulation, and long bulk fermentation. The dough is not rolled tightly; it is gently shaped to preserve irregular alveoli.'",
+    "author_notes": "Jean-Marie Lanio: 'Baguette à l\\'ancienne is characterized by high hydration (74%), minimal mechanical manipulation, and long bulk fermentation. The dough is not rolled tightly; it is gently shaped to preserve irregular alveoli.'",
     "base_hydration": 74.0,
     "ingredients": [
       {
@@ -3979,13 +4264,13 @@ const OG_RECIPES = [
         "note": "Late addition"
       },
       {
-        "name": "P\u00e2te Ferment\u00e9e",
+        "name": "Pâte Fermentée",
         "weight": "100g",
         "pct": 20.0,
         "note": "Old dough from previous batch"
       },
       {
-        "name": "Levure Fra\u00eeche",
+        "name": "Levure Fraîche",
         "weight": "3g",
         "pct": 0.6,
         "note": "Fresh yeast"
@@ -4052,9 +4337,10 @@ const OG_RECIPES = [
         "timer_seconds": 600,
         "phase": "Bake",
         "cues": "Dark caramelization, wide honeycombed holes.",
-        "text": "Single long cut. Bake @ 245\u00b0C with steam 10 min, vent 15 min."
+        "text": "Single long cut. Bake @ 245°C with steam 10 min, vent 15 min."
       }
-    ]
+    ],
+    "leavening": "yeast"
   },
   {
     "id": "og_lanio_graines",
@@ -4141,7 +4427,7 @@ const OG_RECIPES = [
         "timer_seconds": 2700,
         "phase": "Bulk",
         "cues": "Light and aerated.",
-        "text": "Bulk at 24\u00b0C with 3 folds spaced 45 min apart."
+        "text": "Bulk at 24°C with 3 folds spaced 45 min apart."
       },
       {
         "title": "Shape & Seed Roll",
@@ -4165,9 +4451,10 @@ const OG_RECIPES = [
         "timer_seconds": 600,
         "phase": "Bake",
         "cues": "Fragrant toasted seed aroma with golden crust.",
-        "text": "Bake @ 240\u00b0C with steam 10 min, vent 15 min."
+        "text": "Bake @ 240°C with steam 10 min, vent 15 min."
       }
-    ]
+    ],
+    "leavening": "hybrid"
   },
   {
     "id": "og_tartine_baguette",
@@ -4193,7 +4480,7 @@ const OG_RECIPES = [
         "note": "High-protein bread flour"
       },
       {
-        "name": "Water (74\u00b0F - 76\u00b0F)",
+        "name": "Water (74°F - 76°F)",
         "weight": "500g",
         "pct": 50.0,
         "note": "Cooler water to regulate fermentation"
@@ -4224,7 +4511,7 @@ const OG_RECIPES = [
         "timer_seconds": 43200,
         "phase": "Prep",
         "cues": "Both pass float test; sweet milky smell.",
-        "text": "Mix poolish with flour, water, and yeast. Feed young leaven. Ferment overnight at cool room temp (18\u00b0C\u201320\u00b0C)."
+        "text": "Mix poolish with flour, water, and yeast. Feed young leaven. Ferment overnight at cool room temp (18°C–20°C)."
       },
       {
         "title": "Autolyse",
@@ -4232,7 +4519,7 @@ const OG_RECIPES = [
         "timer_seconds": 2400,
         "phase": "Autolyse",
         "cues": "Soft, cohesive dough.",
-        "text": "Combine flours, cool water (24\u00b0C), poolish, and young leaven. Rest 40 min covered."
+        "text": "Combine flours, cool water (24°C), poolish, and young leaven. Rest 40 min covered."
       },
       {
         "title": "Add Salt & Squeeze",
@@ -4248,7 +4535,7 @@ const OG_RECIPES = [
         "timer_seconds": 2400,
         "phase": "Bulk",
         "cues": "Expands 30%, aerated, domed edges.",
-        "text": "Turn dough in bowl every 40 min for first 2 hours at 24\u00b0C\u201326\u00b0C."
+        "text": "Turn dough in bowl every 40 min for first 2 hours at 24°C–26°C."
       },
       {
         "title": "Preshape & Relax",
@@ -4268,7 +4555,7 @@ const OG_RECIPES = [
       },
       {
         "title": "Couche Proof",
-        "time": "2.5 hrs @ 22\u00b0C",
+        "time": "2.5 hrs @ 22°C",
         "timer_seconds": 9000,
         "phase": "Proof",
         "cues": "Puffier, delicate, buoyant to touch.",
@@ -4280,9 +4567,10 @@ const OG_RECIPES = [
         "timer_seconds": 600,
         "phase": "Bake",
         "cues": "Golden brown, paper-thin crisp crust.",
-        "text": "5 swift slashes. Bake at 245\u00b0C with heavy saturated steam for 12 min; vent for 13 min."
+        "text": "5 swift slashes. Bake at 245°C with heavy saturated steam for 12 min; vent for 13 min."
       }
-    ]
+    ],
+    "leavening": "hybrid"
   },
   {
     "id": "og_tartine_country",
@@ -4308,7 +4596,7 @@ const OG_RECIPES = [
         "note": "Stoneground whole wheat"
       },
       {
-        "name": "Water 1 (Autolyse @ 80\u00b0F)",
+        "name": "Water 1 (Autolyse @ 80°F)",
         "weight": "700g",
         "pct": 70.0,
         "note": "Warm autolyse water"
@@ -4363,7 +4651,7 @@ const OG_RECIPES = [
         "timer_seconds": 1800,
         "phase": "Bulk",
         "cues": "Dough expands by 30%, aerated, releases cleanly from bowl.",
-        "text": "Perform stretch-and-folds every 30 min for first 2.5 hours at 25\u00b0C\u201326\u00b0C. Handle gently toward end."
+        "text": "Perform stretch-and-folds every 30 min for first 2.5 hours at 25°C–26°C. Handle gently toward end."
       },
       {
         "title": "Preshape into Rounds",
@@ -4371,31 +4659,31 @@ const OG_RECIPES = [
         "timer_seconds": 1500,
         "phase": "Preshape",
         "cues": "Round sits tall with smooth, taut top skin.",
-        "text": "Tip dough onto lightly floured surface. Work into a loose round with bench knife. Rest 25 min uncovered (*d\u00e9tente*)."
+        "text": "Tip dough onto lightly floured surface. Work into a loose round with bench knife. Rest 25 min uncovered (*détente*)."
       },
       {
         "title": "Final Shape (Boule)",
         "time": "10 min",
         "timer_seconds": 600,
         "phase": "Shape",
-        "cues": "Taut surface skin with tension (*la cl\u00e9* on bottom).",
+        "cues": "Taut surface skin with tension (*la clé* on bottom).",
         "text": "Flip seam-side up. Fold bottom up, sides in, roll top down. Cupped hands create surface tension. Invert into rice-floured banneton."
       },
       {
         "title": "Cold Retardation",
-        "time": "12-16 hrs @ 4\u00b0C",
+        "time": "12-16 hrs @ 4°C",
         "timer_seconds": 43200,
         "phase": "Proof",
         "cues": "Dough is firm, slightly aerated, and chilled through.",
-        "text": "Cover banneton with bag and refrigerate overnight at 3\u00b0C\u20135\u00b0C."
+        "text": "Cover banneton with bag and refrigerate overnight at 3°C–5°C."
       },
       {
         "title": "Combo Cooker Pre-Heat",
         "time": "60 min",
         "timer_seconds": 3600,
         "phase": "Bake",
-        "cues": "Cast iron is scorching hot (250\u00b0C / 485\u00b0F).",
-        "text": "Preheat heavy combo cooker with shallow pan on bottom at 250\u00b0C for 60 minutes."
+        "cues": "Cast iron is scorching hot (250°C / 485°F).",
+        "text": "Preheat heavy combo cooker with shallow pan on bottom at 250°C for 60 minutes."
       },
       {
         "title": "Score & Bake (Lid ON)",
@@ -4403,7 +4691,7 @@ const OG_RECIPES = [
         "timer_seconds": 1200,
         "phase": "Bake",
         "cues": "Steam trapped; loaf springs upward violently.",
-        "text": "Tip cold loaf onto shallow cooker pan. Single long crescent slash at 30\u00b0 angle (10mm deep). Cover with deep lid. Bake 20 min @ 245\u00b0C."
+        "text": "Tip cold loaf onto shallow cooker pan. Single long crescent slash at 30° angle (10mm deep). Cover with deep lid. Bake 20 min @ 245°C."
       },
       {
         "title": "Bake (Lid OFF)",
@@ -4411,14 +4699,15 @@ const OG_RECIPES = [
         "timer_seconds": 1500,
         "phase": "Bake",
         "cues": "Crust caramelizes into deep blistered mahogany (*le chant du pain*).",
-        "text": "Remove lid. Continue baking at 225\u00b0C for 22-25 min until dark blistered mahogany."
+        "text": "Remove lid. Continue baking at 225°C for 22-25 min until dark blistered mahogany."
       }
-    ]
+    ],
+    "leavening": "sourdough"
   },
   {
     "id": "og_tartine_ww",
     "format": "boule",
-    "title": "Tartine 50% Whole Wheat B\u00e2tard",
+    "title": "Tartine 50% Whole Wheat Bâtard",
     "book": "Tartine Bread",
     "book_id": "tartine",
     "author": "Chad Robertson",
@@ -4486,7 +4775,7 @@ const OG_RECIPES = [
         "timer_seconds": 1800,
         "phase": "Bulk",
         "cues": "Light, aerated dough with visible bran specks.",
-        "text": "Perform 6 sets of gentle turns spaced 30 min apart at 26\u00b0C."
+        "text": "Perform 6 sets of gentle turns spaced 30 min apart at 26°C."
       },
       {
         "title": "Preshape & Rest",
@@ -4497,7 +4786,7 @@ const OG_RECIPES = [
         "text": "Preshape into loose cylinder. Bench rest 25 min."
       },
       {
-        "title": "Stitch-Shaping (B\u00e2tard)",
+        "title": "Stitch-Shaping (Bâtard)",
         "time": "10 min",
         "timer_seconds": 600,
         "phase": "Shape",
@@ -4506,7 +4795,7 @@ const OG_RECIPES = [
       },
       {
         "title": "Cold Retard",
-        "time": "14 hrs @ 4\u00b0C",
+        "time": "14 hrs @ 4°C",
         "timer_seconds": 50400,
         "phase": "Proof",
         "cues": "Cold and firm.",
@@ -4518,7 +4807,7 @@ const OG_RECIPES = [
         "timer_seconds": 1320,
         "phase": "Bake",
         "cues": "Steam trapped; maximum oven spring.",
-        "text": "Score single long crescent cut. Bake at 245\u00b0C lid ON for 22 min."
+        "text": "Score single long crescent cut. Bake at 245°C lid ON for 22 min."
       },
       {
         "title": "Bake (Lid OFF)",
@@ -4526,14 +4815,15 @@ const OG_RECIPES = [
         "timer_seconds": 1500,
         "phase": "Bake",
         "cues": "Rich hazelnut-brown whole grain crust.",
-        "text": "Remove lid, bake 25 min at 225\u00b0C."
+        "text": "Remove lid, bake 25 min at 225°C."
       }
-    ]
+    ],
+    "leavening": "sourdough"
   },
   {
     "id": "og_tartine_olive",
     "format": "boule",
-    "title": "Tartine Olive & Walnut B\u00e2tard",
+    "title": "Tartine Olive & Walnut Bâtard",
     "book": "Tartine Bread",
     "book_id": "tartine",
     "author": "Chad Robertson",
@@ -4627,7 +4917,7 @@ const OG_RECIPES = [
         "timer_seconds": 3600,
         "phase": "Bulk",
         "cues": "Dough is airy with trapped aromatic air pockets.",
-        "text": "Continue bulk at 25\u00b0C with 2 gentle turns."
+        "text": "Continue bulk at 25°C with 2 gentle turns."
       },
       {
         "title": "Preshape & Rest",
@@ -4638,16 +4928,16 @@ const OG_RECIPES = [
         "text": "Preshape into oval. Bench rest 25 min."
       },
       {
-        "title": "Shape B\u00e2tard",
+        "title": "Shape Bâtard",
         "time": "10 min",
         "timer_seconds": 600,
         "phase": "Shape",
-        "cues": "Taut oval b\u00e2tard.",
-        "text": "Shape into tight b\u00e2tard. Transfer to oval banneton."
+        "cues": "Taut oval bâtard.",
+        "text": "Shape into tight bâtard. Transfer to oval banneton."
       },
       {
         "title": "Cold Retard",
-        "time": "12 hrs @ 4\u00b0C",
+        "time": "12 hrs @ 4°C",
         "timer_seconds": 43200,
         "phase": "Proof",
         "cues": "Chilled through.",
@@ -4659,9 +4949,10 @@ const OG_RECIPES = [
         "timer_seconds": 1200,
         "phase": "Bake",
         "cues": "Fragrant roasted herbs and purple-tinged open crumb.",
-        "text": "Bake in hot Dutch oven: 20 min lid ON @ 245\u00b0C; 25 min lid OFF @ 225\u00b0C."
+        "text": "Bake in hot Dutch oven: 20 min lid ON @ 245°C; 25 min lid OFF @ 225°C."
       }
-    ]
+    ],
+    "leavening": "sourdough"
   },
   {
     "id": "og_leo_baguette",
@@ -4681,7 +4972,7 @@ const OG_RECIPES = [
         "note": "High quality white flour"
       },
       {
-        "name": "Water 1 (Autolyse @ 26\u00b0C)",
+        "name": "Water 1 (Autolyse @ 26°C)",
         "weight": "270g",
         "pct": 54.0,
         "note": "Autolyse water"
@@ -4696,7 +4987,7 @@ const OG_RECIPES = [
         "name": "Sweet Levain (100% Hydr)",
         "weight": "80g",
         "pct": 16.0,
-        "note": "Built 5h prior at 26\u00b0C"
+        "note": "Built 5h prior at 26°C"
       },
       {
         "name": "Fine Sea Salt",
@@ -4712,7 +5003,7 @@ const OG_RECIPES = [
         "timer_seconds": 18000,
         "phase": "Prep",
         "cues": "Sweet yogurt and green apple notes.",
-        "text": "Mix starter, flour, and warm water. Rest at 26\u00b0C until ripe, bubbly, and sweet."
+        "text": "Mix starter, flour, and warm water. Rest at 26°C until ripe, bubbly, and sweet."
       },
       {
         "title": "Autolyse",
@@ -4744,15 +5035,15 @@ const OG_RECIPES = [
         "timer_seconds": 2700,
         "phase": "Bulk",
         "cues": "Dough holds its shape and releases from bowl cleanly.",
-        "text": "Perform 3 sets of coil folds spaced 45 minutes apart at 24\u00b0C."
+        "text": "Perform 3 sets of coil folds spaced 45 minutes apart at 24°C."
       },
       {
         "title": "Cold Bulk Retard",
-        "time": "14 hrs @ 4\u00b0C",
+        "time": "14 hrs @ 4°C",
         "timer_seconds": 50400,
         "phase": "Bulk",
         "cues": "Chilled dough with fine skin blisters.",
-        "text": "Refrigerate bulk dough overnight at 4\u00b0C (39\u00b0F)."
+        "text": "Refrigerate bulk dough overnight at 4°C (39°F)."
       },
       {
         "title": "Preshape & Relax",
@@ -4776,7 +5067,7 @@ const OG_RECIPES = [
         "timer_seconds": 3600,
         "phase": "Proof",
         "cues": "Aerated and buoyant.",
-        "text": "Proof seam-side UP at 24\u00b0C for 60 min."
+        "text": "Proof seam-side UP at 24°C for 60 min."
       },
       {
         "title": "Lava Rock Steam Bake",
@@ -4784,9 +5075,10 @@ const OG_RECIPES = [
         "timer_seconds": 600,
         "phase": "Bake",
         "cues": "Deep blistered ears and singing crust.",
-        "text": "5 cuts at 25\u00b0 angle. Bake on stone at 245\u00b0C with lava rock steam 10 min, vent 15 min."
+        "text": "5 cuts at 25° angle. Bake on stone at 245°C with lava rock steam 10 min, vent 15 min."
       }
-    ]
+    ],
+    "leavening": "sourdough"
   },
   {
     "id": "og_leo_beginner",
@@ -4815,7 +5107,7 @@ const OG_RECIPES = [
         "name": "Water 1 (Autolyse)",
         "weight": "290g",
         "pct": 58.0,
-        "note": "At 26\u00b0C"
+        "note": "At 26°C"
       },
       {
         "name": "Water 2 (Bassinage)",
@@ -4875,7 +5167,7 @@ const OG_RECIPES = [
         "timer_seconds": 2700,
         "phase": "Bulk",
         "cues": "Dough increases 30%-40% with domed surface.",
-        "text": "Perform 3 sets of stretch-and-folds spaced 45 minutes apart at 24\u00b0C\u201325\u00b0C."
+        "text": "Perform 3 sets of stretch-and-folds spaced 45 minutes apart at 24°C–25°C."
       },
       {
         "title": "Preshape & Rest",
@@ -4895,7 +5187,7 @@ const OG_RECIPES = [
       },
       {
         "title": "Cold Proof",
-        "time": "14 hrs @ 4\u00b0C",
+        "time": "14 hrs @ 4°C",
         "timer_seconds": 50400,
         "phase": "Proof",
         "cues": "Cold and firm; holds razor cut effortlessly.",
@@ -4907,7 +5199,7 @@ const OG_RECIPES = [
         "timer_seconds": 1200,
         "phase": "Bake",
         "cues": "Deep expansion along score line.",
-        "text": "Score single crescent cut at 30\u00b0 angle. Bake in Dutch oven @ 245\u00b0C with lid on for 20 min."
+        "text": "Score single crescent cut at 30° angle. Bake in Dutch oven @ 245°C with lid on for 20 min."
       },
       {
         "title": "Vented Bake (Lid OFF)",
@@ -4915,9 +5207,10 @@ const OG_RECIPES = [
         "timer_seconds": 1500,
         "phase": "Bake",
         "cues": "Deep golden ear with crispy blisters.",
-        "text": "Remove lid, bake 25 min @ 225\u00b0C."
+        "text": "Remove lid, bake 25 min @ 225°C."
       }
-    ]
+    ],
+    "leavening": "sourdough"
   },
   {
     "id": "og_leo_fifty_fifty",
@@ -4990,7 +5283,7 @@ const OG_RECIPES = [
         "timer_seconds": 2700,
         "phase": "Bulk",
         "cues": "Noticeably aerated with pleasant fermented aroma.",
-        "text": "Perform 4 gentle coil folds spaced 45 minutes apart at 25\u00b0C."
+        "text": "Perform 4 gentle coil folds spaced 45 minutes apart at 25°C."
       },
       {
         "title": "Preshape & Rest",
@@ -5010,7 +5303,7 @@ const OG_RECIPES = [
       },
       {
         "title": "Cold Retard",
-        "time": "14 hrs @ 4\u00b0C",
+        "time": "14 hrs @ 4°C",
         "timer_seconds": 50400,
         "phase": "Proof",
         "cues": "Cold and firm.",
@@ -5022,9 +5315,10 @@ const OG_RECIPES = [
         "timer_seconds": 1200,
         "phase": "Bake",
         "cues": "Dark roasted wheat crust and tender open crumb.",
-        "text": "Bake 20 min lid ON @ 245\u00b0C; 25 min lid OFF @ 225\u00b0C."
+        "text": "Bake 20 min lid ON @ 245°C; 25 min lid OFF @ 225°C."
       }
-    ]
+    ],
+    "leavening": "sourdough"
   },
   {
     "id": "og_leo_oat",
@@ -5113,7 +5407,7 @@ const OG_RECIPES = [
         "timer_seconds": 3600,
         "phase": "Bulk",
         "cues": "Dough is jiggly, full of gas, aerated.",
-        "text": "Perform 3 gentle coil folds at 25\u00b0C until dough is puffy."
+        "text": "Perform 3 gentle coil folds at 25°C until dough is puffy."
       },
       {
         "title": "Preshape & Rest",
@@ -5137,9 +5431,10 @@ const OG_RECIPES = [
         "timer_seconds": 1200,
         "phase": "Bake",
         "cues": "Custardy, pudding-like crumb with toasted oat crust.",
-        "text": "Bake in hot Dutch oven 20 min lid ON @ 245\u00b0C; 25 min lid OFF @ 225\u00b0C."
+        "text": "Bake in hot Dutch oven 20 min lid ON @ 245°C; 25 min lid OFF @ 225°C."
       }
-    ]
+    ],
+    "leavening": "sourdough"
   },
   {
     "id": "og_forkish_baguette",
@@ -5159,7 +5454,7 @@ const OG_RECIPES = [
         "note": "Main dough flour"
       },
       {
-        "name": "Water (Warm 26\u00b0C)",
+        "name": "Water (Warm 26°C)",
         "weight": "250g",
         "pct": 25.0,
         "note": "Autolyse water"
@@ -5190,7 +5485,7 @@ const OG_RECIPES = [
         "timer_seconds": 43200,
         "phase": "Prep",
         "cues": "Frothy surface bubbling vigorously.",
-        "text": "Mix poolish with flour, water, and tiny pinch of yeast. Rest 12-14h at 21\u00b0C."
+        "text": "Mix poolish with flour, water, and tiny pinch of yeast. Rest 12-14h at 21°C."
       },
       {
         "title": "Pincer Mix by Hand",
@@ -5206,7 +5501,7 @@ const OG_RECIPES = [
         "timer_seconds": 1800,
         "phase": "Bulk",
         "cues": "Dough increases 2.5x in volume.",
-        "text": "Perform 3 stretch-and-folds during the first 1.5 hours at 24\u00b0C."
+        "text": "Perform 3 stretch-and-folds during the first 1.5 hours at 24°C."
       },
       {
         "title": "Divide & Preshape",
@@ -5238,9 +5533,10 @@ const OG_RECIPES = [
         "timer_seconds": 600,
         "phase": "Bake",
         "cues": "Dark amber blistered crust.",
-        "text": "Bake at 245\u00b0C with cast iron steam pan for 10 min, vent 15 min."
+        "text": "Bake at 245°C with cast iron steam pan for 10 min, vent 15 min."
       }
-    ]
+    ],
+    "leavening": "yeast"
   },
   {
     "id": "og_forkish_blonde",
@@ -5272,7 +5568,7 @@ const OG_RECIPES = [
         "note": "Dark rye flour"
       },
       {
-        "name": "Water (Warm 34\u00b0C)",
+        "name": "Water (Warm 34°C)",
         "weight": "351g",
         "pct": 70.2,
         "note": "Warm water to sustain cool overnight fermentation"
@@ -5321,7 +5617,7 @@ const OG_RECIPES = [
         "timer_seconds": 3600,
         "phase": "Bulk",
         "cues": "Huge pillowy expansion (2.5x to 3x volume) full of gas.",
-        "text": "Perform 3-4 folds during the first 2 hours. Let ferment undisturbed overnight at cool room temp (18\u00b0C\u201320\u00b0C)."
+        "text": "Perform 3-4 folds during the first 2 hours. Let ferment undisturbed overnight at cool room temp (18°C–20°C)."
       },
       {
         "title": "Shape Seam-Down",
@@ -5333,7 +5629,7 @@ const OG_RECIPES = [
       },
       {
         "title": "Final Proof",
-        "time": "3.5 hrs @ 21\u00b0C",
+        "time": "3.5 hrs @ 21°C",
         "timer_seconds": 12600,
         "phase": "Proof",
         "cues": "Finger poke springs back slowly halfway.",
@@ -5345,9 +5641,10 @@ const OG_RECIPES = [
         "timer_seconds": 1800,
         "phase": "Bake",
         "cues": "Natural fissured volcanic rupture on top without scoring.",
-        "text": "Invert directly into hot Dutch oven (seam-side UP - no scoring!). Bake 30m lid ON @ 245\u00b0C; 20m lid OFF @ 225\u00b0C."
+        "text": "Invert directly into hot Dutch oven (seam-side UP - no scoring!). Bake 30m lid ON @ 245°C; 20m lid OFF @ 225°C."
       }
-    ]
+    ],
+    "leavening": "sourdough"
   },
   {
     "id": "og_forkish_field",
@@ -5379,7 +5676,7 @@ const OG_RECIPES = [
         "note": "Dark whole rye"
       },
       {
-        "name": "Water (Warm 34\u00b0C)",
+        "name": "Water (Warm 34°C)",
         "weight": "351g",
         "pct": 70.2,
         "note": "Warm autolyse water"
@@ -5420,7 +5717,7 @@ const OG_RECIPES = [
         "timer_seconds": 2700,
         "phase": "Bulk",
         "cues": "Doubles in volume, airy and bubbly.",
-        "text": "Bulk at 24\u00b0C with 4 stretch-and-folds during the first 3 hours."
+        "text": "Bulk at 24°C with 4 stretch-and-folds during the first 3 hours."
       },
       {
         "title": "Shape & Basket Proof",
@@ -5444,9 +5741,10 @@ const OG_RECIPES = [
         "timer_seconds": 1800,
         "phase": "Bake",
         "cues": "Deep volcanic crackling crust with dark mahogany finish.",
-        "text": "Invert seam-side UP into hot pot. Bake 30m lid ON @ 245\u00b0C; 20m lid OFF @ 225\u00b0C."
+        "text": "Invert seam-side UP into hot pot. Bake 30m lid ON @ 245°C; 20m lid OFF @ 225°C."
       }
-    ]
+    ],
+    "leavening": "sourdough"
   },
   {
     "id": "og_forkish_saturday",
@@ -5466,7 +5764,7 @@ const OG_RECIPES = [
         "note": "High quality white flour"
       },
       {
-        "name": "Water (Warm 35\u00b0C / 95\u00b0F)",
+        "name": "Water (Warm 35°C / 95°F)",
         "weight": "360g",
         "pct": 72.0,
         "note": "Warm water accelerates bulk fermentation"
@@ -5491,7 +5789,7 @@ const OG_RECIPES = [
         "timer_seconds": 1500,
         "phase": "Autolyse",
         "cues": "Cohesive warm dough.",
-        "text": "Mix flour and warm water (35\u00b0C). Rest 25 min."
+        "text": "Mix flour and warm water (35°C). Rest 25 min."
       },
       {
         "title": "Pincer Mix Salt & Yeast",
@@ -5531,19 +5829,20 @@ const OG_RECIPES = [
         "timer_seconds": 1800,
         "phase": "Bake",
         "cues": "Golden yellow and brown fissures across top.",
-        "text": "Invert seam-side UP into scorching Dutch oven. Bake 30m lid ON @ 245\u00b0C; 15m lid OFF @ 225\u00b0C."
+        "text": "Invert seam-side UP into scorching Dutch oven. Bake 30m lid ON @ 245°C; 15m lid OFF @ 225°C."
       }
-    ]
+    ],
+    "leavening": "yeast"
   },
   {
     "id": "og_poilane_baguette",
     "format": "baguette",
     "title": "Baguette Parisienne au Levain",
-    "book": "Poil\u00e2ne",
+    "book": "Poilâne",
     "book_id": "poilane",
-    "author": "Apollonia Poil\u00e2ne",
+    "author": "Apollonia Poilâne",
     "citation": "Chapter 3, Page 74",
-    "author_notes": "Apollonia Poil\u00e2ne: 'The Poil\u00e2ne baguette is distinct from the airy modern Parisian baguette. It is denser, more satisfying, made with our traditional stiff sourdough culture and stoneground wheat flour. It has genuine keeping quality and stays fresh for days.'",
+    "author_notes": "Apollonia Poilâne: 'The Poilâne baguette is distinct from the airy modern Parisian baguette. It is denser, more satisfying, made with our traditional stiff sourdough culture and stoneground wheat flour. It has genuine keeping quality and stays fresh for days.'",
     "base_hydration": 70.0,
     "ingredients": [
       {
@@ -5559,13 +5858,13 @@ const OG_RECIPES = [
         "note": "Pure water"
       },
       {
-        "name": "Poil\u00e2ne Stiff Levain (60% Hydr)",
+        "name": "Poilâne Stiff Levain (60% Hydr)",
         "weight": "100g",
         "pct": 20.0,
         "note": "Stiff starter lineage"
       },
       {
-        "name": "Grey Gu\u00e9rande Salt",
+        "name": "Grey Guérande Salt",
         "weight": "10g",
         "pct": 2.0,
         "note": "Unrefined sea salt"
@@ -5578,7 +5877,7 @@ const OG_RECIPES = [
         "timer_seconds": 21600,
         "phase": "Prep",
         "cues": "Dense ball quadruples in size with winey aroma.",
-        "text": "Feed stiff levain with stoneground flour and water. Ferment at 24\u00b0C."
+        "text": "Feed stiff levain with stoneground flour and water. Ferment at 24°C."
       },
       {
         "title": "Fraisage (Hand Mix)",
@@ -5594,7 +5893,7 @@ const OG_RECIPES = [
         "timer_seconds": 2700,
         "phase": "Bulk",
         "cues": "Deep wheaty aroma with lactic richness.",
-        "text": "Rest at 22\u00b0C. Turn every hour for the first 3 hours."
+        "text": "Rest at 22°C. Turn every hour for the first 3 hours."
       },
       {
         "title": "Preshape & Rest",
@@ -5626,19 +5925,20 @@ const OG_RECIPES = [
         "timer_seconds": 600,
         "phase": "Bake",
         "cues": "Thick caramelized crust, chewy open crumb.",
-        "text": "Single deep slash. Bake at 240\u00b0C with steam 10 min, vent 16 min."
+        "text": "Single deep slash. Bake at 240°C with steam 10 min, vent 16 min."
       }
-    ]
+    ],
+    "leavening": "sourdough"
   },
   {
     "id": "og_poilane_miche",
     "format": "boule",
     "title": "The Punition Master Miche (1.8kg)",
-    "book": "Poil\u00e2ne",
+    "book": "Poilâne",
     "book_id": "poilane",
-    "author": "Apollonia Poil\u00e2ne",
+    "author": "Apollonia Poilâne",
     "citation": "Chapter 2, Page 42",
-    "author_notes": "Apollonia Poil\u00e2ne: 'The legendary four-pound wheel of sourdough created by Pierre Poil\u00e2ne in 1932 on Rue du Cherche-Midi in Paris. Baked in wood-fired ovens with stoneground flour and sea salt, its enormous size preserves moistness for over a week. The crust is scored with a razor in our signature lattice or single P.'",
+    "author_notes": "Apollonia Poilâne: 'The legendary four-pound wheel of sourdough created by Pierre Poilâne in 1932 on Rue du Cherche-Midi in Paris. Baked in wood-fired ovens with stoneground flour and sea salt, its enormous size preserves moistness for over a week. The crust is scored with a razor in our signature lattice or single P.'",
     "base_hydration": 70.0,
     "ingredients": [
       {
@@ -5660,13 +5960,13 @@ const OG_RECIPES = [
         "note": "Pure unchlorinated water"
       },
       {
-        "name": "Poil\u00e2ne Stiff Levain (60% Hydr)",
+        "name": "Poilâne Stiff Levain (60% Hydr)",
         "weight": "200g",
         "pct": 20.0,
         "note": "Ancient stiff starter lineage"
       },
       {
-        "name": "Gu\u00e9rande Grey Sea Salt",
+        "name": "Guérande Grey Sea Salt",
         "weight": "20g",
         "pct": 2.0,
         "note": "Unrefined grey Atlantic salt"
@@ -5679,7 +5979,7 @@ const OG_RECIPES = [
         "timer_seconds": 28800,
         "phase": "Prep",
         "cues": "Dense ball with intense fermentation aroma.",
-        "text": "Feed stiff levain with stoneground flour. Ferment at 22\u00b0C."
+        "text": "Feed stiff levain with stoneground flour. Ferment at 22°C."
       },
       {
         "title": "Fraisage (Hand Smearing)",
@@ -5695,7 +5995,7 @@ const OG_RECIPES = [
         "timer_seconds": 3600,
         "phase": "Bulk",
         "cues": "Deep, pungent sourdough aroma, aerated mass.",
-        "text": "Bulk at 21\u00b0C\u201322\u00b0C. Turn every 60 min for first 3 hours."
+        "text": "Bulk at 21°C–22°C. Turn every 60 min for first 3 hours."
       },
       {
         "title": "Boule Shaping for Large Miche",
@@ -5707,7 +6007,7 @@ const OG_RECIPES = [
       },
       {
         "title": "Final Proof",
-        "time": "2 hrs @ 22\u00b0C",
+        "time": "2 hrs @ 22°C",
         "timer_seconds": 7200,
         "phase": "Proof",
         "cues": "Gentle bounce, expanded and airy.",
@@ -5719,9 +6019,10 @@ const OG_RECIPES = [
         "timer_seconds": 1800,
         "phase": "Bake",
         "cues": "Thick crust, dark chestnut color, hollow thump when tapped.",
-        "text": "Score signature Poil\u00e2ne 'P' or cross. Bake on baking stone with steam: 30 min @ 240\u00b0C, then 25 min @ 215\u00b0C."
+        "text": "Score signature Poilâne 'P' or cross. Bake on baking stone with steam: 30 min @ 240°C, then 25 min @ 215°C."
       }
-    ]
+    ],
+    "leavening": "sourdough"
   },
   {
     "id": "og_ka_baguette",
@@ -5820,9 +6121,10 @@ const OG_RECIPES = [
         "timer_seconds": 600,
         "phase": "Bake",
         "cues": "Golden brown, shatteringly crisp.",
-        "text": "3-5 cuts. Bake at 235\u00b0C with steam pan for 10 min, vent 14 min."
+        "text": "3-5 cuts. Bake at 235°C with steam pan for 10 min, vent 14 min."
       }
-    ]
+    ],
+    "leavening": "yeast"
   },
   {
     "id": "og_greenway_baguette",
@@ -5887,7 +6189,7 @@ const OG_RECIPES = [
       },
       {
         "title": "Overnight Cold Retard",
-        "time": "12 hrs @ 4\u00b0C",
+        "time": "12 hrs @ 4°C",
         "timer_seconds": 43200,
         "phase": "Bulk",
         "cues": "Chilled dough holds shape easily.",
@@ -5915,9 +6217,10 @@ const OG_RECIPES = [
         "timer_seconds": 600,
         "phase": "Bake",
         "cues": "Deep blistered crunch.",
-        "text": "Score 5 slashes. Bake at 240\u00b0C with steam for 10 min, vent 15 min."
+        "text": "Score 5 slashes. Bake at 240°C with steam for 10 min, vent 15 min."
       }
-    ]
+    ],
+    "leavening": "sourdough"
   },
   {
     "id": "og_greenway_sf",
@@ -5927,7 +6230,7 @@ const OG_RECIPES = [
     "book_id": "greenway",
     "author": "Teresa L. Greenway",
     "citation": "Part 1, Page 64",
-    "author_notes": "Teresa Greenway: 'To get that authentic, eye-popping San Francisco sourdough tang, you need to push acetic acid production. This recipe uses a slightly lower hydration starter (75%) and a 24-hour cold bulk retard at 3\u00b0C, which encourages heterofermentative lactic acid bacteria to convert maltose into acetic acid.'",
+    "author_notes": "Teresa Greenway: 'To get that authentic, eye-popping San Francisco sourdough tang, you need to push acetic acid production. This recipe uses a slightly lower hydration starter (75%) and a 24-hour cold bulk retard at 3°C, which encourages heterofermentative lactic acid bacteria to convert maltose into acetic acid.'",
     "base_hydration": 71.0,
     "ingredients": [
       {
@@ -5984,15 +6287,15 @@ const OG_RECIPES = [
         "timer_seconds": 3600,
         "phase": "Bulk",
         "cues": "Fermentation begins; dough puffs.",
-        "text": "Bulk at 24\u00b0C for 2 hours with 2 folds."
+        "text": "Bulk at 24°C for 2 hours with 2 folds."
       },
       {
         "title": "Extended Cold Bulk Retard",
-        "time": "24 hrs @ 3\u00b0C",
+        "time": "24 hrs @ 3°C",
         "timer_seconds": 86400,
         "phase": "Bulk",
         "cues": "Extreme acetic acid accumulation.",
-        "text": "Transfer covered container to cold refrigerator (3\u00b0C / 37\u00b0F) for full 24 hours."
+        "text": "Transfer covered container to cold refrigerator (3°C / 37°F) for full 24 hours."
       },
       {
         "title": "Preshape & Shape Cold",
@@ -6004,7 +6307,7 @@ const OG_RECIPES = [
       },
       {
         "title": "Final Warm Proof",
-        "time": "2.5 hrs @ 24\u00b0C",
+        "time": "2.5 hrs @ 24°C",
         "timer_seconds": 9000,
         "phase": "Proof",
         "cues": "Puffy and airy; aroma is delightfully sour.",
@@ -6016,8 +6319,9 @@ const OG_RECIPES = [
         "timer_seconds": 1200,
         "phase": "Bake",
         "cues": "Intense blistering, sharp golden ear, mouthwatering sourdough tang.",
-        "text": "Deep crescent score. Bake 20 min lid ON @ 245\u00b0C; 25 min lid OFF @ 225\u00b0C."
+        "text": "Deep crescent score. Bake 20 min lid ON @ 245°C; 25 min lid OFF @ 225°C."
       }
-    ]
+    ],
+    "leavening": "sourdough"
   }
 ];
